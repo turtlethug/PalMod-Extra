@@ -103,12 +103,12 @@ enum SupportedGamesList
     DBFCI_A,
     UNICLR_A,
     SPF2T_A,
-	VENTURE_A,
     MSHWOTG_SNES,
     REDEARTH_A_DIR_30,
     KOTM_A,
     XMMA_SNES,
     TMNTTF_SNES,
+	VENTURE_A,
 
     NUM_GAMES // This needs to be last
 };
@@ -213,9 +213,6 @@ const WCHAR g_GameFriendlyName[NUM_GAMES][64] =
    L"Rage of the Dragons (Neo-Geo)",
    L"Garou: MotW (Neo-Geo Prototype)",
    L"Dengeki Bunko: Fighting Climax IGNITION",
-   L"Under Night In-Birth Exe:Late[clr-r]",
-   L"Super Puzzle Fighter II Turbo",
-   L"Jojo's Venture",
    L"Under Night In-Birth Exe:Late[cl-r]",
    L"Super Puzzle Fighter II Turbo (Arcade)",
    L"Marvel Super Heroes: War of the Gems (SNES)",
@@ -223,6 +220,7 @@ const WCHAR g_GameFriendlyName[NUM_GAMES][64] =
    L"King of the Monsters (Neo-Geo)",
    L"X-Men: Mutant Apocalypse (SNES)",
    L"TMNT: Tournament Fighters (SNES)",
+   L"Jojo's Venture",
 };
 
 enum class GamePlatform

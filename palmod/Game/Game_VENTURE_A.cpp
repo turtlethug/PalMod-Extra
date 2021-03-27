@@ -14,7 +14,7 @@ int CGame_VENTURE_A::rgExtraCountAll[VENTURE_A_NUMUNIT + 1];
 int CGame_VENTURE_A::rgExtraLoc[VENTURE_A_NUMUNIT + 1];
 
 UINT32 CGame_VENTURE_A::m_nTotalPaletteCountForVENTURE = 0;
-UINT32 CGame_VENTURE_A::m_nExpectedGameROMSize = 0x3E8000; //4096000 bytes
+UINT32 CGame_VENTURE_A::m_nExpectedGameROMSize = 0x400000;
 UINT32 CGame_VENTURE_A::m_nConfirmedROMSize = -1;
 
 void CGame_VENTURE_A::InitializeStatics()
@@ -55,7 +55,7 @@ CGame_VENTURE_A::CGame_VENTURE_A(UINT32 nConfirmedROMSize)
 
     // You will need to update this once you modify palettes, but PalMod will prompt you to do so.
     // Exact count will be shown in debug output in the debugger
-    m_nSafeCountForThisRom = GetExtraCt(m_nExtraUnit) + 4;
+    m_nSafeCountForThisRom = GetExtraCt(m_nExtraUnit) + 171;
     m_pszExtraFilename = EXTRA_FILENAME_VENTURE_A;
     m_nTotalPaletteCount = m_nTotalPaletteCountForVENTURE; // This value is calculated at runtime: don't change this.
     // This magic number is used to warn users if their Extra file is trying to write somewhere potentially unusual

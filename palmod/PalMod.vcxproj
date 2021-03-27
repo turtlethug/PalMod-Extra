@@ -378,8 +378,8 @@
     <ClInclude Include="Game\Game_GGXXACR_A.h" />
     <ClInclude Include="Game\Game_GUNDAM_SNES.h" />
     <ClInclude Include="Game\Game_JOJOS_A.h" />
-    <ClInclude Include="Game\Game_JOJOS_A_DIR.h" />
 	<ClInclude Include="Game\Game_VENTURE_A.h" />
+    <ClInclude Include="Game\Game_JOJOS_A_DIR.h" />
     <ClInclude Include="Game\Game_KarnovsR_A.h" />
     <ClInclude Include="Game\Game_Kizuna_A.h" />
     <ClInclude Include="Game\Game_KOF01_A.h" />
