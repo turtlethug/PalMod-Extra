@@ -19,6 +19,7 @@
 #include "Game_GUNDAM_SNES.h"
 #include "Game_JOJOS_A.h"
 #include "Game_JOJOS_A_DIR.h"
+#include "Game_VENTURE_A.h"
 #include "Game_KarnovsR_A.h"
 #include "Game_Kizuna_A.h"
 #include "Game_KOF01_A.h"
@@ -237,6 +238,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_JOJOS_A_DIR::GetRule;
         GetNextRule = &CGame_JOJOS_A_DIR::GetNextRule;
 
+        return TRUE;
+    }
+	case VENTURE_A:
+    {
+        GetRule = &CGame_VENTURE_A::GetRule;
         return TRUE;
     }
     case KarnovsR_A:
@@ -709,6 +715,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case JOJOS_A:
     {
         return new CGame_JOJOS_A(nConfirmedROMSize, nExtraGameData);
+    }
+	case VENTURE_A:
+    {
+        return new CGame_VENTURE_A(nConfirmedROMSize);
     }
     case JOJOS_A_DIR_50:
     {

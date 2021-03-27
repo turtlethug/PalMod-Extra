@@ -6,31 +6,32 @@
 
 #define NEWGAME_A_DEBUG DEFAULT_GAME_DEBUG_STATE
 
-stExtraDef* CGame_NEWGAME_A::NEWGAME_A_EXTRA_CUSTOM = nullptr;
+stExtraDef* CGame_VENTURE_A::VENTURE_A_EXTRA_CUSTOM_50 = nullptr;
+stExtraDef* CGame_VENTURE_A::VENTURE_A_EXTRA_CUSTOM_31 = nullptr;
 
-CDescTree CGame_NEWGAME_A::MainDescTree = nullptr;
+CDescTree CGame_VENTURE_A::MainDescTree = nullptr;
 
-int CGame_NEWGAME_A::rgExtraCountAll[NEWGAME_A_NUMUNIT + 1];
-int CGame_NEWGAME_A::rgExtraLoc[NEWGAME_A_NUMUNIT + 1];
+int CGame_VENTURE_A::rgExtraCountAll[NEWGAME_A_NUMUNIT + 1];
+int CGame_VENTURE_A::rgExtraLoc[NEWGAME_A_NUMUNIT + 1];
 
-UINT32 CGame_NEWGAME_A::m_nTotalPaletteCountForNEWGAME = 0;
-UINT32 CGame_NEWGAME_A::m_nExpectedGameROMSize = 0x200000; // Update to the actual size of the ROM you expect
-UINT32 CGame_NEWGAME_A::m_nConfirmedROMSize = -1;
+UINT32 CGame_VENTURE_A::m_nTotalPaletteCountForNEWGAME = 0;
+UINT32 CGame_VENTURE_A::m_nExpectedGameROMSize = 0x3E8000; //4096000 bytes
+UINT32 CGame_VENTURE_A::m_nConfirmedROMSize = -1;
 
-void CGame_NEWGAME_A::InitializeStatics()
+void CGame_VENTURE_A::InitializeStatics()
 {
-    safe_delete_array(CGame_NEWGAME_A::NEWGAME_A_EXTRA_CUSTOM);
+    safe_delete_array(CGame_VENTURE_A::VENTURE_A_EXTRA_CUSTOM);
 
     memset(rgExtraCountAll, -1, sizeof(rgExtraCountAll));
     memset(rgExtraLoc, -1, sizeof(rgExtraLoc));
 
-    MainDescTree.SetRootTree(CGame_NEWGAME_A::InitDescTree());
+    MainDescTree.SetRootTree(CGame_VENTURE_A::InitDescTree());
 }
 
-CGame_NEWGAME_A::CGame_NEWGAME_A(UINT32 nConfirmedROMSize)
+CGame_VENTURE_A::CGame_VENTURE_A(UINT32 nConfirmedROMSize)
 {
     CString strMessage;
-    strMessage.Format(L"CGame_NEWGAME_A::CGame_NEWGAME_A: Loading ROM...\n";
+    strMessage.Format(L"CGame_VENTURE_A::CGame_VENTURE_A: Loading ROM...\n";
     OutputDebugString(strMessage);
 
     // Set alpha mode: this determines whether or not we set alpha values for the data we write back to the game ROM.
@@ -94,20 +95,20 @@ CGame_NEWGAME_A::CGame_NEWGAME_A(UINT32 nConfirmedROMSize)
     PrepChangeTrackingArray();
 }
 
-CGame_NEWGAME_A::~CGame_NEWGAME_A(void)
+CGame_VENTURE_A::~CGame_VENTURE_A(void)
 {
-    safe_delete_array(CGame_NEWGAME_A::NEWGAME_A_EXTRA_CUSTOM);
+    safe_delete_array(CGame_VENTURE_A::VENTURE_A_EXTRA_CUSTOM);
     ClearDataBuffer();
     //Get rid of the file changed flag
     FlushChangeTrackingArray();
 }
 
-CDescTree* CGame_NEWGAME_A::GetMainTree()
+CDescTree* CGame_VENTURE_A::GetMainTree()
 {
-    return &CGame_NEWGAME_A::MainDescTree;
+    return &CGame_VENTURE_A::MainDescTree;
 }
 
-int CGame_NEWGAME_A::GetExtraCt(UINT16 nUnitId, BOOL bCountVisibleOnly)
+int CGame_VENTURE_A::GetExtraCt(UINT16 nUnitId, BOOL bCountVisibleOnly)
 {
     if (rgExtraCountAll[0] == -1)
     {
@@ -131,7 +132,7 @@ int CGame_NEWGAME_A::GetExtraCt(UINT16 nUnitId, BOOL bCountVisibleOnly)
     return rgExtraCountAll[nUnitId];
 }
 
-int CGame_NEWGAME_A::GetExtraLoc(UINT16 nUnitId)
+int CGame_VENTURE_A::GetExtraLoc(UINT16 nUnitId)
 {
     if (rgExtraLoc[0] == -1)
     {
@@ -157,12 +158,12 @@ int CGame_NEWGAME_A::GetExtraLoc(UINT16 nUnitId)
     return rgExtraLoc[nUnitId];
 }
 
-sDescTreeNode* CGame_NEWGAME_A::InitDescTree()
+sDescTreeNode* CGame_VENTURE_A::InitDescTree()
 {
     UINT32 nTotalPaletteCount = 0;
 
     //Load extra file if we're using it
-    LoadExtraFileForGame(EXTRA_FILENAME_NEWGAME_A, NEWGAME_A_EXTRA, &NEWGAME_A_EXTRA_CUSTOM, NEWGAME_A_EXTRALOC, m_nConfirmedROMSize);
+    LoadExtraFileForGame(EXTRA_FILENAME_NEWGAME_A, NEWGAME_A_EXTRA, &VENTURE_A_EXTRA_CUSTOM, NEWGAME_A_EXTRALOC, m_nConfirmedROMSize);
 
     UINT16 nUnitCt = NEWGAME_A_NUMUNIT + (GetExtraCt(NEWGAME_A_EXTRALOC) ? 1 : 0);
     
@@ -177,7 +178,7 @@ sDescTreeNode* CGame_NEWGAME_A::InitDescTree()
 
     CString strMsg;
     bool fHaveExtras = (GetExtraCt(NEWGAME_A_EXTRALOC) > 0);
-    strMsg.Format(L"CGame_NEWGAME_A::InitDescTree: Building desc tree for NEWGAME_A %s extras...\n", fHaveExtras ? L"with" : L"without");
+    strMsg.Format(L"CGame_VENTURE_A::InitDescTree: Building desc tree for NEWGAME_A %s extras...\n", fHaveExtras ? L"with" : L"without");
     OutputDebugString(strMsg);
 
     //Go through each character
@@ -330,7 +331,7 @@ sDescTreeNode* CGame_NEWGAME_A::InitDescTree()
         }
     }
 
-    strMsg.Format(L"CGame_NEWGAME_A::InitDescTree: Loaded %u palettes for NEWGAME Revenge\n", nTotalPaletteCount);
+    strMsg.Format(L"CGame_VENTURE_A::InitDescTree: Loaded %u palettes for NEWGAME Revenge\n", nTotalPaletteCount);
     OutputDebugString(strMsg);
 
     m_nTotalPaletteCountForNEWGAME = nTotalPaletteCount;
@@ -338,7 +339,7 @@ sDescTreeNode* CGame_NEWGAME_A::InitDescTree()
     return NewDescTree;
 }
 
-sFileRule CGame_NEWGAME_A::GetRule(UINT16 nUnitId)
+sFileRule CGame_VENTURE_A::GetRule(UINT16 nUnitId)
 {
     sFileRule NewFileRule;
 
@@ -351,7 +352,7 @@ sFileRule CGame_NEWGAME_A::GetRule(UINT16 nUnitId)
     return NewFileRule;
 }
 
-UINT16 CGame_NEWGAME_A::GetCollectionCountForUnit(UINT16 nUnitId)
+UINT16 CGame_VENTURE_A::GetCollectionCountForUnit(UINT16 nUnitId)
 {
     if (nUnitId == NEWGAME_A_EXTRALOC)
     {
@@ -363,7 +364,7 @@ UINT16 CGame_NEWGAME_A::GetCollectionCountForUnit(UINT16 nUnitId)
     }
 }
 
-UINT16 CGame_NEWGAME_A::GetNodeCountForCollection(UINT16 nUnitId, UINT16 nCollectionId)
+UINT16 CGame_VENTURE_A::GetNodeCountForCollection(UINT16 nUnitId, UINT16 nCollectionId)
 {
     if (nUnitId == NEWGAME_A_EXTRALOC)
     {
@@ -377,7 +378,7 @@ UINT16 CGame_NEWGAME_A::GetNodeCountForCollection(UINT16 nUnitId, UINT16 nCollec
     }
 }
 
-LPCWSTR CGame_NEWGAME_A::GetDescriptionForCollection(UINT16 nUnitId, UINT16 nCollectionId)
+LPCWSTR CGame_VENTURE_A::GetDescriptionForCollection(UINT16 nUnitId, UINT16 nCollectionId)
 {
     if (nUnitId == NEWGAME_A_EXTRALOC)
     {
@@ -390,7 +391,7 @@ LPCWSTR CGame_NEWGAME_A::GetDescriptionForCollection(UINT16 nUnitId, UINT16 nCol
     }
 }
 
-UINT16 CGame_NEWGAME_A::GetPaletteCountForUnit(UINT16 nUnitId)
+UINT16 CGame_VENTURE_A::GetPaletteCountForUnit(UINT16 nUnitId)
 {
     if (nUnitId == NEWGAME_A_EXTRALOC)
     {
@@ -411,7 +412,7 @@ UINT16 CGame_NEWGAME_A::GetPaletteCountForUnit(UINT16 nUnitId)
 
 #if NEWGAME_A_DEBUG
         CString strMsg;
-        strMsg.Format(L"CGame_NEWGAME_A::GetPaletteCountForUnit: %u for unit %u which has %u collections.\n", nCompleteCount, nUnitId, nCollectionCount);
+        strMsg.Format(L"CGame_VENTURE_A::GetPaletteCountForUnit: %u for unit %u which has %u collections.\n", nCompleteCount, nUnitId, nCollectionCount);
         OutputDebugString(strMsg);
 #endif
 
@@ -419,14 +420,14 @@ UINT16 CGame_NEWGAME_A::GetPaletteCountForUnit(UINT16 nUnitId)
     }
 }
 
-const sGame_PaletteDataset* CGame_NEWGAME_A::GetPaletteSet(UINT16 nUnitId, UINT16 nCollectionId)
+const sGame_PaletteDataset* CGame_VENTURE_A::GetPaletteSet(UINT16 nUnitId, UINT16 nCollectionId)
 {
     // Don't use this for Extra palettes.
     const sDescTreeNode* pCurrentSet = (const sDescTreeNode*)NEWGAME_A_UNITS[nUnitId].ChildNodes;
     return ((sGame_PaletteDataset*)(pCurrentSet[nCollectionId].ChildNodes));
 }
 
-const sDescTreeNode* CGame_NEWGAME_A::GetNodeFromPaletteId(UINT16 nUnitId, UINT16 nPaletteId, bool fReturnBasicNodesOnly)
+const sDescTreeNode* CGame_VENTURE_A::GetNodeFromPaletteId(UINT16 nUnitId, UINT16 nPaletteId, bool fReturnBasicNodesOnly)
 {
     // Don't use this for Extra palettes.
     const sDescTreeNode* pCollectionNode = nullptr;
@@ -477,7 +478,7 @@ const sDescTreeNode* CGame_NEWGAME_A::GetNodeFromPaletteId(UINT16 nUnitId, UINT1
     return pCollectionNode;
 }
 
-const sGame_PaletteDataset* CGame_NEWGAME_A::GetSpecificPalette(UINT16 nUnitId, UINT16 nPaletteId)
+const sGame_PaletteDataset* CGame_VENTURE_A::GetSpecificPalette(UINT16 nUnitId, UINT16 nPaletteId)
 {
     // Don't use this for Extra palettes.
     UINT16 nTotalCollections = GetCollectionCountForUnit(nUnitId);
@@ -501,7 +502,7 @@ const sGame_PaletteDataset* CGame_NEWGAME_A::GetSpecificPalette(UINT16 nUnitId, 
     return paletteToUse;
 }
 
-void CGame_NEWGAME_A::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
+void CGame_VENTURE_A::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
 {
      if (nUnitId != NEWGAME_A_EXTRALOC)
     {
@@ -533,7 +534,7 @@ void CGame_NEWGAME_A::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
     }
 }
 
-BOOL CGame_NEWGAME_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node04)
+BOOL CGame_VENTURE_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node04)
 {
     //Reset palette sources
     ClearSrcPal();

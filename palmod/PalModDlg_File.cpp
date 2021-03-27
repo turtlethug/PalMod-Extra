@@ -28,6 +28,7 @@ sSupportedGameList SupportedGameList[] =
     { Garou_S,          L"Garou: MotW", L"Garou: MotW for Steam 2|p1.bin|", GamePlatform::Steam },
     { GUNDAM_SNES,      L"Gundam Wing: Endless Duel", L"Gundam Wing: Endless Duel (SNES)|Shin Kidou Senki Gundam W - Endless Duel (Japan).sfc|", GamePlatform::Nintendo },
     { JOJOS_A,          L"Jojo's: HFTF", L"Jojos (Japan): HUDs and menus (50), Characters (51)|50;51|", GamePlatform::CapcomCPS3 },
+	{ VENTURE_A,        L"Venture", L"Venture: Characters (50), Huds and Extras (31)|50;31|", GamePlatform::CapcomCPS3 },
     { KarnovsR_A,       L"Karnov's Revenge", L"Karnov's Revenge|066-p1.p1|", GamePlatform::NEOGEO }, // DataEast
     { KIZUNA_A,         L"Kizuna Encounter", L"Kizuna Encounter|216-p1.*;ke_p1.rom|", GamePlatform::NEOGEO },
     { KOF94_A,          L"KOF94", L"KOF94|055-p1.*|", GamePlatform::NEOGEO },

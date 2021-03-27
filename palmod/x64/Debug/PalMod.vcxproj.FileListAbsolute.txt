@@ -1,0 +1,2 @@
+d:\Users\Stinn\Documents\GitHub\PalMod\palmod\x64\Debug\PalMod.exe
+d:\Users\Stinn\Documents\GitHub\PalMod\palmod\x64\Debug\PalMod.pdb

@@ -103,6 +103,7 @@ enum SupportedGamesList
     DBFCI_A,
     UNICLR_A,
     SPF2T_A,
+	VENTURE_A,
 
     NUM_GAMES // This needs to be last
 };
@@ -209,6 +210,7 @@ const WCHAR g_GameFriendlyName[NUM_GAMES][64] =
    L"Dengeki Bunko: Fighting Climax IGNITION",
    L"Under Night In-Birth Exe:Late[clr-r]",
    L"Super Puzzle Fighter II Turbo",
+   L"Jojo's Venture",
 };
 
 enum class GamePlatform
