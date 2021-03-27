@@ -38,6 +38,8 @@ enum class ColMode
     COLMODE_9,         // RGB333 for Sega Genesis/MegaDrive
     COLMODE_ARGB7888,  // 32bit color for guilty gear
     COLMODE_SHARPRGB,  // sharp x68000 rgb
+    COLMODE_ARGB1888,  // 32bit color for DBFCI
+    COLMODE_ARGB8888,  // 32bit color for uniclr. and modern computing...
 };
 
 enum class ColFlag
@@ -64,12 +66,14 @@ protected:
     LPCWSTR m_pszCurrentPaletteName = nullptr;
     UINT32 m_nConfirmedCRCValue = 0;
 
+    const int k_nRGBPlaneAmtForRGB111 = 1;
     const int k_nRGBPlaneAmtForRGB333 = 7;
     const int k_nRGBPlaneAmtForRGB444 = 15;
     const int k_nRGBPlaneAmtForRGB555 = 31;
     const int k_nRGBPlaneAmtForRGB777 = 127;
     const int k_nRGBPlaneAmtForRGB888 = 255;
 
+    const double k_nRGBPlaneMulForRGB111 = 255;
     const double k_nRGBPlaneMulForRGB333 = 36.428;
     const double k_nRGBPlaneMulForRGB444 = 17.0;
     const double k_nRGBPlaneMulForRGB555 = 8.225;
@@ -127,8 +131,12 @@ protected:
     static UINT32 CONV_NEOGEO_32(UINT16 inCol);
     static UINT16 CONV_32_SHARPRGB(UINT32 inCol);
     static UINT32 CONV_SHARPRGB_32(UINT16 inCol);
+    static UINT32 CONV_32_ARGB1888(UINT32 inCol);
+    static UINT32 CONV_ARGB1888_32(UINT32 inCol);
     static UINT32 CONV_32_ARGB7888(UINT32 inCol);
     static UINT32 CONV_ARGB7888_32(UINT32 inCol);
+    static UINT32 CONV_32_ARGB8888(UINT32 inCol);
+    static UINT32 CONV_ARGB8888_32(UINT32 inCol);
 
     static UINT16 SWAP_16(UINT16 palv);
 
@@ -140,6 +148,9 @@ protected:
 
     enum PALWriteOutputOptions
     {
+        // This is the number of colors to write when saving to the game ROM before we need to add another reserved color/counter UINT16.
+        // You can set this to WRITE_MAX to write out a maximum of 256 colors.  See CGameClass::UpdatePalData for usage.
+        // You're only really going to be able to prove the game's maximum palette length with palettes longer than 16 colors.
         WRITE_16 = 16,
         WRITE_MAX = 256,
     };
@@ -295,6 +306,22 @@ public:
     virtual void CreateDefPal(sDescNode* srcNode, UINT16 nSepId);
 
     COLORREF*** CreateImgOutPal();
+
+    BOOL _UpdatePalImg(const sDescTreeNode* pGameUnits, int* rgExtraCount, int nNormalUnitCount, UINT16 nExtraUnitLocation, stExtraDef* ppExtraDef, int Node01, int Node02, int Node03, int Node04);
+
+    static UINT16 _GetCollectionCountForUnit(const sDescTreeNode* pGameUnits, int* rgExtraCount, int nNormalUnitCount, UINT16 nExtraUnitLocation, UINT16 nUnitId, stExtraDef* ppExtraDef);
+    static UINT16 _GetNodeCountForCollection(const sDescTreeNode* pGameUnits, int* rgExtraCount, int nNormalUnitCount, UINT16 nExtraUnitLocation, UINT16 nUnitId, UINT16 nCollectionId, stExtraDef* ppExtraDef);
+    static LPCWSTR _GetDescriptionForCollection(const sDescTreeNode* pGameUnits, UINT16 nExtraUnitLocation, UINT16 nUnitId, UINT16 nCollectionId);
+    static const sGame_PaletteDataset* _GetPaletteSet(const sDescTreeNode* pGameUnits, UINT16 nUnitId, UINT16 nCollectionId);
+    static const sGame_PaletteDataset* _GetSpecificPalette(const sDescTreeNode* pGameUnits, int* rgExtraCount, int nNormalUnitCount, UINT16 nExtraUnitLocation, UINT16 nUnitId, UINT16 nPaletteId, stExtraDef* ppExtraDef);
+
+    UINT16 _GetPaletteCountForUnit(const sDescTreeNode* pGameUnits, int* rgExtraCount, int nNormalUnitCount, UINT16 nExtraUnitLocation, UINT16 nUnitId, stExtraDef* ppExtraDef);
+    UINT16 _GetNodeSizeFromPaletteId(const sDescTreeNode* pGameUnits, int* rgExtraCount, int nNormalUnitCount, UINT16 nExtraUnitLocation, UINT16 nUnitId, UINT16 nPaletteId, stExtraDef* ppExtraDef);
+    const sDescTreeNode* _GetNodeFromPaletteId(const sDescTreeNode* pGameUnits, int* rgExtraCount, int nNormalUnitCount, UINT16 nExtraUnitLocation, UINT16 nUnitId, UINT16 nPaletteId, stExtraDef* ppExtraDef, bool fReturnBasicNodesOnly);
+
+    static int _GetExtraCount(int* rgExtraCount, int nNormalUnitCount, UINT16 nUnitId, stExtraDef* ppExtraDef);
+    static int _GetExtraLocation(int *rgExtraLocations, int nNormalUnitCount, UINT16 nUnitId, stExtraDef* ppExtraDef);
+    static UINT32 _InitDescTree(sDescTreeNode* pNewDescTree, const sDescTreeNode* pGameUnits, UINT16 nTotalUnitCount, UINT16 nExtraUnitLocation, UINT16 nTotalNormalUnitCount, int *rgExtraCount, int *rgExtraLocations, stExtraDef *ppExtraDef);
 
     void MarkPaletteDirty(UINT16 nUnit, UINT16 nPaletteID);
     void MarkPaletteClean(UINT16 nUnit, UINT16 nPaletteID);

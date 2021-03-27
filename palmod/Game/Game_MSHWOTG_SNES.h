@@ -1,32 +1,29 @@
 #pragma once
 #include "gameclass.h"
-#include "SAMSHO5SP_A_DEF.h"
+#include "MSHWOTG_SNES_DEF.h"
 #include "..\extrafile.h"
 
-constexpr auto EXTRA_FILENAME_SAMSHO5SP_A = L"SAMSHO5SPE.txt";
-#define GetExtraDefForSAMSHO5SP(x)((stExtraDef *)&SAMSHO5SP_A_EXTRA_CUSTOM[x])
+constexpr auto EXTRA_FILENAME_MSHWOTG_SNES = L"MSHWOTGE.txt";
+#define GetExtraDefForMSHWOTG(x)((stExtraDef *)&MSHWOTG_SNES_EXTRA_CUSTOM[x])
 
-class CGame_SAMSHO5SP_A : public CGameWithExtrasFile
+class CGame_MSHWOTG_SNES : public CGameWithExtrasFile
 {
 private:
-    static UINT32 m_nTotalPaletteCountForSAMSHO5SP;
+    static UINT32 m_nTotalPaletteCountForMSHWOTG;
 
-    static int rgExtraCountAll[SAMSHO5SP_A_NUMUNIT + 1];
-    static int rgExtraLoc[SAMSHO5SP_A_NUMUNIT + 1];
+    static int rgExtraCountAll[MSHWOTG_SNES_NUMUNIT + 1];
+    static int rgExtraLoc[MSHWOTG_SNES_NUMUNIT + 1];
 
     static void InitializeStatics();
     static UINT32 m_nExpectedGameROMSize;
     static UINT32 m_nConfirmedROMSize;
 
-    static const UINT32 m_nExpectedGameROMSizeArcade = 0x400000;  // 4194304 bytes
-    static const UINT32 m_nExpectedGameROMSizeSteam = 0x800000;  // 8388608 bytes
-
     void LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId);
     UINT16 GetPaletteCountForUnit(UINT16 nUnitId);
 
 public:
-    CGame_SAMSHO5SP_A(UINT32 nConfirmedROMSize);
-    ~CGame_SAMSHO5SP_A(void);
+    CGame_MSHWOTG_SNES(UINT32 nConfirmedROMSize);
+    ~CGame_MSHWOTG_SNES(void);
 
     //Static functions / variables
     static CDescTree MainDescTree;
@@ -48,10 +45,11 @@ public:
     static const sGame_PaletteDataset* GetPaletteSet(UINT16 nUnitId, UINT16 nCollectionId);
     static const sGame_PaletteDataset* GetSpecificPalette(UINT16 nUnitId, UINT16 nPaletteId);
 
-    UINT16 GetNodeSizeFromPaletteId(UINT16 nUnitId, UINT16 nPaletteId);
     const sDescTreeNode* GetNodeFromPaletteId(UINT16 nUnitId, UINT16 nPaletteId, bool fReturnBasicNodesOnly);
 
     BOOL UpdatePalImg(int Node01 = -1, int Node02 = -1, int Node03 = -1, int Node04 = -1);
 
-    static stExtraDef* SAMSHO5SP_A_EXTRA_CUSTOM;
+    UINT32 GetKnownCRC32DatasetsForGame(const sCRC32ValueSet** ppKnownROMSet = nullptr, bool* fNeedToValidateCRCs = nullptr) override;
+
+    static stExtraDef* MSHWOTG_SNES_EXTRA_CUSTOM;
 };

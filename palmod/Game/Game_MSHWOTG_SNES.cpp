@@ -1,75 +1,75 @@
 #include "StdAfx.h"
 #include "GameDef.h"
-#include "Game_Matrimelee_A.h"
+#include "Game_MSHWOTG_SNES.h"
+#include "..\PalMod.h"
 #include "..\RegProc.h"
 
-#define Matrimelee_A_DEBUG DEFAULT_GAME_DEBUG_STATE
+#define MSHWOTG_SNES_DEBUG DEFAULT_GAME_DEBUG_STATE
 
-stExtraDef* CGame_Matrimelee_A::Matrimelee_A_EXTRA_CUSTOM = nullptr;
+stExtraDef* CGame_MSHWOTG_SNES::MSHWOTG_SNES_EXTRA_CUSTOM = nullptr;
 
-CDescTree CGame_Matrimelee_A::MainDescTree = nullptr;
+CDescTree CGame_MSHWOTG_SNES::MainDescTree = nullptr;
 
-int CGame_Matrimelee_A::rgExtraCountAll[Matrimelee_A_NUMUNIT + 1];
-int CGame_Matrimelee_A::rgExtraLoc[Matrimelee_A_NUMUNIT + 1];
+int CGame_MSHWOTG_SNES::rgExtraCountAll[MSHWOTG_SNES_NUMUNIT + 1];
+int CGame_MSHWOTG_SNES::rgExtraLoc[MSHWOTG_SNES_NUMUNIT + 1];
 
-UINT32 CGame_Matrimelee_A::m_nTotalPaletteCountForMatrimelee = 0;
-const UINT32 CGame_Matrimelee_A::m_nExpectedGameROMSize = 0x400000;
-UINT32 CGame_Matrimelee_A::m_nConfirmedROMSize = -1;
+UINT32 CGame_MSHWOTG_SNES::m_nTotalPaletteCountForMSHWOTG = 0;
+UINT32 CGame_MSHWOTG_SNES::m_nExpectedGameROMSize = 0x200000;
+UINT32 CGame_MSHWOTG_SNES::m_nConfirmedROMSize = -1;
 
-void CGame_Matrimelee_A::InitializeStatics()
+void CGame_MSHWOTG_SNES::InitializeStatics()
 {
-    safe_delete_array(CGame_Matrimelee_A::Matrimelee_A_EXTRA_CUSTOM);
+    safe_delete_array(CGame_MSHWOTG_SNES::MSHWOTG_SNES_EXTRA_CUSTOM);
 
     memset(rgExtraCountAll, -1, sizeof(rgExtraCountAll));
     memset(rgExtraLoc, -1, sizeof(rgExtraLoc));
 
-    MainDescTree.SetRootTree(CGame_Matrimelee_A::InitDescTree());
+    MainDescTree.SetRootTree(CGame_MSHWOTG_SNES::InitDescTree());
 }
 
-CGame_Matrimelee_A::CGame_Matrimelee_A(UINT32 nConfirmedROMSize)
+CGame_MSHWOTG_SNES::CGame_MSHWOTG_SNES(UINT32 nConfirmedROMSize)
 {
     CString strMessage;
-    strMessage.Format(L"CGame_Matrimelee_A::CGame_Matrimelee_A: Loading ROM...\n");
+    strMessage.Format(L"CGame_MSHWOTG_SNES::CGame_MSHWOTG_SNES: Loading ROM...\n");
     OutputDebugString(strMessage);
 
-    createPalOptions = { NO_SPECIAL_OPTIONS, PALWriteOutputOptions::WRITE_16 };
+    //Set color mode: see the definitions in GameClass.h
+    createPalOptions = { NO_SPECIAL_OPTIONS, WRITE_16 };
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
-    SetColorMode(ColMode::COLMODE_15ALT);
+    SetColorMode(ColMode::COLMODE_GBA);
 
-    //Set palette conversion mode
     BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
 
-    // We need this set before we initialize so that corrupt Extras truncate correctly.
-    // Otherwise the new user inadvertently corrupts their ROM.
+    // We need this set before we initialize so that we can truncate bad Extras correctly.
+    // Otherwise the new user could inadvertently corrupt their ROM.
     m_nConfirmedROMSize = nConfirmedROMSize;
     InitializeStatics();
 
-    m_nTotalInternalUnits = Matrimelee_A_NUMUNIT;
-    m_nExtraUnit = Matrimelee_A_EXTRALOC;
+    m_nTotalInternalUnits = MSHWOTG_SNES_NUMUNIT;
+    m_nExtraUnit = MSHWOTG_SNES_EXTRALOC;
 
-    m_nSafeCountForThisRom = GetExtraCt(m_nExtraUnit) + 768;
-    m_pszExtraFilename = EXTRA_FILENAME_Matrimelee_A;
-    m_nTotalPaletteCount = m_nTotalPaletteCountForMatrimelee;
+    m_nSafeCountForThisRom = GetExtraCt(m_nExtraUnit) + 84;
+    m_pszExtraFilename = EXTRA_FILENAME_MSHWOTG_SNES;
+    m_nTotalPaletteCount = m_nTotalPaletteCountForMSHWOTG;
     // This magic number is used to warn users if their Extra file is trying to write somewhere potentially unusual
-    m_nLowestKnownPaletteRomLocation = 0x72ba;
+    m_nLowestKnownPaletteRomLocation = 0x5e7d1;
 
     nUnitAmt = m_nTotalInternalUnits + (GetExtraCt(m_nExtraUnit) ? 1 : 0);
 
     InitDataBuffer();
 
-    //Set game information
-    nGameFlag = MATRIMELEE_A;
-    nImgGameFlag = IMGDAT_SECTION_MATRIM;
-    nImgUnitAmt = ARRAYSIZE(MATRIM_A_IMG_UNITS);
-    m_prgGameImageSet = MATRIM_A_IMG_UNITS;
+    nGameFlag = MSHWOTG_SNES;
+    nImgGameFlag = IMGDAT_SECTION_SNES;
+    m_prgGameImageSet = MSHWOTG_SNES_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(MSHWOTG_SNES_IMG_UNITS);
 
     nFileAmt = 1;
 
     //Set the image out display type
     DisplayType = eImageOutputSpriteDisplay::DISPLAY_SPRITES_LEFTTORIGHT;
     // Button labels are used for the Export Image dialog
-    pButtonLabelSet = DEF_BUTTONLABEL_NEOGEO;
-    m_nNumberOfColorOptions = ARRAYSIZE(DEF_BUTTONLABEL_NEOGEO);
+    pButtonLabelSet = DEF_NOBUTTONS;
+    m_nNumberOfColorOptions = ARRAYSIZE(DEF_NOBUTTONS);
 
     //Create the redirect buffer
     rgUnitRedir = new UINT16[nUnitAmt + 1];
@@ -79,27 +79,61 @@ CGame_Matrimelee_A::CGame_Matrimelee_A(UINT32 nConfirmedROMSize)
     PrepChangeTrackingArray();
 }
 
-CGame_Matrimelee_A::~CGame_Matrimelee_A(void)
+CGame_MSHWOTG_SNES::~CGame_MSHWOTG_SNES(void)
 {
-    safe_delete_array(CGame_Matrimelee_A::Matrimelee_A_EXTRA_CUSTOM);
+    safe_delete_array(CGame_MSHWOTG_SNES::MSHWOTG_SNES_EXTRA_CUSTOM);
     ClearDataBuffer();
     //Get rid of the file changed flag
     FlushChangeTrackingArray();
 }
 
-CDescTree* CGame_Matrimelee_A::GetMainTree()
+sFileRule CGame_MSHWOTG_SNES::GetRule(UINT16 nUnitId)
 {
-    return &CGame_Matrimelee_A::MainDescTree;
+    sFileRule NewFileRule;
+
+    // This value is only used for directory-based games
+    _snwprintf_s(NewFileRule.szFileName, ARRAYSIZE(NewFileRule.szFileName), _TRUNCATE, L"Marvel Super Heroes in War of the Gems (USA).sfc");
+
+    NewFileRule.uUnitId = 0;
+    NewFileRule.uVerifyVar = m_nExpectedGameROMSize;
+
+    return NewFileRule;
 }
 
-int CGame_Matrimelee_A::GetExtraCt(UINT16 nUnitId, BOOL bCountVisibleOnly)
+UINT32 CGame_MSHWOTG_SNES::GetKnownCRC32DatasetsForGame(const sCRC32ValueSet** ppKnownROMSet, bool* pfNeedToValidateCRCs)
+{
+    static sCRC32ValueSet knownROMs[] =
+    {
+        { L"Marvel Super Heroes:  War of the Gems (SNES USA)", L"Marvel Super Heroes in War of the Gems (USA).sfc", 0, 0 },
+    };
+
+    if (ppKnownROMSet)
+    {
+        *ppKnownROMSet = knownROMs;
+    }
+
+    if (pfNeedToValidateCRCs)
+    {
+        // Each filename is associated with a single CRC
+        *pfNeedToValidateCRCs = false;
+    }
+
+    return ARRAYSIZE(knownROMs);
+}
+
+CDescTree* CGame_MSHWOTG_SNES::GetMainTree()
+{
+    return &CGame_MSHWOTG_SNES::MainDescTree;
+}
+
+int CGame_MSHWOTG_SNES::GetExtraCt(UINT16 nUnitId, BOOL bCountVisibleOnly)
 {
     if (rgExtraCountAll[0] == -1)
     {
         int nDefCtr = 0;
-        memset(rgExtraCountAll, 0, ((Matrimelee_A_NUMUNIT + 1) * sizeof(int)));
+        memset(rgExtraCountAll, 0, ((MSHWOTG_SNES_NUMUNIT + 1) * sizeof(int)));
 
-        stExtraDef* pCurrDef = GetExtraDefForMatrimelee(0);
+        stExtraDef* pCurrDef = GetExtraDefForMSHWOTG(0);
 
         while (pCurrDef->uUnitN != INVALID_UNIT_VALUE)
         {
@@ -109,22 +143,22 @@ int CGame_Matrimelee_A::GetExtraCt(UINT16 nUnitId, BOOL bCountVisibleOnly)
             }
 
             nDefCtr++;
-            pCurrDef = GetExtraDefForMatrimelee(nDefCtr);
+            pCurrDef = GetExtraDefForMSHWOTG(nDefCtr);
         }
     }
 
     return rgExtraCountAll[nUnitId];
 }
 
-int CGame_Matrimelee_A::GetExtraLoc(UINT16 nUnitId)
+int CGame_MSHWOTG_SNES::GetExtraLoc(UINT16 nUnitId)
 {
     if (rgExtraLoc[0] == -1)
     {
         int nDefCtr = 0;
         int nCurrUnit = UNIT_START_VALUE;
-        memset(rgExtraLoc, 0, (Matrimelee_A_NUMUNIT + 1) * sizeof(int));
+        memset(rgExtraLoc, 0, (MSHWOTG_SNES_NUMUNIT + 1) * sizeof(int));
 
-        stExtraDef* pCurrDef = GetExtraDefForMatrimelee(0);
+        stExtraDef* pCurrDef = GetExtraDefForMSHWOTG(0);
 
         while (pCurrDef->uUnitN != INVALID_UNIT_VALUE)
         {
@@ -135,34 +169,34 @@ int CGame_Matrimelee_A::GetExtraLoc(UINT16 nUnitId)
             }
 
             nDefCtr++;
-            pCurrDef = GetExtraDefForMatrimelee(nDefCtr);
+            pCurrDef = GetExtraDefForMSHWOTG(nDefCtr);
         }
     }
 
     return rgExtraLoc[nUnitId];
 }
 
-sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
+sDescTreeNode* CGame_MSHWOTG_SNES::InitDescTree()
 {
     UINT32 nTotalPaletteCount = 0;
 
     //Load extra file if we're using it
-    LoadExtraFileForGame(EXTRA_FILENAME_Matrimelee_A, Matrimelee_A_EXTRA, &Matrimelee_A_EXTRA_CUSTOM, Matrimelee_A_EXTRALOC, m_nConfirmedROMSize);
+    LoadExtraFileForGame(EXTRA_FILENAME_MSHWOTG_SNES, MSHWOTG_SNES_EXTRA, &MSHWOTG_SNES_EXTRA_CUSTOM, MSHWOTG_SNES_EXTRALOC, m_nConfirmedROMSize);
 
-    UINT16 nUnitCt = Matrimelee_A_NUMUNIT + (GetExtraCt(Matrimelee_A_EXTRALOC) ? 1 : 0);
-    
+    UINT16 nUnitCt = MSHWOTG_SNES_NUMUNIT + (GetExtraCt(MSHWOTG_SNES_EXTRALOC) ? 1 : 0);
+
     sDescTreeNode* NewDescTree = new sDescTreeNode;
 
     //Create the main character tree
-    _snwprintf_s(NewDescTree->szDesc, ARRAYSIZE(NewDescTree->szDesc), _TRUNCATE, L"%s", g_GameFriendlyName[MATRIMELEE_A]);
+    _snwprintf_s(NewDescTree->szDesc, ARRAYSIZE(NewDescTree->szDesc), _TRUNCATE, L"%s", g_GameFriendlyName[MSHWOTG_SNES]);
     NewDescTree->ChildNodes = new sDescTreeNode[nUnitCt];
     NewDescTree->uChildAmt = nUnitCt;
     //All units have tree children
     NewDescTree->uChildType = DESC_NODETYPE_TREE;
 
     CString strMsg;
-    bool fHaveExtras = (GetExtraCt(Matrimelee_A_EXTRALOC) > 0);
-    strMsg.Format(L"CGame_Matrimelee_A::InitDescTree: Building desc tree for Matrimelee_A %s extras...\n", fHaveExtras ? L"with" : L"without");
+    bool fHaveExtras = (GetExtraCt(MSHWOTG_SNES_EXTRALOC) > 0);
+    strMsg.Format(L"CGame_MSHWOTG_SNES::InitDescTree: Building desc tree for MSHWOTG_SNES %s extras...\n", fHaveExtras ? L"with" : L"without");
     OutputDebugString(strMsg);
 
     //Go through each character
@@ -179,20 +213,20 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
 
         UnitNode = &((sDescTreeNode*)NewDescTree->ChildNodes)[iUnitCtr];
 
-        if (iUnitCtr < Matrimelee_A_EXTRALOC)
+        if (iUnitCtr < MSHWOTG_SNES_EXTRALOC)
         {
             //Set each description
-            _snwprintf_s(UnitNode->szDesc, ARRAYSIZE(UnitNode->szDesc), _TRUNCATE, L"%s", Matrimelee_A_UNITS[iUnitCtr].szDesc);
+            _snwprintf_s(UnitNode->szDesc, ARRAYSIZE(UnitNode->szDesc), _TRUNCATE, L"%s", MSHWOTG_SNES_UNITS[iUnitCtr].szDesc);
             UnitNode->ChildNodes = new sDescTreeNode[nUnitChildCount];
             //All children have collection trees
             UnitNode->uChildType = DESC_NODETYPE_TREE;
             UnitNode->uChildAmt = nUnitChildCount;
 
-#if Matrimelee_A_DEBUG
-            strMsg.Format(L"Unit: \"%s\", %u of %u (%s), %u total children\n", UnitNode->szDesc, iUnitCtr + 1, nUnitCt, bUseExtra ? L"with extras" : L"no extras", nUnitChildCount);
+#if MSHWOTG_SNES_DEBUG
+            strMsg.Format(L";Unit: \"%s\", %u of %u (%s), %u total children\n", UnitNode->szDesc, iUnitCtr + 1, nUnitCt, bUseExtra ? L"with extras" : L"no extras", nUnitChildCount);
             OutputDebugString(strMsg);
 #endif
-            
+
             UINT16 nTotalPalettesUsedInUnit = 0;
 
             //Set data for each child group ("collection")
@@ -210,8 +244,8 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
                 CollectionNode->uChildAmt = nListedChildrenCount;
                 CollectionNode->ChildNodes = (sDescTreeNode*)new sDescNode[nListedChildrenCount];
 
-#if Matrimelee_A_DEBUG
-                strMsg.Format(L"\tCollection: \"%s\", %u of %u, %u children\n", CollectionNode->szDesc, iCollectionCtr + 1, nUnitChildCount, nListedChildrenCount);
+#if MSHWOTG_SNES_DEBUG
+                strMsg.Format(L";\tCollection: \"%s\", %u of %u, %u children\n", CollectionNode->szDesc, iCollectionCtr + 1, nUnitChildCount, nListedChildrenCount);
                 OutputDebugString(strMsg);
 #endif
 
@@ -228,8 +262,8 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
                     ChildNode->uPalId = nTotalPalettesUsedInUnit++;
                     nTotalPaletteCount++;
 
-#if Matrimelee_A_DEBUG
-                    strMsg.Format(L"\t\tPalette: \"%s\", %u of %u", ChildNode->szDesc, nNodeIndex + 1, nListedChildrenCount);
+#if MSHWOTG_SNES_DEBUG
+                    strMsg.Format(L";\t\tPalette: \"%s\", %u of %u", ChildNode->szDesc, nNodeIndex + 1, nListedChildrenCount);
                     OutputDebugString(strMsg);
                     strMsg.Format(L", 0x%06x to 0x%06x (%u colors),", paletteSetToUse[nNodeIndex].nPaletteOffset, paletteSetToUse[nNodeIndex].nPaletteOffsetEnd, (paletteSetToUse[nNodeIndex].nPaletteOffsetEnd - paletteSetToUse[nNodeIndex].nPaletteOffset) / 2);
                     OutputDebugString(strMsg);
@@ -243,6 +277,10 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
                         strMsg.Format(L" no image available.\n");
                     }
                     OutputDebugString(strMsg);
+
+                    strMsg.Format(L"%s :: %s :: %s\n0x%X\n0x%X\n\n", UnitNode->szDesc, CollectionNode->szDesc, ChildNode->szDesc, paletteSetToUse[nNodeIndex].nPaletteOffset, paletteSetToUse[nNodeIndex].nPaletteOffsetEnd);
+                    OutputDebugString(strMsg);
+
 #endif
                 }
             }
@@ -256,8 +294,8 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
             UnitNode->uChildType = DESC_NODETYPE_TREE;
             UnitNode->uChildAmt = 1;
 
-#if Matrimelee_A_DEBUG
-            strMsg.Format(L"Unit (Extras): %s, %u of %u, %u total children\n", UnitNode->szDesc, iUnitCtr + 1, nUnitCt, nUnitChildCount);
+#if MSHWOTG_SNES_DEBUG
+            strMsg.Format(L";Unit (Extras): %s, %u of %u, %u total children\n", UnitNode->szDesc, iUnitCtr + 1, nUnitCt, nUnitChildCount);
             OutputDebugString(strMsg);
 #endif
         }
@@ -268,7 +306,7 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
             int nExtraPos = GetExtraLoc(iUnitCtr);
             int nCurrExtra = 0;
 
-            CollectionNode = &((sDescTreeNode*)UnitNode->ChildNodes)[(Matrimelee_A_EXTRALOC > iUnitCtr) ? (nUnitChildCount - 1) : 0]; //Extra node
+            CollectionNode = &((sDescTreeNode*)UnitNode->ChildNodes)[(MSHWOTG_SNES_EXTRALOC > iUnitCtr) ? (nUnitChildCount - 1) : 0]; //Extra node
 
             _snwprintf_s(CollectionNode->szDesc, ARRAYSIZE(CollectionNode->szDesc), _TRUNCATE, L"Extra");
 
@@ -277,7 +315,7 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
             CollectionNode->uChildType = DESC_NODETYPE_NODE;
             CollectionNode->uChildAmt = nExtraCt; //EX + Extra
 
-#if Matrimelee_A_DEBUG
+#if MSHWOTG_SNES_DEBUG
             strMsg.Format(L"\tCollection: %s, %u of %u, %u children\n", CollectionNode->szDesc, 1, nUnitChildCount, nExtraCt);
             OutputDebugString(strMsg);
 #endif
@@ -286,21 +324,21 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
             {
                 ChildNode = &((sDescNode*)CollectionNode->ChildNodes)[nExtraCtr];
 
-                stExtraDef* pCurrDef = GetExtraDefForMatrimelee(nExtraPos + nCurrExtra);
+                stExtraDef* pCurrDef = GetExtraDefForMSHWOTG(nExtraPos + nCurrExtra);
 
                 while (pCurrDef->isInvisible)
                 {
                     nCurrExtra++;
 
-                    pCurrDef = GetExtraDefForMatrimelee(nExtraPos + nCurrExtra);
+                    pCurrDef = GetExtraDefForMSHWOTG(nExtraPos + nCurrExtra);
                 }
 
                 _snwprintf_s(ChildNode->szDesc, ARRAYSIZE(ChildNode->szDesc), _TRUNCATE, pCurrDef->szDesc);
 
                 ChildNode->uUnitId = iUnitCtr;
-                ChildNode->uPalId = (((Matrimelee_A_EXTRALOC > iUnitCtr) ? 1 : 0) * nUnitChildCount * 2) + nCurrExtra;
+                ChildNode->uPalId = (((MSHWOTG_SNES_EXTRALOC > iUnitCtr) ? 1 : 0) * nUnitChildCount * 2) + nCurrExtra;
 
-#if Matrimelee_A_DEBUG
+#if MSHWOTG_SNES_DEBUG
                 strMsg.Format(L"\t\tPalette: %s, %u of %u\n", ChildNode->szDesc, nExtraCtr + 1, nExtraCt);
                 OutputDebugString(strMsg);
 #endif
@@ -311,76 +349,63 @@ sDescTreeNode* CGame_Matrimelee_A::InitDescTree()
         }
     }
 
-    strMsg.Format(L"CGame_Matrimelee_A::InitDescTree: Loaded %u palettes for Matrimelee\n", nTotalPaletteCount);
+    strMsg.Format(L"CGame_MSHWOTG_SNES::InitDescTree: Loaded %u palettes for MSHWOTG\n", nTotalPaletteCount);
     OutputDebugString(strMsg);
 
-    m_nTotalPaletteCountForMatrimelee = nTotalPaletteCount;
+    m_nTotalPaletteCountForMSHWOTG = nTotalPaletteCount;
 
     return NewDescTree;
 }
 
-sFileRule CGame_Matrimelee_A::GetRule(UINT16 nUnitId)
+UINT16 CGame_MSHWOTG_SNES::GetCollectionCountForUnit(UINT16 nUnitId)
 {
-    sFileRule NewFileRule;
-
-    // This value is only used for directory-based games
-    _snwprintf_s(NewFileRule.szFileName, ARRAYSIZE(NewFileRule.szFileName), _TRUNCATE, L"066-p1.p1");
-
-    NewFileRule.uUnitId = 0;
-    NewFileRule.uVerifyVar = m_nExpectedGameROMSize;
-
-    return NewFileRule;
-}
-
-UINT16 CGame_Matrimelee_A::GetCollectionCountForUnit(UINT16 nUnitId)
-{
-    if (nUnitId == Matrimelee_A_EXTRALOC)
+    if (nUnitId == MSHWOTG_SNES_EXTRALOC)
     {
         return GetExtraCt(nUnitId);
     }
     else
     {
-        return Matrimelee_A_UNITS[nUnitId].uChildAmt;
+        return MSHWOTG_SNES_UNITS[nUnitId].uChildAmt;
     }
 }
 
-UINT16 CGame_Matrimelee_A::GetNodeCountForCollection(UINT16 nUnitId, UINT16 nCollectionId)
+UINT16 CGame_MSHWOTG_SNES::GetNodeCountForCollection(UINT16 nUnitId, UINT16 nCollectionId)
 {
-    if (nUnitId == Matrimelee_A_EXTRALOC)
+    if (nUnitId == MSHWOTG_SNES_EXTRALOC)
     {
         return GetExtraCt(nUnitId);
     }
     else
     {
-        const sDescTreeNode* pCollectionNode = (const sDescTreeNode*)(Matrimelee_A_UNITS[nUnitId].ChildNodes);
+        const sDescTreeNode* pCollectionNode = (const sDescTreeNode*)(MSHWOTG_SNES_UNITS[nUnitId].ChildNodes);
 
         return pCollectionNode[nCollectionId].uChildAmt;
     }
 }
 
-LPCWSTR CGame_Matrimelee_A::GetDescriptionForCollection(UINT16 nUnitId, UINT16 nCollectionId)
+LPCWSTR CGame_MSHWOTG_SNES::GetDescriptionForCollection(UINT16 nUnitId, UINT16 nCollectionId)
 {
-    if (nUnitId == Matrimelee_A_EXTRALOC)
+    if (nUnitId == MSHWOTG_SNES_EXTRALOC)
     {
         return L"Extra Palettes";
     }
     else
     {
-        const sDescTreeNode* pCollection = (const sDescTreeNode*)Matrimelee_A_UNITS[nUnitId].ChildNodes;
+        const sDescTreeNode* pCollection = (const sDescTreeNode*)MSHWOTG_SNES_UNITS[nUnitId].ChildNodes;
         return pCollection[nCollectionId].szDesc;
     }
 }
 
-UINT16 CGame_Matrimelee_A::GetPaletteCountForUnit(UINT16 nUnitId)
+UINT16 CGame_MSHWOTG_SNES::GetPaletteCountForUnit(UINT16 nUnitId)
 {
-    if (nUnitId == m_nExtraUnit)
+    if (nUnitId == MSHWOTG_SNES_EXTRALOC)
     {
         return GetExtraCt(nUnitId);
     }
     else
     {
         UINT16 nCompleteCount = 0;
-        const sDescTreeNode* pCompleteROMTree = Matrimelee_A_UNITS;
+        const sDescTreeNode* pCompleteROMTree = MSHWOTG_SNES_UNITS;
         UINT16 nCollectionCount = pCompleteROMTree[nUnitId].uChildAmt;
 
         const sDescTreeNode* pCurrentCollection = (const sDescTreeNode*)(pCompleteROMTree[nUnitId].ChildNodes);
@@ -390,9 +415,9 @@ UINT16 CGame_Matrimelee_A::GetPaletteCountForUnit(UINT16 nUnitId)
             nCompleteCount += pCurrentCollection[nCollectionIndex].uChildAmt;
         }
 
-#if Matrimelee_A_DEBUG
+#if MSHWOTG_SNES_DEBUG
         CString strMsg;
-        strMsg.Format(L"CGame_Matrimelee_A::GetPaletteCountForUnit: %u for unit %u which has %u collections.\n", nCompleteCount, nUnitId, nCollectionCount);
+        strMsg.Format(L"CGame_MSHWOTG_SNES::GetPaletteCountForUnit: %u for unit %u which has %u collections.\n", nCompleteCount, nUnitId, nCollectionCount);
         OutputDebugString(strMsg);
 #endif
 
@@ -400,14 +425,14 @@ UINT16 CGame_Matrimelee_A::GetPaletteCountForUnit(UINT16 nUnitId)
     }
 }
 
-const sGame_PaletteDataset* CGame_Matrimelee_A::GetPaletteSet(UINT16 nUnitId, UINT16 nCollectionId)
+const sGame_PaletteDataset* CGame_MSHWOTG_SNES::GetPaletteSet(UINT16 nUnitId, UINT16 nCollectionId)
 {
     // Don't use this for Extra palettes.
-    const sDescTreeNode* pCurrentSet = (const sDescTreeNode*)Matrimelee_A_UNITS[nUnitId].ChildNodes;
+    const sDescTreeNode* pCurrentSet = (const sDescTreeNode*)MSHWOTG_SNES_UNITS[nUnitId].ChildNodes;
     return ((sGame_PaletteDataset*)(pCurrentSet[nCollectionId].ChildNodes));
 }
 
-const sDescTreeNode* CGame_Matrimelee_A::GetNodeFromPaletteId(UINT16 nUnitId, UINT16 nPaletteId, bool fReturnBasicNodesOnly)
+const sDescTreeNode* CGame_MSHWOTG_SNES::GetNodeFromPaletteId(UINT16 nUnitId, UINT16 nPaletteId, bool fReturnBasicNodesOnly)
 {
     // Don't use this for Extra palettes.
     const sDescTreeNode* pCollectionNode = nullptr;
@@ -420,7 +445,7 @@ const sDescTreeNode* CGame_Matrimelee_A::GetNodeFromPaletteId(UINT16 nUnitId, UI
         const sGame_PaletteDataset* paletteSetToCheck = GetPaletteSet(nUnitId, nCollectionIndex);
         UINT16 nNodeCount;
 
-        if (nUnitId == m_nExtraUnit)
+        if (nUnitId == MSHWOTG_SNES_EXTRALOC)
         {
             nNodeCount = GetExtraCt(nUnitId);
 
@@ -432,8 +457,8 @@ const sDescTreeNode* CGame_Matrimelee_A::GetNodeFromPaletteId(UINT16 nUnitId, UI
         }
         else
         {
-            const sDescTreeNode* pCollectionNodeToCheck = (const sDescTreeNode*)(Matrimelee_A_UNITS[nUnitId].ChildNodes);
-            
+            const sDescTreeNode* pCollectionNodeToCheck = (const sDescTreeNode*)(MSHWOTG_SNES_UNITS[nUnitId].ChildNodes);
+
             nNodeCount = pCollectionNodeToCheck[nCollectionIndex].uChildAmt;
 
             if (nDistanceFromZero < nNodeCount)
@@ -458,7 +483,7 @@ const sDescTreeNode* CGame_Matrimelee_A::GetNodeFromPaletteId(UINT16 nUnitId, UI
     return pCollectionNode;
 }
 
-const sGame_PaletteDataset* CGame_Matrimelee_A::GetSpecificPalette(UINT16 nUnitId, UINT16 nPaletteId)
+const sGame_PaletteDataset* CGame_MSHWOTG_SNES::GetSpecificPalette(UINT16 nUnitId, UINT16 nPaletteId)
 {
     // Don't use this for Extra palettes.
     UINT16 nTotalCollections = GetCollectionCountForUnit(nUnitId);
@@ -482,9 +507,9 @@ const sGame_PaletteDataset* CGame_Matrimelee_A::GetSpecificPalette(UINT16 nUnitI
     return paletteToUse;
 }
 
-void CGame_Matrimelee_A::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
+void CGame_MSHWOTG_SNES::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
 {
-     if (nUnitId != m_nExtraUnit)
+    if (nUnitId != MSHWOTG_SNES_EXTRALOC)
     {
         int cbPaletteSizeOnDisc = 0;
         const sGame_PaletteDataset* paletteData = GetSpecificPalette(nUnitId, nPalId);
@@ -496,6 +521,12 @@ void CGame_Matrimelee_A::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
             m_nCurrentPaletteROMLocation = paletteData->nPaletteOffset;
             m_nCurrentPaletteSizeInColors = cbPaletteSizeOnDisc / m_nSizeOfColorsInBytes;
             m_pszCurrentPaletteName = paletteData->szPaletteName;
+
+            // Adjust for ROM-specific variant locations
+            if (m_pCRC32SpecificData)
+            {
+                m_nCurrentPaletteROMLocation += m_pCRC32SpecificData->nROMSpecificOffset;
+            }
         }
         else
         {
@@ -503,10 +534,10 @@ void CGame_Matrimelee_A::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
             DebugBreak();
         }
     }
-    else // m_nExtraUnit
+    else // MSHWOTG_SNES_EXTRALOC
     {
         // This is where we handle all the palettes added in via Extra.
-        stExtraDef* pCurrDef = GetExtraDefForMatrimelee(GetExtraLoc(nUnitId) + nPalId);
+        stExtraDef* pCurrDef = GetExtraDefForMSHWOTG(GetExtraLoc(nUnitId) + nPalId);
 
         m_nCurrentPaletteROMLocation = pCurrDef->uOffset;
         m_nCurrentPaletteSizeInColors = (pCurrDef->cbPaletteSize / m_nSizeOfColorsInBytes);
@@ -514,7 +545,7 @@ void CGame_Matrimelee_A::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
     }
 }
 
-BOOL CGame_Matrimelee_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node04)
+BOOL CGame_MSHWOTG_SNES::UpdatePalImg(int Node01, int Node02, int Node03, int Node04)
 {
     //Reset palette sources
     ClearSrcPal();
@@ -524,7 +555,7 @@ BOOL CGame_Matrimelee_A::UpdatePalImg(int Node01, int Node02, int Node03, int No
         return FALSE;
     }
 
-    sDescNode* NodeGet = GetMainTree()->GetDescNode(Node01, Node02, Node03, Node04);
+    sDescNode* NodeGet = MainDescTree.GetDescNode(Node01, Node02, Node03, Node04);
 
     if (NodeGet == nullptr)
     {
@@ -543,11 +574,9 @@ BOOL CGame_Matrimelee_A::UpdatePalImg(int Node01, int Node02, int Node03, int No
     nTargetImgId = 0;
     UINT16 nImgUnitId = INVALID_UNIT_VALUE;
 
-    bool fShouldUseAlternateLoadLogic = false;
-
     // Only load images for internal units, since we don't currently have a methodology for associating
     // external loads to internal sprites.
-    if (NodeGet->uUnitId != Matrimelee_A_EXTRALOC)
+    if (NodeGet->uUnitId != MSHWOTG_SNES_EXTRALOC)
     {
         const sGame_PaletteDataset* paletteDataSet = GetSpecificPalette(NodeGet->uUnitId, NodeGet->uPalId);
 
@@ -560,67 +589,38 @@ BOOL CGame_Matrimelee_A::UpdatePalImg(int Node01, int Node02, int Node03, int No
 
             if (pCurrentNode)
             {
-                if ((_wcsicmp(pCurrentNode->szDesc, DEF_BUTTONLABEL_NEOGEO[0]) == 0) ||
-                    (_wcsicmp(pCurrentNode->szDesc, DEF_BUTTONLABEL_NEOGEO[1]) == 0) ||
-                    (_wcsicmp(pCurrentNode->szDesc, DEF_BUTTONLABEL_NEOGEO[2]) == 0) ||
-                    (_wcsicmp(pCurrentNode->szDesc, DEF_BUTTONLABEL_NEOGEO[3]) == 0))
+                bool fIsCorePalette = false;
+
+                for (UINT16 nOptionsToTest = 0; nOptionsToTest < m_nNumberOfColorOptions; nOptionsToTest++)
+                {
+                    if (wcscmp(pCurrentNode->szDesc, pButtonLabelSet[nOptionsToTest]) == 0)
+                    {
+                        fIsCorePalette = true;
+                        break;
+                    }
+                }
+
+                if (fIsCorePalette)
                 {
                     nSrcAmt = m_nNumberOfColorOptions;
                     nNodeIncrement = pCurrentNode->uChildAmt;
 
                     while (nSrcStart >= nNodeIncrement)
                     {
-                        // The starting point is the absolute first palette for the sprite in question which is found in P1
+                        // The starting point is the absolute first palette for the sprite in question which is found in P1/A
                         nSrcStart -= nNodeIncrement;
-                    }
-                }
-
-                if (paletteDataSet->pPalettePairingInfo)
-                {
-                    const INT8 nPeerPaletteDistance = paletteDataSet->pPalettePairingInfo->nNodeIncrementToPartner;
-
-                    const sGame_PaletteDataset* paletteDataSetToJoin = GetSpecificPalette(NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance);
-
-                    if (paletteDataSetToJoin)
-                    {
-                        int nXOffs = paletteDataSet->pPalettePairingInfo->nXOffs;
-                        int nYOffs = paletteDataSet->pPalettePairingInfo->nYOffs;
-
-                        fShouldUseAlternateLoadLogic = true;
-
-                        ClearSetImgTicket(
-                            CreateImgTicket(paletteDataSet->indexImgToUse, paletteDataSet->indexOffsetToUse,
-                                CreateImgTicket(paletteDataSetToJoin->indexImgToUse, paletteDataSetToJoin->indexOffsetToUse, nullptr, nXOffs, nYOffs)
-                            )
-                        );
-
-                        //Set each palette
-                        sDescNode* JoinedNode[2] = {
-                            GetMainTree()->GetDescNode(Node01, Node02, Node03, -1),
-                            GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance, -1)
-                        };
-
-                        //Set each palette
-                        CreateDefPal(JoinedNode[0], 0);
-                        CreateDefPal(JoinedNode[1], 1);
-
-                        SetSourcePal(0, NodeGet->uUnitId, nSrcStart, nSrcAmt, nNodeIncrement);
-                        SetSourcePal(1, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance, nSrcAmt, nNodeIncrement);
                     }
                 }
             }
         }
     }
 
-    if (!fShouldUseAlternateLoadLogic)
-    {
-        //Create the default palette
-        ClearSetImgTicket(CreateImgTicket(nImgUnitId, nTargetImgId));
+    //Create the default palette
+    ClearSetImgTicket(CreateImgTicket(nImgUnitId, nTargetImgId));
 
-        CreateDefPal(NodeGet, 0);
+    CreateDefPal(NodeGet, 0);
 
-        SetSourcePal(0, NodeGet->uUnitId, nSrcStart, nSrcAmt, nNodeIncrement);
-    }
+    SetSourcePal(0, NodeGet->uUnitId, nSrcStart, nSrcAmt, nNodeIncrement);
 
     return TRUE;
 }

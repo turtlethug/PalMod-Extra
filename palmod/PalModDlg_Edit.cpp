@@ -217,7 +217,7 @@ void CPalModDlg::OnEditCopy()
         {
         case ColMode::COLMODE_9:
             // RGB333
-            uCopyFlag1 = DUMMY_RGB9 + k_nASCIICharacterOffset;
+            uCopyFlag1 = TOPF2005_SEGA+ k_nASCIICharacterOffset;
             break;
         case ColMode::COLMODE_GBA:
             // BGR555
@@ -246,9 +246,17 @@ void CPalModDlg::OnEditCopy()
         case ColMode::COLMODE_SHARPRGB:
             uCopyFlag1 = DANKUGA_A + k_nASCIICharacterOffset;
             break;
+        case ColMode::COLMODE_ARGB1888:
+            cbColor = 4;
+            uCopyFlag1 = DBFCI_A + k_nASCIICharacterOffset;
+            break;
         case ColMode::COLMODE_ARGB7888:
             cbColor = 4;
             uCopyFlag1 = GGXXACR_A + k_nASCIICharacterOffset;
+            break;
+        case ColMode::COLMODE_ARGB8888:
+            cbColor = 4;
+            uCopyFlag1 = UNICLR_A + k_nASCIICharacterOffset;
             break;
         default:
             {
@@ -532,7 +540,7 @@ void CPalModDlg::OnEditPaste()
             {
                 switch (uPasteGFlag)
                 {
-                case DUMMY_RGB9:
+                case TOPF2005_SEGA:
                 {
                     eColModeForPastedColor = ColMode::COLMODE_9;
                     break;
@@ -542,11 +550,19 @@ void CPalModDlg::OnEditPaste()
                     eColModeForPastedColor = ColMode::COLMODE_12A_LE;
                     break;
                 }
-                case GGXXACR_A:
                 case DBFCI_A:
-                case UNICLR_A:
+                {
+                    eColModeForPastedColor = ColMode::COLMODE_ARGB1888;
+                    break;
+                }
+                case GGXXACR_A:
                 {
                     eColModeForPastedColor = ColMode::COLMODE_ARGB7888;
+                    break;
+                }
+                case UNICLR_A:
+                {
+                    eColModeForPastedColor = ColMode::COLMODE_ARGB8888;
                     break;
                 }
                 case COTA_A:
@@ -585,7 +601,8 @@ void CPalModDlg::OnEditPaste()
                 case JOJOS_A_DIR_50:
                 case JOJOS_A_DIR_51:
                 case REDEARTH_A:
-                case REDEARTH_A_DIR:
+                case REDEARTH_A_DIR_30:
+                case REDEARTH_A_DIR_31:
                 {
                     eColModeForPastedColor = ColMode::COLMODE_15;
                     break;
@@ -614,6 +631,7 @@ void CPalModDlg::OnEditPaste()
                 case KOF01_A:
                 case KOF02_A:
                 case KOF03_A:
+                case KOTM_A:
                 case LASTBLADE2_A:
                 case MATRIMELEE_A:
                 case NeoBomberman_A:
@@ -641,7 +659,10 @@ void CPalModDlg::OnEditPaste()
                 case FatalFuryS_SNES:
                 case GUNDAM_SNES:
                 case MMPR_SNES:
+                case MSHWOTG_SNES:
                 case SSF2T_GBA:
+                case TMNTTF_SNES:
+                case XMMA_SNES:
                 {
                     eColModeForPastedColor = ColMode::COLMODE_GBA;
                     break;

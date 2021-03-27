@@ -116,7 +116,9 @@ public:
     void SetColorFormatToGBA() { SetColorFormatTo(ColMode::COLMODE_GBA); };
     void SetColorFormatToNEOGEO() { SetColorFormatTo(ColMode::COLMODE_NEOGEO); };
     void SetColorFormatToSharpRGB() { SetColorFormatTo(ColMode::COLMODE_SHARPRGB); };
+    void SetColorFormatToARGB1888() { SetColorFormatTo(ColMode::COLMODE_ARGB1888); };
     void SetColorFormatToARGB7888() { SetColorFormatTo(ColMode::COLMODE_ARGB7888); };
+    void SetColorFormatToARGB8888() { SetColorFormatTo(ColMode::COLMODE_ARGB8888); };
 
     void SetAlphaModeTo(AlphaMode newAlphaMode);
     void SetAlphaModeToFixed() { SetAlphaModeTo(AlphaMode::GameUsesFixedAlpha); };
@@ -295,7 +297,8 @@ public:
     afx_msg void OnLoadDir_MVC2ArcadeAll()  { OnLoadGameByDirectory(MVC2_A_DIR); };
     afx_msg void OnLoadDir_MVC2DCUSA()      { OnLoadGameByDirectory(MVC2_D); };
     afx_msg void OnLoadDir_MVC2PS2USA()     { OnLoadGameByDirectory(MVC2_P); };
-    afx_msg void OnLoadDir_RedEarthAll()    { OnLoadGameByDirectory(REDEARTH_A_DIR); };
+    afx_msg void OnLoadDir_RedEarth30()     { OnLoadGameByDirectory(REDEARTH_A_DIR_30); };
+    afx_msg void OnLoadDir_RedEarth31()     { OnLoadGameByDirectory(REDEARTH_A_DIR_31); };
     afx_msg void OnLoadDir_SFIII3DCAll()    { OnLoadGameByDirectory(SFIII3_D); };
     afx_msg void OnLoadDir_SFIII1Arcade()   { OnLoadGameByDirectory(SFIII1_A_DIR); };
     afx_msg void OnLoadDir_SFIII2Arcade()   { OnLoadGameByDirectory(SFIII2_A_DIR); };

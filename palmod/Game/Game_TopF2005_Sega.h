@@ -1,32 +1,30 @@
 #pragma once
 #include "gameclass.h"
-#include "SAMSHO5SP_A_DEF.h"
+#include "TOPF2005_SEGA_DEF.h"
 #include "..\extrafile.h"
 
-constexpr auto EXTRA_FILENAME_SAMSHO5SP_A = L"SAMSHO5SPE.txt";
-#define GetExtraDefForSAMSHO5SP(x)((stExtraDef *)&SAMSHO5SP_A_EXTRA_CUSTOM[x])
+constexpr auto EXTRA_FILENAME_TOPF2005 = L"TOPF2005e.txt";
+#define GetExtraDefForTOPF2005(x)((stExtraDef *)&TOPF2005_SEGA_EXTRA_CUSTOM[x])
 
-class CGame_SAMSHO5SP_A : public CGameWithExtrasFile
+class CGame_TOPF2005_SEGA : public CGameWithExtrasFile
 {
 private:
-    static UINT32 m_nTotalPaletteCountForSAMSHO5SP;
+    static UINT32 m_nTotalPaletteCountForTOPF2005;
 
-    static int rgExtraCountAll[SAMSHO5SP_A_NUMUNIT + 1];
-    static int rgExtraLoc[SAMSHO5SP_A_NUMUNIT + 1];
+    static int rgExtraCountAll[TOPF2005_SEGA_NUMUNIT + 1];
+    static int rgExtraCountVisibleOnly[TOPF2005_SEGA_NUMUNIT + 1];
+    static int rgExtraLoc[TOPF2005_SEGA_NUMUNIT + 1];
 
     static void InitializeStatics();
     static UINT32 m_nExpectedGameROMSize;
     static UINT32 m_nConfirmedROMSize;
 
-    static const UINT32 m_nExpectedGameROMSizeArcade = 0x400000;  // 4194304 bytes
-    static const UINT32 m_nExpectedGameROMSizeSteam = 0x800000;  // 8388608 bytes
-
     void LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId);
     UINT16 GetPaletteCountForUnit(UINT16 nUnitId);
 
 public:
-    CGame_SAMSHO5SP_A(UINT32 nConfirmedROMSize);
-    ~CGame_SAMSHO5SP_A(void);
+    CGame_TOPF2005_SEGA(UINT32 nConfirmedROMSize);
+    ~CGame_TOPF2005_SEGA(void);
 
     //Static functions / variables
     static CDescTree MainDescTree;
@@ -40,6 +38,7 @@ public:
 
     //Normal functions
     CDescTree* GetMainTree();
+
     static UINT16 GetCollectionCountForUnit(UINT16 nUnitId);
 
     // We don't fold these into one sDescTreeNode return because we need to handle the Extra section.
@@ -53,5 +52,7 @@ public:
 
     BOOL UpdatePalImg(int Node01 = -1, int Node02 = -1, int Node03 = -1, int Node04 = -1);
 
-    static stExtraDef* SAMSHO5SP_A_EXTRA_CUSTOM;
+    UINT32 GetKnownCRC32DatasetsForGame(const sCRC32ValueSet** ppKnownROMSet = nullptr, bool* fNeedToValidateCRCs = nullptr) override;
+
+    static stExtraDef* TOPF2005_SEGA_EXTRA_CUSTOM;
 };

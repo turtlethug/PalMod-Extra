@@ -31,11 +31,13 @@
 #include "Game_KOF98_A.h"
 #include "Game_KOF99AE_A.h"
 #include "Game_KOFXI_A.h"
+#include "Game_KOTM_A.h"
 #include "Game_LASTBLADE2_A.h"
 #include "Game_Matrimelee_A.h"
 #include "Game_MMPR_SNES.h"
 #include "Game_MSH_A.h"
 #include "Game_MSHVSF_A.h"
+#include "Game_MSHWOTG_SNES.h"
 #include "Game_MVC_A.h"
 #include "Game_MVC2_A.h"
 #include "Game_MVC2_A_DIR.h"
@@ -76,6 +78,7 @@
 #include "Game_SSF2T_A.h"
 #include "Game_SSF2T_GBA.h"
 #include "Game_SVCPLUSA_A.h"
+#include "Game_TopF2005_Sega.h"
 #include "Game_UNICLR_A.h"
 #include "Game_VHUNT2_A.h"
 #include "Game_VSAV_A.h"
@@ -300,6 +303,12 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_KOFXI_A::GetRule;
         return TRUE;
     }
+    case KOTM_A:
+    {
+        GetRule = &CGame_KOTM_A::GetRule;
+        return TRUE;
+    }
+
     case LASTBLADE2_A:
     {
         GetRule = &CGame_LASTBLADE2_A::GetRule;
@@ -323,6 +332,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
     case MSHVSF_A:
     {
         GetRule = &CGame_MSHVSF_A::GetRule;
+        return TRUE;
+    }
+    case MSHWOTG_SNES:
+    {
+        GetRule = &CGame_MSHWOTG_SNES::GetRule;
         return TRUE;
     }
     case MVC_A:
@@ -402,12 +416,21 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_REDEARTH_A::GetRule;
         return TRUE;
     }
-    case REDEARTH_A_DIR:
+    case REDEARTH_A_DIR_30:
     {
         GetRuleCtr = &CGame_RedEarth_A_DIR::GetRuleCtr;
         ResetRuleCtr = &CGame_RedEarth_A_DIR::ResetRuleCtr;
-        GetRule = &CGame_RedEarth_A_DIR::GetRule;
-        GetNextRule = &CGame_RedEarth_A_DIR::GetNextRule;
+        GetRule = &CGame_RedEarth_A_DIR::GetRule_30;
+        GetNextRule = &CGame_RedEarth_A_DIR::GetNextRule_30;
+
+        return TRUE;
+    }
+    case REDEARTH_A_DIR_31:
+    {
+        GetRuleCtr = &CGame_RedEarth_A_DIR::GetRuleCtr;
+        ResetRuleCtr = &CGame_RedEarth_A_DIR::ResetRuleCtr;
+        GetRule = &CGame_RedEarth_A_DIR::GetRule_31;
+        GetNextRule = &CGame_RedEarth_A_DIR::GetNextRule_31;
 
         return TRUE;
     }
@@ -586,6 +609,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
     case SVCPLUSA_A:
     {
         GetRule = &CGame_SVCPLUSA_A::GetRule;
+        return TRUE;
+    }
+    case TOPF2005_SEGA:
+    {
+        GetRule = &CGame_TOPF2005_SEGA::GetRule;
         return TRUE;
     }
     case UNICLR_A:
@@ -772,6 +800,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_KOFXI_A(nConfirmedROMSize);
     }
+    case KOTM_A:
+    {
+        return new CGame_KOTM_A(nConfirmedROMSize);
+    }
     case LASTBLADE2_A:
     {
         return new CGame_LASTBLADE2_A(nConfirmedROMSize);
@@ -791,6 +823,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case MSHVSF_A:
     {
         return new CGame_MSHVSF_A(nConfirmedROMSize, nExtraGameData);
+    }
+    case MSHWOTG_SNES:
+    {
+        return new CGame_MSHWOTG_SNES(nConfirmedROMSize);
     }
     case MVC_A:
     {
@@ -842,11 +878,15 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     }
     case REDEARTH_A:
     {
-        return new CGame_REDEARTH_A(nConfirmedROMSize);
+        return new CGame_REDEARTH_A(nConfirmedROMSize, nExtraGameData);
     }
-    case REDEARTH_A_DIR:
+    case REDEARTH_A_DIR_30:
     {
-        return new CGame_RedEarth_A_DIR(-1);
+        return new CGame_RedEarth_A_DIR(-1, 30);
+    }
+    case REDEARTH_A_DIR_31:
+    {
+        return new CGame_RedEarth_A_DIR(-1, 31);
     }
     case RODSM2_A:
     {
@@ -964,6 +1004,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_SVCPLUSA_A(nConfirmedROMSize);
     }
+    case TOPF2005_SEGA:
+    {
+        return new CGame_TOPF2005_SEGA(nConfirmedROMSize);
+    }    
     case UNICLR_A:
     {
         return new CGame_UNICLR_A(nConfirmedROMSize);
@@ -1063,6 +1107,9 @@ CGameClass* CGameLoad::LoadFile(int nGameFlag, WCHAR* pszLoadFile)
             nGameRule = ((wcsstr(pszFileName, L".05") != nullptr) ? 5 : 6);
             break;
         }
+        case REDEARTH_A:
+            nGameRule = ((wcscmp(pszFileName, L"30") == 0) ? 30 : 31);
+            break;
         case SFA2_A:
         {
             nGameRule = ((wcsstr(pszFileName, L".08") != nullptr) ? 8 : 7);
@@ -1137,7 +1184,7 @@ CGameClass* CGameLoad::LoadFile(int nGameFlag, WCHAR* pszLoadFile)
             CString strQuestion;
             UINT nStringID;
 
-            strQuestion.Format(L"Internal warning: Game file size is 0x%x, but 0x%x is the expected size.\n", (int)nGameFileLength, CurrRule.uVerifyVar);
+            strQuestion.Format(L"Internal warning: Game file size is 0x%x, but 0x%x is the expected size. You may just need to update the value of m_nExpectedGameROMSize for your game.\n", (int)nGameFileLength, CurrRule.uVerifyVar);
             OutputDebugString(strQuestion);
 
             if ((nGameFlag == JOJOS_A) && (nGameRule == 50) && (nGameFileLength == 4194304))
@@ -1208,6 +1255,15 @@ CGameClass* CGameLoad::LoadFile(int nGameFlag, WCHAR* pszLoadFile)
         }
 
         CurrFile.Abort();
+    }
+    else
+    {
+        if (pszFileName)
+        {
+            CString strError;
+            strError.Format(L"The file \"%s\" can not be opened.  Another application is probably using it.", pszFileName);
+            MessageBox(g_appHWnd, strError, GetHost()->GetAppName(), MB_ICONSTOP);
+        }
     }
 
     if (OutGame)

@@ -18,7 +18,7 @@ sSupportedGameList SupportedGameList[] =
     { AOF3_A,           L"Art of Fighting 3", L"Art of Fighting 3: Characters (p1), Stages (p2)|096-p1.*;096-p2.*|", GamePlatform::NEOGEO },
     { BREAKERS_A,       L"Breakers Revenge", L"Breakers Revenge|245-p1.p1|", GamePlatform::NEOGEO },
     { BLEACH_DS,        L"Bleach Dark Souls (DS)", L"Bleach Dark Souls|3494*Europe*nds;2761*US*nds|", GamePlatform::Nintendo }, // Sega
-    { CFTE_SNES,        L"Clay Fighter:TE", L"Clay Fighter:TE|Clay Fighter - Tournament Edition (USA).sfc|", GamePlatform::Nintendo },
+    { CFTE_SNES,        L"Clay Fighter:TE (SNES)", L"Clay Fighter:TE (SNES)|Clay Fighter - Tournament Edition (USA).sfc|", GamePlatform::Nintendo },
     { COTA_A,           L"COTA", L"COTA|xmn*.05*|", GamePlatform::CapcomCPS12 },
     { CVS2_A,           L"CVS2", L"CVS2|SNKGD_SL.bin|", GamePlatform::SegaNAOMI },
     { DOUBLEDRAGON_A,   L"Double Dragon", L"Double Dragon|082-p1.*;ddrag_p1.rom|", GamePlatform::NEOGEO },
@@ -26,10 +26,11 @@ sSupportedGameList SupportedGameList[] =
     { Garou_A,          L"Garou: MotW", L"Garou: MotW|kf.neo-sma|", GamePlatform::NEOGEO },
     { GarouP_A,         L"Garou: MotW (Prototype)", L"Garou: MotW (Prototype)|proto_253-p1.p1;253-p1p.bin|", GamePlatform::NEOGEO },
     { Garou_S,          L"Garou: MotW", L"Garou: MotW for Steam 2|p1.bin|", GamePlatform::Steam },
-    { GUNDAM_SNES,      L"Gundam Wing: Endless Duel", L"Gundam Wing: Endless Duel (SNES)|Shin Kidou Senki Gundam W - Endless Duel (Japan).sfc|", GamePlatform::Nintendo },
+    { GUNDAM_SNES,      L"Gundam Wing: Endless Duel (SNES)", L"Gundam Wing: Endless Duel (SNES)|Shin Kidou Senki Gundam W - Endless Duel (Japan).sfc|", GamePlatform::Nintendo },
     { JOJOS_A,          L"Jojo's: HFTF", L"Jojos (Japan): HUDs and menus (50), Characters (51)|50;51|", GamePlatform::CapcomCPS3 },
 	{ VENTURE_A,        L"Venture", L"Venture: Characters (50), Huds and Extras (31)|50;31|", GamePlatform::CapcomCPS3 },
     { KarnovsR_A,       L"Karnov's Revenge", L"Karnov's Revenge|066-p1.p1|", GamePlatform::NEOGEO }, // DataEast
+    { KOTM_A,           L"King of the Monsters", L"King of the Monsters (Neo-Geo)|016-p1.*;016-hp1.*|", GamePlatform::NEOGEO },
     { KIZUNA_A,         L"Kizuna Encounter", L"Kizuna Encounter|216-p1.*;ke_p1.rom|", GamePlatform::NEOGEO },
     { KOF94_A,          L"KOF94", L"KOF94|055-p1.*|", GamePlatform::NEOGEO },
     { KOF97_A,          L"KOF97", L"KOF97|232-p2.*;kof97_p2.rom|", GamePlatform::NEOGEO },
@@ -46,6 +47,7 @@ sSupportedGameList SupportedGameList[] =
     { MMPR_SNES,        L"MMPR:TFE (SNES)", L"MMPR:TFE (SNES)|Mighty Morphin Power Rangers - The Fighting Edition (USA).sfc|", GamePlatform::Nintendo },
     { MSH_A,            L"Marvel Super Heroes", L"MSH: Characters (*.05), Portraits (*.06b)|*.05*;*.06b|", GamePlatform::CapcomCPS12 },
     { MSHVSF_A,         L"MSHVSF", L"MSHVSF: Characters (*.06a), Portraits (*.07b)|*.06a;*.07b|", GamePlatform::CapcomCPS12 },
+    { MSHWOTG_SNES,     L"MSH: War of the Gems (SNES)", L"MSH: War of the Gems (SNES)|Marvel Super Heroes in War of the Gems (USA).sfc|", GamePlatform::Nintendo },
     { MVC_A,            L"Marvel vs Capcom", L"MVC Arcade|mvc*.06*|", GamePlatform::CapcomCPS12 },
     // MarvelVsCapcom2.bin
     // Unlocked\MarvelVsCapcom2_unlocked.bin
@@ -58,7 +60,7 @@ sSupportedGameList SupportedGameList[] =
     { RBFF2_A,          L"Real Bout Fatal Fury 2", L"Real Bout Fatal Fury 2|240-p1.*;rb2_p1.rom|", GamePlatform::NEOGEO },
     // normal ROM name is 223-p1.p1 (and 223-p1k.p1 for Korean), FC uses 223-p1.bin
     { RBFFS_A,          L"Real Bout Fatal Fury Special", L"Real Bout Fatal Fury Special|223*p1*|", GamePlatform::NEOGEO },
-    { REDEARTH_A,       L"Red Earth", L"Red Earth|31|", GamePlatform::CapcomCPS3 },
+    { REDEARTH_A,       L"Red Earth", L"Red Earth (Stages: 30, Characters: 31)|30;31|", GamePlatform::CapcomCPS3 },
     { RODSM2_A,         L"Ring of Destruction: Slam Masters 2", L"Ring of Destruction: Slam Masters 2|smbe.05b|", GamePlatform::CapcomCPS12 },
     { SAMSHO3_A,        L"Samurai Shodown III", L"Samurai Shodown III|087-p5.p5|", GamePlatform::NEOGEO },
     { SAMSHO4_A,        L"Samurai Shodown IV", L"Samurai Shodown IV|sams4_p1.rom;222-p1.bin;222_p1.p1|", GamePlatform::NEOGEO },
@@ -80,6 +82,7 @@ sSupportedGameList SupportedGameList[] =
     { GEMFIGHTER_A,     L"Super Gem Fighter", L"Super Gem Fighter|pcf*.07|", GamePlatform::CapcomCPS12 },
     { SPF2T_A,          L"Super Puzzle Fighter II Turbo", L"Super Puzzle Fighter II Turbo|pzf.04*|", GamePlatform::CapcomCPS12 },
     { SVCPLUSA_A,       L"SVC Plus A", L"SVC PlusA|svc-p2pl.bin|", GamePlatform::NEOGEO },
+    { TOPF2005_SEGA,    L"Top Fighter 2005 (Mega Drive)", L"Top Fighter 2005|top fighter 2005 (unl).bin|", GamePlatform::Sega },
     { VHUNT2_A,         L"Vampire Hunter 2", L"Vampire Hunter 2|vh2j.09|", GamePlatform::CapcomCPS12 },
     { VSAV_A,           L"Vampire Savior", L"Vampire Savior|vm3*.10b|", GamePlatform::CapcomCPS12 },
     { VSAV2_A,          L"Vampire Savior 2", L"Vampire Savior 2|vs2j.10|", GamePlatform::CapcomCPS12 },
@@ -331,7 +334,9 @@ void CPalModDlg::UpdateColorFormatMenu()
         pSettMenu->CheckMenuItem(ID_COLORFORMAT_RGB555_GBA, MF_BYCOMMAND | ((currColMode == ColMode::COLMODE_GBA) ? MF_CHECKED : MF_UNCHECKED));
         pSettMenu->CheckMenuItem(ID_COLORFORMAT_SHARPRGB, MF_BYCOMMAND | ((currColMode == ColMode::COLMODE_SHARPRGB) ? MF_CHECKED : MF_UNCHECKED));
         pSettMenu->CheckMenuItem(ID_COLORFORMAT_RGB666, MF_BYCOMMAND | ((currColMode == ColMode::COLMODE_NEOGEO) ? MF_CHECKED : MF_UNCHECKED));
+        pSettMenu->CheckMenuItem(ID_COLORFORMAT_ARGB1888, MF_BYCOMMAND | ((currColMode == ColMode::COLMODE_ARGB1888) ? MF_CHECKED : MF_UNCHECKED));
         pSettMenu->CheckMenuItem(ID_COLORFORMAT_ARGB7888, MF_BYCOMMAND | ((currColMode == ColMode::COLMODE_ARGB7888) ? MF_CHECKED : MF_UNCHECKED));
+        pSettMenu->CheckMenuItem(ID_COLORFORMAT_ARGB8888, MF_BYCOMMAND | ((currColMode == ColMode::COLMODE_ARGB8888) ? MF_CHECKED : MF_UNCHECKED));
 
         // There's no allowance for alpha with NEOGEO colors
         canChangeAlpha = canChangeAlpha && (currColMode != ColMode::COLMODE_NEOGEO);
@@ -349,7 +354,9 @@ void CPalModDlg::UpdateColorFormatMenu()
     pSettMenu->EnableMenuItem(ID_COLORFORMAT_RGB555_GBA, canChangeFormat ? MF_ENABLED : MF_DISABLED);
     pSettMenu->EnableMenuItem(ID_COLORFORMAT_SHARPRGB, canChangeFormat ? MF_ENABLED : MF_DISABLED);
     pSettMenu->EnableMenuItem(ID_COLORFORMAT_RGB666, canChangeFormat ? MF_ENABLED : MF_DISABLED);
+    pSettMenu->EnableMenuItem(ID_COLORFORMAT_ARGB1888, canChangeFormat ? MF_ENABLED : MF_DISABLED);
     pSettMenu->EnableMenuItem(ID_COLORFORMAT_ARGB7888, canChangeFormat ? MF_ENABLED : MF_DISABLED);
+    pSettMenu->EnableMenuItem(ID_COLORFORMAT_ARGB8888, canChangeFormat ? MF_ENABLED : MF_DISABLED);
 
     pSettMenu->EnableMenuItem(ID_ALPHASETTING_FIXED, canChangeAlpha ? MF_ENABLED : MF_DISABLED);
     pSettMenu->EnableMenuItem(ID_ALPHASETTING_UNUSED, canChangeAlpha ? MF_ENABLED : MF_DISABLED);
