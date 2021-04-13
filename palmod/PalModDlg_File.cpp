@@ -21,6 +21,7 @@ sSupportedGameList SupportedGameList[] =
     { CFTE_SNES,        L"Clay Fighter:TE (SNES)", L"Clay Fighter:TE (SNES)|Clay Fighter - Tournament Edition (USA).sfc|", GamePlatform::Nintendo },
     { COTA_A,           L"COTA", L"COTA|xmn*.05*|", GamePlatform::CapcomCPS12 },
     { CVS2_A,           L"CVS2", L"CVS2|SNKGD_SL.bin|", GamePlatform::SegaNAOMI },
+    { DBZHD_SNES,       L"Dragon Ball Z: Hyper Dimension (SNES)", L"Dragon Ball Z: Hyper Dimension (SNES)|dragon ball z - hyper dimension (*).sfc|", GamePlatform::Nintendo },
     { DOUBLEDRAGON_A,   L"Double Dragon", L"Double Dragon|082-p1.*;ddrag_p1.rom|", GamePlatform::NEOGEO },
     { FatalFuryS_SNES,  L"Fatal Fury Special (SNES)", L"Fatal Fury Special (SNES)|Fatal Fury Special (USA).sfc|", GamePlatform::Nintendo },
     { Garou_A,          L"Garou: MotW", L"Garou: MotW|kf.neo-sma|", GamePlatform::NEOGEO },
@@ -44,11 +45,12 @@ sSupportedGameList SupportedGameList[] =
     { KOFXI_A,          L"KOFXI", L"KOFXI|gdrom_KOFXI_v5_AllFighters.bin|", GamePlatform::SammyAtomiswave },
     { LASTBLADE2_A,     L"Last Blade 2", L"Last Blade 2 (Arcade)|243*.p1;LB2_P1.ROM|", GamePlatform::NEOGEO },
     { MATRIMELEE_A,     L"Matrimelee", L"Matrimelee|266-p2.sp2|", GamePlatform::NEOGEO },
-    { MMPR_SNES,        L"MMPR:TFE (SNES)", L"MMPR:TFE (SNES)|Mighty Morphin Power Rangers - The Fighting Edition (USA).sfc|", GamePlatform::Nintendo },
     { MSH_A,            L"Marvel Super Heroes", L"MSH: Characters (*.05), Portraits (*.06b)|*.05*;*.06b|", GamePlatform::CapcomCPS12 },
+    { MVC_A,            L"Marvel vs Capcom", L"MVC Arcade|mvc*.06*|", GamePlatform::CapcomCPS12 },
+    { MMX2_SNES,        L"Mega Man X2 (SNES)", L"Mega Man X2 (SNES)|Mega*Man X2 (USA).sfc|", GamePlatform::Nintendo },
+    { MMPR_SNES,        L"MMPR:TFE (SNES)", L"MMPR:TFE (SNES)|Mighty Morphin Power Rangers - The Fighting Edition (USA).sfc|", GamePlatform::Nintendo },
     { MSHVSF_A,         L"MSHVSF", L"MSHVSF: Characters (*.06a), Portraits (*.07b)|*.06a;*.07b|", GamePlatform::CapcomCPS12 },
     { MSHWOTG_SNES,     L"MSH: War of the Gems (SNES)", L"MSH: War of the Gems (SNES)|Marvel Super Heroes in War of the Gems (USA).sfc|", GamePlatform::Nintendo },
-    { MVC_A,            L"Marvel vs Capcom", L"MVC Arcade|mvc*.06*|", GamePlatform::CapcomCPS12 },
     // MarvelVsCapcom2.bin
     // Unlocked\MarvelVsCapcom2_unlocked.bin
     { MVC2_A,           L"MVC2", L"MVC2 Arcade (MarvelVsCapcom2_unlocked.bin)|m*.dat;m*.bin|", GamePlatform::SegaNAOMI },
@@ -82,12 +84,14 @@ sSupportedGameList SupportedGameList[] =
     { GEMFIGHTER_A,     L"Super Gem Fighter", L"Super Gem Fighter|pcf*.07|", GamePlatform::CapcomCPS12 },
     { SPF2T_A,          L"Super Puzzle Fighter II Turbo", L"Super Puzzle Fighter II Turbo|pzf.04*|", GamePlatform::CapcomCPS12 },
     { SVCPLUSA_A,       L"SVC Plus A", L"SVC PlusA|svc-p2pl.bin|", GamePlatform::NEOGEO },
+    { TMNTTF_SNES,      L"Teenage Mutant Ninja Turtles: TF (SNES)", L"Teenage Mutant Ninja Turtles: TF (SNES)|sns-ky-0.u1;teenage mutant ninja turtles - tournament fighters (U*.s*c|", GamePlatform::Nintendo },
     { TOPF2005_SEGA,    L"Top Fighter 2005 (Mega Drive)", L"Top Fighter 2005|top fighter 2005 (unl).bin|", GamePlatform::Sega },
     { VHUNT2_A,         L"Vampire Hunter 2", L"Vampire Hunter 2|vh2j.09|", GamePlatform::CapcomCPS12 },
     { VSAV_A,           L"Vampire Savior", L"Vampire Savior|vm3*.10b|", GamePlatform::CapcomCPS12 },
     { VSAV2_A,          L"Vampire Savior 2", L"Vampire Savior 2|vs2j.10|", GamePlatform::CapcomCPS12 },
     { WakuWaku7_A,      L"Waku Waku 7", L"Waku Waku 7|225-p1.p1|", GamePlatform::NEOGEO },
     { WINDJAMMERS_A,    L"Windjammers", L"Windjammers|065-p1.p1|", GamePlatform::NEOGEO }, // Data East on NEOGEO
+    { XMMA_SNES,        L"X-Men: Mutant Apocalypse (SNES)", L"X-Men: Mutant Apocalypse (SNES)|X-Men - Mutant Apocalypse (USA).sfc|", GamePlatform::Nintendo },
     { XMVSF_A,          L"XMVSF", L"XMVSF|xvs*.05*|", GamePlatform::CapcomCPS12 },
     { NEOGEO_A,         L"Unknown Game Mode", L"Unknown Game ROM|*.*|" },
 };
@@ -276,6 +280,14 @@ void CPalModDlg::OnFileExit()
     OnClose();
 }
 
+void CPalModDlg::OnFileOpenExtrasFile()
+{
+    if (GetHost()->GetCurrGame() && GetHost()->GetCurrGame()->GameAllowsExtraFile())
+    {
+        GetHost()->GetCurrGame()->OpenExtraFile();
+    }
+}
+
 void CPalModDlg::OnFileCloseFileDir()
 {
     if (VerifyMsg(eVerifyType::VM_FILECHANGE))
@@ -324,6 +336,7 @@ void CPalModDlg::UpdateColorFormatMenu()
     {
         ColMode currColMode = GetHost()->GetCurrGame()->GetColorMode();
         AlphaMode currAlphaMode = GetHost()->GetCurrGame()->GetAlphaMode();
+        PALWriteOutputOptions currWriteMode = GetHost()->GetCurrGame()->GetMaximumWritePerEachTransparency();
         canChangeAlpha = canChangeFormat = GetHost()->GetCurrGame()->AllowUpdatingColorFormatForGame();
 
         pSettMenu->CheckMenuItem(ID_COLORFORMAT_RGB333, MF_BYCOMMAND | ((currColMode == ColMode::COLMODE_9) ? MF_CHECKED : MF_UNCHECKED));
@@ -345,7 +358,11 @@ void CPalModDlg::UpdateColorFormatMenu()
         pSettMenu->CheckMenuItem(ID_ALPHASETTING_VARIABLE, MF_BYCOMMAND | ((currAlphaMode == AlphaMode::GameUsesVariableAlpha) ? MF_CHECKED : MF_UNCHECKED));
         pSettMenu->CheckMenuItem(ID_ALPHASETTING_UNUSED, MF_BYCOMMAND | ((currAlphaMode == AlphaMode::GameDoesNotUseAlpha) ? MF_CHECKED : MF_UNCHECKED));
         pSettMenu->CheckMenuItem(ID_ALPHASETTING_CHAOTIC, MF_BYCOMMAND | ((currAlphaMode == AlphaMode::GameUsesChaoticAlpha) ? MF_CHECKED : MF_UNCHECKED));
+
+        pSettMenu->CheckMenuItem(ID_TRANSPSETTING_16, MF_BYCOMMAND | ((currWriteMode == PALWriteOutputOptions::WRITE_16) ? MF_CHECKED : MF_UNCHECKED));
+        pSettMenu->CheckMenuItem(ID_TRANSPSETTING_256, MF_BYCOMMAND | ((currWriteMode == PALWriteOutputOptions::WRITE_MAX) ? MF_CHECKED : MF_UNCHECKED));
     }
+
     pSettMenu->EnableMenuItem(ID_COLORFORMAT_RGB333, canChangeFormat ? MF_ENABLED : MF_DISABLED);
     pSettMenu->EnableMenuItem(ID_COLORFORMAT_RGB444, canChangeFormat ? MF_ENABLED : MF_DISABLED);
     pSettMenu->EnableMenuItem(ID_COLORFORMAT_RGB444_LE, canChangeFormat ? MF_ENABLED : MF_DISABLED);
@@ -363,6 +380,8 @@ void CPalModDlg::UpdateColorFormatMenu()
     pSettMenu->EnableMenuItem(ID_ALPHASETTING_VARIABLE, MF_DISABLED);
     pSettMenu->EnableMenuItem(ID_ALPHASETTING_CHAOTIC, MF_DISABLED);
 
+    pSettMenu->EnableMenuItem(ID_TRANSPSETTING_16, canChangeFormat ? MF_ENABLED : MF_DISABLED);
+    pSettMenu->EnableMenuItem(ID_TRANSPSETTING_256, canChangeFormat ? MF_ENABLED : MF_DISABLED);
 }
 
 void CPalModDlg::SetAlphaModeTo(AlphaMode newAlphaMode)
@@ -378,6 +397,14 @@ void CPalModDlg::SetColorFormatTo(ColMode newColMode)
     if (GetHost()->GetCurrGame())
     {
         GetHost()->GetCurrGame()->SetColorMode(newColMode);
+    }
+}
+
+void CPalModDlg::SetMaximumWritePerEachTransparency(PALWriteOutputOptions eUpdatedOption)
+{
+    if (GetHost()->GetCurrGame())
+    {
+        GetHost()->GetCurrGame()->SetMaximumWritePerEachTransparency(eUpdatedOption);
     }
 }
 
@@ -540,56 +567,44 @@ void CPalModDlg::OnFileOpenInternal(UINT nDefaultGameFilter /* = NUM_GAMES */)
     nDefaultGameFilter = nDefaultGameFilter & 0xffff; // eliminate the applied mask that we use to avoid existing menu items
 
     // The following logic ensures that their last used selection is the default filter view.
-    int nCurrentGameListIndex = 1; // 0 is for special data in OFN
     int nLastUsedGFlag = nDefaultGameFilter;
 
+    if ((nLastUsedGFlag == NUM_GAMES) &&
+        !GetLastUsedDirectory(nullptr, 0, &nLastUsedGFlag, TRUE, nullptr))
     {
-        if ((nLastUsedGFlag == NUM_GAMES) &&
-            !GetLastUsedDirectory(nullptr, 0, &nLastUsedGFlag, TRUE, nullptr))
+        // If we're here, that means that they have never used PalMod to load a game before.  Help them.
+        CString strInfo;
+        LPCWSTR pszParagraph1 = L"Howdy!  You appear to be new to PalMod.  Welcome!\n\n";
+        LPCWSTR pszParagraph2 = L"The first step is to load the ROM for the game you care about. There are a lot of game ROMs out there: the filter in the bottom right of the Load ROM dialog that you will see next helps show the right one for your game.\n\n";
+
+        WCHAR szGameFilter[MAX_DESCRIPTION_LENGTH];
+        wcsncpy(szGameFilter, SupportedGameList[0].szGameFilterString, ARRAYSIZE(szGameFilter));
+        szGameFilter[MAX_DESCRIPTION_LENGTH - 1] = 0;
+
+        LPTSTR pszPipe = wcsstr(szGameFilter, L"|");
+
+        if (pszPipe != nullptr)
         {
-            // If we're here, that means that they have never used PalMod to load a game before.  Help them.
-            CString strInfo;
-            LPCWSTR pszParagraph1 = L"Howdy!  You appear to be new to PalMod.  Welcome!\n\n";
-            LPCWSTR pszParagraph2 = L"The first step is to load the ROM for the game you care about. There are a lot of game ROMs out there: the filter in the bottom right of the Load ROM dialog that you will see next helps show the right one for your game.\n\n";
-
-            WCHAR szGameFilter[MAX_DESCRIPTION_LENGTH];
-            wcsncpy(szGameFilter, SupportedGameList[0].szGameFilterString, ARRAYSIZE(szGameFilter));
-            szGameFilter[MAX_DESCRIPTION_LENGTH - 1] = 0;
-
-            LPTSTR pszPipe = wcsstr(szGameFilter, L"|");
-
-            if (pszPipe != nullptr)
-            {
-                // Truncate off the filter information
-                pszPipe[0] = 0;
-            }
-
-            strInfo.Format(L"%s%sRight now this is going to be set to \'%s\' for the default game, \'%s\': you need to change that to the game you're interested in so that your ROM shows up.", pszParagraph1, pszParagraph2, szGameFilter, g_GameFriendlyName[SupportedGameList[0].nInternalGameIndex]);
-            MessageBox(strInfo, GetHost()->GetAppName(), MB_ICONINFORMATION);
+            // Truncate off the filter information
+            pszPipe[0] = 0;
         }
+
+        strInfo.Format(L"%s%sRight now this is going to be set to \'%s\' for the default game, \'%s\': you need to change that to the game you're interested in so that your ROM shows up.", pszParagraph1, pszParagraph2, szGameFilter, g_GameFriendlyName[SupportedGameList[0].nInternalGameIndex]);
+        MessageBox(strInfo, GetHost()->GetAppName(), MB_ICONINFORMATION);
     }
 
-    // Add the chosen game if any
+    DWORD dwLastUsedGameIndex = 0;
+
+    // Add all the games, and make sure we know how to map index to game code
     for (int nArrayPosition = 0; nArrayPosition < ARRAYSIZE(SupportedGameList); nArrayPosition++)
     {
+        szGameFileDef.Append(SupportedGameList[nArrayPosition].szGameFilterString);
+        SupportedGameList[nArrayPosition].nListedGameIndex = nArrayPosition;
+
         if (SupportedGameList[nArrayPosition].nInternalGameIndex == nLastUsedGFlag)
         {
-            szGameFileDef.Append(SupportedGameList[nArrayPosition].szGameFilterString);
-            SupportedGameList[nArrayPosition].nListedGameIndex = nCurrentGameListIndex++;
-        }
-        else
-        {
-            SupportedGameList[nArrayPosition].nListedGameIndex = INVALID_UNIT_VALUE;
-        }
-    }
-
-    // Add everything else
-    for (int nArrayPosition = 0; nArrayPosition < ARRAYSIZE(SupportedGameList); nArrayPosition++)
-    {
-        if (SupportedGameList[nArrayPosition].nListedGameIndex == INVALID_UNIT_VALUE)
-        {
-            szGameFileDef.Append(SupportedGameList[nArrayPosition].szGameFilterString);
-            SupportedGameList[nArrayPosition].nListedGameIndex = nCurrentGameListIndex++;
+            // user nFilterIndex starts at 1
+            dwLastUsedGameIndex = SupportedGameList[nArrayPosition].nListedGameIndex + 1;
         }
     }
 
@@ -602,6 +617,10 @@ void CPalModDlg::OnFileOpenInternal(UINT nDefaultGameFilter /* = NUM_GAMES */)
         OFN_FILEMUSTEXIST | OFN_HIDEREADONLY,
         szGameFileDef
     );
+
+    OPENFILENAME &pOFN = OpenDialog.GetOFN();
+
+    pOFN.nFilterIndex = dwLastUsedGameIndex;
 
     if (OpenDialog.DoModal() == IDOK)
     {
@@ -625,7 +644,8 @@ void CPalModDlg::OnFileOpenInternal(UINT nDefaultGameFilter /* = NUM_GAMES */)
         {
             for (const sSupportedGameList currentGame : SupportedGameList)
             {
-                if (currentGame.nListedGameIndex == ofn.nFilterIndex)
+                // user nFilterIndex starts at 1
+                if ((currentGame.nListedGameIndex + 1) == ofn.nFilterIndex)
                 {
                     LoadGameFile(currentGame.nInternalGameIndex, (WCHAR*)ofn.lpstrFile);
                     break;
@@ -894,11 +914,11 @@ bool CPalModDlg::LoadPaletteFromACT(LPCWSTR pszFileName, bool fReadUpsideDown)
         CString strStatus;
         if (fHadToFlip)
         {
-            strStatus.Format(L"ACT appears to have a reversed color table: loaded %u colors backwards.", nTotalColorsUsed);
+            strStatus.Format(IDS_ACT_REVERSEDLOAD, nTotalColorsUsed);
         }
         else
         {
-            strStatus.Format(L"Loaded %u colors from %u color %s file.", nTotalColorsUsed, nACTColorCount, L"ACT");
+            strStatus.Format(IDS_ACT_LOADED, nTotalColorsUsed, nACTColorCount);
         }
 
         SetStatusText(strStatus);
@@ -911,7 +931,7 @@ bool CPalModDlg::LoadPaletteFromACT(LPCWSTR pszFileName, bool fReadUpsideDown)
         {
             MessageBox(strError, GetHost()->GetAppName(), MB_ICONERROR);
         }
-        SetStatusText(CString(L"Failed loading ACT file."));
+        SetStatusText(IDS_ACT_LOADFAILURE);
     }
 
     return fSuccess;
@@ -1016,7 +1036,7 @@ bool CPalModDlg::LoadPaletteFromPAL(LPCWSTR pszFileName)
 
                             fSuccess = true;
                             CString strStatus;
-                            strStatus.Format(L"Loaded %u colors from %u color %s file.", nTotalColorsUsed, nPALColorCount, L"PAL");
+                            strStatus.Format(IDS_PAL_LOADED, nTotalColorsUsed, nPALColorCount);
                             SetStatusText(strStatus);
                         }
 
@@ -1032,7 +1052,7 @@ bool CPalModDlg::LoadPaletteFromPAL(LPCWSTR pszFileName)
     if (!fFoundPALChunk)
     {
         MessageBox(L"Error: This is not a Microsoft PAL RIFF file.", GetHost()->GetAppName(), MB_ICONERROR);
-        SetStatusText(CString(L"Failed loading PAL file."));
+        SetStatusText(IDS_PAL_LOADFAILURE);
     }
     else if (!fSuccess)
     {
@@ -1041,7 +1061,7 @@ bool CPalModDlg::LoadPaletteFromPAL(LPCWSTR pszFileName)
         {
             MessageBox(strError, GetHost()->GetAppName(), MB_ICONERROR);
         }
-        SetStatusText(CString(L"Failed loading PAL file."));
+        SetStatusText(IDS_PAL_LOADFAILURE);
     }
 
     return fSuccess;
@@ -1319,11 +1339,11 @@ bool CPalModDlg::LoadPaletteFromPNG(LPCWSTR pszFileName, bool fReadUpsideDown)
 
                     if (fHadToFlip)
                     {
-                        strInfo.Format(L"PNG appears to have a reversed color table: loaded %u colors backwards.", nTotalColorsUsed);
+                        strInfo.Format(IDS_PNG_REVERSEDLOAD, nTotalColorsUsed);
                     }
                     else
                     {
-                        strInfo.Format(L"Loaded %u colors from the %u color indexed %s file.", nTotalColorsUsed, nPNGColorCount, L"PNG");
+                        strInfo.Format(IDS_PNG_LOADED, nTotalColorsUsed, nPNGColorCount);
                     }
                     SetStatusText(strInfo);
 
@@ -1364,12 +1384,12 @@ bool CPalModDlg::LoadPaletteFromPNG(LPCWSTR pszFileName, bool fReadUpsideDown)
         strMessage.Append(L"Failing that, open up the PNG in a picture viewer.  While PalMod is the foreground application, select a color in PalMod. ");
         strMessage.Append(L"Then hover your mouse over the \"new\" color in your image, and press CTRL+SHIFT+V to copy that color to PalMod.  Repeat until you're done.");
         MessageBox(strMessage, GetHost()->GetAppName(), MB_ICONERROR);
-        SetStatusText(CString(L"Cannot use this PNG: it does not contain a palette table."));
+        SetStatusText(IDS_PNGLOAD_NOTABLE);
     }
     else if (!fSuccess)
     {
         MessageBox(L"Error: This is not a valid PNG file.", GetHost()->GetAppName(), MB_ICONERROR);
-        SetStatusText(CString(L"Failed loading PNG file."));
+        SetStatusText(IDS_PNG_LOADFAILURE);
     }
 
     return fSuccess;
@@ -1413,7 +1433,7 @@ void CPalModDlg::OnImportPalette()
     }
 }
 
-bool CPalModDlg::SavePaletteToACT(LPCWSTR pszFileName)
+bool CPalModDlg::SavePaletteToACT(LPCWSTR pszFileName, bool fRightsideUp)
 {
     CFile ActFile;
     bool fSuccess = false;
@@ -1426,7 +1446,7 @@ bool CPalModDlg::SavePaletteToACT(LPCWSTR pszFileName)
         // ACT import wherein they mangle the parse for 768b files.  Thus we are forcibly using 772b here.
 
         const int k_nMaxColorsAllowed = 256;
-        int nActSz = k_nMaxColorsAllowed * 3;
+        const int nActSz = k_nMaxColorsAllowed * 3;
         UINT8* pAct = new UINT8[nActSz];
         memset(pAct, 0, nActSz);
 
@@ -1444,29 +1464,64 @@ bool CPalModDlg::SavePaletteToACT(LPCWSTR pszFileName)
         }
 
         int nTotalColorsUsed = 0;
-        for (; nTotalColorsUsed < nWorkingAmt; nTotalColorsUsed++)
-        {
-            pAct[nTotalColorsUsed * 3] = pPal[nTotalColorsUsed * 4];
-            pAct[nTotalColorsUsed * 3 + 1] = pPal[nTotalColorsUsed * 4 + 1];
-            pAct[nTotalColorsUsed * 3 + 2] = pPal[nTotalColorsUsed * 4 + 2];
-        }
 
-        for (UINT8 nCurrentPage = 1; nCurrentPage < nPalettePageCount; nCurrentPage++)
+        if (fRightsideUp)
         {
-            CJunk* pPalCtrlNextPage = m_PalHost.GetPalCtrl(nCurrentPage);
-
-            if (pPalCtrlNextPage)
+            for (; nTotalColorsUsed < nWorkingAmt; nTotalColorsUsed++)
             {
-                const int nNextPageWorkingAmt = pPalCtrlNextPage->GetWorkingAmt();
+                pAct[nTotalColorsUsed * 3] = pPal[nTotalColorsUsed * 4];
+                pAct[nTotalColorsUsed * 3 + 1] = pPal[nTotalColorsUsed * 4 + 1];
+                pAct[nTotalColorsUsed * 3 + 2] = pPal[nTotalColorsUsed * 4 + 2];
+            }
 
-                for (int nActivePageIndex = 0; (nTotalColorsUsed < k_nMaxColorsAllowed) && (nActivePageIndex < nNextPageWorkingAmt); nActivePageIndex++)
+            for (UINT8 nCurrentPage = 1; nCurrentPage < nPalettePageCount; nCurrentPage++)
+            {
+                CJunk* pPalCtrlNextPage = m_PalHost.GetPalCtrl(nCurrentPage);
+
+                if (pPalCtrlNextPage)
                 {
-                    pAct[nTotalColorsUsed * 3] = pPal[nTotalColorsUsed * 4];
-                    pAct[nTotalColorsUsed * 3 + 1] = pPal[nTotalColorsUsed * 4 + 1];
-                    pAct[nTotalColorsUsed * 3 + 2] = pPal[nTotalColorsUsed * 4 + 2];
-                    nTotalColorsUsed++;
+                    const int nNextPageWorkingAmt = pPalCtrlNextPage->GetWorkingAmt();
+
+                    for (int nActivePageIndex = 0; (nTotalColorsUsed < k_nMaxColorsAllowed) && (nActivePageIndex < nNextPageWorkingAmt); nActivePageIndex++)
+                    {
+                        pAct[nTotalColorsUsed * 3] = pPal[nTotalColorsUsed * 4];
+                        pAct[nTotalColorsUsed * 3 + 1] = pPal[nTotalColorsUsed * 4 + 1];
+                        pAct[nTotalColorsUsed * 3 + 2] = pPal[nTotalColorsUsed * 4 + 2];
+                        nTotalColorsUsed++;
+                    }
                 }
             }
+        }
+        else //upside-down for fighter factory 3
+        {
+            int nWriteLocation = k_nMaxColorsAllowed - 1;
+            for (; nTotalColorsUsed < nWorkingAmt; nTotalColorsUsed++)
+            {
+                pAct[(nWriteLocation - nTotalColorsUsed) * 3] = pPal[nTotalColorsUsed * 4];
+                pAct[(nWriteLocation - nTotalColorsUsed) * 3 + 1] = pPal[nTotalColorsUsed * 4 + 1];
+                pAct[(nWriteLocation - nTotalColorsUsed) * 3 + 2] = pPal[nTotalColorsUsed * 4 + 2];
+            }
+
+            for (UINT8 nCurrentPage = 1; nCurrentPage < nPalettePageCount; nCurrentPage++)
+            {
+                CJunk* pPalCtrlNextPage = m_PalHost.GetPalCtrl(nCurrentPage);
+
+                if (pPalCtrlNextPage)
+                {
+                    const int nNextPageWorkingAmt = pPalCtrlNextPage->GetWorkingAmt();
+
+                    for (int nActivePageIndex = 0; (nTotalColorsUsed < k_nMaxColorsAllowed) && (nActivePageIndex < nNextPageWorkingAmt); nActivePageIndex++)
+                    {
+                        pAct[(nWriteLocation - nTotalColorsUsed) * 3] = pPal[nTotalColorsUsed * 4];
+                        pAct[(nWriteLocation - nTotalColorsUsed) * 3 + 1] = pPal[nTotalColorsUsed * 4 + 1];
+                        pAct[(nWriteLocation - nTotalColorsUsed) * 3 + 2] = pPal[nTotalColorsUsed * 4 + 2];
+                        nTotalColorsUsed++;
+                    }
+                }
+            }
+
+            // max this since we started the write at the end
+            nTotalColorsUsed = k_nMaxColorsAllowed;
         }
 
         ActFile.Write(pAct, nActSz);
@@ -1487,7 +1542,7 @@ bool CPalModDlg::SavePaletteToACT(LPCWSTR pszFileName)
         fSuccess = true;
     }
 
-    SetStatusText(CString(fSuccess ? "ACT file saved successfully." : "Error saving ACT file."));
+    SetStatusText(fSuccess ? IDS_ACTSAVE_SUCCESS : IDS_ACTSAVE_FAILURE);
     return fSuccess;
 }
 
@@ -1556,7 +1611,7 @@ bool CPalModDlg::SavePaletteToGPL(LPCWSTR pszFileName)
         fSuccess = true;
     }
 
-    SetStatusText(CString(fSuccess ? L"GPL file saved successfully." : L"Error saving GPL file."));
+    SetStatusText(fSuccess ? IDS_GPLSAVE_SUCCESS : IDS_GPLSAVE_FAILURE);
     return fSuccess;
 }
 
@@ -1600,7 +1655,7 @@ bool CPalModDlg::SavePaletteToPAL(LPCWSTR pszFileName)
         mmioClose(hRIFFFile, 0);
     }
 
-    SetStatusText(CString(fSuccess ? "RIFF PAL file saved successfully." : "Error saving RIFF PAL file."));
+    SetStatusText(fSuccess ? IDS_PALSAVE_SUCCESS : IDS_PALSAVE_FAILURE);
     return fSuccess;
 }
 
@@ -1609,6 +1664,7 @@ void CPalModDlg::OnExportPalette()
     static LPCWSTR szSaveFilter[] = { L"ACT Palette|*.act|"
                                       L"GIMP Palette File|*.gpl|"
                                       L"Microsoft PAL|*.pal|"
+                                      L"Upside-down ACT Palette|*.act|"
                                       L"|" };
 
     CFileDialog ActSave(FALSE, L"act", nullptr, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, *szSaveFilter);
@@ -1633,7 +1689,14 @@ void CPalModDlg::OnExportPalette()
         }
         else
         {
-            fSuccess = SavePaletteToACT(ActSave.GetOFN().lpstrFile);
+            if (ActSave.GetOFN().nFilterIndex == 4)
+            {
+                fSuccess = SavePaletteToACT(ActSave.GetOFN().lpstrFile, false);
+            }
+            else
+            {
+                fSuccess = SavePaletteToACT(ActSave.GetOFN().lpstrFile, true);
+            }
         }
 
         if (!fSuccess)

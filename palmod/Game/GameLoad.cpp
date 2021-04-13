@@ -11,6 +11,7 @@
 #include "Game_CVS2_A.h"
 #include "Game_DanKuGa_A.h"
 #include "Game_DBFCI_A.h"
+#include "Game_DBZHD_SNES.h"
 #include "Game_DoubleDragon_A.h"
 #include "Game_FatalFuryS_SNES.h"
 #include "Game_Garou_A.h"
@@ -35,6 +36,7 @@
 #include "Game_LASTBLADE2_A.h"
 #include "Game_Matrimelee_A.h"
 #include "Game_MMPR_SNES.h"
+#include "Game_MMX2_SNES.h"
 #include "Game_MSH_A.h"
 #include "Game_MSHVSF_A.h"
 #include "Game_MSHWOTG_SNES.h"
@@ -78,6 +80,7 @@
 #include "Game_SSF2T_A.h"
 #include "Game_SSF2T_GBA.h"
 #include "Game_SVCPLUSA_A.h"
+#include "Game_TMNTTF_SNES.h"
 #include "Game_TopF2005_Sega.h"
 #include "Game_UNICLR_A.h"
 #include "Game_VHUNT2_A.h"
@@ -85,6 +88,7 @@
 #include "Game_VSAV2_A.h"
 #include "Game_WakuWaku7_A.h"
 #include "Game_Windjammers_A.h"
+#include "Game_XMMA_SNES.h"
 #include "Game_XMVSF_A.h"
 
 #include "..\resource.h"
@@ -127,7 +131,6 @@ BOOL CGameLoad::SetGame(int nGameFlag)
 {
     switch (nGameFlag)
     {
-
     case AOF1_A:
     {
         GetRule = &CGame_AOF1_A::GetRule;
@@ -182,6 +185,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_DBFCI_A::GetRule;
         GetNextRule = &CGame_DBFCI_A::GetNextRule;
 
+        return TRUE;
+    }
+    case DBZHD_SNES:
+    {
+        GetRule = &CGame_DBZHD_SNES::GetRule;
         return TRUE;
     }
     case DOUBLEDRAGON_A:
@@ -322,6 +330,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
     case MMPR_SNES:
     {
         GetRule = &CGame_MMPR_SNES::GetRule;
+        return TRUE;
+    }
+    case MMX2_SNES:
+    {
+        GetRule = &CGame_MMX2_SNES::GetRule;
         return TRUE;
     }
     case MSH_A:
@@ -611,6 +624,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_SVCPLUSA_A::GetRule;
         return TRUE;
     }
+    case TMNTTF_SNES:
+    {
+        GetRule = &CGame_TMNTTF_SNES::GetRule;
+        return TRUE;
+    }
     case TOPF2005_SEGA:
     {
         GetRule = &CGame_TOPF2005_SEGA::GetRule;
@@ -648,6 +666,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
     case WINDJAMMERS_A:
     {
         GetRule = &CGame_Windjammers_A::GetRule;
+        return TRUE;
+    }
+    case XMMA_SNES:
+    {
+        GetRule = &CGame_XMMA_SNES::GetRule;
         return TRUE;
     }
     case XMVSF_A:
@@ -707,6 +730,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case DBFCI_A:
     {
         return new CGame_DBFCI_A(nConfirmedROMSize);
+    }
+    case DBZHD_SNES:
+    {
+        return new CGame_DBZHD_SNES(nConfirmedROMSize);
     }
     case DOUBLEDRAGON_A:
     {
@@ -815,6 +842,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case MMPR_SNES:
     {
         return new CGame_MMPR_SNES(nConfirmedROMSize);
+    }
+    case MMX2_SNES:
+    {
+        return new CGame_MMX2_SNES(nConfirmedROMSize);
     }
     case MSH_A:
     {
@@ -1004,6 +1035,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_SVCPLUSA_A(nConfirmedROMSize);
     }
+    case TMNTTF_SNES:
+    {
+        return new CGame_TMNTTF_SNES(nConfirmedROMSize);
+    }
     case TOPF2005_SEGA:
     {
         return new CGame_TOPF2005_SEGA(nConfirmedROMSize);
@@ -1032,7 +1067,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_Windjammers_A(nConfirmedROMSize);
     }
-
+    case XMMA_SNES:
+    {
+        return new CGame_XMMA_SNES(nConfirmedROMSize);
+    }
     case XMVSF_A:
     {
         return new CGame_XMVSF_A(nConfirmedROMSize);
@@ -1272,12 +1310,12 @@ CGameClass* CGameLoad::LoadFile(int nGameFlag, WCHAR* pszLoadFile)
         //OutGame->rgUnitRedir[OutGame->nRedirCtr] = INVALID_UNIT_VALUE;
     }
 
-    strLoadSaveStr.Format(L"Game %s successfully.", OutGame ? L"loaded" : L"did not load");
+    strLoadSaveStr.Format(OutGame ? IDS_LOADSAVE_SUCCESS : IDS_LOADSAVE_FAILURE);
 
     return OutGame;
 }
 
-CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* szLoadDir)
+CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* pszLoadDir)
 {
     CGameClass* OutGame = NULL;
     sFileRule CurrRule;
@@ -1291,7 +1329,7 @@ CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* szLoadDir)
     nSaveLoadSucc = 0;
     nSaveLoadErr = 0;
 
-    if (!VerifyLocationIsUsable(szLoadDir))
+    if (!VerifyLocationIsUsable(pszLoadDir))
     {
         return nullptr;
     }
@@ -1311,16 +1349,29 @@ CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* szLoadDir)
 
         CurrRule = GetNextRule();
 
-        strCurrFile.Format(L"%s\\%s", szLoadDir, CurrRule.szFileName);
+        strCurrFile.Format(L"%s\\%s", pszLoadDir, CurrRule.szFileName);
 
-        if (CurrFile.Open(strCurrFile, CFile::modeRead | CFile::typeBinary))
+        BOOL fFileOpened = CurrFile.Open(strCurrFile, CFile::modeRead | CFile::typeBinary);
+
+        if (!fFileOpened && CurrRule.fHasAltName)
+        {
+            CString strAltFileName;
+
+            OutputDebugString(L"Loading game via alternate filenames...\n");
+
+            strAltFileName.Format(L"%s\\%s", pszLoadDir, CurrRule.szAltFileName);
+
+            fFileOpened = CurrFile.Open(strAltFileName, CFile::modeRead | CFile::typeBinary);
+        }
+
+        if (fFileOpened)
         {
             bool fActualFileSizeIsSafe = ((short int)CurrRule.uVerifyVar == -1) || (CurrFile.GetLength() == CurrRule.uVerifyVar);
 
             if (!fActualFileSizeIsSafe)
             {
                 CString strError;
-                strError.Format(L"The file \"%s\" was found but is not the expected size.  We expect the file to be %u bytes, but this file is %u bytes.\n\nAre you sure you wish to load this file?", strCurrFile.GetString(), CurrRule.uVerifyVar, CurrFile.GetLength());
+                strError.Format(L"The file \"%s\" was found but is not the expected size.  We expect the file to be %u bytes, but this file is %u bytes.\n\nAre you sure you wish to load this file?", strCurrFile.GetString(), CurrRule.uVerifyVar, (int)CurrFile.GetLength());
                 fActualFileSizeIsSafe = (MessageBox(g_appHWnd, strError, GetHost()->GetAppName(), MB_YESNO | MB_ICONERROR) == IDYES);
             }
 
@@ -1333,7 +1384,7 @@ CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* szLoadDir)
                     if (OutGame)
                     {
                         OutGame->SetIsDir();
-                        OutGame->SetLoadDir(szLoadDir);
+                        OutGame->SetLoadDir(pszLoadDir);
                     }
                 }
 
@@ -1402,10 +1453,10 @@ CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* szLoadDir)
     CString strErrorText = L"";
     if (nSaveLoadErr)
     {
-        strErrorText.Format(L" (%d error%s)", nSaveLoadErr, (nSaveLoadErr == 1) ? L"" : L"s");
+        strErrorText.Format((nSaveLoadErr == 1) ? IDS_LOADERROR_SINGLE : IDS_LOADERROR_MULTI, nSaveLoadErr);
     }
     
-    strLoadSaveStr.Format(L"%d of %d file%s loaded successfully%s.", nSaveLoadSucc, nSaveLoadCount, (nSaveLoadCount == 1) ? L"" : L"s", strErrorText.GetString());
+    strLoadSaveStr.Format((nSaveLoadCount == 1) ? IDS_LOADGAME_SINGLE : IDS_LOADGAME_MULTI, nSaveLoadSucc, nSaveLoadCount, strErrorText.GetString());
 
     // Perhaps we could be less strict here, but -- we also will crash elsewhere if we don't have the full PL set.
     return (nSaveLoadErr == 0) ? OutGame : nullptr;
@@ -1620,10 +1671,10 @@ void CGameLoad::SaveGame(CGameClass* CurrGame)
             CString strErrorText = L"";
             if (nSaveLoadErr)
             {
-                strErrorText.Format(L" (%d error%s)", nSaveLoadErr, (nSaveLoadErr == 1) ? L"" : L"s");
+                strErrorText.Format((nSaveLoadErr == 1) ? IDS_LOADERROR_SINGLE : IDS_LOADERROR_MULTI, nSaveLoadErr);
             }
 
-            strLoadSaveStr.Format(L"%d of %d files patched successfully%s.", nSaveLoadSucc, nSaveLoadCount, strErrorText.GetString());
+            strLoadSaveStr.Format((nSaveLoadCount == 1) ? IDS_PATCHGAME_SINGLE : IDS_PATCHGAME_MULTI, nSaveLoadSucc, nSaveLoadCount, strErrorText.GetString());
         }
 
         if (nSaveLoadErr == 0)
@@ -1633,7 +1684,7 @@ void CGameLoad::SaveGame(CGameClass* CurrGame)
     }
     else
     {
-        strLoadSaveStr = L"No changes detected: nothing to patch.";
+        strLoadSaveStr.LoadString(IDS_PATCH_EMPTY);
     }
 }
 
@@ -1724,21 +1775,21 @@ void CGameLoad::CrosscopyGame(CGameClass* CurrGame)
         CString strErrorText = L"";
         if (nSaveLoadErr)
         {
-            strErrorText.Format(L" (%d error%s)", nSaveLoadErr, (nSaveLoadErr == 1) ? L"" : L"s");
+            strErrorText.Format((nSaveLoadErr == 1) ? IDS_LOADERROR_SINGLE : IDS_LOADERROR_MULTI, nSaveLoadErr);
         }
 
         if (nSaveLoadCount == 1)
         {
-            strLoadSaveStr.Format(L"Game crosscopied successfully%s.", strErrorText.GetString());
+            strLoadSaveStr.Format(IDS_CROSSCOPY_SINGLE_SUCCESS, strErrorText.GetString());
         }
         else
         {
-            strLoadSaveStr.Format(L"%d of %d files crosscopied successfully%s.", nSaveLoadSucc, nSaveLoadCount, strErrorText.GetString());
+            strLoadSaveStr.Format(IDS_CROSSCOPY_MULTI_SUCCESS, nSaveLoadSucc, nSaveLoadCount, strErrorText.GetString());
         }
     }
     else
     {
-        strLoadSaveStr = (L"No directory specified.");
+        strLoadSaveStr.LoadString(IDS_CROSSCOPY_NODIR);
     }
 }
 
@@ -1795,11 +1846,11 @@ void CGameLoad::SavePatchFile(CGameClass* CurrGame)
 
     if (nNumberOfChangesSaved > 0)
     {
-        strLoadSaveStr.Format(L"%u change%s saved to patch file.", nNumberOfChangesSaved, nNumberOfChangesSaved == 1 ? L"" : L"s");
+        strLoadSaveStr.Format((nNumberOfChangesSaved == 1) ? IDS_IPS_SINGLE : IDS_IPS_MULTI, nNumberOfChangesSaved);
     }
     else
     {
-        strLoadSaveStr = L"No changes detected: nothing to put in patch file.";
+        strLoadSaveStr.LoadString(IDS_IPS_EMPTY);
     }
 }
 
@@ -1816,10 +1867,10 @@ void CGameLoad::SaveMultiplePatchFiles(CGameClass* CurrGame, CString strTargetDi
 
     if (nNumberOfChangesSaved > 0)
     {
-        strLoadSaveStr.Format(L"%u change%s saved to patch file.", nNumberOfChangesSaved, nNumberOfChangesSaved == 1 ? L"" : L"s");
+        strLoadSaveStr.Format((nNumberOfChangesSaved == 1) ? IDS_IPS_SINGLE : IDS_IPS_MULTI, nNumberOfChangesSaved);
     }
     else
     {
-        strLoadSaveStr = L"No changes detected: nothing to put in patch file.";
+        strLoadSaveStr.LoadString(IDS_IPS_EMPTY);
     }
 }

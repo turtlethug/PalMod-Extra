@@ -35,9 +35,6 @@ CGame_MVC_A::CGame_MVC_A(UINT32 nConfirmedROMSize)
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
     SetColorMode(ColMode::COLMODE_12A);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_16STEPS);
-
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
     m_nConfirmedROMSize = nConfirmedROMSize;
@@ -48,7 +45,7 @@ CGame_MVC_A::CGame_MVC_A(UINT32 nConfirmedROMSize)
 
     m_nTotalInternalUnits = MVC_A_NUMUNIT;
     m_nExtraUnit = MVC_A_EXTRALOC;
-    m_nSafeCountForThisRom = 1264 + GetExtraCt(MVC_A_EXTRALOC);
+    m_nSafeCountForThisRom = GetExtraCt(MVC_A_EXTRALOC) + 1288;
     m_pszExtraFilename = EXTRA_FILENAME_MVC;
     m_nTotalPaletteCount = m_nTotalPaletteCountForMVC;
 
@@ -360,7 +357,7 @@ void CGame_MVC_A::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
     else // MVC_A_EXTRALOC
     {
         // This is where we handle all the palettes added in via Extra.
-        stExtraDef* pCurrDef = GetExtraDefForMVC(GetExtraLoc(nUnitId) + nPalId);
+        stExtraDef* pCurrDef = (stExtraDef*)&MVC_A_EXTRA_CUSTOM[GetExtraLoc(nUnitId) + nPalId];
 
         m_nCurrentPaletteROMLocation = pCurrDef->uOffset;
         m_nCurrentPaletteSizeInColors = (pCurrDef->cbPaletteSize / m_nSizeOfColorsInBytes);
@@ -513,6 +510,37 @@ BOOL CGame_MVC_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node04)
                     SetSourcePal(2, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance1, nSrcAmt, nNodeIncrement);
                     SetSourcePal(3, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance3, nSrcAmt, nNodeIncrement);
                     SetSourcePal(4, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance4, nSrcAmt, nNodeIncrement);
+                }
+                else if (paletteDataSet->pPalettePairingInfo->nPalettesToJoin == 3)
+                {
+                    const INT8 nPeerPaletteDistance1 = paletteDataSet->pPalettePairingInfo->nNodeIncrementToPartner;
+                    const INT8 nPeerPaletteDistance2 = paletteDataSet->pPalettePairingInfo->nOverallNodeIncrementTo2ndPartner;
+                    const sGame_PaletteDataset* paletteDataSetToJoin1 = GetSpecificPalette(NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance1);
+                    const sGame_PaletteDataset* paletteDataSetToJoin2 = GetSpecificPalette(NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance2);
+                    fShouldUseAlternateLoadLogic = true;
+
+                    ClearSetImgTicket(
+                        CreateImgTicket(paletteDataSet->indexImgToUse, paletteDataSet->indexOffsetToUse,
+                            CreateImgTicket(paletteDataSetToJoin1->indexImgToUse, paletteDataSetToJoin1->indexOffsetToUse,
+                                CreateImgTicket(paletteDataSetToJoin2->indexImgToUse, paletteDataSetToJoin2->indexOffsetToUse)
+                            ))
+                    );
+
+                    //Set each palette
+                    sDescNode* JoinedNode[] = {
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance1, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance2, -1)
+                    };
+
+                    //Set each palette
+                    CreateDefPal(JoinedNode[0], 0);
+                    CreateDefPal(JoinedNode[1], 1);
+                    CreateDefPal(JoinedNode[2], 2);
+
+                    SetSourcePal(0, NodeGet->uUnitId, nSrcStart, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(1, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance1, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(2, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance2, nSrcAmt, nNodeIncrement);
                 }
                 else if (paletteDataSet->pPalettePairingInfo == &pairFullyLinkedNode)
                 {

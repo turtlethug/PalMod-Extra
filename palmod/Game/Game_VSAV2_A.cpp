@@ -32,9 +32,6 @@ CGame_VSAV2_A::CGame_VSAV2_A(UINT32 nConfirmedROMSize)
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
     SetColorMode(ColMode::COLMODE_12A);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_16STEPS);
-
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
 
@@ -46,7 +43,7 @@ CGame_VSAV2_A::CGame_VSAV2_A(UINT32 nConfirmedROMSize)
 
     m_nTotalInternalUnits = VSAV2_A_NUMUNIT;
     m_nExtraUnit = VSAV2_A_EXTRALOC;
-    m_nSafeCountForThisRom = 3341 + GetExtraCt(VSAV2_A_EXTRALOC);
+    m_nSafeCountForThisRom = 3343 + GetExtraCt(VSAV2_A_EXTRALOC);
     m_pszExtraFilename = EXTRA_FILENAME_VSAV2;
     m_nTotalPaletteCount = m_nTotalPaletteCountForVSAV2;
 
@@ -58,8 +55,8 @@ CGame_VSAV2_A::CGame_VSAV2_A(UINT32 nConfirmedROMSize)
     //Set game information
     nGameFlag = VSAV2_A;
     nImgGameFlag = IMGDAT_SECTION_CPS2;
-    nImgUnitAmt = VSAV2_A_NUM_IMG_UNITS;
     m_prgGameImageSet = VSAV2_A_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(VSAV2_A_IMG_UNITS);
 
     nFileAmt = 1;
 

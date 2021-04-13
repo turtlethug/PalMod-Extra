@@ -27,8 +27,6 @@ enum class eVerifyType
     VM_FILECHANGE
 };
 
-constexpr auto DEFAULT_STATUS_TEXT = L"Always keep a backup of files!";
-
 class CPalDropTarget : public COleDropTarget
 {
 public:
@@ -120,6 +118,10 @@ public:
     void SetColorFormatToARGB7888() { SetColorFormatTo(ColMode::COLMODE_ARGB7888); };
     void SetColorFormatToARGB8888() { SetColorFormatTo(ColMode::COLMODE_ARGB8888); };
 
+    void SetMaximumWritePerEachTransparency(PALWriteOutputOptions eUpdatedOption);
+    void SetMaximumWriteTo16Colors() { SetMaximumWritePerEachTransparency(PALWriteOutputOptions::WRITE_16); };
+    void SetMaximumWriteTo256Colors() { SetMaximumWritePerEachTransparency(PALWriteOutputOptions::WRITE_MAX); };
+
     void SetAlphaModeTo(AlphaMode newAlphaMode);
     void SetAlphaModeToFixed() { SetAlphaModeTo(AlphaMode::GameUsesFixedAlpha); };
     void SetAlphaModeToUnused() { SetAlphaModeTo(AlphaMode::GameDoesNotUseAlpha); };
@@ -141,7 +143,7 @@ public:
     bool LoadPaletteFromPNG(LPCWSTR pszFileName, bool fReadUpsideDown = false);
     // if you add a new palette type here, please update the CPalDropTarget support
 
-    bool SavePaletteToACT(LPCWSTR pszFileName);
+    bool SavePaletteToACT(LPCWSTR pszFileName, bool fRightsideUp);
     bool SavePaletteToGPL(LPCWSTR pszFileName);
     bool SavePaletteToPAL(LPCWSTR pszFileName);
 
@@ -171,6 +173,9 @@ public:
 // Construction
 public:
     CPalModDlg(CWnd* pParent = NULL);    // standard constructor
+#ifdef ENABLE_MUI_SUPPORT
+    ~CPalModDlg();
+#endif
 
 // Dialog Data
     enum { IDD = IDD_PALMOD_DIALOG };
@@ -191,6 +196,7 @@ public:
     void CloseFileDir();
     void ClearGameVar();
     void SetStatusText(CString szText);
+    void SetStatusText(UINT uStrId);
     void StopBlink();
 
 protected:
@@ -272,6 +278,7 @@ public:
     afx_msg void OnDeltaposSpinBL(NMHDR* pNMHDR, LRESULT* pResult);
     afx_msg void OnDeltaposSpinA(NMHDR* pNMHDR, LRESULT* pResult);
     afx_msg void OnFileExit();
+    afx_msg void OnFileOpenExtrasFile();
     afx_msg void OnFileCloseFileDir();
     afx_msg void OnTimer(UINT_PTR nIDEvent);
     afx_msg void OnBnShowPrev();

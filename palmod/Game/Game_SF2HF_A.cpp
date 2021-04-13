@@ -54,9 +54,6 @@ CGame_SF2HF_A::CGame_SF2HF_A(UINT32 nConfirmedROMSize, int nSF2HFROMToLoad)
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
     SetColorMode(IsSF30thBundleFile() ? ColMode::COLMODE_12A_LE : ColMode::COLMODE_12A);
 
-    //Set palette conversion mode=
-    BasePalGroup.SetMode(ePalType::PALTYPE_16STEPS);
-    
     InitializeStatics();
 
     m_nSelectedRom = nSF2HFROMToLoad;
@@ -81,8 +78,8 @@ CGame_SF2HF_A::CGame_SF2HF_A(UINT32 nConfirmedROMSize, int nSF2HFROMToLoad)
     //Set game information
     nGameFlag = SF2HF_A;
     nImgGameFlag = IMGDAT_SECTION_SF2;
-    nImgUnitAmt = SF2HF_A_NUM_IMG_UNITS;
     m_prgGameImageSet = SF2HF_A_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(SF2HF_A_IMG_UNITS);
 
     nFileAmt = 1;
 

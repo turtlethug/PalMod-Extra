@@ -18,9 +18,6 @@ CGame_SFIII3_D::CGame_SFIII3_D(void)
     SetAlphaMode(AlphaMode::GameUsesFixedAlpha);
     SetColorMode(ColMode::COLMODE_15ALT);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
-
     InitializeStatics();
 
     //We need the proper unit amt before we init the main buffer
@@ -31,14 +28,15 @@ CGame_SFIII3_D::CGame_SFIII3_D(void)
     //Set game information
     nGameFlag = SFIII3_D;
     nImgGameFlag = IMGDAT_SECTION_SF3;
-    nImgUnitAmt = SFIII3_D_NUM_IMG_UNITS;
     m_prgGameImageSet = SFIII3_D_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(SFIII3_D_IMG_UNITS);
 
     nFileAmt = SFIII3_D_NUMUNIT;
 
     //Set the image out display type
     DisplayType = eImageOutputSpriteDisplay::DISPLAY_SPRITES_LEFTTORIGHT;
     pButtonLabelSet = DEF_BUTTONLABEL7_SF3;
+    m_nNumberOfColorOptions = ARRAYSIZE(DEF_BUTTONLABEL7_SF3);
 
     //Create the redirect buffer
     rgUnitRedir = new UINT16[nUnitAmt + 1];

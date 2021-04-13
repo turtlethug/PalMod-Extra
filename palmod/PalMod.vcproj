@@ -234,14 +234,6 @@
 					RelativePath=".\Game\PalGroup.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Game\ShellSort.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Game\ShellSort.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="MVC2_D"
@@ -615,15 +607,7 @@
 			>
 		</Filter>
 		<File
-			RelativePath=".\Notes.txt"
-			>
-		</File>
-		<File
-			RelativePath="..\..\PalMod\PalMod\res\palmod_.manifest"
-			>
-		</File>
-		<File
-			RelativePath=".\ReadMe.txt"
+			RelativePath=".\res\palmod.manifest"
 			>
 		</File>
 	</Files>

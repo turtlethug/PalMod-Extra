@@ -52,9 +52,6 @@ CGame_SSF2T_A::CGame_SSF2T_A(UINT32 nConfirmedROMSize, int nSSF2TRomToLoad)
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
     SetColorMode(ColMode::COLMODE_12A);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_16STEPS);
-
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
     m_nConfirmedROMSize = nConfirmedROMSize;
@@ -108,8 +105,8 @@ CGame_SSF2T_A::CGame_SSF2T_A(UINT32 nConfirmedROMSize, int nSSF2TRomToLoad)
     //Set game information
     nGameFlag = SSF2T_A;
     nImgGameFlag = IMGDAT_SECTION_SF2;
-    nImgUnitAmt = SSF2T_A_NUM_IMG_UNITS;
     m_prgGameImageSet = SSF2T_A_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(SSF2T_A_IMG_UNITS);
 
     nFileAmt = 1;
 

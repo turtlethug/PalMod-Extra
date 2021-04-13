@@ -236,6 +236,7 @@
     <ClCompile Include="Game\Game_CVS2_A.cpp" />
     <ClCompile Include="Game\Game_DANKUGA_A.cpp" />
     <ClCompile Include="Game\Game_DBFCI_A.cpp" />
+    <ClCompile Include="Game\Game_DBZHD_SNES.cpp" />
     <ClCompile Include="Game\Game_DoubleDragon_A.cpp" />
     <ClCompile Include="Game\Game_FatalFuryS_SNES.cpp" />
     <ClCompile Include="Game\Game_Garou_A.cpp" />
@@ -260,6 +261,7 @@
     <ClCompile Include="Game\Game_LASTBLADE2_A.cpp" />
     <ClCompile Include="Game\Game_Matrimelee_A.cpp" />
     <ClCompile Include="Game\Game_MMPR_SNES.cpp" />
+    <ClCompile Include="Game\Game_MMX2_SNES.cpp" />
     <ClCompile Include="Game\Game_MSHVSF_A.cpp" />
     <ClCompile Include="Game\Game_MSHWOTG_SNES.cpp" />
     <ClCompile Include="Game\Game_MSH_A.cpp" />
@@ -303,6 +305,7 @@
     <ClCompile Include="Game\Game_SSF2T_A.cpp" />
     <ClCompile Include="Game\Game_SSF2T_GBA.cpp" />
     <ClCompile Include="Game\Game_SVCPLUSA_A.cpp" />
+    <ClCompile Include="Game\Game_TMNTTF_SNES.cpp" />
     <ClCompile Include="Game\Game_TopF2005_Sega.cpp" />
     <ClCompile Include="Game\Game_UNICLR_A.cpp" />
     <ClCompile Include="Game\Game_VHUNT2_A.cpp" />
@@ -310,12 +313,12 @@
     <ClCompile Include="Game\Game_VSAV_A.cpp" />
     <ClCompile Include="Game\Game_WakuWaku7_A.cpp" />
     <ClCompile Include="Game\Game_Windjammers_A.cpp" />
+    <ClCompile Include="Game\Game_XMMA_SNES.cpp" />
     <ClCompile Include="Game\Game_XMVSF_A.cpp" />
     <ClCompile Include="Game\MVC2_PALSEL.cpp" />
     <ClCompile Include="Game\MVC2_SUPP.cpp" />
     <ClCompile Include="Game\mvc2_validate.cpp" />
     <ClCompile Include="Game\PalGroup.cpp" />
-    <ClCompile Include="Game\ShellSort.cpp" />
     <ClCompile Include="ImgDat.cpp" />
     <ClCompile Include="ImgDisp.cpp" />
     <ClCompile Include="ImgDumpBmp.cpp" />
@@ -355,6 +358,7 @@
     <ClInclude Include="Game\COTA_A_DEF.h" />
     <ClInclude Include="Game\CVS2_A_DEF.h" />
     <ClInclude Include="Game\DANKUGA_A_DEF.h" />
+    <ClInclude Include="Game\DBZHD_SNES_DEF.h" />
     <ClInclude Include="Game\Default.h" />
     <ClInclude Include="Game\DescTree.h" />
     <ClInclude Include="Game\DoubleDragon_A_DEF.h" />
@@ -371,6 +375,7 @@
     <ClInclude Include="Game\Game_CVS2_A.h" />
     <ClInclude Include="Game\Game_DANKUGA_A.h" />
     <ClInclude Include="Game\Game_DBFCI_A.h" />
+    <ClInclude Include="Game\Game_DBZHD_SNES.h" />
     <ClInclude Include="Game\Game_DoubleDragon_A.h" />
     <ClInclude Include="Game\Game_FatalFuryS_SNES.h" />
     <ClInclude Include="Game\Game_Garou_A.h" />
@@ -395,6 +400,7 @@
     <ClInclude Include="Game\Game_LASTBLADE2_A.h" />
     <ClInclude Include="Game\Game_Matrimelee_A.h" />
     <ClInclude Include="Game\Game_MMPR_SNES.h" />
+    <ClInclude Include="Game\Game_MMX2_SNES.h" />
     <ClInclude Include="Game\Game_MSHVSF_A.h" />
     <ClInclude Include="Game\Game_MSHWOTG_SNES.h" />
     <ClInclude Include="Game\Game_MSH_A.h" />
@@ -438,6 +444,7 @@
     <ClInclude Include="Game\Game_SSF2T_A.h" />
     <ClInclude Include="Game\Game_SSF2T_GBA.h" />
     <ClInclude Include="Game\Game_SVCPLUSA_A.h" />
+    <ClInclude Include="Game\Game_TMNTTF_SNES.h" />
     <ClInclude Include="Game\Game_TopF2005_Sega.h" />
     <ClInclude Include="Game\Game_UNICLR_A.h" />
     <ClInclude Include="Game\Game_VHUNT2_A.h" />
@@ -445,6 +452,7 @@
     <ClInclude Include="Game\Game_VSAV_A.h" />
     <ClInclude Include="Game\Game_WakuWaku7_A.h" />
     <ClInclude Include="Game\Game_Windjammers_A.h" />
+    <ClInclude Include="Game\Game_XMMA_SNES.h" />
     <ClInclude Include="Game\Game_XMVSF_A.h" />
     <ClInclude Include="Game\Garou_A_DEF.h" />
     <ClInclude Include="Game\Garou_S_DEF.h" />
@@ -467,6 +475,7 @@
     <ClInclude Include="Game\LASTBLADE2_A_DEF.h" />
     <ClInclude Include="Game\Matrimelee_A_DEF.h" />
     <ClInclude Include="Game\MMPR_SNES_DEF.h" />
+    <ClInclude Include="Game\MMX2_SNES_DEF.h" />
     <ClInclude Include="Game\MSHVSF_A_DEF.h" />
     <ClInclude Include="Game\MSHWOTG_SNES_DEF.h" />
     <ClInclude Include="Game\MSH_A_DEF.h" />
@@ -503,17 +512,18 @@
     <ClInclude Include="Game\SFIII3_A_DEF.h" />
     <ClInclude Include="Game\SFIII3_D_DEF.h" />
     <ClInclude Include="Game\SFZ3U_A_DEF.h" />
-    <ClInclude Include="Game\ShellSort.h" />
     <ClInclude Include="Game\SPF2T_A_DEF.h" />
     <ClInclude Include="Game\SSF2T_A_DEF.h" />
     <ClInclude Include="Game\SSF2T_GBA_DEF.h" />
     <ClInclude Include="Game\SVCPLUSA_A_DEF.h" />
+    <ClInclude Include="Game\TMNTTF_SNES_DEF.h" />
     <ClInclude Include="Game\TopF2005_Sega_DEF.h" />
     <ClInclude Include="Game\VHUNT2_A_DEF.h" />
     <ClInclude Include="Game\VSAV2_A_DEF.h" />
     <ClInclude Include="Game\VSAV_A_DEF.h" />
     <ClInclude Include="Game\WakuWaku7_A_DEF.h" />
     <ClInclude Include="Game\Windjammers_A_DEF.h" />
+    <ClInclude Include="Game\XMMA_SNES_DEF.h" />
     <ClInclude Include="Game\XMVSF_A_DEF.h" />
     <ClInclude Include="ImgDat.h" />
     <ClInclude Include="ImgDisp.h" />
@@ -545,10 +555,7 @@
     <None Include="res\PalMod.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="res\palmod_.manifest" />
+    <Manifest Include="res\palmod.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

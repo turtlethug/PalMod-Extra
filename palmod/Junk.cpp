@@ -152,7 +152,7 @@ BOOL CJunk::InitNewSize(int nNewAmt, COLORREF* rgNewPal)
             // You can either slice the palette or add separators so that PalGroup can handle page divisions
             // You can easily have separators added for you automatically by using the new ::CreateDefPal logic
             // that is already in use for SFA3 and MSH and some of the other more recently added games
-            strError.Format(L"ERROR: Our color table can only show %u colors per page, but this palette wants %u colors on one page.  This palette is too large and needs to be modified or split.\n\nThis is a bug in PalMod: please report it.\n"), nMaximumColorsPerPage, nNewAmt;
+            strError.Format(L"ERROR: Our color table can only show %u colors per page, but this palette wants %u colors on one page.  This palette is too large and needs to be modified or split.\n\nThis is a bug in PalMod: please report it.\n", nMaximumColorsPerPage, nNewAmt);
             OutputDebugString(strError);
             if (!s_fAlreadyShown)
             {
@@ -172,7 +172,7 @@ BOOL CJunk::InitNewSize(int nNewAmt, COLORREF* rgNewPal)
         }
 
         //Set new width/height
-        iPalW = nNewAmt > nWidthMax ? nWidthMax : nNewAmt;
+        iPalW = (nNewAmt > nWidthMax) ? nWidthMax : nNewAmt;
 
         if (nNewAmt > nWidthMax)
         {
@@ -254,16 +254,16 @@ void CJunk::SetIndexPen(int nIndex, int pFlag)
 {
     switch (pFlag)
     {
-    case FLAG_HL:
+    case FLAG_HIGHLIGHT:
         dcBaseDC.SelectObject(&PIndexHL);
         break;
-    case FLAG_SL:
+    case FLAG_SELECTED:
         dcBaseDC.SelectObject(&PIndexSL);
         break;
-    case FLAG_MH:
+    case FLAG_MULTIHIGHLIGHT:
         dcBaseDC.SelectObject(&PIndexMHL);
         break;
-    case FLAG_DE:
+    case FLAG_DEFAULT:
         dcBaseDC.SelectObject(&PIndexBG);
         break;
     }
@@ -465,14 +465,13 @@ void CJunk::UpdateFace()
 
     if (bEnabled)
     {
-        BOOL bDraw;
         RECT* rSqRct = new RECT[iWorkingAmt];
 
         nNewCt++;
 
         for (int index = 0; index < iWorkingAmt; index++)
         {
-            SetIndexPen(index, FLAG_DE);
+            SetIndexPen(index, FLAG_DEFAULT);
 
             rSqRct[index].top = (BDR_SZ * ((index / iPalW) + 1)) + ((GetPaletteSquareSize()) * (index / iPalW));
             rSqRct[index].left = (BDR_SZ * ((index % iPalW) + 1)) + ((GetPaletteSquareSize()) * (index % iPalW));
@@ -486,57 +485,27 @@ void CJunk::UpdateFace()
 
         for (int index = 0; index < iWorkingAmt; index++)
         {
-            bDraw = TRUE;
-
             if (Selected[index])
             {
-                SetIndexPen(index, FLAG_SL);
-            }
-            else
-            {
-                bDraw = FALSE;
-            }
-
-            if (bDraw)
-            {
+                SetIndexPen(index, FLAG_SELECTED);
                 dcBaseDC.Rectangle(&rSqRct[index]);
             }
         }
 
         for (int index = 0; index < iWorkingAmt; index++)
         {
-            bDraw = TRUE;
-
             if (SelView && SelView[index])
             {
-                SetIndexPen(index, FLAG_MH);
-            }
-            else
-            {
-                bDraw = FALSE;
-            }
-
-            if (bDraw)
-            {
+                SetIndexPen(index, FLAG_MULTIHIGHLIGHT);
                 dcBaseDC.Rectangle(&rSqRct[index]);
             }
         }
 
         for (int index = 0; index < iWorkingAmt; index++)
         {
-            bDraw = TRUE;
-
             if (Highlighted[index])
             {
-                SetIndexPen(index, FLAG_HL);
-            }
-            else
-            {
-                bDraw = FALSE;
-            }
-
-            if (bDraw)
-            {
+                SetIndexPen(index, FLAG_HIGHLIGHT);
                 dcBaseDC.Rectangle(&rSqRct[index]);
             }
         }

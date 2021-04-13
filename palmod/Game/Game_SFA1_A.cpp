@@ -35,9 +35,6 @@ CGame_SFA1_A::CGame_SFA1_A(UINT32 nConfirmedROMSize)
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
     SetColorMode(ColMode::COLMODE_12A);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_16STEPS);
-
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
     m_nConfirmedROMSize = nConfirmedROMSize;
@@ -58,8 +55,8 @@ CGame_SFA1_A::CGame_SFA1_A(UINT32 nConfirmedROMSize)
     //Set game information
     nGameFlag = SFA1_A;
     nImgGameFlag = IMGDAT_SECTION_CPS2;
-    nImgUnitAmt = SFA1_A_NUM_IMG_UNITS;
     m_prgGameImageSet = SFA1_A_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(SFA1_A_IMG_UNITS);
 
     nFileAmt = 1;
 

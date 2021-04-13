@@ -140,9 +140,6 @@ CGame_UNICLR_A::CGame_UNICLR_A(UINT32 nConfirmedROMSize /* = -1 */)
     m_fGameUsesAlphaValue = true;
     SetColorMode(ColMode::COLMODE_ARGB8888);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_256STEPS);
-
     InitializeStatics();
 
     // Don't load extras
@@ -160,8 +157,8 @@ CGame_UNICLR_A::CGame_UNICLR_A(UINT32 nConfirmedROMSize /* = -1 */)
     //Set the image out display type
     DisplayType = eImageOutputSpriteDisplay::DISPLAY_SPRITES_LEFTTORIGHT;
 
-    pButtonLabelSet = DEF_NOBUTTONS;
-    m_nNumberOfColorOptions = ARRAYSIZE(DEF_NOBUTTONS);
+    pButtonLabelSet = DEF_BUTTONLABEL_2_LEFTRIGHT;
+    m_nNumberOfColorOptions = ARRAYSIZE(DEF_BUTTONLABEL_2_LEFTRIGHT);
 
     //Create the redirect buffer
     rgUnitRedir = new UINT16[nUnitAmt + 1];
@@ -357,9 +354,11 @@ BOOL CGame_UNICLR_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node04
     nTargetImgId = 0;
     UINT16 nImgUnitId = UNICLRCharacterData[NodeGet->uUnitId].nSpriteIndex;
 
-    UINT16 nSrcStart = NodeGet->uPalId;
-    UINT16 nSrcAmt = 1;
-    UINT16 nNodeIncrement = 1;
+    // This logic presumes that we are only showing core character palettes.  If we decide to handle
+    // anything else, we'd want to validate that the palette in question is in the core lists
+    UINT16 nSrcStart = (NodeGet->uPalId % UNICLRCharacterData[NodeGet->uUnitId].nPaletteListSize);
+    UINT16 nSrcAmt = m_nNumberOfColorOptions;
+    UINT16 nNodeIncrement = UNICLRCharacterData[NodeGet->uUnitId].nPaletteListSize;
 
     //Get rid of any palettes if there are any
     BasePalGroup.FlushPalAll();

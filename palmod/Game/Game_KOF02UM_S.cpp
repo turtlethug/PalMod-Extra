@@ -99,16 +99,13 @@ CGame_KOF02UM_S::CGame_KOF02UM_S(UINT32 nConfirmedROMSize, int nRomToLoad)
     SetAlphaMode(AlphaMode::GameUsesFixedAlpha);
     SetColorMode(UseMainPaletteSet() ? ColMode::COLMODE_15ALT : ColMode::COLMODE_GBA);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
-
     InitDataBuffer();
 
     //Set game information
     nGameFlag = KOF02UM_S;
     nImgGameFlag = IMGDAT_SECTION_KOF;
-    nImgUnitAmt = KOF02UM_S_NUM_IMG_UNITS;
     m_prgGameImageSet = KOF02UM_S_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(KOF02UM_S_IMG_UNITS);
 
     nFileAmt = 1;
 

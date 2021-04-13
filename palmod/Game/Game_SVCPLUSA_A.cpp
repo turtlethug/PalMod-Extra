@@ -1,8 +1,8 @@
 #include "StdAfx.h"
 #include "GameDef.h"
 #include "Game_SVCPLUSA_A.h"
-#include "..\PalMod.h"
-#include "..\RegProc.h"
+#include "PalMod.h"
+#include "RegProc.h"
 
 #define SVCPLUSA_A_DEBUG DEFAULT_GAME_DEBUG_STATE
 
@@ -201,9 +201,6 @@ CGame_SVCPLUSA_A::CGame_SVCPLUSA_A(UINT32 nConfirmedROMSize)
     createPalOptions = { NO_SPECIAL_OPTIONS, WRITE_16 };
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
     SetColorMode(ColMode::COLMODE_NEOGEO);
-
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
 
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
@@ -999,9 +996,9 @@ BOOL CGame_SVCPLUSA_A::LoadFile(CFile* LoadedFile, UINT16 nUnitId)
 
                     {
                         CWaitCursor wait;
-                        GetHost()->GetPalModDlg()->SetStatusText(L"Decrypting game: please wait...");
+                        GetHost()->GetPalModDlg()->SetStatusText(IDS_DECRYPTING_START);
                         svcsplus_px_decrypt(decryptedROM, m_nConfirmedROMSize * 2);
-                        GetHost()->GetPalModDlg()->SetStatusText(L"Decryption complete!");
+                        GetHost()->GetPalModDlg()->SetStatusText(IDS_DECRYPTING_DONE);
                     }
 
 #ifdef dump_decrypted_file
@@ -1070,9 +1067,9 @@ BOOL CGame_SVCPLUSA_A::LoadFile(CFile* LoadedFile, UINT16 nUnitId)
 
                 {
                     CWaitCursor wait;
-                    GetHost()->GetPalModDlg()->SetStatusText(L"Decrypting game: please wait...");
+                    GetHost()->GetPalModDlg()->SetStatusText(IDS_DECRYPTING_START);
                     svcplus_px_decrypt(decryptedROM, nROMSetSize);
-                    GetHost()->GetPalModDlg()->SetStatusText(L"Decryption complete!");
+                    GetHost()->GetPalModDlg()->SetStatusText(IDS_DECRYPTING_DONE);
                 }
 
 #ifdef save_decrypted_output
@@ -1215,7 +1212,7 @@ BOOL CGame_SVCPLUSA_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node
 
             if (paletteDataSet->pPalettePairingInfo)
             {
-                if (NodeGet->uUnitId == indexSVC_A_PrincessAthena)
+                if (NodeGet->uUnitId == indexSVC_A_GoddessAthena)
                 {
                     fShouldUseAlternateLoadLogic = true;
 
@@ -1257,7 +1254,7 @@ BOOL CGame_SVCPLUSA_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node
                 }
                 else if (NodeGet->uUnitId == indexSVC_A_Zero)
                 {
-                    UINT16 nLocationOfSecondPalette  = 1;
+                    UINT16 nLocationOfSecondPalette = 1;
                     UINT16 nSecondPaletteWithinNode = 0;
 
                     // Zero is interesting and has two different palettes joins with shared palettes.
@@ -1300,6 +1297,43 @@ BOOL CGame_SVCPLUSA_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node
                         SetSourcePal(0, NodeGet->uUnitId, nSrcStart, nSrcAmt, nNodeIncrement);
                         SetSourcePal(1, NodeGet->uUnitId, nLocationOfSecondPalette, nSrcAmt, nNodeIncrement);
                     }
+                }
+                else if (paletteDataSet->pPalettePairingInfo->nPalettesToJoin == 4)
+                {
+                    const INT8 nPeerPaletteDistance1 = paletteDataSet->pPalettePairingInfo->nNodeIncrementToPartner;
+                    const INT8 nPeerPaletteDistance2 = paletteDataSet->pPalettePairingInfo->nOverallNodeIncrementTo2ndPartner;
+                    const INT8 nPeerPaletteDistance3 = paletteDataSet->pPalettePairingInfo->nOverallNodeIncrementTo3rdPartner;
+                    const sGame_PaletteDataset* paletteDataSetToJoin1 = GetSpecificPalette(NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance1);
+                    const sGame_PaletteDataset* paletteDataSetToJoin2 = GetSpecificPalette(NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance2);
+                    const sGame_PaletteDataset* paletteDataSetToJoin3 = GetSpecificPalette(NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance3);
+                    fShouldUseAlternateLoadLogic = true;
+
+                    ClearSetImgTicket(
+                        CreateImgTicket(paletteDataSet->indexImgToUse, paletteDataSet->indexOffsetToUse,
+                            CreateImgTicket(paletteDataSetToJoin1->indexImgToUse, paletteDataSetToJoin1->indexOffsetToUse,
+                                CreateImgTicket(paletteDataSetToJoin2->indexImgToUse, paletteDataSetToJoin2->indexOffsetToUse,
+                                    CreateImgTicket(paletteDataSetToJoin3->indexImgToUse, paletteDataSetToJoin3->indexOffsetToUse)
+                                )))
+                    );
+
+                    //Set each palette
+                    sDescNode* JoinedNode[] = {
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance1, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance2, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance3, -1)
+                    };
+
+                    //Set each palette
+                    CreateDefPal(JoinedNode[0], 0);
+                    CreateDefPal(JoinedNode[1], 1);
+                    CreateDefPal(JoinedNode[2], 2);
+                    CreateDefPal(JoinedNode[3], 3);
+
+                    SetSourcePal(0, NodeGet->uUnitId, nSrcStart, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(1, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance1, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(2, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance2, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(3, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance3, nSrcAmt, nNodeIncrement);
                 }
                 else
                 {

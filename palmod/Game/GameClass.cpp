@@ -56,13 +56,14 @@ int CGameClass::GetPlaneAmt(ColFlag Flag)
             return k_nRGBPlaneAmtForRGB333;
         case ColMode::COLMODE_12A:
         case ColMode::COLMODE_12A_LE:
-        case ColMode::COLMODE_NEOGEO:
             return k_nRGBPlaneAmtForRGB444;
         case ColMode::COLMODE_GBA:
         case ColMode::COLMODE_15:
         case ColMode::COLMODE_15ALT:
         case ColMode::COLMODE_SHARPRGB:
             return k_nRGBPlaneAmtForRGB555;
+        case ColMode::COLMODE_NEOGEO:
+            return k_nRGBPlaneAmtForRGB666;
         case ColMode::COLMODE_ARGB1888:
             if (Flag == ColFlag::COL_A)
             {
@@ -104,13 +105,14 @@ double CGameClass::GetPlaneMul(ColFlag Flag)
             return k_nRGBPlaneMulForRGB333;
         case ColMode::COLMODE_12A:
         case ColMode::COLMODE_12A_LE:
-        case ColMode::COLMODE_NEOGEO:
             return k_nRGBPlaneMulForRGB444;
         case ColMode::COLMODE_GBA:
         case ColMode::COLMODE_15:
         case ColMode::COLMODE_15ALT:
         case ColMode::COLMODE_SHARPRGB:
             return k_nRGBPlaneMulForRGB555;
+        case ColMode::COLMODE_NEOGEO:
+            return k_nRGBPlaneMulForRGB666;
         case ColMode::COLMODE_ARGB1888:
             if (Flag == ColFlag::COL_A)
             {
@@ -208,6 +210,11 @@ void CGameClass::ClearSetImgTicket(sImgTicket* NewImgTicket)
 
 BOOL CGameClass::SetColorMode(ColMode NewMode)
 {
+    return _SetColorMode(NewMode);
+}
+
+BOOL CGameClass::_SetColorMode(ColMode NewMode)
+{
     if (CurrColMode != NewMode)
     {
         CString strDebugInfo;
@@ -262,56 +269,70 @@ BOOL CGameClass::SetColorMode(ColMode NewMode)
         m_nSizeOfColorsInBytes = 2;
         ConvPal16 = &CGameClass::CONV_9_32;
         ConvCol16 = &CGameClass::CONV_32_9;
-        return TRUE;
-    case ColMode::COLMODE_GBA:
-        m_nSizeOfColorsInBytes = 2;
-        ConvPal16 = &CGameClass::CONV_GBA_32;
-        ConvCol16 = &CGameClass::CONV_32_GBA;
+        BasePalGroup.SetMode(ePalType::PALTYPE_8STEPS);
         return TRUE;
     case ColMode::COLMODE_12A:
         m_nSizeOfColorsInBytes = 2;
         ConvPal16 = &CGameClass::CONV_12A_32;
         ConvCol16 = &CGameClass::CONV_32_12A;
+        BasePalGroup.SetMode(ePalType::PALTYPE_16STEPS);
         return TRUE;
     case ColMode::COLMODE_12A_LE:
         m_nSizeOfColorsInBytes = 2;
         ConvPal16 = &CGameClass::CONV_12A_32_LE;
         ConvCol16 = &CGameClass::CONV_32_12A_LE;
+        BasePalGroup.SetMode(ePalType::PALTYPE_16STEPS);
+        return TRUE;
+    case ColMode::COLMODE_GBA:
+        m_nSizeOfColorsInBytes = 2;
+        ConvPal16 = &CGameClass::CONV_GBA_32;
+        ConvCol16 = &CGameClass::CONV_32_GBA;
+        BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
         return TRUE;
     case ColMode::COLMODE_15:
         m_nSizeOfColorsInBytes = 2;
         ConvPal16 = &CGameClass::CONV_15_32;
         ConvCol16 = &CGameClass::CONV_32_15;
+        BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
         return TRUE;
     case ColMode::COLMODE_15ALT:
         m_nSizeOfColorsInBytes = 2;
         ConvPal16 = &CGameClass::CONV_15ALT_32;
         ConvCol16 = &CGameClass::CONV_32_15ALT;
-        return TRUE;
-    case ColMode::COLMODE_NEOGEO:
-        m_nSizeOfColorsInBytes = 2;
-        ConvPal16 = &CGameClass::CONV_NEOGEO_32;
-        ConvCol16 = &CGameClass::CONV_32_NEOGEO;
+        BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
         return TRUE;
     case ColMode::COLMODE_SHARPRGB:
         m_nSizeOfColorsInBytes = 2;
         ConvPal16 = &CGameClass::CONV_SHARPRGB_32;
         ConvCol16 = &CGameClass::CONV_32_SHARPRGB;
+        BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
+        return TRUE;
+    case ColMode::COLMODE_NEOGEO:
+        m_nSizeOfColorsInBytes = 2;
+        ConvPal16 = &CGameClass::CONV_NEOGEO_32;
+        ConvCol16 = &CGameClass::CONV_32_NEOGEO;
+        // We use RGB444-equivalent stepping, but NeoGeo uses a color table that has non-linear
+        // stepping.  RGB444 at least gets us pretty close to correct until such time as we want to 
+        // dynamically generate the +/- step values for use by palmoddlg_color.cpp
+        BasePalGroup.SetMode(ePalType::PALTYPE_NEOGEO);
         return TRUE;
     case ColMode::COLMODE_ARGB1888:
         m_nSizeOfColorsInBytes = 4;
         ConvPal32 = &CGameClass::CONV_ARGB1888_32;
         ConvCol32 = &CGameClass::CONV_32_ARGB1888;
+        BasePalGroup.SetMode(ePalType::PALTYPE_256STEPS);
         return TRUE;
     case ColMode::COLMODE_ARGB7888:
         m_nSizeOfColorsInBytes = 4;
         ConvPal32 = &CGameClass::CONV_ARGB7888_32;
         ConvCol32 = &CGameClass::CONV_32_ARGB7888;
+        BasePalGroup.SetMode(ePalType::PALTYPE_256STEPS);
         return TRUE;
     case ColMode::COLMODE_ARGB8888:
         m_nSizeOfColorsInBytes = 4;
         ConvPal32 = &CGameClass::CONV_ARGB8888_32;
         ConvCol32 = &CGameClass::CONV_32_ARGB8888;
+        BasePalGroup.SetMode(ePalType::PALTYPE_256STEPS);
         return TRUE;
     default:
         return FALSE;
@@ -633,12 +654,12 @@ UINT8 Convert32ToNEOGEO(UINT8 nColor)
 UINT32 CGameClass::CONV_NEOGEO_32(UINT16 nColorData)
 {
     UINT8 darkbit =  (nColorData >> 0xf) & 0x01;
-    UINT8 red1 = ((nColorData >> 0xe) & 0x01) * 2;
-    UINT8 redm = ((nColorData >> 0x8) & 0x0f) * 4;
-    UINT8 green1 = ((nColorData >> 0xd) & 0x01) * 2;
-    UINT8 greenm = ((nColorData >> 0x4) & 0x0f) * 4;
-    UINT8 blue1 = ((nColorData >> 0xc) & 0x01) * 2;
-    UINT8 bluem = ((nColorData >> 0x0) & 0x0f) * 4;
+    UINT8 red1 =    ((nColorData >> 0xe) & 0x01) * 2;
+    UINT8 redm =    ((nColorData >> 0x8) & 0x0f) * 4;
+    UINT8 green1 =  ((nColorData >> 0xd) & 0x01) * 2;
+    UINT8 greenm =  ((nColorData >> 0x4) & 0x0f) * 4;
+    UINT8 blue1 =   ((nColorData >> 0xc) & 0x01) * 2;
+    UINT8 bluem =   ((nColorData >> 0x0) & 0x0f) * 4;
     UINT32 auxa = 0xFF;
 
     UINT8 blue =  NGColorVals[((blue1 + bluem) - darkbit) + 1];
@@ -1799,7 +1820,7 @@ BOOL CGameClass::_UpdatePalImg(const sDescTreeNode* pGameUnits, int* rgExtraCoun
 
             if (paletteDataSet->pPalettePairingInfo)
             {
-                if (paletteDataSet->pPalettePairingInfo == &pairFullyLinkedNode)
+                if (paletteDataSet->pPalettePairingInfo->nPalettesToJoin == -1)
                 {
                     const UINT16 nStageCount = _GetNodeSizeFromPaletteId(pGameUnits, rgExtraCount, nNormalUnitCount, nExtraUnitLocation, NodeGet->uUnitId, NodeGet->uPalId, ppExtraDef);
 
@@ -1822,6 +1843,74 @@ BOOL CGameClass::_UpdatePalImg(const sDescTreeNode* pGameUnits, int* rgExtraCoun
                     }
 
                     ClearSetImgTicket(pImgArray);
+                }
+                else if (paletteDataSet->pPalettePairingInfo->nPalettesToJoin == 3)
+                {
+                    const INT8 nPeerPaletteDistance1 = paletteDataSet->pPalettePairingInfo->nNodeIncrementToPartner;
+                    const INT8 nPeerPaletteDistance2 = paletteDataSet->pPalettePairingInfo->nOverallNodeIncrementTo2ndPartner;
+                    const sGame_PaletteDataset* paletteDataSetToJoin1 = _GetSpecificPalette(pGameUnits, rgExtraCount, nNormalUnitCount, nExtraUnitLocation, NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance1, ppExtraDef);
+                    const sGame_PaletteDataset* paletteDataSetToJoin2 = _GetSpecificPalette(pGameUnits, rgExtraCount, nNormalUnitCount, nExtraUnitLocation, NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance2, ppExtraDef);
+                    fShouldUseAlternateLoadLogic = true;
+
+                    ClearSetImgTicket(
+                        CreateImgTicket(paletteDataSet->indexImgToUse, paletteDataSet->indexOffsetToUse,
+                            CreateImgTicket(paletteDataSetToJoin1->indexImgToUse, paletteDataSetToJoin1->indexOffsetToUse,
+                                CreateImgTicket(paletteDataSetToJoin2->indexImgToUse, paletteDataSetToJoin2->indexOffsetToUse)
+                            ))
+                    );
+
+                    //Set each palette
+                    sDescNode* JoinedNode[] = {
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance1, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance2, -1)
+                    };
+
+                    //Set each palette
+                    CreateDefPal(JoinedNode[0], 0);
+                    CreateDefPal(JoinedNode[1], 1);
+                    CreateDefPal(JoinedNode[2], 2);
+
+                    SetSourcePal(0, NodeGet->uUnitId, nSrcStart, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(1, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance1, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(2, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance2, nSrcAmt, nNodeIncrement);
+                }
+                else if (paletteDataSet->pPalettePairingInfo->nPalettesToJoin == 4)
+                {
+                    const INT8 nPeerPaletteDistance1 = paletteDataSet->pPalettePairingInfo->nNodeIncrementToPartner;
+                    const INT8 nPeerPaletteDistance2 = paletteDataSet->pPalettePairingInfo->nOverallNodeIncrementTo2ndPartner;
+                    const INT8 nPeerPaletteDistance3 = paletteDataSet->pPalettePairingInfo->nOverallNodeIncrementTo3rdPartner;
+                    const sGame_PaletteDataset* paletteDataSetToJoin1 = _GetSpecificPalette(pGameUnits, rgExtraCount, nNormalUnitCount, nExtraUnitLocation, NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance1, ppExtraDef);
+                    const sGame_PaletteDataset* paletteDataSetToJoin2 = _GetSpecificPalette(pGameUnits, rgExtraCount, nNormalUnitCount, nExtraUnitLocation, NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance2, ppExtraDef);
+                    const sGame_PaletteDataset* paletteDataSetToJoin3 = _GetSpecificPalette(pGameUnits, rgExtraCount, nNormalUnitCount, nExtraUnitLocation, NodeGet->uUnitId, NodeGet->uPalId + nPeerPaletteDistance3, ppExtraDef);
+                    fShouldUseAlternateLoadLogic = true;
+
+                    ClearSetImgTicket(
+                        CreateImgTicket(paletteDataSet->indexImgToUse, paletteDataSet->indexOffsetToUse,
+                            CreateImgTicket(paletteDataSetToJoin1->indexImgToUse, paletteDataSetToJoin1->indexOffsetToUse,
+                                CreateImgTicket(paletteDataSetToJoin2->indexImgToUse, paletteDataSetToJoin2->indexOffsetToUse,
+                                    CreateImgTicket(paletteDataSetToJoin3->indexImgToUse, paletteDataSetToJoin3->indexOffsetToUse)
+                            )))
+                    );
+
+                    //Set each palette
+                    sDescNode* JoinedNode[] = {
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance1, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance2, -1),
+                        GetMainTree()->GetDescNode(Node01, Node02, Node03 + nPeerPaletteDistance3, -1)
+                    };
+
+                    //Set each palette
+                    CreateDefPal(JoinedNode[0], 0);
+                    CreateDefPal(JoinedNode[1], 1);
+                    CreateDefPal(JoinedNode[2], 2);
+                    CreateDefPal(JoinedNode[3], 3);
+
+                    SetSourcePal(0, NodeGet->uUnitId, nSrcStart, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(1, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance1, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(2, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance2, nSrcAmt, nNodeIncrement);
+                    SetSourcePal(3, NodeGet->uUnitId, nSrcStart + nPeerPaletteDistance3, nSrcAmt, nNodeIncrement);
                 }
                 else
                 {
@@ -1951,7 +2040,11 @@ BOOL CGameClass::LoadFile(CFile* LoadedFile, UINT16 nUnitId)
     }
     else
     {
-        MessageBox(g_appHWnd, L"Error: this game is using the wrong color size.  This needs to be fixed for the game to work.", GetHost()->GetAppName(), MB_ICONERROR);
+        CString strMessage;
+        if (strMessage.LoadString(IDS_COLOR_WRONGSIZE))
+        {
+            MessageBox(g_appHWnd, strMessage.GetString(), GetHost()->GetAppName(), MB_ICONERROR);
+        }
         return FALSE;
     }
 
@@ -1980,7 +2073,7 @@ BOOL CGameClass::SaveFile(CFile* SaveFile, UINT16 nUnitId)
                 if (!fShownOnce && (m_nCurrentPaletteROMLocation < GetLowestExpectedPaletteLocation())) // This magic number is the lowest known ROM location.
                 {
                     CString strMsg;
-                    strMsg.Format(L"Warning: Unit %u palette %u is trying to write to ROM location 0x%x which is lower than we usually write to.", nUnitCtr, nPalCtr, m_nCurrentPaletteROMLocation);
+                    strMsg.Format(IDS_SAVE_LOWWRITE, nUnitCtr, nPalCtr, m_nCurrentPaletteROMLocation);
                     MessageBox(g_appHWnd, strMsg, GetHost()->GetAppName(), MB_ICONERROR);
                     fShownOnce = true;
                 }
@@ -2190,7 +2283,7 @@ BOOL CGameClass::LoadFileForSIMMGame(CFile* LoadedFile, UINT16 nSIMMNumber)
                         if (!fShownCrossSIMMErrorOnce)
                         {
                             fShownCrossSIMMErrorOnce = true;
-                            strInfo.Format(L"Error: An extras file is trying to write from 0x%x to 0x%x, which crosses SIMM set boundaries.  This is not supported. Please remove that.",
+                            strInfo.Format(IDS_EXTRAS_SIMMBOUNDARY,
                                             nOriginalROMLocation, nOriginalROMLocation + (m_nCurrentPaletteSizeInColors * m_nSizeOfColorsInBytes));
                             MessageBox(g_appHWnd, strInfo, GetHost()->GetAppName(), MB_ICONERROR);
                         }

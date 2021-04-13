@@ -261,8 +261,10 @@ void CPalModDlg::OnEditCopy()
         default:
             {
                 CString strMsg;
-                strMsg.Format(L"Warning: The current color mode needs to have copy support added.");
-                MessageBox(strMsg, GetHost()->GetAppName(), MB_ICONERROR);
+                if (strMsg.LoadString(IDS_ERROR_COPYCOLOR))
+                {
+                    MessageBox(strMsg, GetHost()->GetAppName(), MB_ICONERROR);
+                }
                 uCopyFlag1 = CurrGame->GetGameFlag() + k_nASCIICharacterOffset;
                 break;
             }
@@ -656,9 +658,11 @@ void CPalModDlg::OnEditPaste()
                 }
                 case BLEACH_DS:
                 case CFTE_SNES:
+                case DBZHD_SNES:
                 case FatalFuryS_SNES:
                 case GUNDAM_SNES:
                 case MMPR_SNES:
+                case MMX2_SNES:
                 case MSHWOTG_SNES:
                 case SSF2T_GBA:
                 case TMNTTF_SNES:
@@ -684,7 +688,7 @@ void CPalModDlg::OnEditPaste()
                 {
                     fWasColorImportedFromDifferentGame = true;
                     OutputDebugString(L"Pasted color is using a different color mode: switching to that game's color mode to ensure correct values...\n");
-                    CurrGame->SetColorMode(eColModeForPastedColor);
+                    CurrGame->_SetColorMode(eColModeForPastedColor);
                 }
             }
 
@@ -716,7 +720,7 @@ void CPalModDlg::OnEditPaste()
                     //Set the color mode back
                     //Round the values with the switched game flag
                     OutputDebugString(L"Reverting color mode back to this game's desired color mode...\n");
-                    CurrGame->SetColorMode(eCurrColMode);
+                    CurrGame->_SetColorMode(eCurrColMode);
 
                     for (UINT16 i = 0; i < uPasteAmt; i++)
                     {
@@ -741,7 +745,7 @@ void CPalModDlg::OnEditPaste()
                     //Set the color mode back
                     //Round the values with the switched game flag
                     OutputDebugString(L"Reverting color mode back to this game's desired color mode...\n");
-                    CurrGame->SetColorMode(eCurrColMode);
+                    CurrGame->_SetColorMode(eCurrColMode);
 
                     for (UINT16 i = 0; i < uPasteAmt; i++)
                     {
@@ -795,11 +799,11 @@ void CPalModDlg::OnEditPaste()
 
             if (fWasColorImportedFromDifferentGame)
             {
-                SetStatusText(CString("Pasted a PalMod color string. Colors may be rounded as required by this game."));
+                SetStatusText(IDS_PASTE_CROSSGAME);
             }
             else
             {
-                SetStatusText(CString("Pasted a PalMod color string."));
+                SetStatusText(IDS_PASTED_COLOR);
             }
         }
     }
@@ -893,11 +897,11 @@ void CPalModDlg::OnEditPaste()
 
         UpdateSliderSel();
 
-        SetStatusText(CString("Pasted RGB color. Colors may be rounded as required by the game."));
+        SetStatusText(IDS_PASTE_RGB);
     }
     else
     {
-        SetStatusText(CString("Unsupported paste option."));
+        SetStatusText(IDS_PASTE_UNSUPPORTED);
     }
 }
 
@@ -983,8 +987,10 @@ void CPalModDlg::OnSettingsSettings()
         if (SettDlg.m_fAllowAlphaChanges)
         {
             CString strMessage;
-            strMessage = L"Transparent characters are not suitable for competitive gameplay.  Do not use them for any serious matches.\n\nClick yes to agree to not use this mix for competition.  Click no to disagree and not use transparency.";
-            SettDlg.m_fAllowAlphaChanges = (MessageBox(strMessage, GetHost()->GetAppName(), MB_ICONEXCLAMATION | MB_YESNO) == IDYES);
+            if (strMessage.LoadString(IDS_WARN_TRANSPARENCY))
+            {
+                SettDlg.m_fAllowAlphaChanges = (MessageBox(strMessage, GetHost()->GetAppName(), MB_ICONEXCLAMATION | MB_YESNO) == IDYES);
+            }
         }
 
         CGameClass::AllowTransparency(SettDlg.m_fAllowAlphaChanges);

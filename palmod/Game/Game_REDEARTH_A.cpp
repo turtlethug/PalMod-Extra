@@ -45,9 +45,6 @@ CGame_REDEARTH_A::CGame_REDEARTH_A(UINT32 nConfirmedROMSize /* = -1 */, int nRed
     SetAlphaMode(AlphaMode::GameUsesFixedAlpha);
     SetColorMode(ColMode::COLMODE_15);
 
-    //Set palette conversion mode=
-    BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
-
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
     m_nConfirmedROMSize = nConfirmedROMSize;
@@ -71,20 +68,20 @@ CGame_REDEARTH_A::CGame_REDEARTH_A(UINT32 nConfirmedROMSize /* = -1 */, int nRed
     m_nExtraUnit = UsePaletteSetFor30() ? REDEARTH_A_EXTRALOC_30 : REDEARTH_A_EXTRALOC_31;
 
     const UINT32 nSafeCountFor30 = 29;
-    const UINT32 nSafeCountFor31 = 498;
+    const UINT32 nSafeCountFor31 = 574;
 
     m_nSafeCountForThisRom = UsePaletteSetFor30() ? (nSafeCountFor30 + GetExtraCt(REDEARTH_A_EXTRALOC_30)) : (nSafeCountFor31 + GetExtraCt(REDEARTH_A_EXTRALOC_31));
     m_pszExtraFilename = UsePaletteSetFor30() ? EXTRA_FILENAME_REDEARTH_30 : EXTRA_FILENAME_REDEARTH_31;
     m_nTotalPaletteCount = UsePaletteSetFor30() ? m_nTotalPaletteCount30 : m_nTotalPaletteCount31;
-    m_nLowestKnownPaletteRomLocation = UsePaletteSetFor30() ? 0x1de0000 : 0x1de000;
+    m_nLowestKnownPaletteRomLocation = UsePaletteSetFor30() ? 0x737000 : 0x1de000;
 
     InitDataBuffer();
 
     //Set game information
     nGameFlag = REDEARTH_A;
     nImgGameFlag = IMGDAT_SECTION_REDEARTH;
-    nImgUnitAmt = REDEARTH_A_NUM_IMG_UNITS;
     m_prgGameImageSet = REDEARTH_A_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(REDEARTH_A_IMG_UNITS);
 
     nFileAmt = 1;
 

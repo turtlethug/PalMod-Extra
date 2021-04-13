@@ -7,18 +7,37 @@ const sGame_PaletteDataset REDEARTH_A_LEO_PUNCH_PALETTES[] =
     { L"Leo Punch Vs/Winning/Losing Sword",  0x1E4700, 0x1E4780, indexRedEarthSprites_Leo, 0x14, &pairPrevious },
     { L"Leo Punch LifeBar Portrait",         0x406640, 0x406680, indexRedEarthSprites_Leo, 0x10 },
 
-    { L"Leo Punch Rusty Sword",              0x408100, 0x408180 },
-    { L"Leo Punch Bronze Sword",             0x408180, 0x408200 },
-    { L"Leo Punch Crystal Sword ",           0x408280, 0x408300 },
-    { L"Leo Punch Black Sword",              0x408300, 0x408380 },
-    { L"Leo Punch Old Shield",               0x408380, 0x408400 },
-    { L"Leo Punch Wooden Shield",            0x408400, 0x408480 },
-    { L"Leo Punch Sapphire Shield",          0x408500, 0x408580 },
-    { L"Leo Punch Legendary Shield",         0x408580, 0x408600 },
-    { L"Leo Punch Fire Sword",               0x408600, 0x408680 },
-    { L"Leo Punch Ice Sword",                0x408680, 0x408700 },
-    { L"Leo Punch Lightning Sword",          0x408700, 0x408780 },
-    { L"Leo Punch Battle Axe",               0x408780, 0x408800 },
+    { L"Leo Punch Old Sword",               0x408100, 0x408180 },
+    { L"Leo Punch Bronze Sword",            0x408180, 0x408200 },
+    { L"Leo Punch Steel Sword",             0x408200, 0x408280 },
+    { L"Leo Punch Diamond Sword",           0x408280, 0x408300 },
+    { L"Leo Punch Legendary Sword",         0x408300, 0x408380 },
+    { L"Leo Punch Old Shield",              0x408380, 0x408400 },
+    { L"Leo Punch Wooden Shield",           0x408400, 0x408480 },
+    { L"Leo Punch Steel Shield",            0x408480, 0x408500 },
+    { L"Leo Punch Diamond Shield",          0x408500, 0x408580 },
+    { L"Leo Punch Legendary Shield",        0x408580, 0x408600 },
+    { L"Leo Punch Fire Sword",              0x408600, 0x408680 },
+    { L"Leo Punch Ice Sword",               0x408680, 0x408700 },
+    { L"Leo Punch Lightning Sword",         0x408700, 0x408780 },
+    { L"Leo Punch Battle Axe",              0x408780, 0x408800 },
+
+    { L"Leo Punch Ultimate Guard Flash and Burn 1", 0x40AA00, 0x40AA80, indexRedEarthSprites_Leo },
+    { L"Leo Punch Burn 2", 0x40AA80, 0x40AB00, indexRedEarthSprites_Leo },
+    { L"Leo Punch Shock 1", 0x40AB00, 0x40AB80, indexRedEarthSprites_Leo },
+    { L"Leo Punch Shock 2", 0x40AB80, 0x40AC00, indexRedEarthSprites_Leo },
+    { L"Leo Punch Poisoned 1", 0x40AC00, 0x40AC80, indexRedEarthSprites_Leo },
+    { L"Leo Punch Poisoned 2", 0x40AC80, 0x40AD00, indexRedEarthSprites_Leo },
+    { L"Leo Punch Poisoned 3", 0x40AD00, 0x40AD80, indexRedEarthSprites_Leo },
+    { L"Leo Punch Poisoned 4", 0x40AD80, 0x40AE00, indexRedEarthSprites_Leo },
+    { L"Leo Punch Petrified 1", 0x40AE00, 0x40AE80, indexRedEarthSprites_Leo },
+    { L"Leo Punch Petrified 2", 0x40AE80, 0x40AF00, indexRedEarthSprites_Leo },
+    { L"Leo Punch Petrified 3", 0x40AF00, 0x40AF80, indexRedEarthSprites_Leo },
+    { L"Leo Punch Frozen 1", 0x40AF80, 0x40B000, indexRedEarthSprites_Leo },
+    { L"Leo Punch Frozen 2", 0x40B000, 0x40B080, indexRedEarthSprites_Leo },
+    { L"Leo Punch Frozen 3", 0x40B080, 0x40B100, indexRedEarthSprites_Leo },
+    { L"Leo Punch Frozen 4", 0x40B100, 0x40B180, indexRedEarthSprites_Leo },
+    { L"Leo Punch Frozen 5", 0x40B180, 0x40B200, indexRedEarthSprites_Leo },
 };
 
 const sGame_PaletteDataset REDEARTH_A_LEO_KICK_PALETTES[] =
@@ -28,18 +47,37 @@ const sGame_PaletteDataset REDEARTH_A_LEO_KICK_PALETTES[] =
     { L"Leo Kick Vs/Winning/Losing Sword",   0x1E4D80, 0x1E4E00, indexRedEarthSprites_Leo, 0x14, &pairPrevious },
     { L"Leo Kick LifeBar Portrait",          0x406680, 0x4066C0, indexRedEarthSprites_Leo, 0x10 },
 
-    { L"Leo Kick Rusty Sword",               0x414900, 0x414980 },
-    { L"Leo Kick Bronze Sword",              0x414980, 0x414A00 },
-    { L"Leo Kick Crystal Sword",             0x414A80, 0x414B00 },
-    { L"Leo Kick Black Sword",               0x414B00, 0x414B80 },
-    { L"Leo Kick Old Shield",                0x414B80, 0x414C00 },
-    { L"Leo Kick Wooden Shield",             0x414C00, 0x414C80 },
-    { L"Leo Kick Sapphire Shield",           0x414D00, 0x414D80 },
-    { L"Leo Kick Legendary Shield",          0x414D80, 0x414E00 },
-    { L"Leo Kick Fire Sword",                0x414E00, 0x414E80 },
-    { L"Leo Kick Ice Sword",                 0x414E80, 0x414F00 },
-    { L"Leo Kick Lightning Sword",           0x414F00, 0x414F80 },
-    { L"Leo Kick Battle Axe",                0x414F80, 0x415000 },
+    { L"Leo Kick Old Sword",                0x414900, 0x414980 },
+    { L"Leo Kick Bronze Sword",             0x414980, 0x414A00 },
+    { L"Leo Kick Steel Sword",              0x414A00, 0x414A80 },
+    { L"Leo Kick Diamond Sword",            0x414A80, 0x414B00 },
+    { L"Leo Kick Legendary Sword",          0x414B00, 0x414B80 },
+    { L"Leo Kick Old Shield",               0x414B80, 0x414C00 },
+    { L"Leo Kick Wooden Shield",            0x414C00, 0x414C80 },
+    { L"Leo Kick Steel Shield",             0x414C80, 0x414D00 },
+    { L"Leo Kick Diamond Shield",           0x414D00, 0x414D80 },
+    { L"Leo Kick Legendary Shield",         0x414D80, 0x414E00 },
+    { L"Leo Kick Fire Sword",               0x414E00, 0x414E80 },
+    { L"Leo Kick Ice Sword",                0x414E80, 0x414F00 },
+    { L"Leo Kick Lightning Sword",          0x414F00, 0x414F80 },
+    { L"Leo Kick Battle Axe",               0x414F80, 0x415000 },
+
+    { L"Leo Kick Ultimate Guard Flash and Burn 1", 0x417200, 0x417280, indexRedEarthSprites_Leo },
+    { L"Leo Kick Burn 2", 0x417280, 0x417300, indexRedEarthSprites_Leo },
+    { L"Leo Kick Shock 1", 0x417300, 0x417380, indexRedEarthSprites_Leo },
+    { L"Leo Kick Shock 2", 0x417380, 0x417400, indexRedEarthSprites_Leo },
+    { L"Leo Kick Poisoned 1", 0x417400, 0x417480, indexRedEarthSprites_Leo },
+    { L"Leo Kick Poisoned 2", 0x417480, 0x417500, indexRedEarthSprites_Leo },
+    { L"Leo Kick Poisoned 3", 0x417500, 0x417580, indexRedEarthSprites_Leo },
+    { L"Leo Kick Poisoned 4", 0x417580, 0x417600, indexRedEarthSprites_Leo },
+    { L"Leo Kick Petrified 1", 0x417600, 0x417680, indexRedEarthSprites_Leo },
+    { L"Leo Kick Petrified 2", 0x417680, 0x417700, indexRedEarthSprites_Leo },
+    { L"Leo Kick Petrified 3", 0x417700, 0x417780, indexRedEarthSprites_Leo },
+    { L"Leo Kick Frozen 1", 0x417780, 0x417800, indexRedEarthSprites_Leo },
+    { L"Leo Kick Frozen 2", 0x417800, 0x417880, indexRedEarthSprites_Leo },
+    { L"Leo Kick Frozen 3", 0x417880, 0x417900, indexRedEarthSprites_Leo },
+    { L"Leo Kick Frozen 4", 0x417900, 0x417980, indexRedEarthSprites_Leo },
+    { L"Leo Kick Frozen 5", 0x417980, 0x417A00, indexRedEarthSprites_Leo }, 
 };
 
 const sGame_PaletteDataset REDEARTH_A_LEO_BONUS_PALETTES[] =
@@ -47,6 +85,8 @@ const sGame_PaletteDataset REDEARTH_A_LEO_BONUS_PALETTES[] =
     { L"Leo Character Select",               0x1DF200, 0x1DF280, indexRedEarthSprites_Leo, 0x11 },
     { L"Leo Character Selected",             0x1DEB80, 0x1DEC00, indexRedEarthSprites_Leo, 0x11 },
     { L"Leo Character Select Portrait",      0x1DEF00, 0x1DEF80, indexRedEarthSprites_Leo, 0x12 },
+    { L"P1 Leo Character Select Portrait Highlighted", 0x1E0D80, 0x1E0E00, indexRedEarthSprites_Leo, 0x12 },
+    { L"P2 Leo Character Select Portrait Highlighted", 0x1E2F80, 0x1E3000, indexRedEarthSprites_Leo, 0x12 },
 };
 
 const sGame_PaletteDataset REDEARTH_A_KENJI_PUNCH_PALETTES[] =
@@ -69,6 +109,23 @@ const sGame_PaletteDataset REDEARTH_A_KENJI_PUNCH_PALETTES[] =
     { L"Kunai Throwing Shine (1/3)",             0x40BF00, 0x40BF80, indexRedEarthSprites_Kenji, 0x01 },
     { L"Kunai Throwing Shine (2/3)",             0x40BE80, 0x40BF00, indexRedEarthSprites_Kenji, 0x01 },
     { L"Kunai Throwing Shine (3/3)",             0x40BE00, 0x40BE80, indexRedEarthSprites_Kenji, 0x01 },
+
+    { L"Kenji Punch Ultimate Guard Flash and Burn 1", 0x40DC00, 0x40DC80, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Burn 2", 0x40DC80, 0x40DD00, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Shock 1", 0x40DD00, 0x40DD80, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Shock 2", 0x40DD80, 0x40DE00, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Poisoned 1", 0x40DE00, 0x40DE80, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Poisoned 2", 0x40DE80, 0x40DF00, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Poisoned 3", 0x40DF00, 0x40DF80, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Poisoned 4", 0x40DF80, 0x40E000, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Petrified 1", 0x40E000, 0x40E080, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Petrified 2", 0x40E080, 0x40E100, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Petrified 3", 0x40E100, 0x40E180, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Frozen 1", 0x40E180, 0x40E200, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Frozen 2", 0x40E200, 0x40E280, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Frozen 3", 0x40E280, 0x40E300, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Frozen 4", 0x40E300, 0x40E380, indexRedEarthSprites_Kenji },
+    { L"Kenji Punch Frozen 5", 0x40E380, 0x40E400, indexRedEarthSprites_Kenji },
 };
 
 const sGame_PaletteDataset REDEARTH_A_KENJI_KICK_PALETTES[] =
@@ -91,6 +148,23 @@ const sGame_PaletteDataset REDEARTH_A_KENJI_KICK_PALETTES[] =
     { L"Kunai Throwing Shine (1/3)",             0x418700, 0x418780, indexRedEarthSprites_Kenji, 0x01 },
     { L"Kunai Throwing Shine (2/3)",             0x418680, 0x418700, indexRedEarthSprites_Kenji, 0x01 },
     { L"Kunai Throwing Shine (3/3)",             0x418600, 0x418680, indexRedEarthSprites_Kenji, 0x01 },
+
+    { L"Kenji Kick Ultimate Guard Flash and Burn 1", 0x41A400, 0x41A480, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Burn 2", 0x41A480, 0x41A500, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Shock 1", 0x41A500, 0x41A580, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Shock 2", 0x41A580, 0x41A600, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Poisoned 1", 0x41A600, 0x41A680, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Poisoned 2", 0x41A680, 0x41A700, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Poisoned 3", 0x41A700, 0x41A780, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Poisoned 4", 0x41A780, 0x41A800, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Petrified 1", 0x41A800, 0x41A880, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Petrified 2", 0x41A880, 0x41A900, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Petrified 3", 0x41A900, 0x41A980, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Frozen 1", 0x41A980, 0x41AA00, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Frozen 2", 0x41AA00, 0x41AA80, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Frozen 3", 0x41AA80, 0x41AB00, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Frozen 4", 0x41AB00, 0x41AB80, indexRedEarthSprites_Kenji },
+    { L"Kenji Kick Frozen 5", 0x41AB80, 0x41AC00, indexRedEarthSprites_Kenji },
 };
 
 const sGame_PaletteDataset REDEARTH_A_KENJI_BONUS_PALETTES[] =
@@ -98,6 +172,8 @@ const sGame_PaletteDataset REDEARTH_A_KENJI_BONUS_PALETTES[] =
     { L"Kenji Character Select",                 0x1DF380, 0x1DF400, indexRedEarthSprites_Kenji, 0x11 },
     { L"Kenji Character Selected",               0x1DED00, 0x1DED80, indexRedEarthSprites_Kenji, 0x11 },
     { L"Kenji Character Select Portrait",        0x1DF000, 0x1DF080, indexRedEarthSprites_Kenji, 0x12 },
+    { L"P1 Kenji Character Select Portrait Highlighted", 0x1E0F00, 0x1E0F80, indexRedEarthSprites_Kenji, 0x12 },
+    { L"P2 Kenji Character Select Portrait Highlighted", 0x1E3100, 0x1E3180, indexRedEarthSprites_Kenji, 0x12 },
 };
 
 const sGame_PaletteDataset REDEARTH_A_TESSA_PUNCH_PALETTES[] =
@@ -234,6 +310,8 @@ const sGame_PaletteDataset REDEARTH_A_TESSA_BONUS_PALETTES[] =
     { L"Tessa Character Select",                 0x1DF180, 0x1DF200, indexRedEarthSprites_Tessa, 0x11 },
     { L"Tessa Character Selected",               0x1DEB00, 0x1DEB80, indexRedEarthSprites_Tessa, 0x11 },
     { L"Tessa Character Select Portrait ",       0x1DEF80, 0x1DF000, indexRedEarthSprites_Tessa, 0x12 },
+    { L"P1 Tessa Character Select Portrait Highlighted", 0x1E0D00, 0x1E0D80, indexRedEarthSprites_Tessa, 0x12 },
+    { L"P2 Tessa Character Select Portrait Highlighted", 0x1E2F00, 0x1E2F80, indexRedEarthSprites_Tessa, 0x12 },
 };
 
 const sGame_PaletteDataset REDEARTH_A_MAILING_PUNCH_PALETTES[] =
@@ -267,7 +345,7 @@ const sGame_PaletteDataset REDEARTH_A_MAILING_PUNCH_PALETTES[] =
 const sGame_PaletteDataset REDEARTH_A_MAILING_KICK_PALETTES[] =
 {
     { L"Mai Ling Kick", 0x41DE00, 0x41DE80, indexRedEarthSprites_MaiLing, 0 },
-    { L"Mai Ling Kick Vs/Winning Screen", 0x1E4F80, 0x1E5000, indexRedEarthSprites_MaiLing, 0x17 },
+    { L"Mai Ling Kick Vs/Winning Screen", 0x1E4F80, 0x1E5000, indexRedEarthSprites_MaiLing, 0x27 },
     { L"Mai Ling Kick Losing Screen", 0x1E4F00, 0x1E4F80 },
     { L"Mai Ling Kick LifeBar Portrait", 0x406A40, 0x406A80, indexRedEarthSprites_MaiLing, 0x10 },
 
@@ -297,6 +375,8 @@ const sGame_PaletteDataset REDEARTH_A_MAILING_BONUS_PALETTES[] =
     { L"Mai Ling Character Select",          0x1DF300, 0x1DF380, indexRedEarthSprites_MaiLing, 0x11 },
     { L"Mai Ling Character Selected",        0x1DEC80, 0x1DED00, indexRedEarthSprites_MaiLing, 0x11 },
     { L"Mai Ling Character Select Portrait", 0x1DF080, 0x1DF100, indexRedEarthSprites_MaiLing, 0x12 },
+    { L"P1 Mai Ling Character Select Portrait Highlighted", 0x1E0E80, 0x1E0F00, indexRedEarthSprites_MaiLing, 0x12 },
+    { L"P2 Mai Ling Character Select Portrait Highlighted", 0x1E3080, 0x1E3100, indexRedEarthSprites_MaiLing, 0x12 },
 };
 
 const sGame_PaletteDataset REDEARTH_A_HAUZER_PALETTES[] =
@@ -417,10 +497,10 @@ const sGame_PaletteDataset REDEARTH_A_CHARACTERSELECT_PALETTES[] =
     { L"Character Select Transition Skyline (2/4)", 0x1DE680, 0x1DE700 },
     { L"Character Select Transition Skyline (3/4)", 0x1DE700, 0x1DE780 },
     { L"Character Select Transition Skyline (4/4)", 0x1DE780, 0x1DE800 },
-    { L"Vs Screen Transition (1/4)", 0x406000, 0x406100 },
-    { L"Vs Screen Transition (2/4)", 0x406100, 0x406200 },
-    { L"Vs Screen Transition (3/4)", 0x406200, 0x406300 },
-    { L"Vs Screen Transition (4/4)", 0x406300, 0x406400 },
+    { L"Vs Screen Transition - Leo (1/4)", 0x406000, 0x406100 },
+    { L"Vs Screen Transition - Kenji (2/4)", 0x406100, 0x406200 },
+    { L"Vs Screen Transition - Tessa (3/4)", 0x406200, 0x406300 },
+    { L"Vs Screen Transition - Mai-Ling (4/4)", 0x406300, 0x406400 },
     { L"Victory Screen (1/6)", 0x1DE800, 0x1DE880 },
     { L"Victory Screen (2/6)", 0x1DE880, 0x1DE900 },
     { L"Victory Screen (3/6)", 0x1DE900, 0x1DE980 },

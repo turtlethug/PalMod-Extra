@@ -37,9 +37,6 @@ CGame_SFIII2_A::CGame_SFIII2_A(UINT32 nConfirmedROMSize, int nSF3ROMToLoad)
     SetAlphaMode(AlphaMode::GameUsesFixedAlpha);
     SetColorMode(ColMode::COLMODE_15);
 
-    //Set palette conversion mode=
-    BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
-
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
     m_nConfirmedROMSize = nConfirmedROMSize;
@@ -68,8 +65,8 @@ CGame_SFIII2_A::CGame_SFIII2_A(UINT32 nConfirmedROMSize, int nSF3ROMToLoad)
     //Set game information
     nGameFlag = SFIII2_A;
     nImgGameFlag = IMGDAT_SECTION_SF3;
-    nImgUnitAmt = SFIII2_A_NUM_IMG_UNITS;
     m_prgGameImageSet = SFIII2_A_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(SFIII2_A_IMG_UNITS);
 
     nFileAmt = 1;
 

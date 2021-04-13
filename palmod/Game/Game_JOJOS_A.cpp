@@ -47,9 +47,6 @@ CGame_JOJOS_A::CGame_JOJOS_A(UINT32 nConfirmedROMSize, int nJojosModeToLoad)
     SetAlphaMode(AlphaMode::GameUsesFixedAlpha);
     SetColorMode(ColMode::COLMODE_15);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_32STEPS);
-
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
     m_nConfirmedROMSize = nConfirmedROMSize;
@@ -73,7 +70,7 @@ CGame_JOJOS_A::CGame_JOJOS_A(UINT32 nConfirmedROMSize, int nJojosModeToLoad)
     m_nExtraUnit = UsePaletteSetFor50() ? JOJOS_A_EXTRALOC_50 : JOJOS_A_EXTRALOC_51;
 
     const UINT32 nSafeCountFor50 = 477;
-    const UINT32 nSafeCountFor51 = 1667;
+    const UINT32 nSafeCountFor51 = 1672;
 
     m_nSafeCountForThisRom = UsePaletteSetFor50() ? (nSafeCountFor50 + GetExtraCt(JOJOS_A_EXTRALOC_50)): (nSafeCountFor51 + GetExtraCt(JOJOS_A_EXTRALOC_51));
     m_pszExtraFilename = UsePaletteSetFor50() ? EXTRA_FILENAME_50 : EXTRA_FILENAME_51;
@@ -85,8 +82,8 @@ CGame_JOJOS_A::CGame_JOJOS_A(UINT32 nConfirmedROMSize, int nJojosModeToLoad)
     //Set game information
     nGameFlag = JOJOS_A;
     nImgGameFlag = IMGDAT_SECTION_JOJOS;
-    nImgUnitAmt = JOJOS_A_NUM_IMG_UNITS;
     m_prgGameImageSet = JOJOS_A_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(JOJOS_A_IMG_UNITS);
 
     nFileAmt = 1;
 

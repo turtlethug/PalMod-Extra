@@ -80,6 +80,13 @@ protected:
     const double k_nRGBPlaneMulForRGB777 = 2;
     const double k_nRGBPlaneMulForRGB888 = 1;
 
+    // The next values are special and flawed values.  We use RGB444 stepping, but we're trying
+    // to step through a color table that has non-linear steps.  The following values give us a
+    // "close enough" solution.  To really have correct stepping we would need to get step
+    // lengths at runtime and get them relative to the current color value.
+    const int k_nRGBPlaneAmtForRGB666 = 15;
+    const double k_nRGBPlaneMulForRGB666 = 17.0;
+
     BOOL m_fIsDirectoryBasedGame = FALSE;
     BOOL m_fGameUnitsMapToIndividualFiles = FALSE;
 
@@ -144,15 +151,6 @@ protected:
     {
         NO_SPECIAL_OPTIONS = 0,
         OFFSET_PALETTE_BY_ONE = 1,
-    };
-
-    enum PALWriteOutputOptions
-    {
-        // This is the number of colors to write when saving to the game ROM before we need to add another reserved color/counter UINT16.
-        // You can set this to WRITE_MAX to write out a maximum of 256 colors.  See CGameClass::UpdatePalData for usage.
-        // You're only really going to be able to prove the game's maximum palette length with palettes longer than 16 colors.
-        WRITE_16 = 16,
-        WRITE_MAX = 256,
     };
 
     struct sCreatePalOptions
@@ -232,8 +230,14 @@ public:
     virtual void SetAlphaMode(AlphaMode NewMode) { CurrAlphaMode = NewMode; };
 
     ColMode GetColorMode() { return CurrColMode; };
+    BOOL _SetColorMode(ColMode NewMode);
     virtual BOOL SetColorMode(ColMode NewMode);
     virtual bool AllowUpdatingColorFormatForGame() { return false; };
+    virtual void OpenExtraFile() { };
+    virtual bool GameAllowsExtraFile() { return false; };
+
+    void SetMaximumWritePerEachTransparency(PALWriteOutputOptions eUpdatedOption) { createPalOptions.eWriteOutputOptions = eUpdatedOption; };
+    PALWriteOutputOptions GetMaximumWritePerEachTransparency() { return createPalOptions.eWriteOutputOptions; };
 
     BOOL SpecSel(int* nVarSet, int nPalId, int nStart, int nInc, int nAmt = 1, int nMax = 6);
 

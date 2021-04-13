@@ -25,29 +25,6 @@ const UINT16 COTA_A_IMG_UNITS[] =
     indexCPS2_COTAAssets,
 };
 
-enum SupportedCOTAPaletteListIndex
-{
-    indexCOTAColossus,
-    indexCOTACyclops,
-    indexCOTAIceman,
-    indexCOTAJuggernaut,
-    indexCOTAMagneto,
-    indexCOTAOmegaRed,
-    indexCOTAPsylocke,
-    indexCOTASentinel,
-    indexCOTASilverSamurai,
-    indexCOTASpiral,
-    indexCOTAStorm,
-    indexCOTAWolverine,
-    indexCOTAAkuma,
-    indexCOTABonus,
-    indexCOTA_Last
-};
-
-constexpr auto COTA_A_NUMUNIT = indexCOTA_Last;
-
-#define COTA_A_EXTRALOC COTA_A_NUMUNIT
-
 const sGame_PaletteDataset COTA_A_COLOSSUS_PALETTES_P1[] =
 {
     { L"P1",          0x2683e, 0x2685e, indexCPS2_Colossus },
@@ -145,8 +122,8 @@ const sGame_PaletteDataset COTA_A_CYCLOPS_PALETTES_P1[] =
     { L"P1 Extras 3", 0x2699E, 0x269BE, indexCPS2_Cyclops, 0x2 },
 
     // preceded by unknown, this segment followed by P2 intro 1
-    { L"P1 Optic Light 1", 0x2865E, 0x2867E, indexCPS2_Cyclops, 13 },
-    { L"P1 Optic Light 2", 0x2867E, 0x2869E, indexCPS2_Cyclops, 13 },
+    { L"P1 Optic Stance 1", 0x2865E, 0x2867E, indexCPS2_Cyclops, 13 },
+    { L"P1 Optic Stance 2", 0x2867E, 0x2869E, indexCPS2_Cyclops, 13 },
     { L"P1 Intro 1", 0x2877E, 0x2879E, indexCPS2_Cyclops, 12 },
     { L"P1 Intro 2", 0x2879E, 0x287BE, indexCPS2_Cyclops, 12 },
     { L"P1 Intro 3", 0x287BE, 0x287DE, indexCPS2_Cyclops, 12 },
@@ -178,8 +155,8 @@ const sGame_PaletteDataset COTA_A_CYCLOPS_PALETTES_P2[] =
     { L"P2 jHK",      0x269FE, 0x26A1E, indexCPS2_Cyclops, 0x1 }, 
     { L"P2 Extras 3", 0x26A1E, 0x26A3E, indexCPS2_Cyclops, 0x2 },
 
-    { L"P2 Optic Light 1", 0x2887E, 0x2889E, indexCPS2_Cyclops, 13 },
-    { L"P2 Optic Light 2", 0x2889E, 0x288BE, indexCPS2_Cyclops, 13 },
+    { L"P2 Optic Stance 1", 0x2887E, 0x2889E, indexCPS2_Cyclops, 13 },
+    { L"P2 Optic Stance 2", 0x2889E, 0x288BE, indexCPS2_Cyclops, 13 },
     { L"P2 Intro 1", 0x288BE, 0x288DE, indexCPS2_Cyclops, 12 },
     { L"P2 Intro 2", 0x288DE, 0x288FE, indexCPS2_Cyclops, 12 },
     { L"P2 Intro 3", 0x288FE, 0x2891E, indexCPS2_Cyclops, 12 },
@@ -314,7 +291,7 @@ const sGame_PaletteDataset COTA_A_PSYLOCKE_PALETTES_P2[] =
 
 const sGame_PaletteDataset COTA_A_SENTINEL_PALETTES_P1[] =
 {
-    { L"Sentinel P1", 0x26e3E, 0x26e5E, indexCPS2_Sentinel, 0, &pairHandledInCode },
+    { L"Sentinel P1", 0x26e3E, 0x26e5E, indexCPS2_Sentinel, 0, &pairNextAndNextSkipped },
     { L"P1 Drones (bombs) / Guts", 0x26e5E, 0x26e7E, indexCPS2_Sentinel, 1 },
     { L"P1 MP / Rocket Punch wires", 0x26e7E, 0x26e9E, indexCPS2_Sentinel, 2 },
     { L"P1 Plasma Storm / Flight", 0x26e9E, 0x26ebE, indexCPS2_Sentinel, 3 },
@@ -322,18 +299,23 @@ const sGame_PaletteDataset COTA_A_SENTINEL_PALETTES_P1[] =
 
 const sGame_PaletteDataset COTA_A_SENTINEL_PALETTES_P2[] =
 {
-    { L"Sentinel P2", 0x26ebE, 0x26edE, indexCPS2_Sentinel, 0, &pairHandledInCode },
+    { L"Sentinel P2", 0x26ebE, 0x26edE, indexCPS2_Sentinel, 0, &pairNextAndNextSkipped },
     { L"P2 Drones (bombs) / Guts", 0x26edE, 0x26efE, indexCPS2_Sentinel, 1 },
     { L"P2 MP / Rocket Punch wires", 0x26efE, 0x26f1E, indexCPS2_Sentinel, 2 },
     { L"P2 Plasma Storm / Flight", 0x26f1E, 0x26f3E, indexCPS2_Sentinel, 3 },
 };
 
+const sGame_PaletteDataset COTA_A_SENTINEL_PALETTES_SHARED[] =
+{
+    { L"Sentinel Super FX (shared)", 0x29ABE, 0x29ADE },
+};
+
 const sGame_PaletteDataset COTA_A_SILSAM_PALETTES_P1[] =
 {
     { L"P1",          0x2727E, 0x2729E, indexCPS2_SilverSamurai },
-    { L"P1 Extras 1", 0x2729E, 0x272BE, indexCPS2_SilverSamurai },
-    { L"P1 Extras 2", 0x272BE, 0x272DE },
-    { L"P1 Extras 3", 0x272DE, 0x272FE },
+    { L"P1 Extras 1: Shadow Frame", 0x2729E, 0x272BE, indexCPS2_SilverSamurai },
+    { L"P1 Extras 2: Shuriken Slash", 0x272BE, 0x272DE, indexCPS2_SilverSamurai, 0x02 },
+    { L"P1 Extras 3: Fire Effect (Sword) / Lightning Super / Shuriken (hand shadow)", 0x272DE, 0x272FE, indexCPS2_SilverSamurai, 0x03 },
 
     { L"P1 Shine 1", 0x2973E, 0x2975E, indexCPS2_SilverSamurai }, // core rotation
     { L"P1 Shine 2", 0x2975E, 0x2977E, indexCPS2_SilverSamurai },
@@ -348,9 +330,9 @@ const sGame_PaletteDataset COTA_A_SILSAM_PALETTES_P1[] =
 const sGame_PaletteDataset COTA_A_SILSAM_PALETTES_P2[] =
 {
     { L"P2",          0x272FE, 0x2731E, indexCPS2_SilverSamurai },
-    { L"P2 Extras 1", 0x2731E, 0x2733E, indexCPS2_SilverSamurai, 1 },
-    { L"P2 Extras 2", 0x2733E, 0x2735E },
-    { L"P2 Extras 3", 0x2735E, 0x2737E },
+    { L"P2 Extras 1: Shadow Frame", 0x2731E, 0x2733E, indexCPS2_SilverSamurai, 1 },
+    { L"P2 Extras 2: Shuriken Slash", 0x2733E, 0x2735E, indexCPS2_SilverSamurai, 0x02 },
+    { L"P2 Extras 3: Fire Effect (Sword) / Lightning Super / Shuriken (hand shadow)", 0x2735E, 0x2737E, indexCPS2_SilverSamurai, 0x03 },
 
     { L"P2 Shine 1", 0x2977E, 0x2979E, indexCPS2_SilverSamurai }, // core rotation
     { L"P2 Shine 2", 0x2979E, 0x297BE, indexCPS2_SilverSamurai },
@@ -367,6 +349,7 @@ const sGame_PaletteDataset COTA_A_SPIRAL_PALETTES_P1[] =
     { L"P1",          0x26C3E, 0x26C5E, indexCPS2_Spiral },
     { L"P1 Extras 1", 0x26C5E, 0x26C7E, indexCPS2_Spiral, 1 },
     { L"P1 Extras 2", 0x26C7E, 0x26C9E, indexCPS2_Spiral, 2 },
+    { L"P1 Sword flashing palette", 0x26C9E, 0x26CBE, indexCPS2_Spiral, 3 },
 
     { L"P1 Power Dance 1", 0x2909E, 0x290BE, indexCPS2_Spiral, 11 },
     { L"P1 Power Dance 2", 0x290BE, 0x290DE, indexCPS2_Spiral, 11 },
@@ -398,6 +381,7 @@ const sGame_PaletteDataset COTA_A_SPIRAL_PALETTES_P2[] =
     { L"P2",          0x26CBE, 0x26CDE, indexCPS2_Spiral },
     { L"P2 Extras 1", 0x26CDE, 0x26CFE, indexCPS2_Spiral, 1 },
     { L"P2 Extras 2", 0x26CFE, 0x26D1E, indexCPS2_Spiral, 2 },
+    { L"P2 Sword flashing palette", 0x26D1E, 0x26D3E, indexCPS2_Spiral, 3 },
 
     { L"P2 Power Dance 1", 0x2941E, 0x2943E, indexCPS2_Spiral, 11 },
     { L"P2 Power Dance 2", 0x2943E, 0x2945E, indexCPS2_Spiral, 11 },
@@ -427,8 +411,8 @@ const sGame_PaletteDataset COTA_A_SPIRAL_PALETTES_P2[] =
 const sGame_PaletteDataset COTA_A_STORM_PALETTES_P1[] =
 {
     { L"P1",         0x26A3E, 0x26A5E, indexCPS2_Storm },
-    { L"P1 Extras 1: Lightning FX", 0x26A7E, 0x26A9E }, // lightning fx
-    { L"P1 Extras 2: Lightning FX", 0x26A9E, 0x26ABE }, // head of lightning attack
+    { L"P1 Extras 1: Lightning FX", 0x26A7E, 0x26A9E, indexCPS2_Storm, 0x08 }, // lightning fx
+    { L"P1 Extras 2: Lightning FX", 0x26A9E, 0x26ABE, indexCPS2_Storm, 0x09 }, // head of lightning attack
 
     { L"P1 Extras 3", 0x26A5E, 0x26A7E, indexCPS2_Storm },
     { L"P1 Ending Sprite", 0x279FE, 0x27A1E, indexCPS2_Storm },
@@ -450,8 +434,8 @@ const sGame_PaletteDataset COTA_A_STORM_PALETTES_P1[] =
 const sGame_PaletteDataset COTA_A_STORM_PALETTES_P2[] =
 {
     { L"P2", 0x26ABE, 0x26ADE, indexCPS2_Storm },
-    { L"P2 Extras 1: Lightning FX", 0x26AFE, 0x26B1E },
-    { L"P2 Extras 2: Lightning FX", 0x26B1E, 0x26B3E },
+    { L"P2 Extras 1: Lightning FX", 0x26AFE, 0x26B1E, indexCPS2_Storm, 0x08 },
+    { L"P2 Extras 2: Lightning FX", 0x26B1E, 0x26B3E, indexCPS2_Storm, 0x09 },
 
     { L"P2 Extras 3", 0x26ADE, 0x26AFE, indexCPS2_Storm },
     { L"P2 Ending Sprite", 0x27A3E, 0x27A5E, indexCPS2_Storm },
@@ -472,18 +456,18 @@ const sGame_PaletteDataset COTA_A_STORM_PALETTES_P2[] =
 
 const sGame_PaletteDataset COTA_A_WOLVERINE_PALETTES_P1[] =
 {
-    { L"Wolverine P1",    0x2713E, 0x2715E, 0x07, 0, &pairNext },
-    { L"P1 Claws",        0x2715E, 0x2717E, 0x07, 1 },
-    { L"P1 Berserker Barrage", 0x2717e, 0x2719e, 0x07, 2 },
-    { L"P1 ?",            0x2719e, 0x271be, 0x07 },
+    { L"Wolverine P1",    0x2713E, 0x2715E, indexCPS2_Wolverine, 0, &pairNext },
+    { L"P1 Claws",        0x2715E, 0x2717E, indexCPS2_Wolverine, 1 },
+    { L"P1 Berserker Barrage", 0x2717e, 0x2719e, indexCPS2_Wolverine, 2 },
+    { L"P1 ?",            0x2719e, 0x271be, indexCPS2_Wolverine },
 };
 
 const sGame_PaletteDataset COTA_A_WOLVERINE_PALETTES_P2[] =
 {
-    { L"Wolverine P2", 0x271be, 0x271dE, 0x07, 0, &pairNext },
-    { L"P2 Claws", 0x271dE, 0x271fE, 0x07, 1 },
-    { L"P2 Berserker Barrage", 0x271fE, 0x2721E, 0x07, 2 },
-    { L"P2 ?", 0x2721E, 0x2723E, 0x07 },
+    { L"Wolverine P2", 0x271be, 0x271dE, indexCPS2_Wolverine, 0, &pairNext },
+    { L"P2 Claws", 0x271dE, 0x271fE, indexCPS2_Wolverine, 1 },
+    { L"P2 Berserker Barrage", 0x271fE, 0x2721E, indexCPS2_Wolverine, 2 },
+    { L"P2 ?", 0x2721E, 0x2723E, indexCPS2_Wolverine },
 };
 
 const sGame_PaletteDataset COTA_A_AKUMA_PALETTES_P1[] = // aka Gouki
@@ -536,12 +520,24 @@ const sGame_PaletteDataset COTA_A_CSI_PALETTES[] =
     //    { L"Magneto",        0x37154, 0x37174 },
 };
 
-const sGame_PaletteDataset COTA_A_BONUS_PALETTES[] =
+const sGame_PaletteDataset COTA_A_BONUS_SELECT_PALETTES[] =
 {
     { L"Select Screen World Map",   0x371b4, 0x371d4, indexCPS2_COTAAssets, 1 },
     { L"Select Screen Vs Text",     0x371d4, 0x371f4, indexCPS2_COTAAssets, 0 },
     { L"Select Screen Background",  0x3D436, 0x3D456 },
+};
+
+const sGame_PaletteDataset COTA_A_BONUS_ENDING_PALETTES[] =
+{
     { L"Mojo",                      0x279a0, 0x279c0, indexCPS2_COTAAssets, 2 },
+    { L"Professor X",               0x2781E, 0x2783E, indexCPS2_COTAAssets, 0x07 },
+    { L"Forge",                     0x27a1e, 0x27a3e, indexCPS2_COTAAssets, 0x06 },
+    { L"Cyclops (Ending sprite)",   0x2777e, 0x2779e, indexCPS2_COTAAssets, 0x03 },
+    { L"Jean Grey (Holding Cyclops/Photo)",  0x2779E, 0x277BE, indexCPS2_COTAAssets, 0x04 },
+    { L"Jean Grey (Flying)",        0x2771E, 0x2773E, indexCPS2_COTAAssets, 0x05 },
+    { L"Wolverine's Motorcycle",    0x279de, 0x279fe, indexCPS2_COTAAssets, 0x09 },
+    { L"Psylocke Ending (dress)",   0x2785E, 0x2787E, indexCPS2_COTAAssets, 0x08 },
+    { L"Psylocke Ending (undressed)", 0x2783E, 0x2785E, indexCPS2_Psylocke, 0 },
 };
 
 const sDescTreeNode COTA_A_COLOSSUS_COLLECTION[] =
@@ -554,7 +550,7 @@ const sDescTreeNode COTA_A_CYCLOPS_COLLECTION[] =
 {
     { L"P1", DESC_NODETYPE_TREE, (void*)COTA_A_CYCLOPS_PALETTES_P1,           ARRAYSIZE(COTA_A_CYCLOPS_PALETTES_P1) },
     { L"P2", DESC_NODETYPE_TREE, (void*)COTA_A_CYCLOPS_PALETTES_P2,           ARRAYSIZE(COTA_A_CYCLOPS_PALETTES_P2) },
-    { L"Extras", DESC_NODETYPE_TREE, (void*)COTA_A_CYCLOPS_PALETTES_EXTRAS,   ARRAYSIZE(COTA_A_CYCLOPS_PALETTES_EXTRAS) },
+    { L"Shared", DESC_NODETYPE_TREE, (void*)COTA_A_CYCLOPS_PALETTES_EXTRAS,   ARRAYSIZE(COTA_A_CYCLOPS_PALETTES_EXTRAS) },
 };
 
 const sDescTreeNode COTA_A_ICEMAN_COLLECTION[] =
@@ -593,6 +589,7 @@ const sDescTreeNode COTA_A_SENTINEL_COLLECTION[] =
 {
     { L"P1", DESC_NODETYPE_TREE, (void*)COTA_A_SENTINEL_PALETTES_P1,        ARRAYSIZE(COTA_A_SENTINEL_PALETTES_P1) },
     { L"P2", DESC_NODETYPE_TREE, (void*)COTA_A_SENTINEL_PALETTES_P2,        ARRAYSIZE(COTA_A_SENTINEL_PALETTES_P2) },
+    { L"Shared", DESC_NODETYPE_TREE, (void*)COTA_A_SENTINEL_PALETTES_SHARED, ARRAYSIZE(COTA_A_SENTINEL_PALETTES_SHARED) },
 };
 
 const sDescTreeNode COTA_A_SILSAM_COLLECTION[] =
@@ -627,32 +624,13 @@ const sDescTreeNode COTA_A_AKUMA_COLLECTION[] =
 
 const sDescTreeNode COTA_A_BONUS_COLLECTION[] =
 {
-    { L"Portraits",  DESC_NODETYPE_TREE, (void*)COTA_A_PORTRAIT_PALETTES,        ARRAYSIZE(COTA_A_PORTRAIT_PALETTES) },
+    { L"Portraits", DESC_NODETYPE_TREE, (void*)COTA_A_PORTRAIT_PALETTES,                ARRAYSIZE(COTA_A_PORTRAIT_PALETTES) },
     { L"Character Select Icons", DESC_NODETYPE_TREE, (void*)COTA_A_CSI_PALETTES, ARRAYSIZE(COTA_A_CSI_PALETTES) },
-    { L"Bonus",      DESC_NODETYPE_TREE, (void*)COTA_A_BONUS_PALETTES,           ARRAYSIZE(COTA_A_BONUS_PALETTES) },
+    { L"Select Screen", DESC_NODETYPE_TREE, (void*)COTA_A_BONUS_SELECT_PALETTES,        ARRAYSIZE(COTA_A_BONUS_SELECT_PALETTES) },
+    { L"Ending Characters", DESC_NODETYPE_TREE, (void*)COTA_A_BONUS_ENDING_PALETTES,    ARRAYSIZE(COTA_A_BONUS_ENDING_PALETTES) },
 };
 
-const UINT8 COTA_A_UNITSORT[COTA_A_NUMUNIT + 1] = // Plus 1 for the extra palettes
-{
-    indexCOTAColossus,
-    indexCOTACyclops,
-    indexCOTAIceman,
-    indexCOTAJuggernaut,
-    indexCOTAMagneto,
-    indexCOTAOmegaRed,
-    indexCOTAPsylocke,
-    indexCOTASentinel,
-    indexCOTASilverSamurai,
-    indexCOTASpiral,
-    indexCOTAStorm,
-    indexCOTAWolverine,
-    indexCOTAAkuma,
-    indexCOTABonus,
-
-    COTA_A_EXTRALOC // Extra palettes
-};
-
-const sDescTreeNode COTA_UNITS[COTA_A_NUMUNIT] =
+const sDescTreeNode COTA_UNITS[] =
 {
     { L"Colossus",                  DESC_NODETYPE_TREE, (void*)COTA_A_COLOSSUS_COLLECTION,      ARRAYSIZE(COTA_A_COLOSSUS_COLLECTION) },
     { L"Cyclops",                   DESC_NODETYPE_TREE, (void*)COTA_A_CYCLOPS_COLLECTION,       ARRAYSIZE(COTA_A_CYCLOPS_COLLECTION) },
@@ -669,6 +647,9 @@ const sDescTreeNode COTA_UNITS[COTA_A_NUMUNIT] =
     { L"Akuma",                     DESC_NODETYPE_TREE, (void*)COTA_A_AKUMA_COLLECTION,         ARRAYSIZE(COTA_A_AKUMA_COLLECTION) },
     { L"Bonus Stuff",               DESC_NODETYPE_TREE, (void*)COTA_A_BONUS_COLLECTION,         ARRAYSIZE(COTA_A_BONUS_COLLECTION) },
 };
+
+constexpr auto COTA_A_NUMUNIT = ARRAYSIZE(COTA_UNITS);
+#define COTA_A_EXTRALOC COTA_A_NUMUNIT
 
 // We extend this array with data groveled from the cotae.txt extensible extras file, if any.
 const stExtraDef COTA_A_EXTRA[] =

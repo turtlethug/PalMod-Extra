@@ -5,6 +5,9 @@
 #include "PalMod.h"
 #include "PalModDlg.h"
 #include "RegProc.h"
+#ifdef ENABLE_MUI_SUPPORT
+#include <muiload.h>
+#endif
 
 // CAboutDlg dialog used for App About
 
@@ -59,10 +62,44 @@ static UINT BASED_CODE indicators[] =
 
 CStringA szPasteStr = "";
 
+#ifdef ENABLE_MUI_SUPPORT
+HMODULE g_hMUIInstance = nullptr;
+
+CPalModDlg::~CPalModDlg()
+{
+    FreeMUILibrary(g_hMUIInstance);
+}
+#endif
+
 // CPalModDlg dialog
 CPalModDlg::CPalModDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CPalModDlg::IDD, pParent)
 {
+#ifdef ENABLE_MUI_SUPPORT_TESTING
+    WCHAR szzPreferredLanguage[10] = L"en-gb";
+    DWORD langCount = 0;
+
+    SetThreadPreferredUILanguages(MUI_LANGUAGE_NAME, szzPreferredLanguage, &langCount);
+#endif
+
+#ifdef ENABLE_MUI_SUPPORT
+    WCHAR szFileName[MAX_PATH];
+
+    if (GetModuleFileName(nullptr, szFileName, ARRAYSIZE(szFileName)))
+    {
+#ifdef ENABLE_MUI_SUPPORT_TESTING
+        g_hMUIInstance = LoadMUILibrary(szFileName, MUI_LANGUAGE_NAME, LOCALE_CUSTOM_DEFAULT);
+#else
+        g_hMUIInstance = LoadMUILibrary(szFileName, MUI_LANGUAGE_NAME, LOCALE_USER_DEFAULT);
+#endif
+    }
+
+    if (!g_hMUIInstance)
+    {
+        AfxMessageBox(L"Warning: resources failed to load!\n");
+    }
+#endif
+
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
@@ -139,6 +176,7 @@ BEGIN_MESSAGE_MAP(CPalModDlg, CDialog)
     ON_COMMAND(ID_EDIT_SELECTALL, &CPalModDlg::OnEditSelectAll)
     ON_COMMAND(ID_EDIT_SELECTNONE, &CPalModDlg::OnEditSelectNone)
     ON_COMMAND(ID_FILE_LOADLASTUSEDDIR, &CPalModDlg::LoadLastDir)
+
     ON_COMMAND(ID_COLORSPERLINE_8COLORSPERLINE, &CPalModDlg::SetColorsPerLineTo8)
     ON_COMMAND(ID_COLORSPERLINE_16COLORSPERLINE, &CPalModDlg::SetColorsPerLineTo16)
     ON_COMMAND(ID_COLORFORMAT_RGB333, &CPalModDlg::SetColorFormatTo9)
@@ -152,6 +190,8 @@ BEGIN_MESSAGE_MAP(CPalModDlg, CDialog)
     ON_COMMAND(ID_COLORFORMAT_ARGB1888, &CPalModDlg::SetColorFormatToARGB1888)
     ON_COMMAND(ID_COLORFORMAT_ARGB7888, &CPalModDlg::SetColorFormatToARGB7888)
     ON_COMMAND(ID_COLORFORMAT_ARGB8888, &CPalModDlg::SetColorFormatToARGB8888)
+    ON_COMMAND(ID_TRANSPSETTING_16, &CPalModDlg::SetMaximumWriteTo16Colors)
+    ON_COMMAND(ID_TRANSPSETTING_256, &CPalModDlg::SetMaximumWriteTo256Colors)
     
     ON_COMMAND(ID_ALPHASETTING_FIXED, &CPalModDlg::SetAlphaModeToFixed)
     ON_COMMAND(ID_ALPHASETTING_VARIABLE, &CPalModDlg::SetAlphaModeToVariable)
@@ -166,6 +206,7 @@ BEGIN_MESSAGE_MAP(CPalModDlg, CDialog)
     ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_BL, &CPalModDlg::OnDeltaposSpinBL)
     ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_A, &CPalModDlg::OnDeltaposSpinA)
     ON_COMMAND(ID_FILE_EXIT, &CPalModDlg::OnFileExit)
+    ON_COMMAND(ID_FILE_OPENEXTRAS, &CPalModDlg::OnFileOpenExtrasFile)
     ON_COMMAND(ID_FILE_CLOSEFILEDIR, &CPalModDlg::OnFileCloseFileDir)
     ON_WM_TIMER()
     ON_BN_CLICKED(IDC_SHOWPREVIEW, &CPalModDlg::OnBnShowPrev)
@@ -253,7 +294,11 @@ BOOL CPalModDlg::OnInitDialog()
 
     RepositionBars(AFX_IDW_CONTROLBAR_FIRST, AFX_IDW_CONTROLBAR_LAST, ID_INDICATOR_MAIN);
 
-    m_StatusBar.SetPaneText(0, DEFAULT_STATUS_TEXT);
+    CString strMsg;
+    if (strMsg.LoadStringW(IDS_WELCOME_BACKUP))
+    {
+        m_StatusBar.SetPaneText(0, strMsg.GetString());
+    }
 
     if (m_ToolTip.Create(this))
     {
@@ -556,7 +601,6 @@ BOOL CPalModDlg::VerifyMsg(eVerifyType eType)
             CString strQuestion;
             if (strQuestion.LoadString(IDS_SAVE_FILE_CHANGES))
             {
-
                 switch (MessageBox(strQuestion, GetHost()->GetAppName(), MB_YESNOCANCEL | MB_ICONEXCLAMATION))
                 {
                 case IDYES:
@@ -680,6 +724,15 @@ void CPalModDlg::SetStatusText(CString szText)
 
     //Set timer
     SetTimer(TIMER_STATUS, TIMER_ELAPSE, NULL);
+}
+
+void CPalModDlg::SetStatusText(UINT uStrId)
+{
+    CString strMessage;
+    if (strMessage.LoadString(uStrId))
+    {
+        SetStatusText(strMessage);
+    }
 }
 
 void CPalModDlg::OnAboutAboutpalmod()

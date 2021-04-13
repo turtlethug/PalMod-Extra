@@ -41,9 +41,6 @@ CGame_MVC2_A::CGame_MVC2_A(UINT32 nConfirmedROMSize)
     SetAlphaMode(AlphaMode::GameUsesVariableAlpha);
     SetColorMode(ColMode::COLMODE_12A);
 
-    //Set palette conversion mode
-    BasePalGroup.SetMode(ePalType::PALTYPE_16STEPS);
-
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
     m_nConfirmedROMSize = nConfirmedROMSize;
@@ -65,8 +62,8 @@ CGame_MVC2_A::CGame_MVC2_A(UINT32 nConfirmedROMSize)
     //Set game information
     nGameFlag = MVC2_A;
     nImgGameFlag = IMGDAT_SECTION_CPS2;
-    nImgUnitAmt = MVC2_D_NUM_IMG_UNITS;
     m_prgGameImageSet = MVC2_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(MVC2_IMG_UNITS);
 
     m_fGameUsesAlphaValue = true;
 
@@ -892,7 +889,7 @@ BOOL CGame_MVC2_A::SaveFile(CFile* SaveFile, UINT16 nUnitId)
                 if (!fShownOnce && (m_nCurrentPaletteROMLocation < m_nLowestKnownPaletteRomLocation)) // This magic number is the lowest known ROM location.
                 {
                     CString strMsg;
-                    strMsg.Format(L"Warning: Unit %u palette %u is trying to write to ROM location 0x%06x which is lower than we usually write to.", nUnitCtr, nPalCtr, m_nCurrentPaletteROMLocation);
+                    strMsg.Format(IDS_SAVE_LOWWRITE, nUnitCtr, nPalCtr, m_nCurrentPaletteROMLocation);
                     MessageBox(g_appHWnd, strMsg, GetHost()->GetAppName(), MB_ICONERROR);
                     fShownOnce = true;
                 }
@@ -1115,6 +1112,7 @@ BOOL CGame_MVC2_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node04)
                     nNodeIncrement = pCurrentNode->uChildAmt;
                     // Need to reset because we have a status effect label set as well.
                     pButtonLabelSet = DEF_BUTTONLABEL6_MVC2;
+                    m_nNumberOfColorOptions = ARRAYSIZE(DEF_BUTTONLABEL6_MVC2);
 
                     while (nSrcStart >= nNodeIncrement)
                     {
@@ -1138,6 +1136,7 @@ BOOL CGame_MVC2_A::UpdatePalImg(int Node01, int Node02, int Node03, int Node04)
                     nSrcAmt = 8;
                     nNodeIncrement = paletteDataSet->pPalettePairingInfo ? 2 : 1;
                     pButtonLabelSet = DEF_LABEL_STATUS_EFFECTS;
+                    m_nNumberOfColorOptions = ARRAYSIZE(DEF_LABEL_STATUS_EFFECTS);
                 }
             }
 
