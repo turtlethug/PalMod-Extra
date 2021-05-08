@@ -192,11 +192,11 @@ END
 
 IDD_SETT_DIALOG DIALOGEX 0, 0, 203, 106
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "MvC2 Settings"
+CAPTION "Special Settings"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     GROUPBOX        "Settings",IDC_STATIC,6,6,193,95
-    CONTROL         "Allow transparency (Not Recommended)",IDC_CALPHATRANS,
+    CONTROL         "Allow transparency (MvC2, GG)",IDC_CALPHATRANS,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,26,169,11
     CONTROL         "Process Supplement Palettes (Recommended) (ex: Cyclops HK, Spider-Man win poses, etc)",IDC_CUPDSUPP,
                     "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,20,39,168,30
@@ -396,16 +396,16 @@ BEGIN
         END
         POPUP "Color Format"
         BEGIN
-            MENUITEM "RGB333 (big endian for Sega Genesis)", ID_COLORFORMAT_RGB333
-            MENUITEM "RGB444 (big endian for CPS1/CPS2)", ID_COLORFORMAT_RGB444
-            MENUITEM "RGB444 (little endian for SF2/SFA 30th)", ID_COLORFORMAT_RGB444_LE
-            MENUITEM "RGB555 (little endian for CPS3)", ID_COLORFORMAT_RGB555
-            MENUITEM "BGR555 (little endian for GBA)", ID_COLORFORMAT_RGB555_GBA
+            MENUITEM "RGB333 (big endian)", ID_COLORFORMAT_RGB333
+            MENUITEM "RGB444 (big endian)", ID_COLORFORMAT_RGB444
+            MENUITEM "RGB444 (little endian)", ID_COLORFORMAT_RGB444_LE
+            MENUITEM "RGB555 (little endian", ID_COLORFORMAT_RGB555
+            MENUITEM "BGR555 (little endian)", ID_COLORFORMAT_RGB555_GBA
             MENUITEM "RGB555 (big endian)",         ID_COLORFORMAT_RGB555_ALT
             MENUITEM "RGB555 (Sharp X68000)",       ID_COLORFORMAT_SHARPRGB
-            MENUITEM "RGB666 (Neo-Geo)",            ID_COLORFORMAT_RGB666
-            MENUITEM "ARGB1888 (DBFCI)",            ID_COLORFORMAT_ARGB1888
-            MENUITEM "ARGB7888 (Arc Sys)",          ID_COLORFORMAT_ARGB7888
+            MENUITEM "RGB666",            ID_COLORFORMAT_RGB666
+            MENUITEM "ARGB1888",            ID_COLORFORMAT_ARGB1888
+            MENUITEM "ARGB7888",          ID_COLORFORMAT_ARGB7888
             MENUITEM "ARGB8888",                    ID_COLORFORMAT_ARGB8888
             MENUITEM SEPARATOR
             MENUITEM "No Alpha",                    ID_ALPHASETTING_UNUSED
@@ -413,10 +413,10 @@ BEGIN
             MENUITEM "Variable Alpha",              ID_ALPHASETTING_VARIABLE
             MENUITEM "Unknown Alpha",               ID_ALPHASETTING_CHAOTIC
             MENUITEM SEPARATOR
-            MENUITEM "Transparency every 16 colors", ID_TRANSPSETTING_16
-            MENUITEM "Transparency every 256 colors", ID_TRANSPSETTING_256
+            MENUITEM "BG color every 16 tiles", ID_TRANSPSETTING_16
+            MENUITEM "BG color every 256 tiles", ID_TRANSPSETTING_256
         END
-        MENUITEM "MvC2 &Settings...",           ID_SETTINGS_SETTINGS
+        MENUITEM "Special &Settings...",           ID_SETTINGS_SETTINGS
         MENUITEM SEPARATOR
         MENUITEM "Show 32-bit values for 8-bit colors (will round!)", ID_SHOW32BITRGB
         MENUITEM "Include bonus data in CTRL+C copy", ID_SETTINGS_EXTCOPYDATA
@@ -559,7 +559,7 @@ BEGIN
     IDS_ABOUTBOX            "&About PalMod..."
     IDS_CURRENTAPPNAME      "PalMod-Ex 1.0"
     IDS_ERROR_LOADING_IMG_DAT_FORMAT 
-                            "Can't find or load our image archive file %s at '%s'\n\n%s is included in the PalMod RAR: it needs to be in the same folder as PalMod.exe in order for previews to work."
+                            "Can't find or load our image archive file %s at '%s'\n\n%s is in the official PalMod Builds. Download it and place it in the same folder as PalMod-Ex.exe."
     IDS_ERROR_NO_IMAGES     "No images available."
     IDS_ERROR_LOADING_GAME  "Unable to load game."
     IDS_ERROR_PARAMETERS    "Invalid parameters."
@@ -591,12 +591,12 @@ BEGIN
     IDS_TOOLTIP_UPDATE      "Saves the current changes to memory.  ROM is only updated on patch."
     IDS_TOOLTIP_REVERT      "Reverts to the last saved colors. Use CTRL+Z for just the last change."
     IDS_TOOLTIP_GETCOLOR    "Use the color picker to update the selected palette color."
-    IDS_ERROR_TEXTURE_LOAD  "Error loading RAW texture file.  Filename must be of form WHATEVER-W-width-H-height.data"
+    IDS_ERROR_TEXTURE_LOAD  "Error loading RAW texture file.  Filename must be of form WHATEVER-W-width-H-height.raw"
     IDS_ERROR_TEXTURE_NOGAME "A game must be loaded first."
     IDS_ERROR_FILENOTFOUND_FORMAT 
                             "Save failed: output file '%s' does not exist."
     IDS_ROMMISMATCH_CHECK   "ERROR!  This ROM is not the expected size, which means PalMod writing to where it expects the ROM to be may corrupt it.  Are you sure you wish to continue? "
-    IDS_ROMISVENTURE        "This ROM isn't the right size.  It looks like a Venture ROM.  If you want to PalMod Venture, let people in the HFTF Discord server know and they'll walk you through it.\n\nAre you sure you wish to continue?"
+    IDS_ROMISVENTURE        "This ROM isn't the right size.  It looks like a Venture ROM. Use the Venture mode for a better expirience.\n\nDo you wish to continue anyways?"
 END
 
 STRINGTABLE
@@ -659,7 +659,7 @@ BEGIN
     IDS_SAVE_LOWWRITE        "Warning: Unit %u palette %u is trying to write to ROM location 0x%x which is lower than we usually write to."
 
     IDS_ERROR_COPYCOLOR      "Warning: The current color mode needs to have copy support added."
-    IDS_WARN_TRANSPARENCY    "Transparent characters are not suitable for competitive gameplay.  Do not use them for any serious matches.\n\nClick Yes to agree to not use this mix for competition.  Click No to disagree and not use transparency."
+    IDS_WARN_TRANSPARENCY    "Transparent characters cause graphical bugs, and arent suitable for competition.\n\nClick Yes to continue.  Click No to cancel."
 END
 
 #endif    // English (United States) resources
