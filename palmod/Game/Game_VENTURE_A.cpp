@@ -39,7 +39,7 @@ CGame_VENTURE_A::CGame_VENTURE_A(UINT32 nConfirmedROMSize)
     // Set color mode: see the definitions in GameClass.h
     // We need to set color mode before calling InitializeStatics as color mode affects color size (2 bytes vs 4 bytes)
     // which in turn affects all our calculations involving colors
-    SetColorMode(ColMode::COLMODE_15);
+    SetColorMode(ColMode::COLMODE_RGB555_LE);
 
 
     //Set palette conversion mode: 12A uses a step of PALTYPE_16STEPS, everything else uses PALTYPE_32STEPS at this point

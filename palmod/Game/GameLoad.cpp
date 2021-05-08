@@ -105,6 +105,7 @@
 #include "Game_Windjammers_A.h"
 #include "Game_XMMA_SNES.h"
 #include "Game_XMVSF_A.h"
+#include "Game_ESCKIDS_A.h"
 
 #include "..\resource.h"
 #include "..\palmod.h"
@@ -775,6 +776,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_XMVSF_A::GetRule;
         return TRUE;
     }
+	case ESCKIDS_A:
+    {
+        GetRule = &CGame_ESCKIDS_A::GetRule;
+        return TRUE;
+    }
 
     default:
         OutputDebugString(L"CGameLoad::SetGame:: BUGBUG: New game has not been properly added yet\n");
@@ -1232,6 +1238,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case XMVSF_A:
     {
         return new CGame_XMVSF_A(nConfirmedROMSize);
+    }
+	case ESCKIDS_A:
+    {
+        return new CGame_ESCKIDS_A(nConfirmedROMSize);
     }
 
     default:

@@ -108,7 +108,6 @@ enum SupportedGamesList
     KOTM_A,
     XMMA_SNES,
     TMNTTF_SNES,
-	VENTURE_A,
     DBZHD_SNES,
     MMX2_SNES,
     KOF00N_A,
@@ -128,6 +127,7 @@ enum SupportedGamesList
     MMX3_SNES,
     KI_SNES,
     RANMAHB_SNES,
+	VENTURE_A,
 	ESCKIDS_A,
 
     NUM_GAMES // This needs to be last
