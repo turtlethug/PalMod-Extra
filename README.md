@@ -4,10 +4,9 @@ PalMod-Extra is a fork of [PalMod](https://github.com/Preppy/PalMod) which aims 
 
 The games I've added support for are...
 -
-- Jojo's Venture _(CPS-III, jojo.zip & clones)_
-
-^^Currently only supports the old unsplit romset, file 50.^^
+- Jojo's Venture _(CPS-III, jojo.zip & clones)_ (Very limited support)
+- Escape Kids _(Konami Arcade, esckids.zip & clones)_
 
 The games i'm planning to support are...
 -
-- Escape Kids _(Konami Arcade, esckids.zip & clones)_
+- Nothing new yet.
