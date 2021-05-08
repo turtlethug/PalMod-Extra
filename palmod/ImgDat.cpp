@@ -68,8 +68,7 @@ bool CImgDat::PrepImageBuffer(const UINT16* prgGameImageSet, const UINT16 nGameI
 
 #if IMGDAT_DEBUG
     CString strDebugInfo;
-    strDebugInfo.Format(L"CImgDat::PrepImageBuffer : Prepping Image Buffer \n");
-    OutputDebugString(strDebugInfo);
+    OutputDebugString(L"CImgDat::PrepImageBuffer : Prepping Image Buffer \n");
 #endif
 
     if (prgGameImageSet == nullptr)
@@ -91,6 +90,10 @@ bool CImgDat::PrepImageBuffer(const UINT16* prgGameImageSet, const UINT16 nGameI
 #endif
         nImgMap->insert({ nImageUnitCounterToUse, new ImgInfoList });
     }
+
+#if IMGDAT_DEBUG
+    OutputDebugString(L"CImgDat::PrepImageBuffer : Prepping Image Buffer is complete.\n");
+#endif
 
     imageBufferFlushed = false;
     return true;
@@ -146,8 +149,7 @@ sImgDef* CImgDat::GetImageDef(UINT16 uUnitId, UINT16 uImgId)
     }
 
 #if IMGDAT_DEBUG
-    strDebugInfo.Format(L"\tCImgDat::GetImageDef : No image found\n");
-    OutputDebugString(strDebugInfo);
+    OutputDebugString(L"\tCImgDat::GetImageDef : No image found\n");
 #endif
     return nullptr;
 }
@@ -294,10 +296,10 @@ void CImgDat::SanityCheckImgDat(ULONGLONG nFileSize, UINT32 nCurrentDatestamp, U
         // here we keep track of the imgdat version we expect.
         // not super critical for daily updates, but still useful
         const UINT16 nExpectedYear = 2021;
-        const UINT8 nExpectedMonth = 4;
-        const UINT8 nExpectedDay = 11;
+        const UINT8 nExpectedMonth = 5;
+        const UINT8 nExpectedDay = 5;
         const UINT8 nExpectedRevision = 0;
-        const ULONGLONG nExpectedFileSize = 82781656;
+        const ULONGLONG nExpectedFileSize = 86924702;
 
         const UINT32 nExpectedDatestamp = (nExpectedYear << 16) | (nExpectedMonth << 8) | (nExpectedDay);
 
@@ -348,14 +350,14 @@ BOOL CImgDat::LoadGameImages(WCHAR* lpszLoadFile, UINT8 uGameFlag, UINT8 uImgGam
     {
 
 #if IMGDAT_DEBUG
-        strDebugInfo.Format(L"CImgDat::LoadGameImages : New game being loaded gameFlag:0x%02X with imgGameFlag:0x%02X, flushing image buffer.'\n", uGameFlag, uImgGameFlag);
+        strDebugInfo.Format(L"CImgDat::LoadGameImages : New game being loaded gameFlag:0x%02X with imgGameFlag:0x%02X, flushing image buffer.\n", uGameFlag, uImgGameFlag);
         OutputDebugString(strDebugInfo);
 #endif
 
         imageBufferFlushed = false;
         imageBufferFlushed = FlushImageBuffer();
 #if IMGDAT_DEBUG
-        strDebugInfo.Format(L"CImgDat::LoadGameImages : Image buffer has been flushed. imageBuffer: %u '\n", imageBufferPrepped);
+        strDebugInfo.Format(L"CImgDat::LoadGameImages : Image buffer has been flushed. imageBuffer prepped: %s \n", imageBufferPrepped ? L"true" : L"false");
         OutputDebugString(strDebugInfo);
 #endif
         CloseImgFile();

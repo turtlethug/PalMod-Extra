@@ -32,14 +32,12 @@ void CGame_MVC2_A::InitializeStatics()
 
 CGame_MVC2_A::CGame_MVC2_A(UINT32 nConfirmedROMSize)
 {
-    CString strMessage;
-    strMessage.Format(L"CGame_MVC2_A::CGame_MVC2_A: Loading ROM...\n");
-    OutputDebugString(strMessage);
+    OutputDebugString(L"CGame_MVC2_A::CGame_MVC2_A: Loading ROM...\n");
 
     //Set color mode
     createPalOptions = { NO_SPECIAL_OPTIONS, WRITE_MAX };
     SetAlphaMode(AlphaMode::GameUsesVariableAlpha);
-    SetColorMode(ColMode::COLMODE_12A);
+    SetColorMode(ColMode::COLMODE_RGB444_BE);
 
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
@@ -867,7 +865,6 @@ BOOL CGame_MVC2_A::LoadFile(CFile* LoadedFile, UINT16 nUnitId)
 BOOL CGame_MVC2_A::SaveFile(CFile* SaveFile, UINT16 nUnitId)
 {
     UINT32 nTotalPalettesSaved = 0;
-    bool fShownOnce = false;
 
     for (UINT16 nUnitCtr = 0; nUnitCtr < nUnitAmt; nUnitCtr++)
     {
@@ -885,14 +882,6 @@ BOOL CGame_MVC2_A::SaveFile(CFile* SaveFile, UINT16 nUnitId)
             //if (IsPaletteDirty(nUnitCtr, nPalCtr))
             {
                 LoadSpecificPaletteData(nUnitCtr, nPalCtr);
-
-                if (!fShownOnce && (m_nCurrentPaletteROMLocation < m_nLowestKnownPaletteRomLocation)) // This magic number is the lowest known ROM location.
-                {
-                    CString strMsg;
-                    strMsg.Format(IDS_SAVE_LOWWRITE, nUnitCtr, nPalCtr, m_nCurrentPaletteROMLocation);
-                    MessageBox(g_appHWnd, strMsg, GetHost()->GetAppName(), MB_ICONERROR);
-                    fShownOnce = true;
-                }
 
                 SaveFile->Seek(m_nCurrentPaletteROMLocation, CFile::begin);
                 SaveFile->Write(m_pppDataBuffer[nUnitCtr][nPalCtr], m_nCurrentPaletteSizeInColors * 2);

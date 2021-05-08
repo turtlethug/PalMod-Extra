@@ -31,9 +31,9 @@ void CGame_SFA1_A::InitializeStatics()
 
 CGame_SFA1_A::CGame_SFA1_A(UINT32 nConfirmedROMSize)
 {
-    createPalOptions = { OFFSET_PALETTE_BY_ONE, WRITE_16 };
+    createPalOptions = { NO_SPECIAL_OPTIONS, WRITE_16 };
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
-    SetColorMode(ColMode::COLMODE_12A);
+    SetColorMode(ColMode::COLMODE_RGB444_BE);
 
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
@@ -48,7 +48,7 @@ CGame_SFA1_A::CGame_SFA1_A(UINT32 nConfirmedROMSize)
     m_nSafeCountForThisRom = 234 + GetExtraCt(SFA1_A_EXTRALOC);
     m_pszExtraFilename = EXTRA_FILENAME_SFA1;
     m_nTotalPaletteCount = m_nTotalPaletteCountForSFA1;
-    m_nLowestKnownPaletteRomLocation = 0x67960;
+    m_nLowestKnownPaletteRomLocation = 0x6795e;
 
     InitDataBuffer();
 

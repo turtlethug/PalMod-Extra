@@ -142,10 +142,14 @@
 #define IDS_SF3_UNKNOWNROM              2044
 #define IDS_EXTRAS_SIMMBOUNDARY         2045
 #define IDS_COLOR_WRONGSIZE             2046
-#define IDS_SAVE_LOWWRITE               2047
 #define IDS_ERROR_COPYCOLOR             2048
 #define IDS_WARN_TRANSPARENCY           2049
-
+#define IDS_ENCRYPTING_START            2050
+#define IDS_ENCRYPTING_DONE             2051
+#define IDS_SVC_WARNDECRYPT             2052
+#define IDS_SVC_UNKNOWNCRYPTO           2053
+#define IDS_SVC_WARNENCRYPT             2054
+#define IDS_SVC_CRYPTO_RO               2055
 #define ID_FILE_LOADDIRECTORY           32771
 #define ID_LOADDIRECTORY_MARVELVSCAPCOM2 32772
 #define ID_LD_MVC2DCUSA                 32773
@@ -245,7 +249,7 @@
 #define ID_LD_SFIII3ARCADE4rd10         32882
 #define ID_LD_SFIII1                    32883
 #define ID_LD_SFIII2                    32884
-#define ID_LD_GGXXACR                   32885
+#define ID_LD_GGXXACR_S                 32885
 #define ID_LD_DBFCI                     32886
 #define ID_LD_UNICLR                    32887
 #define ID_LOADDIRECTORY_REDEARTH_31    32888
@@ -254,15 +258,18 @@
 #define ID_TRANSPSETTING_16             32891
 #define ID_TRANSPSETTING_256            32892
 #define ID_FILE_OPENEXTRAS              32893
-
-// Please note that the F0000 range (983040) is reserved for the dynamic game menu
+#define ID_COLORFORMAT_xRGB888          32894
+#define ID_COLORFORMAT_xBGR888          32895
+#define ID_FILE_LOADSPRITEFLIPPED       32896
+#define ID_LD_GGXXACR_P                 32897
+#define ID_LD_MBAACC_S                  32898
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        138
-#define _APS_NEXT_COMMAND_VALUE         32894
+#define _APS_NEXT_COMMAND_VALUE         32899
 #define _APS_NEXT_CONTROL_VALUE         1040
 #define _APS_NEXT_SYMED_VALUE           104
 #endif

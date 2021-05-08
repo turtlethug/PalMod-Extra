@@ -13,30 +13,42 @@
 #include "Game_DBFCI_A.h"
 #include "Game_DBZHD_SNES.h"
 #include "Game_DoubleDragon_A.h"
+#include "Game_FatalFury1_A.h"
+#include "Game_FatalFuryS_A.h"
 #include "Game_FatalFuryS_SNES.h"
 #include "Game_Garou_A.h"
 #include "Game_Garou_S.h"
-#include "Game_GGXXACR_A.h"
+#include "Game_GGXXACR_S.h"
+#include "Game_GGXXACR_p.h"
 #include "Game_GUNDAM_SNES.h"
 #include "Game_JOJOS_A.h"
 #include "Game_JOJOS_A_DIR.h"
 #include "Game_VENTURE_A.h"
 #include "Game_KarnovsR_A.h"
+#include "Game_KI_SNES.h"
 #include "Game_Kizuna_A.h"
+#include "Game_KOF00N_A.h"
 #include "Game_KOF01_A.h"
 #include "Game_KOF02_A.h"
 #include "Game_KOF02UM_S.h"
 #include "Game_KOF03_A.h"
 #include "Game_KOF94_A.h"
+#include "Game_KOF95_A.h"
+#include "Game_KOF96_A.h"
 #include "Game_KOF97_A.h"
 #include "Game_KOF98_A.h"
+#include "Game_KOF98AE2016_A.h"
 #include "Game_KOF99AE_A.h"
 #include "Game_KOFXI_A.h"
 #include "Game_KOTM_A.h"
+#include "Game_LASTBLADE_A.h"
 #include "Game_LASTBLADE2_A.h"
 #include "Game_Matrimelee_A.h"
+#include "Game_MBAACC_S.h"
 #include "Game_MMPR_SNES.h"
+#include "Game_MMX_SNES.h"
 #include "Game_MMX2_SNES.h"
+#include "Game_MMX3_SNES.h"
 #include "Game_MSH_A.h"
 #include "Game_MSHVSF_A.h"
 #include "Game_MSHWOTG_SNES.h"
@@ -50,6 +62,7 @@
 #include "Game_NGBC_A.h"
 #include "Game_NINJAMASTERS_A.h"
 #include "Game_GEMFIGHTER_A.h"
+#include "Game_RanmaHB_SNES.h"
 #include "Game_RBFF1_A.h"
 #include "Game_RBFF2_A.h"
 #include "Game_RBFFS_A.h"
@@ -57,6 +70,8 @@
 #include "Game_REDEARTH_A_DIR.h"
 #include "Game_RODSM2_A.h"
 #include "Game_ROTD_A.h"
+#include "Game_SAMSHO1_A.h"
+#include "Game_SAMSHO2_A.h"
 #include "Game_SAMSHO3_A.h"
 #include "Game_SAMSHO4_A.h"
 #include "Game_SAMSHO5_A.h"
@@ -197,6 +212,16 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_DOUBLEDRAGON_A::GetRule;
         return TRUE;
     }
+    case FatalFury1_A:
+    {
+        GetRule = &CGame_FatalFury1_A::GetRule;
+        return TRUE;
+    }
+    case FatalFuryS_A:
+    {
+        GetRule = &CGame_FatalFuryS_A::GetRule;
+        return TRUE;
+    }
     case FatalFuryS_SNES:
     {
         GetRule = &CGame_FatalFuryS_SNES::GetRule;
@@ -222,12 +247,21 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_GEMFIGHTER_A::GetRule;
         return TRUE;
     }
-    case GGXXACR_A:
+    case GGXXACR_S:
     {
-        GetRuleCtr = &CGame_GGXXACR_A::GetRuleCtr;
-        ResetRuleCtr = &CGame_GGXXACR_A::ResetRuleCtr;
-        GetRule = &CGame_GGXXACR_A::GetRule;
-        GetNextRule = &CGame_GGXXACR_A::GetNextRule;
+        GetRuleCtr = &CGame_GGXXACR_S::GetRuleCtr;
+        ResetRuleCtr = &CGame_GGXXACR_S::ResetRuleCtr;
+        GetRule = &CGame_GGXXACR_S::GetRule;
+        GetNextRule = &CGame_GGXXACR_S::GetNextRule;
+
+        return TRUE;
+    }
+    case GGXXACR_P:
+    {
+        GetRuleCtr = &CGame_GGXXACR_P::GetRuleCtr;
+        ResetRuleCtr = &CGame_GGXXACR_P::ResetRuleCtr;
+        GetRule = &CGame_GGXXACR_P::GetRule;
+        GetNextRule = &CGame_GGXXACR_P::GetNextRule;
 
         return TRUE;
     }
@@ -261,6 +295,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_KarnovsR_A::GetRule;
         return TRUE;
     }
+    case KI_SNES:
+    {
+        GetRule = &CGame_KI_SNES::GetRule;
+        return TRUE;
+    }
     case KIZUNA_A:
     {
         GetRule = &CGame_Kizuna_A::GetRule;
@@ -269,6 +308,16 @@ BOOL CGameLoad::SetGame(int nGameFlag)
     case KOF94_A:
     {
         GetRule = &CGame_KOF94_A::GetRule;
+        return TRUE;
+    }
+    case KOF95_A:
+    {
+        GetRule = &CGame_KOF95_A::GetRule;
+        return TRUE;
+    }
+    case KOF96_A:
+    {
+        GetRule = &CGame_KOF96_A::GetRule;
         return TRUE;
     }
     case KOF97_A:
@@ -281,9 +330,19 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_KOF98_A::GetRule;
         return TRUE;
     }
+    case KOF98AE2016_A:
+    {
+        GetRule = &CGame_KOF98AE2016_A::GetRule;
+        return TRUE;
+    }
     case KOF99AE_A:
     {
         GetRule = &CGame_KOF99AE_A::GetRule;
+        return TRUE;
+    }
+    case KOF00N_A:
+    {
+        GetRule = &CGame_KOF00N_A::GetRule;
         return TRUE;
     }
     case KOF01_A:
@@ -316,7 +375,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_KOTM_A::GetRule;
         return TRUE;
     }
-
+    case LASTBLADE_A:
+    {
+        GetRule = &CGame_LASTBLADE_A::GetRule;
+        return TRUE;
+    }
     case LASTBLADE2_A:
     {
         GetRule = &CGame_LASTBLADE2_A::GetRule;
@@ -327,14 +390,33 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_Matrimelee_A::GetRule;
         return TRUE;
     }
+    case MBAACC_S:
+    {
+        GetRuleCtr = &CGame_MBAACC_S::GetRuleCtr;
+        ResetRuleCtr = &CGame_MBAACC_S::ResetRuleCtr;
+        GetRule = &CGame_MBAACC_S::GetRule;
+        GetNextRule = &CGame_MBAACC_S::GetNextRule;
+
+        return TRUE;
+    }
     case MMPR_SNES:
     {
         GetRule = &CGame_MMPR_SNES::GetRule;
         return TRUE;
     }
+    case MMX_SNES:
+    {
+        GetRule = &CGame_MMX_SNES::GetRule;
+        return TRUE;
+    }
     case MMX2_SNES:
     {
         GetRule = &CGame_MMX2_SNES::GetRule;
+        return TRUE;
+    }
+    case MMX3_SNES:
+    {
+        GetRule = &CGame_MMX3_SNES::GetRule;
         return TRUE;
     }
     case MSH_A:
@@ -409,6 +491,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_NINJAMASTERS_A::GetRule;
         return TRUE;
     }
+    case RANMAHB_SNES:
+    {
+        GetRule = &CGame_RANMAHB_SNES::GetRule;
+        return TRUE;
+    }
     case RBFF1_A: 
     {
         GetRule = &CGame_RBFF1_A::GetRule;
@@ -455,6 +542,16 @@ BOOL CGameLoad::SetGame(int nGameFlag)
     case ROTD_A:
     {
         GetRule = &CGame_ROTD_A::GetRule;
+        return TRUE;
+    }
+    case SAMSHO1_A:
+    {
+        GetRule = &CGame_SAMSHO1_A::GetRule;
+        return TRUE;
+    }
+    case SAMSHO2_A:
+    {
+        GetRule = &CGame_SAMSHO2_A::GetRule;
         return TRUE;
     }
     case SAMSHO3_A:
@@ -739,6 +836,14 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_DOUBLEDRAGON_A(nConfirmedROMSize);
     }
+    case FatalFury1_A:
+    {
+        return new CGame_FatalFury1_A(nConfirmedROMSize);
+    }
+    case FatalFuryS_A:
+    {
+        return new CGame_FatalFuryS_A(nConfirmedROMSize);
+    }
     case FatalFuryS_SNES:
     {
         return new CGame_FatalFuryS_SNES(nConfirmedROMSize);
@@ -759,9 +864,13 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_GEMFIGHTER_A(nConfirmedROMSize);
     }
-    case GGXXACR_A:
+    case GGXXACR_S:
     {
-        return new CGame_GGXXACR_A(nConfirmedROMSize);
+        return new CGame_GGXXACR_S(nConfirmedROMSize);
+    }
+    case GGXXACR_P:
+    {
+        return new CGame_GGXXACR_P(nConfirmedROMSize);
     }
     case GUNDAM_SNES:
     {
@@ -787,6 +896,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_KarnovsR_A(nConfirmedROMSize);
     }
+    case KI_SNES:
+    {
+        return new CGame_KI_SNES(nConfirmedROMSize);
+    }
     case KIZUNA_A:
     {
         return new CGame_Kizuna_A(nConfirmedROMSize);
@@ -794,6 +907,14 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case KOF94_A:
     {
         return new CGame_KOF94_A(nConfirmedROMSize);
+    }
+    case KOF95_A:
+    {
+        return new CGame_KOF95_A(nConfirmedROMSize);
+    }
+    case KOF96_A:
+    {
+        return new CGame_KOF96_A(nConfirmedROMSize);
     }
     case KOF97_A:
     {
@@ -803,9 +924,18 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_KOF98_A(nConfirmedROMSize);
     }
+
+    case KOF98AE2016_A:
+    {
+        return new CGame_KOF98AE2016_A(nConfirmedROMSize);
+    }
     case KOF99AE_A:
     {
         return new CGame_KOF99AE_A(nConfirmedROMSize, nExtraGameData);
+    }
+    case KOF00N_A:
+    {
+        return new CGame_KOF00N_A(nConfirmedROMSize);
     }
     case KOF01_A:
     {
@@ -831,6 +961,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_KOTM_A(nConfirmedROMSize);
     }
+    case LASTBLADE_A:
+    {
+        return new CGame_LASTBLADE_A(nConfirmedROMSize);
+    }
     case LASTBLADE2_A:
     {
         return new CGame_LASTBLADE2_A(nConfirmedROMSize);
@@ -839,13 +973,25 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_Matrimelee_A(nConfirmedROMSize);
     }
+    case MBAACC_S:
+    {
+        return new CGame_MBAACC_S(nConfirmedROMSize);
+    }
     case MMPR_SNES:
     {
         return new CGame_MMPR_SNES(nConfirmedROMSize);
     }
+    case MMX_SNES:
+    {
+        return new CGame_MMX_SNES(nConfirmedROMSize);
+    }
     case MMX2_SNES:
     {
         return new CGame_MMX2_SNES(nConfirmedROMSize);
+    }
+    case MMX3_SNES:
+    {
+        return new CGame_MMX3_SNES(nConfirmedROMSize);
     }
     case MSH_A:
     {
@@ -895,6 +1041,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_NINJAMASTERS_A(nConfirmedROMSize);
     }
+    case RANMAHB_SNES:
+    {
+        return new CGame_RANMAHB_SNES(nConfirmedROMSize);
+    }
     case RBFF1_A:
     {
         return new CGame_RBFF1_A(nConfirmedROMSize);
@@ -926,6 +1076,14 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case ROTD_A:
     {
         return new CGame_ROTD_A(nConfirmedROMSize);
+    }
+    case SAMSHO1_A:
+    {
+        return new CGame_SAMSHO1_A(nConfirmedROMSize);
+    }
+    case SAMSHO2_A:
+    {
+        return new CGame_SAMSHO2_A(nConfirmedROMSize);
     }
     case SAMSHO3_A:
     {
@@ -1336,7 +1494,13 @@ CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* pszLoadDir)
 
     if (!SetGame(nGameFlag))
     {
-        return NULL;
+        return nullptr;
+    }
+
+    if (ResetRuleCtr == nullptr)
+    {
+        // This isn't a directory-based game: something is wrong
+        return nullptr;
     }
 
     ResetRuleCtr();

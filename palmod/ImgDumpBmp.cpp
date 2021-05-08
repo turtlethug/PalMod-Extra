@@ -571,7 +571,7 @@ BOOL CImgDumpBmp::CustomBlt(int nSrcIndex, int nPalIndex, int nDstX, int nDstY, 
         {
             nYCtr = (int)((double)y * fpYDiff);
 
-            nStartRow = (0 - ((nBltH - 1) - y + rBltRct.top)) * (nMainW * 4) + (rBltRct.left * 4);
+            nStartRow = (y + rBltRct.top) * (nMainW * 4) + (rBltRct.left * 4);
             nSrcStartRow = ((nYCtr + nSrcY) * nWidth) + nSrcX;
 
             for (int x = 0; x < (nBltW * 4); x += 4)
@@ -580,7 +580,7 @@ BOOL CImgDumpBmp::CustomBlt(int nSrcIndex, int nPalIndex, int nDstX, int nDstY, 
 
                 uIndex = pImgData[nSrcStartRow + (nXCtr / 4)];
 
-                if (uIndex)
+                if (uIndex) // don't draw the background color
                 {
                     nDstPos = nStartRow + x;
 
@@ -619,7 +619,7 @@ BOOL CImgDumpBmp::CustomBlt(int nSrcIndex, int nPalIndex, int nDstX, int nDstY, 
 
                 uIndex = pImgData[nSrcStartRow + (nXCtr / 4)];
 
-                if (uIndex)
+                if (uIndex) // don't draw the background color
                 {
                     nDstPos = nStartRow + x;
 
@@ -711,7 +711,11 @@ int CImgDumpBmp::GetMaxImagesPerLine()
         w_mul = 3;
         break;
     case 7: // SF3
-    case 8:
+    case 8: // MBAACC
+    case 16: // MBAACC
+    case 32: // MBAACC
+    case 36: // MBAACC
+    case 64: // MBAACC
         w_mul = 4;
         break;
     case 9:
@@ -773,7 +777,7 @@ void CImgDumpBmp::ResizeMainBmp()
         DeleteObject(MainHBmp);
 
         MainBmpi.bmiHeader.biWidth = nMainW;
-        MainBmpi.bmiHeader.biHeight = -nMainH;
+        MainBmpi.bmiHeader.biHeight = nMainH;
         MainBmpi.bmiHeader.biPlanes = 1;
         MainBmpi.bmiHeader.biBitCount = 32;
         MainBmpi.bmiHeader.biCompression = BI_RGB;

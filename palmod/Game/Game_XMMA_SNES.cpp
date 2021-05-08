@@ -16,7 +16,7 @@ CGame_XMMA_SNES::CGame_XMMA_SNES(UINT32 nConfirmedROMSize)
     createPalOptions = { NO_SPECIAL_OPTIONS, WRITE_16 };
 
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
-    SetColorMode(ColMode::COLMODE_GBA);
+    SetColorMode(ColMode::COLMODE_BGR555_LE);
 
     // The value passed in to us was the confirmed ROM size we have.
     // We keep track of this before we initialize so that we can truncate bad Extras correctly on load.
@@ -40,8 +40,8 @@ CGame_XMMA_SNES::CGame_XMMA_SNES(UINT32 nConfirmedROMSize)
     nGameFlag = XMMA_SNES;
 
     nImgGameFlag = IMGDAT_SECTION_SNES;
-    m_prgGameImageSet = nullptr;  // XMMA_SNES_IMG_UNITS
-    nImgUnitAmt = 0; // ARRAYSIZE(XMMA_SNES_IMG_UNITS);
+    m_prgGameImageSet = XMMA_SNES_IMG_UNITS;
+    nImgUnitAmt = ARRAYSIZE(XMMA_SNES_IMG_UNITS);
 
     nFileAmt = 1;
 
@@ -107,8 +107,6 @@ int CGame_XMMA_SNES::GetExtraLoc(UINT16 nUnitId)
 
 sDescTreeNode* CGame_XMMA_SNES::InitDescTree()
 {
-    UINT32 nTotalPaletteCount = 0;
-
     //Load extra file if we're using it
     LoadExtraFileForGame(EXTRA_FILENAME_XMMA_SNES, XMMA_SNES_EXTRA, &XMMA_SNES_EXTRA_CUSTOM, XMMA_SNES_EXTRALOC, m_nConfirmedROMSize);
 
@@ -123,25 +121,14 @@ sDescTreeNode* CGame_XMMA_SNES::InitDescTree()
     //All units have tree children
     NewDescTree->uChildType = DESC_NODETYPE_TREE;
 
-    CString strMsg;
-    bool fHaveExtras = (GetExtraCt(XMMA_SNES_EXTRALOC) > 0);
-    strMsg.Format(L"CGame_XMMA_SNES::InitDescTree: Building desc tree for XMMA_SNES %s extras...\n", fHaveExtras ? L"with" : L"without");
-    OutputDebugString(strMsg);
-
-    nTotalPaletteCount = _InitDescTree(NewDescTree,
+    m_nTotalPaletteCountForXMMA = _InitDescTree(NewDescTree,
         XMMA_SNES_UNITS,
-        nUnitCt,
         XMMA_SNES_EXTRALOC,
         XMMA_SNES_NUMUNIT,
         rgExtraCountAll,
         rgExtraLoc,
         XMMA_SNES_EXTRA_CUSTOM
     );
-
-    strMsg.Format(L"CGame_XMMA_SNES::InitDescTree: Loaded %u palettes for XMMA\n", nTotalPaletteCount);
-    OutputDebugString(strMsg);
-
-    m_nTotalPaletteCountForXMMA = nTotalPaletteCount;
 
     return NewDescTree;
 }

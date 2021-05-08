@@ -33,33 +33,33 @@ const UINT16 SAMSHO5_A_IMG_UNITS[] =
     indexSamSho5Sprites_Bonus,
     indexSamSho5Sprites_Stages,
 
-    indexSS5_Basara,      // 0x31
-    indexSS5_Charlotte,   // 0x32
-    indexSS5_Enja,        // 0x33
-    indexSS5_Gaira,       // 0x34
-    indexSS5_Galford,     // 0x35
-    indexSS5_Gaoh,        // 0x36
-    indexSS5_Genjuro,     // 0x37
-    indexSS5_Hanzo,       // 0x38
-    indexSS5_Haohmaru,    // 0x39
-    indexSS5_Jubei,       // 0x3A
-    indexSS5_Kazuki,      // 0x3B
-    indexSS5_Kusaregedo,  // 0x3C
-    indexSS5_Kyoshiro,    // 0x3D
-    indexSS5_Mina,        // 0x3E
-    indexSS5_Nakoruru,    // 0x3F
-    indexSS5_Rasetsumaru, // 0x40
-    indexSS5_Rera,        // 0x41
-    indexSS5_Rimururu,    // 0x42
-    indexSS5_Sankuro,     // 0x43
-    indexSS5_Shizumaru,   // 0x44
-    indexSS5_Sogetsu,     // 0x45
-    indexSS5_Suija,       // 0x46
-    indexSS5_TamTam,      // 0x47
-    indexSS5_Ukyo,        // 0x48
-    indexSS5_Yoshitora,   // 0x49
-    indexSS5_Yumeji,      // 0x4A
-    indexSS5_Yunfei,      // 0x4B
+    indexSS5_Basara,        // 0x31
+    indexSS5_Charlotte,     // 0x32
+    indexSS5_Enja,          // 0x33
+    indexSS5_Gaira,         // 0x34
+    indexSS5_Galford,       // 0x35
+    indexSS5_Gaoh,          // 0x36
+    indexSS5_Genjuro,       // 0x37
+    indexSS5_Hanzo,         // 0x38
+    indexSS5_Haohmaru,      // 0x39
+    indexSS5_Jubei,         // 0x3A
+    indexSS5_Kazuki,        // 0x3B
+    indexSS5_Kusaregedo,    // 0x3C
+    indexSS5_Kyoshiro,      // 0x3D
+    indexSS5_Mina,          // 0x3E
+    indexSS5_Nakoruru,      // 0x3F
+    indexSS5_Rasetsumaru,   // 0x40
+    indexSS5_Rera,          // 0x41
+    indexSS5_Rimururu,      // 0x42
+    indexSS5_Sankuro,       // 0x43
+    indexSS5_Shizumaru,     // 0x44
+    indexSS5_Sogetsu,       // 0x45
+    indexSS5_Suija,         // 0x46
+    indexSS5_TamTam,        // 0x47
+    indexSS5_Ukyo,          // 0x48
+    indexSS5_Yoshitora,     // 0x49
+    indexSS5_Yumeji,        // 0x4A
+    indexSS5_Yunfei,        // 0x4B
     indexSS5_Bonus,         // 0x4c
     indexSS5_Stages,        // 0x4d
 };
@@ -1916,7 +1916,7 @@ const sGame_PaletteDataset SAMSHO5_A_Yumeji_PALETTES_A[] =
     { L"Yumeji A Tomato", 0xe03e0, 0xe0400, indexSS5_Yumeji, 0x01 },
     { L"Yumeji A Transformation", 0xe00a0, 0xe00c0 },
     { L"Yumeji A Transformation Weapons", 0xe0080, 0xe00a0 },
-    { L"Yumeji A Haohmaru", 0xe01c0, 0xe01e0 },
+    { L"Yumeji A Haohmaru", 0xe01c0, 0xe01e0, indexSS5_Yumeji, 0x003 },
     { L"Yumeji A Genjuro", 0xe01e0, 0xe0200 },
     { L"Yumeji A Hanzo", 0xe0280, 0xe02a0 },
     { L"Yumeji A Jubei", 0xe02a0, 0xe02c0 },
@@ -1944,7 +1944,7 @@ const sGame_PaletteDataset SAMSHO5_A_Yumeji_PALETTES_B[] =
     { L"Yumeji B Slash Effect", 0xe0740, 0xe0760 },
     { L"Yumeji B Transformation", 0xe04a0, 0xe04c0 },
     { L"Yumeji B Transformation Weapons", 0xe0480, 0xe04a0 },
-    { L"Yumeji B Haohmaru", 0xe05c0, 0xe05e0 },
+    { L"Yumeji B Haohmaru", 0xe05c0, 0xe05e0, indexSS5_Yumeji, 0x03 },
     { L"Yumeji B Genjuro", 0xe05e0, 0xe0600 },
     { L"Yumeji B Hanzo", 0xe0680, 0xe06a0 },
     { L"Yumeji B Jubei", 0xe06a0, 0xe06c0 },
@@ -1970,7 +1970,7 @@ const sGame_PaletteDataset SAMSHO5_A_Yumeji_PALETTES_C[] =
     { L"Yumeji C Tomato", 0xe0be0, 0xe0c00, indexSS5_Yumeji, 0x01 },
     { L"Yumeji C Transformation", 0xe08a0, 0xe08c0 },
     { L"Yumeji C Transformation Weapons", 0xe0880, 0xe08a0 },
-    { L"Yumeji C Haohmaru", 0xe09c0, 0xe09e0 },
+    { L"Yumeji C Haohmaru", 0xe09c0, 0xe09e0, indexSS5_Yumeji, 0x03 },
     { L"Yumeji C Genjuro", 0xe09e0, 0xe0a00 },
     { L"Yumeji C Hanzo", 0xe0a80, 0xe0aa0 },
     { L"Yumeji C Jubei", 0xe0aa0, 0xe0ac0 },
@@ -1997,7 +1997,7 @@ const sGame_PaletteDataset SAMSHO5_A_Yumeji_PALETTES_D[] =
     { L"Yumeji D Tomato", 0xe0fe0, 0xe1000, indexSS5_Yumeji, 0x01 },
     { L"Yumeji D Transformation", 0xe0ca0, 0xe0cc0 },
     { L"Yumeji D Transformation Weapons", 0xe0c80, 0xe0ca0 },
-    { L"Yumeji D Haohmaru", 0xe0dc0, 0xe0de0 },
+    { L"Yumeji D Haohmaru", 0xe0dc0, 0xe0de0, indexSS5_Yumeji, 0x03 },
     { L"Yumeji D Genjuro", 0xe0de0, 0xe0e00 },
     { L"Yumeji D Hanzo", 0xe0e80, 0xe0ea0 },
     { L"Yumeji D Jubei", 0xe0ea0, 0xe0ec0 },
@@ -2393,7 +2393,7 @@ const sGame_PaletteDataset SAMSHO5_A_BONUS_INTRO_PALETTES[] =
 const sGame_PaletteDataset SAMSHO5_A_BONUS_INGAME_PALETTES[] =
 {
     // --Ingame Extras--
-    { L"Blood/Shadow", 0xd4600, 0xd4620 },
+    { L"Blood/Shadow", 0xd4600, 0xd4620, indexSS5_Bonus, 0x00 },
     { L"Censored Blood/Shadow", 0xd4640, 0xd4660 },
     { L"Kazuki/Enja Explosion Pal P1", 0xd4220, 0xd4240 },
     { L"Kazuki/Enja Explosion Pal P2", 0xd4620, 0xd4640 },

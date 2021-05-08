@@ -16,7 +16,7 @@ CGame_MMX2_SNES::CGame_MMX2_SNES(UINT32 nConfirmedROMSize)
     createPalOptions = { NO_SPECIAL_OPTIONS, WRITE_16 };
 
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
-    SetColorMode(ColMode::COLMODE_GBA);
+    SetColorMode(ColMode::COLMODE_BGR555_LE);
 
     // The value passed in to us was the confirmed ROM size we have.
     // We keep track of this before we initialize so that we can truncate bad Extras correctly on load.
@@ -107,8 +107,6 @@ int CGame_MMX2_SNES::GetExtraLoc(UINT16 nUnitId)
 
 sDescTreeNode* CGame_MMX2_SNES::InitDescTree()
 {
-    UINT32 nTotalPaletteCount = 0;
-
     //Load extra file if we're using it
     LoadExtraFileForGame(EXTRA_FILENAME_MMX2_SNES, MMX2_SNES_EXTRA, &MMX2_SNES_EXTRA_CUSTOM, MMX2_SNES_EXTRALOC, m_nConfirmedROMSize);
 
@@ -123,25 +121,14 @@ sDescTreeNode* CGame_MMX2_SNES::InitDescTree()
     //All units have tree children
     NewDescTree->uChildType = DESC_NODETYPE_TREE;
 
-    CString strMsg;
-    bool fHaveExtras = (GetExtraCt(MMX2_SNES_EXTRALOC) > 0);
-    strMsg.Format(L"CGame_MMX2_SNES::InitDescTree: Building desc tree for MMX2_SNES %s extras...\n", fHaveExtras ? L"with" : L"without");
-    OutputDebugString(strMsg);
-
-    nTotalPaletteCount = _InitDescTree(NewDescTree,
+    m_nTotalPaletteCountForMMX2 = _InitDescTree(NewDescTree,
         MMX2_SNES_UNITS,
-        nUnitCt,
         MMX2_SNES_EXTRALOC,
         MMX2_SNES_NUMUNIT,
         rgExtraCountAll,
         rgExtraLoc,
         MMX2_SNES_EXTRA_CUSTOM
     );
-
-    strMsg.Format(L"CGame_MMX2_SNES::InitDescTree: Loaded %u palettes for MMX2\n", nTotalPaletteCount);
-    OutputDebugString(strMsg);
-
-    m_nTotalPaletteCountForMMX2 = nTotalPaletteCount;
 
     return NewDescTree;
 }

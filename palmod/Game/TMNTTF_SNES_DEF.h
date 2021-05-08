@@ -7,30 +7,49 @@
 // * Then create the set of palettes for that character
 // That should be it.  Good luck.
 
+const UINT16 TMNTTF_SNES_IMG_UNITS[] =
+{
+    indexTMNTTFSprites_Armaggon,        // 0x39
+    indexTMNTTFSprites_Aska,            // 0x3A
+    indexTMNTTFSprites_ChromeDome,      // 0x3B
+    indexTMNTTFSprites_CyberShredder,   // 0x3C
+    indexTMNTTFSprites_Donatello,       // 0x3D
+    indexTMNTTFSprites_FakeBrother,     // 0x3E
+    indexTMNTTFSprites_Karai,           // 0x3F
+    indexTMNTTFSprites_Leonardo,        // 0x40
+    indexTMNTTFSprites_Michelangelo,    // 0x41
+    indexTMNTTFSprites_Raphael,         // 0x42
+    indexTMNTTFSprites_RatKing,         // 0x43
+    indexTMNTTFSprites_War,             // 0x44
+    indexTMNTTFSprites_Wingnut,         // 0x45
+    indexTMNTTFSprites_Bonus,           // 0x46
+    indexTMNTTFSprites_Stages,          // 0x47
+};
+
 const sGame_PaletteDataset TMNTTF_SNES_LEO_PALETTES_P1[] =
 {
-     { L"Leo P1", 0x0487bc, 0x0487dc },
+     { L"Leo P1", 0x0487bc, 0x0487dc, indexTMNTTFSprites_Leonardo, 0x00, &pairNext2 },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_LEO_PALETTES_P2[] =
 {
-    { L"Leo P2", 0x0487Dc, 0x0487FC },
+    { L"Leo P2", 0x0487Dc, 0x0487FC, indexTMNTTFSprites_Leonardo, 0x00, &pairNext },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_LEO_PALETTES_SHARED[] =
 {
-    { L"Leo Katanas", 0x0487Fc, 0x04880c },
-    { L"Leo FX", 0x04880c, 0x04882c },
+    { L"Leo Katanas", 0x0487Fc, 0x04880c, indexTMNTTFSprites_Leonardo, 0x01 },
+    { L"Leo FX", 0x04880c, 0x04882c, indexTMNTTFSprites_Leonardo, 0x02 },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_RALPH_PALETTES_P1[] =
 {
-    { L"Ralph P1", 0x04882c, 0x04884C },
+    { L"Ralph P1", 0x04882c, 0x04884C, indexTMNTTFSprites_Leonardo },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_RALPH_PALETTES_P2[] =
 {
-    { L"Ralph P2", 0x04884c, 0x04886C },
+    { L"Ralph P2", 0x04884c, 0x04886C, indexTMNTTFSprites_Leonardo },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_RALPH_PALETTES_SHARED[] =
@@ -41,12 +60,12 @@ const sGame_PaletteDataset TMNTTF_SNES_RALPH_PALETTES_SHARED[] =
 
 const sGame_PaletteDataset TMNTTF_SNES_DON_PALETTES_P1[] =
 {
-    { L"Don P1", 0x04890c, 0x04892C },
+    { L"Don P1", 0x04890c, 0x04892C, indexTMNTTFSprites_Leonardo },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_DON_PALETTES_P2[] =
 {
-    { L"Don P2", 0x04892c, 0x04894C },
+    { L"Don P2", 0x04892c, 0x04894C, indexTMNTTFSprites_Leonardo },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_DON_PALETTES_SHARED[] =
@@ -57,12 +76,12 @@ const sGame_PaletteDataset TMNTTF_SNES_DON_PALETTES_SHARED[] =
 
 const sGame_PaletteDataset TMNTTF_SNES_MIKE_PALETTES_P1[] =
 {
-    { L"Mike P1", 0x04889c, 0x0488BC },
+    { L"Mike P1", 0x04889c, 0x0488BC, indexTMNTTFSprites_Leonardo },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_MIKE_PALETTES_P2[] =
 {
-    { L"Mike P2", 0x0488Bc, 0x0488DC },
+    { L"Mike P2", 0x0488Bc, 0x0488DC, indexTMNTTFSprites_Leonardo },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_MIKE_PALETTES_SHARED[] =
@@ -73,15 +92,15 @@ const sGame_PaletteDataset TMNTTF_SNES_MIKE_PALETTES_SHARED[] =
 
 const sGame_PaletteDataset TMNTTF_SNES_SHREDDER_PALETTES_P1[] =
 {
-    { L"C. Shredder P1", 0x048450, 0x048470 },
-    { L"C. Shredder P1 FX 1", 0x048470, 0x04847e },
+    { L"C. Shredder P1", 0x048450, 0x048470, indexTMNTTFSprites_CyberShredder, 0x00, &pairNext },
+    { L"C. Shredder P1 FX 1", 0x048470, 0x04847e, indexTMNTTFSprites_CyberShredder, 0x01 },
     { L"C. Shredder P1 FX 2", 0x048480, 0x0484a0 },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_SHREDDER_PALETTES_P2[] =
 {
-    { L"C. Shredder P2", 0x0484A0, 0x0484C0 },
-    { L"C. Shredder P2 FX", 0x0484C0, 0x0484Ce },
+    { L"C. Shredder P2", 0x0484A0, 0x0484C0, indexTMNTTFSprites_CyberShredder, 0x00, &pairNext },
+    { L"C. Shredder P2 FX", 0x0484C0, 0x0484Ce, indexTMNTTFSprites_CyberShredder, 0x01 },
     { L"C. Shredder P2 FX 2", 0x0484d0, 0x0484F0 },
 };
 
@@ -218,6 +237,12 @@ const sGame_PaletteDataset TMNTTF_SNES_STAGE_ARTMUSEUM_PALETTES[] =
     { L"Center Sculpture", 0x4A946, 0x4A966 },
     { L"Mousers, Big pillars", 0x4A964, 0x4A984 },
     { L"People", 0x4A982, 0x4A9A2 },
+
+    { L"Art Museum - Center Statue Glow", 0x9BEE, 0x9C0E },
+    { L"Thunder Dome - Small Floor Lights 1", 0x49ED0, 0x49EE0 },
+    { L"Thunder Dome - Small Floor Lights 2", 0x49C68, 0x49C78 },
+    { L"Thunder Dome - Big Floor Lights", 0x49EE0, 0x49EF8 },
+    { L"Thunder Dome - Dinosaur Glow", 0x49EF8, 0x49F18 },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_STAGE_BACKALLEY_PALETTES[] =
@@ -262,6 +287,7 @@ const sGame_PaletteDataset TMNTTF_SNES_STAGE_METALWORKS_PALETTES[] =
     { L"Yellow supports / Violet Foot", 0x4831E, 0x4833E },
     { L"Yellow supports / Green Foot", 0x4833C, 0x4835C },
     { L"Background", 0x4835A, 0x4837A },
+    { L"Metal Works Background Cycle", 0x9BCE, 0x9BEE },
 };
 
 const sGame_PaletteDataset TMNTTF_SNES_STAGE_MTOLYMPUS_PALETTES[] =
@@ -380,6 +406,27 @@ const sGame_PaletteDataset TMNTTF_SNES_BONUS_PALETTES_SELECTICONS[] =
     { L"Armaggon Select Icon", 0x049820, 0x049840 },
 };
 
+const sGame_PaletteDataset TMNTTF_SNES_BONUS_PALETTES_STAGESELECTICONS[] =
+{
+    { L"Satellite", 0x49EAE, 0x49ECE },
+    { L"US Map", 0x49CD2, 0x49CF2 },
+    { L"Statue of Liberty / Horizontal Gradient / Stars", 0x49C96, 0x49CB6 },
+    { L"US Flag", 0x49CB4, 0x49CD4 },
+
+    { L"Back Alley Select Icon", 0x49D2e, 0x49D4E },
+    { L"Thunder Dome Select Icon", 0x49D4e, 0x49D6E },
+    { L"Metal Works Select Icon", 0x49D6e, 0x49D8E },
+    { L"Cafeteria Select Icon", 0x49DAe, 0x49DCE },
+    { L"Mt. Olympus Select Icon", 0x49DCe, 0x49DEE },
+    { L"Pirate Ship Select Icon", 0x49DEe, 0x49E0E },
+    { L"Sky Palace Select Icon", 0x49E0e, 0x49E2E },
+    { L"Art Museum Select Icon", 0x49E4e, 0x49E6E },
+    { L"Noh-Stage Select Icon", 0x49E6e, 0x49E8E },
+    { L"Scrapyard Select Icon", 0x49E8e, 0x49EAE },
+    { L"Studio 6 Select Icon", 0x49E2E, 0x49E4E },
+    { L"Metro Train Select Icon", 0x49D8E, 0x49DAE },
+};
+
 const sGame_PaletteDataset TMNTTF_SNES_BONUS_PALETTES_UNSELECTICONS[] =
 {
     { L"Turtles UnSelect Icon", 0x04973a, 0x04975a },
@@ -390,9 +437,10 @@ const sGame_PaletteDataset TMNTTF_SNES_BONUS_PALETTES_UNSELECTICONS[] =
     { L"Wingnut UnSelect Icon", 0x0497c2, 0x0497e2 },
 };
 
-const sGame_PaletteDataset TMNTTF_SNES_BONUS_PALETTES_MENU[] =
+const sGame_PaletteDataset TMNTTF_SNES_BONUS_PALETTES_BONUS[] =
 {
     { L"Characters Names", 0x049840, 0x049860 },
+    { L"Character Select BG", 0x49678, 0x49698 },
 };
 
 const sDescTreeNode TMNTTF_SNES_LEO_COLLECTION[] =
@@ -495,6 +543,7 @@ const sDescTreeNode TMNTTF_SNES_STAGES_COLLECTION[] =
     { L"Sky Palace", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_STAGE_SKYPALACE_PALETTES, ARRAYSIZE(TMNTTF_SNES_STAGE_SKYPALACE_PALETTES) },
     { L"Studio 6", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_STAGE_STUDIO6_PALETTES, ARRAYSIZE(TMNTTF_SNES_STAGE_STUDIO6_PALETTES) },
     { L"Thunder Dome", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_STAGE_THUNDERDOME_PALETTES, ARRAYSIZE(TMNTTF_SNES_STAGE_THUNDERDOME_PALETTES) },
+    { L"Stage Select", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_BONUS_PALETTES_STAGESELECTICONS, ARRAYSIZE(TMNTTF_SNES_BONUS_PALETTES_STAGESELECTICONS) },
 };
 
 const sDescTreeNode TMNTTF_SNES_BONUS_COLLECTION[] =
@@ -502,7 +551,7 @@ const sDescTreeNode TMNTTF_SNES_BONUS_COLLECTION[] =
     { L"Select Portraits", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_BONUS_PALETTES_SELECT, ARRAYSIZE(TMNTTF_SNES_BONUS_PALETTES_SELECT) },
     { L"Selected Icons", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_BONUS_PALETTES_SELECTICONS, ARRAYSIZE(TMNTTF_SNES_BONUS_PALETTES_SELECTICONS) },
     { L"Unselected Icons", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_BONUS_PALETTES_UNSELECTICONS, ARRAYSIZE(TMNTTF_SNES_BONUS_PALETTES_UNSELECTICONS) },
-    { L"Menu Extras", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_BONUS_PALETTES_MENU, ARRAYSIZE(TMNTTF_SNES_BONUS_PALETTES_MENU) },
+    { L"Bonus", DESC_NODETYPE_TREE, (void*)TMNTTF_SNES_BONUS_PALETTES_BONUS, ARRAYSIZE(TMNTTF_SNES_BONUS_PALETTES_BONUS) },
 };
 
 const sDescTreeNode TMNTTF_SNES_UNITS[] =

@@ -39,9 +39,9 @@ void CGame_MSH_A::InitializeStatics()
 
 CGame_MSH_A::CGame_MSH_A(UINT32 nConfirmedROMSize, int nMSHRomToLoad)
 {
-    createPalOptions = { OFFSET_PALETTE_BY_ONE, WRITE_16 };
+    createPalOptions = { NO_SPECIAL_OPTIONS, WRITE_16 };
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
-    SetColorMode(ColMode::COLMODE_12A);
+    SetColorMode(ColMode::COLMODE_RGB444_BE);
 
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
@@ -57,7 +57,7 @@ CGame_MSH_A::CGame_MSH_A(UINT32 nConfirmedROMSize, int nMSHRomToLoad)
     m_nTotalInternalUnits = UsePaletteSetForCharacters() ? MSH_A_NUMUNIT_05 : MSH_A_NUMUNIT_06;
     m_nExtraUnit = UsePaletteSetForCharacters() ? MSH_A_EXTRALOC_05 : MSH_A_EXTRALOC_06;
 
-    const UINT32 nSafeCountFor05 = 445;
+    const UINT32 nSafeCountFor05 = 436;
     const UINT32 nSafeCountFor06 = 72;
 
     m_nSafeCountForThisRom = GetExtraCt(m_nExtraUnit) + (UsePaletteSetForCharacters() ? nSafeCountFor05 : nSafeCountFor06);

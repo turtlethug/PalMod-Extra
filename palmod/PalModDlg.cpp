@@ -187,6 +187,8 @@ BEGIN_MESSAGE_MAP(CPalModDlg, CDialog)
     ON_COMMAND(ID_COLORFORMAT_RGB555_GBA, &CPalModDlg::SetColorFormatToGBA)
     ON_COMMAND(ID_COLORFORMAT_RGB666, &CPalModDlg::SetColorFormatToNEOGEO)
     ON_COMMAND(ID_COLORFORMAT_SHARPRGB, &CPalModDlg::SetColorFormatToSharpRGB)
+    ON_COMMAND(ID_COLORFORMAT_xRGB888, &CPalModDlg::SetColorFormatToxRGB888)
+    ON_COMMAND(ID_COLORFORMAT_xBGR888, &CPalModDlg::SetColorFormatToxBGR888)
     ON_COMMAND(ID_COLORFORMAT_ARGB1888, &CPalModDlg::SetColorFormatToARGB1888)
     ON_COMMAND(ID_COLORFORMAT_ARGB7888, &CPalModDlg::SetColorFormatToARGB7888)
     ON_COMMAND(ID_COLORFORMAT_ARGB8888, &CPalModDlg::SetColorFormatToARGB8888)
@@ -227,12 +229,14 @@ BEGIN_MESSAGE_MAP(CPalModDlg, CDialog)
     ON_WM_GETMINMAXINFO()
     ON_COMMAND(ID_LOADDIRECTORY_DANKUGA, &CPalModDlg::OnLoadDir_Dankuga)
     ON_COMMAND(ID_LD_DBFCI, &CPalModDlg::OnLoadDir_DBFCI)    
-    ON_COMMAND(ID_LD_GGXXACR, &CPalModDlg::OnLoadDir_GGXXACReloaded)
+    ON_COMMAND(ID_LD_GGXXACR_S, &CPalModDlg::OnLoadDir_GGXXACR_S)
+    ON_COMMAND(ID_LD_GGXXACR_P, &CPalModDlg::OnLoadDir_GGXXACR_P)
     ON_COMMAND(ID_LD_JOJOS50, &CPalModDlg::OnLoadDir_Jojos50)
     ON_COMMAND(ID_LD_JOJOS51, &CPalModDlg::OnLoadDir_Jojos51)
     ON_COMMAND(ID_LD_MVC2ARCADE, &CPalModDlg::OnLoadDir_MVC2ArcadeAll)
     ON_COMMAND(ID_LD_MVC2DCUSA, &CPalModDlg::OnLoadDir_MVC2DCUSA)
     ON_COMMAND(ID_LD_MVC2PS2USA, &CPalModDlg::OnLoadDir_MVC2PS2USA)
+    ON_COMMAND(ID_LD_MBAACC_S, &CPalModDlg::OnLoadDir_MBAACC_S)
     ON_COMMAND(ID_LOADDIRECTORY_REDEARTH_30, &CPalModDlg::OnLoadDir_RedEarth30)
     ON_COMMAND(ID_LOADDIRECTORY_REDEARTH_31, &CPalModDlg::OnLoadDir_RedEarth31)
     ON_COMMAND(ID_LD_SFIII1, &CPalModDlg::OnLoadDir_SFIII1Arcade)
@@ -432,9 +436,10 @@ BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam)
     return TRUE;
 }
 
-BOOL CPalModDlg::SetLoadDir(CString* szOut)
+BOOL CPalModDlg::SetLoadDir(CString* strOut, LPCWSTR pszDescriptionString /* = nullptr */, SupportedGamesList nDefaultGameFlag /* = NUM_GAMES */)
 {
     LPMALLOC pMalloc;
+    BOOL fSuccess = TRUE;
 
     if (::SHGetMalloc(&pMalloc) == NOERROR)
     {
@@ -443,31 +448,30 @@ BOOL CPalModDlg::SetLoadDir(CString* szOut)
         LPITEMIDLIST    pidl;
 
         bi.hwndOwner = GetSafeHwnd();
-        bi.pidlRoot = NULL;
+        bi.pidlRoot = nullptr; // We don't want to force browse-below
         bi.pszDisplayName = pszBuffer;
-        bi.lpszTitle = L"Select a target directory";
-        bi.ulFlags = BIF_RETURNFSANCESTORS | BIF_RETURNONLYFSDIRS;
+        bi.lpszTitle = pszDescriptionString ? pszDescriptionString : L"Select a target directory";
+        bi.ulFlags = BIF_RETURNFSANCESTORS | BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE | BIF_NONEWFOLDERBUTTON;
         bi.lpfn = OnBrowseDialog;
-        bi.lParam = 0;
+        bi.lParam = nDefaultGameFlag;
 
         if (pidl = ::SHBrowseForFolder(&bi))
         {
             if (::SHGetPathFromIDList(pidl, pszBuffer))
             {
-                *szOut = pszBuffer;
+                *strOut = pszBuffer;
             }
             pMalloc->Free(pidl);
         }
         else
         {
-            pMalloc->Release();
-            return FALSE;
+            fSuccess = FALSE;
         }
 
         pMalloc->Release();
     }
 
-    return TRUE;
+    return fSuccess;
 }
 
 BOOL CPalModDlg::PreTranslateMessage(MSG* pMsg)

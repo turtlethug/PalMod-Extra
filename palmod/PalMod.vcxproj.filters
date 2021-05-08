@@ -217,26 +217,14 @@
     <Filter Include="Game\Other Platforms">
       <UniqueIdentifier>{3e8ed08b-6c31-4d0d-affc-0f6a12a8dcb7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\SNK Games\Samurai Shodown 4">
-      <UniqueIdentifier>{dc385e4d-7b94-4805-8871-c401b54bd681}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Capcom Games\Slam Masters 2">
       <UniqueIdentifier>{790c3553-43d8-4e6d-9b0f-b36f7b64f595}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\SNK Games\Last Blade 2">
       <UniqueIdentifier>{882354da-0a66-45a8-a19f-7582fcd08abc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\SNK Games\Samurai Shodown 5">
-      <UniqueIdentifier>{41152932-6857-4875-a1a1-40ed18d6bd80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\SNK Games\Real Bout Fatal Fury 1">
       <UniqueIdentifier>{1bde8d50-ba03-407d-a49b-fe58c356b932}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\SNK Games\Samurai Shodown 3">
-      <UniqueIdentifier>{1bc29372-5f2a-4d1f-b949-f5fd9a70efe5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\SNK Games\Samurai Shodown 5 Special">
-      <UniqueIdentifier>{fe714ae2-392a-409d-93fc-c41ebecf4c94}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\SNK Games\Real Bout Fatal Fury 2">
       <UniqueIdentifier>{82710d2e-de00-4ee9-a2bc-77447da7e830}</UniqueIdentifier>
@@ -273,9 +261,6 @@
     </Filter>
     <Filter Include="Game\SNK Games\Savage Reign">
       <UniqueIdentifier>{85ad4673-3216-48e6-8843-d42c26132625}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Other Platforms\GGXX ACR">
-      <UniqueIdentifier>{4465c092-2e8d-4ad8-9e9f-3ddfa005bc8c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\SNK Games\Rage of the Dragons">
       <UniqueIdentifier>{deaf145c-fe5f-4801-b2be-a8c8b9d7eb01}</UniqueIdentifier>
@@ -318,6 +303,69 @@
     </Filter>
     <Filter Include="Game\Nintendo\Mega Man X2 %28SNES%29">
       <UniqueIdentifier>{d96afcbe-5807-4584-8bd8-3d65cb6c2bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\KOF02N_A">
+      <UniqueIdentifier>{6c820e94-dd0d-4006-b5ae-340da094c0fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Last Blade">
+      <UniqueIdentifier>{632ea97e-c50d-4066-901e-222d3c1799bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\KOF96_A">
+      <UniqueIdentifier>{e0a1c9b3-bbfc-4de4-9d93-2b26a8b42442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\KOF95_A">
+      <UniqueIdentifier>{60e388d3-c582-459a-af73-107faa18b5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Samurai Shodown">
+      <UniqueIdentifier>{c835cd9f-12f1-412c-9544-f34f43015967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Samurai Shodown II">
+      <UniqueIdentifier>{445ddcfa-8e9f-4caa-bf08-71e0c219c2a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Samurai Shodown III">
+      <UniqueIdentifier>{1bc29372-5f2a-4d1f-b949-f5fd9a70efe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Samurai Shodown IV">
+      <UniqueIdentifier>{dc385e4d-7b94-4805-8871-c401b54bd681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Samurai Shodown V">
+      <UniqueIdentifier>{41152932-6857-4875-a1a1-40ed18d6bd80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Samurai Shodown V Special">
+      <UniqueIdentifier>{fe714ae2-392a-409d-93fc-c41ebecf4c94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Fatal Fury Special">
+      <UniqueIdentifier>{03a8779c-00c7-41f8-8c89-0431e3e52880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\Fatal Fury 1">
+      <UniqueIdentifier>{bd825340-a735-4c79-8a29-97133f4a6fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\SNK Games\KOF98AE2016">
+      <UniqueIdentifier>{eac807da-e805-4c7a-abee-b390a28f9021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Other Platforms\Melty Blood Actress Again Current Code %28Steam/Community Port%29">
+      <UniqueIdentifier>{f137a86b-ea24-46d9-87ee-354ee6f2a295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Other Platforms\Guilty Gear">
+      <UniqueIdentifier>{36d28334-3e84-4185-a3a8-b684238a647f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Other Platforms\Guilty Gear\GGXX ACR %28Steam%29">
+      <UniqueIdentifier>{4465c092-2e8d-4ad8-9e9f-3ddfa005bc8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Other Platforms\Guilty Gear\GGXX ACR %28PlayStation 3%29">
+      <UniqueIdentifier>{c0591ed6-c310-4f32-8073-aef44a841908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Nintendo\Mega Man X3 %28SNES%29">
+      <UniqueIdentifier>{4b9c1e94-852d-419e-a68e-6f73f414bf78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Nintendo\Mega Man X %28SNES%29">
+      <UniqueIdentifier>{b5bf73f8-84db-4a1c-b488-826c8f24b470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Nintendo\Killer Instinct %28SNES%29">
+      <UniqueIdentifier>{4c2a078b-795a-47f5-9d20-36f3ad47a2c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Nintendo\Ranma 1/2: Hard Battle %28SNES%29">
+      <UniqueIdentifier>{3637f834-52c4-4fbf-93a8-f818875ec489}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -481,7 +529,7 @@
       <Filter>Game\SNK Games\SVCPLUSA_A</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game_SAMSHO5SP_A.cpp">
-      <Filter>Game\SNK Games\Samurai Shodown 5 Special</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown V Special</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game_MVC2_A_DIR.cpp">
       <Filter>Game\Capcom Games\MVC2_A_DIR</Filter>
@@ -517,7 +565,7 @@
       <Filter>Game\SNK Games\Real Bout Fatal Fury Special</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game_SAMSHO3_A.cpp">
-      <Filter>Game\SNK Games\Samurai Shodown 3</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown III</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game_VHUNT2_A.cpp">
       <Filter>Game\Capcom Games\Vampire Hunter 2_A</Filter>
@@ -589,7 +637,7 @@
       <Filter>Game\SNK Games\Art of Fighting 3</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game_SAMSHO4_A.cpp">
-      <Filter>Game\SNK Games\Samurai Shodown 4</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown IV</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game_RODSM2_A.cpp">
       <Filter>Game\Capcom Games\Slam Masters 2</Filter>
@@ -601,7 +649,7 @@
       <Filter>Main DLG/APP\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game_SAMSHO5_A.cpp">
-      <Filter>Game\SNK Games\Samurai Shodown 5</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown V</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game_RBFF1_A.cpp">
       <Filter>Game\SNK Games\Real Bout Fatal Fury 1</Filter>
@@ -642,9 +690,6 @@
     <ClCompile Include="Game\Game_SavageReign_A.cpp">
       <Filter>Game\SNK Games\Savage Reign</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Game_GGXXACR_A.cpp">
-      <Filter>Game\Other Platforms\GGXX ACR</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Game_ROTD_A.cpp">
       <Filter>Game\SNK Games\Rage of the Dragons</Filter>
     </ClCompile>
@@ -677,6 +722,54 @@
     </ClCompile>
     <ClCompile Include="Game\Game_MMX2_SNES.cpp">
       <Filter>Game\Nintendo\Mega Man X2 %28SNES%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_LASTBLADE_A.cpp">
+      <Filter>Game\SNK Games\Last Blade</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_KOF00N_A.cpp">
+      <Filter>Game\SNK Games\KOF02N_A</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_KOF95_A.cpp">
+      <Filter>Game\SNK Games\KOF95_A</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_KOF96_A.cpp">
+      <Filter>Game\SNK Games\KOF96_A</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_SAMSHO1_A.cpp">
+      <Filter>Game\SNK Games\Samurai Shodown</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_SAMSHO2_A.cpp">
+      <Filter>Game\SNK Games\Samurai Shodown II</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_FatalFuryS_A.cpp">
+      <Filter>Game\SNK Games\Fatal Fury Special</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_FatalFury1_A.cpp">
+      <Filter>Game\SNK Games\Fatal Fury 1</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_GGXXACR_S.cpp">
+      <Filter>Game\Other Platforms\Guilty Gear\GGXX ACR %28Steam%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_GGXXACR_P.cpp">
+      <Filter>Game\Other Platforms\Guilty Gear\GGXX ACR %28PlayStation 3%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_MBAACC_S.cpp">
+      <Filter>Game\Other Platforms\Melty Blood Actress Again Current Code %28Steam/Community Port%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_KOF98AE2016_A.cpp">
+      <Filter>Game\SNK Games\KOF98AE2016</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_KI_SNES.cpp">
+      <Filter>Game\Nintendo\Killer Instinct %28SNES%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_MMX_SNES.cpp">
+      <Filter>Game\Nintendo\Mega Man X %28SNES%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_MMX3_SNES.cpp">
+      <Filter>Game\Nintendo\Mega Man X3 %28SNES%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game_RanmaHB_SNES.cpp">
+      <Filter>Game\Nintendo\Ranma 1/2: Hard Battle %28SNES%29</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -900,10 +993,10 @@
       <Filter>Game\SNK Games\SVCPLUSA_A</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game_SAMSHO5SP_A.h">
-      <Filter>Game\SNK Games\Samurai Shodown 5 Special</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown V Special</Filter>
     </ClInclude>
     <ClInclude Include="Game\SAMSHO5SP_A_DEF.h">
-      <Filter>Game\SNK Games\Samurai Shodown 5 Special</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown V Special</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game_MVC2_A_DIR.h">
       <Filter>Game\Capcom Games\MVC2_A_DIR</Filter>
@@ -963,10 +1056,10 @@
       <Filter>Game\SNK Games\Real Bout Fatal Fury Special</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game_SAMSHO3_A.h">
-      <Filter>Game\SNK Games\Samurai Shodown 3</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown III</Filter>
     </ClInclude>
     <ClInclude Include="Game\SAMSHO3_A_DEF.h">
-      <Filter>Game\SNK Games\Samurai Shodown 3</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown III</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game_VHUNT2_A.h">
       <Filter>Game\Capcom Games\Vampire Hunter 2_A</Filter>
@@ -1101,10 +1194,10 @@
       <Filter>Game\SNK Games\Art of Fighting 3</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game_SAMSHO4_A.h">
-      <Filter>Game\SNK Games\Samurai Shodown 4</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown IV</Filter>
     </ClInclude>
     <ClInclude Include="Game\SAMSHO4_A_DEF.h">
-      <Filter>Game\SNK Games\Samurai Shodown 4</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown IV</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game_RODSM2_A.h">
       <Filter>Game\Capcom Games\Slam Masters 2</Filter>
@@ -1119,10 +1212,10 @@
       <Filter>Game\SNK Games\Last Blade 2</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game_SAMSHO5_A.h">
-      <Filter>Game\SNK Games\Samurai Shodown 5</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown V</Filter>
     </ClInclude>
     <ClInclude Include="Game\SAMSHO5_A_DEF.h">
-      <Filter>Game\SNK Games\Samurai Shodown 5</Filter>
+      <Filter>Game\SNK Games\Samurai Shodown V</Filter>
     </ClInclude>
     <ClInclude Include="Game\Game_RBFF1_A.h">
       <Filter>Game\SNK Games\Real Bout Fatal Fury 1</Filter>
@@ -1196,9 +1289,6 @@
     <ClInclude Include="Game\SavageReign_A_DEF.h">
       <Filter>Game\SNK Games\Savage Reign</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Game_GGXXACR_A.h">
-      <Filter>Game\Other Platforms\GGXX ACR</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Game_ROTD_A.h">
       <Filter>Game\SNK Games\Rage of the Dragons</Filter>
     </ClInclude>
@@ -1258,6 +1348,105 @@
     </ClInclude>
     <ClInclude Include="Game\MMX2_SNES_DEF.h">
       <Filter>Game\Nintendo\Mega Man X2 %28SNES%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_LASTBLADE_A.h">
+      <Filter>Game\SNK Games\Last Blade</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\LASTBLADE_A_DEF.h">
+      <Filter>Game\SNK Games\Last Blade</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_KOF00N_A.h">
+      <Filter>Game\SNK Games\KOF02N_A</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\KOF00N_A_DEF.h">
+      <Filter>Game\SNK Games\KOF02N_A</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_KOF95_A.h">
+      <Filter>Game\SNK Games\KOF95_A</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\KOF95_A_DEF.h">
+      <Filter>Game\SNK Games\KOF95_A</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_KOF96_A.h">
+      <Filter>Game\SNK Games\KOF96_A</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\KOF96_A_DEF.h">
+      <Filter>Game\SNK Games\KOF96_A</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_SAMSHO1_A.h">
+      <Filter>Game\SNK Games\Samurai Shodown</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SAMSHO1_A_DEF.h">
+      <Filter>Game\SNK Games\Samurai Shodown</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_SAMSHO2_A.h">
+      <Filter>Game\SNK Games\Samurai Shodown II</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SAMSHO2_A_DEF.h">
+      <Filter>Game\SNK Games\Samurai Shodown II</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\FatalFuryS_A_DEF.h">
+      <Filter>Game\SNK Games\Fatal Fury Special</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_FatalFuryS_A.h">
+      <Filter>Game\SNK Games\Fatal Fury Special</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\FatalFury1_A_DEF.h">
+      <Filter>Game\SNK Games\Fatal Fury 1</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_FatalFury1_A.h">
+      <Filter>Game\SNK Games\Fatal Fury 1</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_GGXXACR_S.h">
+      <Filter>Game\Other Platforms\Guilty Gear\GGXX ACR %28Steam%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GGXXACR_S_DEF.h">
+      <Filter>Game\Other Platforms\Guilty Gear\GGXX ACR %28Steam%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_GGXXACR_P.h">
+      <Filter>Game\Other Platforms\Guilty Gear\GGXX ACR %28PlayStation 3%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GGXXACR_P_DEF.h">
+      <Filter>Game\Other Platforms\Guilty Gear\GGXX ACR %28PlayStation 3%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_MBAACC_S.h">
+      <Filter>Game\Other Platforms\Melty Blood Actress Again Current Code %28Steam/Community Port%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_KOF98AE2016_A.h">
+      <Filter>Game\SNK Games\KOF98AE2016</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\KOF98AE2016_A_DEF.h">
+      <Filter>Game\SNK Games\KOF98AE2016</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\MBAACC_S_DEF.h">
+      <Filter>Game\Other Platforms\Melty Blood Actress Again Current Code %28Steam/Community Port%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GGXXACR_Common.h">
+      <Filter>Game\Other Platforms\Guilty Gear</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_KI_SNES.h">
+      <Filter>Game\Nintendo\Killer Instinct %28SNES%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\KI_SNES_DEF.h">
+      <Filter>Game\Nintendo\Killer Instinct %28SNES%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_MMX_SNES.h">
+      <Filter>Game\Nintendo\Mega Man X %28SNES%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\MMX_SNES_DEF.h">
+      <Filter>Game\Nintendo\Mega Man X %28SNES%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_MMX3_SNES.h">
+      <Filter>Game\Nintendo\Mega Man X3 %28SNES%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\MMX3_SNES_DEF.h">
+      <Filter>Game\Nintendo\Mega Man X3 %28SNES%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Game_RanmaHB_SNES.h">
+      <Filter>Game\Nintendo\Ranma 1/2: Hard Battle %28SNES%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\RanmaHB_SNES_DEF.h">
+      <Filter>Game\Nintendo\Ranma 1/2: Hard Battle %28SNES%29</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -31,7 +31,7 @@ CGame_KOTM_A::CGame_KOTM_A(UINT32 nConfirmedROMSize)
 {
     createPalOptions = { NO_SPECIAL_OPTIONS, WRITE_16 };
     SetAlphaMode(AlphaMode::GameDoesNotUseAlpha);
-    SetColorMode(ColMode::COLMODE_NEOGEO);
+    SetColorMode(ColMode::COLMODE_RGB666_NEOGEO);
 
     // We need this set before we initialize so that corrupt Extras truncate correctly.
     // Otherwise the new user inadvertently corrupts their ROM.
@@ -117,8 +117,6 @@ sFileRule CGame_KOTM_A::GetRule(UINT16 nUnitId)
 
 sDescTreeNode* CGame_KOTM_A::InitDescTree()
 {
-    UINT32 nTotalPaletteCount = 0;
-
     //Load extra file if we're using it
     LoadExtraFileForGame(EXTRA_FILENAME_KOTM, KOTM_A_EXTRA, &KOTM_A_EXTRA_CUSTOM, KOTM_A_EXTRALOC, m_nConfirmedROMSize);
 
@@ -133,25 +131,14 @@ sDescTreeNode* CGame_KOTM_A::InitDescTree()
     //All units have tree children
     NewDescTree->uChildType = DESC_NODETYPE_TREE;
 
-    CString strMsg;
-    bool fHaveExtras = (GetExtraCt(KOTM_A_EXTRALOC) > 0);
-    strMsg.Format(L"CGame_KOTM_A::InitDescTree: Building desc tree for KOTM %s extras...\n", fHaveExtras ? L"with" : L"without");
-    OutputDebugString(strMsg);
-
-    nTotalPaletteCount = _InitDescTree(NewDescTree,
-                                    KOTM_UNITS,
-                                    nUnitCt,
-                                    KOTM_A_EXTRALOC,
-                                    KOTM_A_NUMUNIT,
-                                    rgExtraCountAll,
-                                    rgExtraLoc,
-                                    KOTM_A_EXTRA_CUSTOM    
+    m_nTotalPaletteCountForKOTM = _InitDescTree(NewDescTree,
+        KOTM_UNITS,
+        KOTM_A_EXTRALOC,
+        KOTM_A_NUMUNIT,
+        rgExtraCountAll,
+        rgExtraLoc,
+        KOTM_A_EXTRA_CUSTOM
     );
-
-    strMsg.Format(L"CGame_KOTM_A::InitDescTree: Loaded %u palettes for KOTM\n", nTotalPaletteCount);
-    OutputDebugString(strMsg);
-
-    m_nTotalPaletteCountForKOTM = nTotalPaletteCount;
 
     return NewDescTree;
 }

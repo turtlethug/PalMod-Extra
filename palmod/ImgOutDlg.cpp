@@ -129,6 +129,14 @@ BOOL CImgOutDlg::OnInitDialog()
         m_CB_Amt.AddString(L"20");
         m_CB_Amt.AddString(L"22");
         break;
+    case 64:
+        m_CB_Amt.AddString(L"4");
+        m_CB_Amt.AddString(L"8");
+        m_CB_Amt.AddString(L"16");
+        m_CB_Amt.AddString(L"32");
+        m_CB_Amt.AddString(L"36");
+        m_CB_Amt.AddString(L"64");
+        break;
     }
 
     FillPalCombo();
@@ -500,10 +508,11 @@ void CImgOutDlg::ExportToIndexedPNG(CString save_str, CString output_str, CStrin
 
                             for (unsigned zoomX = 0; zoomX < currentZoom; zoomX++)
                             {
-                                // make sure to flip the sprite
                                 int destIndex = ((m_DumpBmp.border_sz + adjustedY + zoomY) * destWidth) + (m_DumpBmp.border_sz + adjustedX + zoomX);
-                                // read bottom up, starting at the beginning of the last row
-                                int srcIndex = srcSize + (destX / currentZoom) - (((destY / currentZoom) + 1) * srcWidth);
+                                // this is the upside-down version:
+                                //int srcIndex = srcSize + (destX / currentZoom) - (((destY / currentZoom) + 1) * srcWidth);
+                                // and this is the rightside-up version:
+                                int srcIndex = (destX / currentZoom) + ((destY / currentZoom) * srcWidth);
 
                                 // only write used pixels
                                 if (rgSrcImg[nImageIndex]->pImgData[srcIndex] != 0)
@@ -559,9 +568,12 @@ void CImgOutDlg::ExportToIndexedPNG(CString save_str, CString output_str, CStrin
             // But currently, I don't know what metadata I would want, so I'm leaving it alone for now.
             state.encoder.text_compression = 0; // use tExt
             LodePNGInfo& info = state.info_png;
+            CStringA astrText;
+            astrText.Format("%S", GetHost()->GetAppName(false));
+            lodepng_add_text(&info, "Software", astrText.GetString());
+            // What should title be?  Node name plus current palette name...?
             lodepng_add_text(&info, "Title", "...");
-            lodepng_add_text(&info, "Software", "PalMod");
-#endif
+#endif      
 
             // lodepng options: going from RAW to indexed PNG
             state.info_png.color.colortype = state.info_raw.colortype = LCT_PALETTE;
@@ -649,7 +661,8 @@ void CImgOutDlg::ExportToCImageType(CString output_str, GUID img_format, DWORD d
     int output_width = m_DumpBmp.GetOutputW();
     int output_height = m_DumpBmp.GetOutputH();
 
-    if (out_img.Create(output_width, output_height, 32, dwExportFlags))
+    // Pass negative height in order to indicate that this is top-down
+    if (out_img.Create(output_width, -output_height, 32, dwExportFlags))
     {
         const bool fUsingAlphaChannel = dwExportFlags == CImage::createAlphaChannel;
         if (fUsingAlphaChannel)

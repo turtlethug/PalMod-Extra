@@ -90,7 +90,7 @@ void CImgDisp::ResizeMainBitmap()
         DeleteObject(hBmp);
 
         Bmpi.bmiHeader.biWidth = MAIN_W;
-        Bmpi.bmiHeader.biHeight = -MAIN_H;
+        Bmpi.bmiHeader.biHeight = MAIN_H;
         Bmpi.bmiHeader.biPlanes = 1;
         Bmpi.bmiHeader.biBitCount = 32;
         Bmpi.bmiHeader.biCompression = BI_RGB;
@@ -111,7 +111,7 @@ void CImgDisp::CreateImgBitmap(int nIndex, int nWidth, int nHeight)
     //pImgBuffer[nIndex]->pBmpData = new UINT32[nWidth * nHeight];
 
     currInfo->bmiHeader.biWidth = nWidth;
-    currInfo->bmiHeader.biHeight = -nHeight;
+    currInfo->bmiHeader.biHeight = nHeight;
     currInfo->bmiHeader.biPlanes = 1;
     currInfo->bmiHeader.biBitCount = 32;
     currInfo->bmiHeader.biCompression = BI_RGB;
@@ -272,7 +272,7 @@ BOOL CImgDisp::LoadBGBmp(WCHAR* szBmpLoc)
     {
         hBGBitmap = backgroundImage.Detach();
             
-        m_bBGAvail = TRUE;
+        m_fIsBGAvail = TRUE;
 
         BGBitmap.DeleteObject();
         BGBitmap.Attach(hBGBitmap);
@@ -293,25 +293,24 @@ BOOL CImgDisp::LoadBGBmp(WCHAR* szBmpLoc)
     }
     else
     {
-        m_bBGAvail = FALSE;
-        bTileBGBmp = FALSE;
+        m_fIsBGAvail = FALSE;
         return FALSE;
     }
 }
 
 BOOL CImgDisp::CanForceBGBitmapAvailable()
 {
-    if (!m_bBGAvail && (m_strBackgroundLoc.GetLength() > 8))
+    if (!m_fIsBGAvail && (m_strBackgroundLoc.GetLength() > 8))
     {
         LoadBGBmp(nullptr);
     }
 
-    return m_bBGAvail; 
+    return m_fIsBGAvail; 
 };
 
 void CImgDisp::InitDC(CPaintDC& PaintDC)
 {
-    if (bFirstInit)
+    if (m_fNeedFirstInit)
     {
         MainDC = new CDC;
         ImageDC = new CDC;
@@ -319,7 +318,7 @@ void CImgDisp::InitDC(CPaintDC& PaintDC)
         MainDC->CreateCompatibleDC(&PaintDC);
         ImageDC->CreateCompatibleDC(&PaintDC);
 
-        bFirstInit = FALSE;
+        m_fNeedFirstInit = FALSE;
 
         ModifyClRect();
         ModifySrcRect();
@@ -374,7 +373,7 @@ void CImgDisp::DrawMainBG()
 {
     if (MainDC)
     {
-        if (bTileBGBmp && !bUseBGCol && CanForceBGBitmapAvailable())
+        if (m_fShouldTileBGBmp && !m_fShouldUseBGCol && CanForceBGBitmapAvailable())
         {
             MainDC->FillRect(CRect(0, 0, MAIN_W, MAIN_H), &BGBrush);
         }
@@ -383,7 +382,7 @@ void CImgDisp::DrawMainBG()
             MainDC->FillSolidRect(CRect(0, 0, MAIN_W, MAIN_H), crBGCol);
         }
 
-        if (!bTileBGBmp && !bUseBGCol && CanForceBGBitmapAvailable())
+        if (!m_fShouldTileBGBmp && !m_fShouldUseBGCol && CanForceBGBitmapAvailable())
         {
             ImageDC->SelectObject(&BGBitmap);
 
@@ -540,7 +539,7 @@ bool CImgDisp::DoWeHaveImageForIndex(int nIndex)
     return false;
 }
 
-bool CImgDisp::LoadExternalSprite(UINT nPositionToLoadTo, WCHAR* pszTextureLocation)
+bool CImgDisp::LoadExternalSprite(UINT nPositionToLoadTo, SpriteImportDirection direction, WCHAR* pszTextureLocation)
 {
     CFile TextureFile;
 
@@ -550,7 +549,7 @@ bool CImgDisp::LoadExternalSprite(UINT nPositionToLoadTo, WCHAR* pszTextureLocat
         safe_delete_array(m_ppSpriteOverrideTexture[nPositionToLoadTo]);
 
         // Filename of form: MvC2_D-offset-2230419-W-60-H-98
-        pszTextureLocation = _wcslwr(pszTextureLocation);
+        _wcslwr(pszTextureLocation);
         WCHAR* pszDataW = wcsstr(pszTextureLocation, L"-w-");
         WCHAR* pszDataH = wcsstr(pszTextureLocation, L"-h-");
         WCHAR* pszTermination = wcsstr(pszTextureLocation, L".data");
@@ -595,7 +594,24 @@ bool CImgDisp::LoadExternalSprite(UINT nPositionToLoadTo, WCHAR* pszTextureLocat
                     OutputDebugString(wcsstr);
 
                     TextureFile.SeekToBegin();
-                    TextureFile.Read(m_ppSpriteOverrideTexture[nPositionToLoadTo], nSizeToRead);
+
+                    if (direction == SpriteImportDirection::TopDown)
+                    {
+                        TextureFile.Read(m_ppSpriteOverrideTexture[nPositionToLoadTo], nSizeToRead);
+                    }
+                    else
+                    {
+                        int nCurrentFilePosition = nSizeToRead;
+                        nCurrentFilePosition -= m_nTextureOverrideW[nPositionToLoadTo];
+
+                        // We need to flip this line by line
+                        for (int nLinePosition = 0; nLinePosition < m_nTextureOverrideH[nPositionToLoadTo]; nLinePosition++)
+                        {
+                            //TextureFile.Read(m_ppSpriteOverrideTexture[nPositionToLoadTo], nSizeToRead);
+                            TextureFile.Read(&m_ppSpriteOverrideTexture[nPositionToLoadTo][nCurrentFilePosition], m_nTextureOverrideW[nPositionToLoadTo]);
+                            nCurrentFilePosition -= m_nTextureOverrideW[nPositionToLoadTo];
+                        }                        
+                    }
 
                     TextureFile.Close();
 
@@ -768,7 +784,7 @@ void CImgDisp::OnMouseMove(UINT nFlags, CPoint point)
 
 #ifndef SETIMGPOS
 
-        if (bCtrlDown && !bTileBGBmp)
+        if (bCtrlDown && !m_fShouldTileBGBmp)
         {
             while (fabs(fpDiffX) >= 1.0f)
             {
@@ -813,7 +829,7 @@ void CImgDisp::OnMouseMove(UINT nFlags, CPoint point)
 
 #ifndef SETIMGPOS
 
-        if (bCtrlDown && !bTileBGBmp)
+        if (bCtrlDown && !m_fShouldTileBGBmp)
         {
             while (fabs(fpDiffY) >= 1.0f)
             {

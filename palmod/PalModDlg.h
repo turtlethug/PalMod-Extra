@@ -53,10 +53,10 @@ public:
     BOOL bOleInit = TRUE;
     BOOL bEnabled = FALSE;
 
-    BOOL bShow32 = TRUE;
-    BOOL bRGB = TRUE;
+    BOOL m_fForceShowAs32bitColor = TRUE;
+    BOOL m_fShowAsRGBNotHSL = TRUE;
     BOOL bCopyFromBase = FALSE;
-    BOOL bExtraCopyData = TRUE;
+    BOOL m_fShowExtraCopyData = TRUE;
 
     BOOL fFileChanged = FALSE;
     BOOL bPalChanged = FALSE;
@@ -94,27 +94,31 @@ public:
 
     //Program functions
 
-    void LoadGameDir(int nGameFlag, WCHAR * szLoadDir);
-    void OnLoadGameByDirectory(int nGameFlag);
-    BOOL SetLoadDir(CString* szOut);
+    void LoadGameDir(SupportedGamesList nGameFlag, WCHAR* pszLoadDir);
+    void OnLoadGameByDirectory(SupportedGamesList nGameFlag);
+    BOOL SetLoadDir(CString* strOut, LPCWSTR pszDescriptionString = nullptr, SupportedGamesList nDefaultGameFlag = NUM_GAMES);
     void UpdateAppTitle();
 
-    void LoadGameFile(int nGameFlag, WCHAR * szFile);
+    void LoadGameFile(SupportedGamesList nGameFlag, WCHAR* pszFile);
 
     void LoadLastDir();
 
     void SetColorsPerLineTo8();
     void SetColorsPerLineTo16();
     void SetColorFormatTo(ColMode newColMode);
-    void SetColorFormatTo9() { SetColorFormatTo(ColMode::COLMODE_9); };
-    void SetColorFormatTo12A() { SetColorFormatTo(ColMode::COLMODE_12A); };
-    void SetColorFormatTo12A_LE() { SetColorFormatTo(ColMode::COLMODE_12A_LE); };
-    void SetColorFormatTo15() { SetColorFormatTo(ColMode::COLMODE_15); };
-    void SetColorFormatTo15ALT() { SetColorFormatTo(ColMode::COLMODE_15ALT); };
-    void SetColorFormatToGBA() { SetColorFormatTo(ColMode::COLMODE_GBA); };
-    void SetColorFormatToNEOGEO() { SetColorFormatTo(ColMode::COLMODE_NEOGEO); };
-    void SetColorFormatToSharpRGB() { SetColorFormatTo(ColMode::COLMODE_SHARPRGB); };
+    void SetColorFormatTo9() { SetColorFormatTo(ColMode::COLMODE_RGB333); };
+    void SetColorFormatTo12A() { SetColorFormatTo(ColMode::COLMODE_RGB444_BE); };
+    void SetColorFormatTo12A_LE() { SetColorFormatTo(ColMode::COLMODE_RGB444_LE); };
+    void SetColorFormatTo15() { SetColorFormatTo(ColMode::COLMODE_RGB555_LE); };
+    void SetColorFormatTo15ALT() { SetColorFormatTo(ColMode::COLMODE_RGB555_BE); };
+    void SetColorFormatToGBA() { SetColorFormatTo(ColMode::COLMODE_BGR555_LE); };
+    void SetColorFormatToNEOGEO() { SetColorFormatTo(ColMode::COLMODE_RGB666_NEOGEO); };
+    void SetColorFormatToSharpRGB() { SetColorFormatTo(ColMode::COLMODE_RGB555_SHARP); };
+    void SetColorFormatToxRGB888() { SetColorFormatTo(ColMode::COLMODE_xRGB888); };
+    void SetColorFormatToxBGR888() { SetColorFormatTo(ColMode::COLMODE_xBGR888); };
     void SetColorFormatToARGB1888() { SetColorFormatTo(ColMode::COLMODE_ARGB1888); };
+    // I'm deliberately not exposing ColMode::COLMODE_ARGB1888_32STEPS here at this point:
+    // it's only currently used for MBAACC.
     void SetColorFormatToARGB7888() { SetColorFormatTo(ColMode::COLMODE_ARGB7888); };
     void SetColorFormatToARGB8888() { SetColorFormatTo(ColMode::COLMODE_ARGB8888); };
 
@@ -141,6 +145,7 @@ public:
     bool LoadPaletteFromACT(LPCWSTR pszFileName, bool fReadUpsideDown = false);
     bool LoadPaletteFromPAL(LPCWSTR pszFileName);
     bool LoadPaletteFromPNG(LPCWSTR pszFileName, bool fReadUpsideDown = false);
+    bool LoadPaletteFromPS3SF3OETXT(LPCWSTR pszFileName);
     // if you add a new palette type here, please update the CPalDropTarget support
 
     bool SavePaletteToACT(LPCWSTR pszFileName, bool fRightsideUp);
@@ -148,7 +153,7 @@ public:
     bool SavePaletteToPAL(LPCWSTR pszFileName);
 
     void UpdateSliderSel(BOOL bModeChange = FALSE, BOOL bResetRF = FALSE);
-    void SetColorMode(int nColMode);
+    void SetShowColorsAsRGBOrHSL(BOOL fShowAsRGB);
     void GetPlaneData();
     void UpdatePalSel(BOOL bSetSingleCol = FALSE);
 
@@ -266,6 +271,8 @@ public:
     DWORD GetColorAtCurrentMouseCursorPosition(int ptX = -1, int ptY = -1);
     bool SelectMatchingColorsInPalette(DWORD dwColorToMatch);
 
+    static int CALLBACK OnBrowseDialog(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
+
     afx_msg void OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOOL bSysMenu);
     afx_msg void OnSettingsSettings();
     afx_msg void OnEditUndo();
@@ -298,9 +305,11 @@ public:
 
     afx_msg void OnLoadDir_Dankuga()        { OnLoadGameByDirectory(DANKUGA_A); };
     afx_msg void OnLoadDir_DBFCI()          { OnLoadGameByDirectory(DBFCI_A); };
-    afx_msg void OnLoadDir_GGXXACReloaded() { OnLoadGameByDirectory(GGXXACR_A); };
+    afx_msg void OnLoadDir_GGXXACR_S()      { OnLoadGameByDirectory(GGXXACR_S); };
+    afx_msg void OnLoadDir_GGXXACR_P()      { OnLoadGameByDirectory(GGXXACR_P); };
     afx_msg void OnLoadDir_Jojos50()        { OnLoadGameByDirectory(JOJOS_A_DIR_50); };
     afx_msg void OnLoadDir_Jojos51()        { OnLoadGameByDirectory(JOJOS_A_DIR_51); };
+    afx_msg void OnLoadDir_MBAACC_S()       { OnLoadGameByDirectory(MBAACC_S); };
     afx_msg void OnLoadDir_MVC2ArcadeAll()  { OnLoadGameByDirectory(MVC2_A_DIR); };
     afx_msg void OnLoadDir_MVC2DCUSA()      { OnLoadGameByDirectory(MVC2_D); };
     afx_msg void OnLoadDir_MVC2PS2USA()     { OnLoadGameByDirectory(MVC2_P); };
@@ -322,6 +331,5 @@ extern BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam);
 extern BOOL IsPasteSupported();
 extern CStringA szPasteStr;
 
-extern int CALLBACK OnBrowseDialog( HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData );
-extern void SetLastUsedDirectory( LPCWSTR ptszPath, int nGameFlag );
-extern BOOL GetLastUsedDirectory( LPTSTR ptszPath, DWORD cbSize, int * nGameFlag, BOOL bCheckOnly = FALSE, BOOL * bIsDir = NULL);
+extern void SetLastUsedDirectory(LPCWSTR pszPath, SupportedGamesList nGameFlag);
+extern BOOL GetLastUsedPath(LPWSTR pszPath, DWORD cbSize, SupportedGamesList* nGameFlag, BOOL bCheckOnly = FALSE, BOOL* bIsDir = NULL);

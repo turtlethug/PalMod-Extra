@@ -17,7 +17,6 @@
 // * go to game\gameload.cpp and add an include for your game's header
 // * in game\gameload.cpp add a handler for your game to CGameLoad::SetGame
 // * in game\gameload.cpp add a handler for your game to CGameLoad::CreateGame
-// * go to palmoddlg_edit.cpp and map your game to the appropriate color format in CPalModDlg::OnEditPaste
 // * go to palmoddlg_file.cpp and add your game to the SupportedGameList array
 
 // That's it!  Good luck!  If you have any questions, feel free to ask.
@@ -33,7 +32,7 @@ CGame_NEWGAME_A::CGame_NEWGAME_A(UINT32 nConfirmedROMSize)
     OutputDebugString(L"CGame_NEWGAME_A::CGame_NEWGAME_A: Loading ROM...\n");
 
     createPalOptions = {
-                        NO_SPECIAL_OPTIONS, // Set to SKIP_FIRST_COLOR for most CPS2 games.  Use the nStartingPosition version of UpdatePalData as found in CPS2 game code.
+                        NO_SPECIAL_OPTIONS, // Obsolete, don't change.
                         WRITE_16            // This is the number of colors to write when saving to the game ROM before we need to add another reserved color/counter UINT16.
                                             // You can set this to WRITE_MAX to write out a maximum of 256 colors.  See CGameClass::UpdatePalData for usage.
     };
@@ -145,8 +144,6 @@ int CGame_NEWGAME_A::GetExtraLoc(UINT16 nUnitId)
 
 sDescTreeNode* CGame_NEWGAME_A::InitDescTree()
 {
-    UINT32 nTotalPaletteCount = 0;
-
     //Load extra file if we're using it
     LoadExtraFileForGame(EXTRA_FILENAME_NEWGAME_A, NEWGAME_A_EXTRA, &NEWGAME_A_EXTRA_CUSTOM, NEWGAME_A_EXTRALOC, m_nConfirmedROMSize);
 
@@ -161,25 +158,14 @@ sDescTreeNode* CGame_NEWGAME_A::InitDescTree()
     //All units have tree children
     NewDescTree->uChildType = DESC_NODETYPE_TREE;
 
-    CString strMsg;
-    bool fHaveExtras = (GetExtraCt(NEWGAME_A_EXTRALOC) > 0);
-    strMsg.Format(L"CGame_NEWGAME_A::InitDescTree: Building desc tree for NEWGAME_A %s extras...\n", fHaveExtras ? L"with" : L"without");
-    OutputDebugString(strMsg);
-
-    nTotalPaletteCount = _InitDescTree(NewDescTree,
+    m_nTotalPaletteCountForNEWGAME = _InitDescTree(NewDescTree,
         NEWGAME_A_UNITS,
-        nUnitCt,
         NEWGAME_A_EXTRALOC,
         NEWGAME_A_NUMUNIT,
         rgExtraCountAll,
         rgExtraLoc,
         NEWGAME_A_EXTRA_CUSTOM
     );
-
-    strMsg.Format(L"CGame_NEWGAME_A::InitDescTree: Loaded %u palettes for NEWGAME\n", nTotalPaletteCount);
-    OutputDebugString(strMsg);
-
-    m_nTotalPaletteCountForNEWGAME = nTotalPaletteCount;
 
     return NewDescTree;
 }
