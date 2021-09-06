@@ -1,4 +1,5 @@
 # PalMod-Extra
+# This repository is deprecated. Go see the new and improved palmod fork repository here:(link not ready)
 -
 PalMod-Extra is a fork of [PalMod](https://github.com/Preppy/PalMod) which aims to implement game support and features that are better off in a hacky fork than cluttering up the original.
 
@@ -10,3 +11,4 @@ The games I've added support for are...
 The games i'm planning to support are...
 -
 - Nothing new yet.
+
