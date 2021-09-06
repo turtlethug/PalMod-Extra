@@ -8,4 +8,3 @@ PalMod-Lite is a build of PalMod based on [PalMod-Extended](https://github.com/t
 #### Removed features from base build:
 `- None currently`
 #
-

@@ -42,7 +42,7 @@ CGame_XMVSF_A::CGame_XMVSF_A(UINT32 nConfirmedROMSize)
     //We need the proper unit amt before we init the main buffer
     m_nTotalInternalUnits = XMVSF_A_NUMUNIT;
     m_nExtraUnit = XMVSF_A_EXTRALOC;
-    m_nSafeCountForThisRom = 468 + GetExtraCt(m_nExtraUnit);
+    m_nSafeCountForThisRom = 506 + GetExtraCt(m_nExtraUnit);
     m_pszExtraFilename = EXTRA_FILENAME_XMVSF;
     m_nTotalPaletteCount = m_nTotalPaletteCountForXMVSF;
     // This magic number is used to warn users if their Extra file is trying to write somewhere potentially unusual
@@ -55,8 +55,8 @@ CGame_XMVSF_A::CGame_XMVSF_A(UINT32 nConfirmedROMSize)
     //Set game information
     nGameFlag = XMVSF_A;
     nImgGameFlag = IMGDAT_SECTION_CPS2;
-    m_prgGameImageSet = XMVSF_A_IMG_UNITS;
-    nImgUnitAmt = ARRAYSIZE(XMVSF_A_IMG_UNITS);
+    m_prgGameImageSet = XMVSF_A_IMGIDS_USED;
+    nImgUnitAmt = ARRAYSIZE(XMVSF_A_IMGIDS_USED);
 
     nFileAmt = 1;
 

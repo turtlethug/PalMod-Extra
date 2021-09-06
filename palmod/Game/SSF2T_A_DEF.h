@@ -3,7 +3,7 @@
 // transparency color is the last color on cps2 graphics
 // the first 2 bytes of a palette on ST is how many palette lines it has
 
-enum Supported_SSF2T_4A_PaletteListIndex
+enum Supported_SSF2T_4A_UnitListIndex
 {
     index_SSF2T_Balrog,
     index_SSF2T_Blanka,
@@ -22,21 +22,14 @@ enum Supported_SSF2T_4A_PaletteListIndex
     index_SSF2T_THawk,
     index_SSF2T_Vega,
     index_SSF2T_Zangief,
+    index_SSF2T_4A_Stages,
     index_SSF2T_4A_Bonus,
     index_SSF2T_4A_Last
 };
 
-enum Supported_SSF2T_8_PaletteListIndex
-{
-    index_SSF2T_Stages,
-    index_SSF2T_8_Last
-};
-
 constexpr auto SSF2T_A_NUM_IND_4A = index_SSF2T_4A_Last;
-constexpr auto SSF2T_A_NUM_IND_8 = index_SSF2T_8_Last;
 
 #define SSF2T_A_EXTRALOC_4A SSF2T_A_NUM_IND_4A
-#define SSF2T_A_EXTRALOC_8 SSF2T_A_NUM_IND_8
 
 const UINT8 SSF2T_A_UNITSORT_4A[SSF2T_A_NUM_IND_4A + 1] = // Plus 1 for the extra palettes
 {
@@ -58,7 +51,33 @@ const UINT8 SSF2T_A_UNITSORT_4A[SSF2T_A_NUM_IND_4A + 1] = // Plus 1 for the extr
     index_SSF2T_Vega,
     index_SSF2T_Zangief,
 
+    index_SSF2T_4A_Stages,
+    index_SSF2T_4A_Bonus,
+
     SSF2T_A_EXTRALOC_4A // Extra palettes
+};
+
+const UINT16 SSF2T_A_IMGIDS_USED[] =
+{
+    indexSF2Sprites_Ryu,
+    indexSF2Sprites_EHonda,
+    indexSF2Sprites_Blanka,
+    indexSF2Sprites_Guile,
+    indexSF2Sprites_Ken,
+    indexSF2Sprites_ChunLi,
+    indexSF2Sprites_Zangief,
+    indexSF2Sprites_Dhalsim,
+    indexSF2Sprites_Bison,
+    indexSF2Sprites_Sagat,
+    indexSF2Sprites_Balrog,
+    indexSF2Sprites_Vega,
+    indexSF2Sprites_Cammy,
+    indexSF2Sprites_THawk,
+    indexSF2Sprites_FeiLong,
+    indexSF2Sprites_DeeJay,
+    indexSF2Sprites_Gouki,
+    indexSF2Sprites_Bonus,
+    indexSF2Sprites_Stages,
 };
 
 const sGame_PaletteDataset SSF2T_A_BALROG_PALETTES_JAB[] =
@@ -1647,18 +1666,83 @@ const sDescTreeNode SSF2T_A_GOUKI_COLLECTION[] =
     { L"P2 Color",    DESC_NODETYPE_TREE, (void*)SSF2T_A_GOUKI_PALETTES_P2COLOR,     ARRAYSIZE(SSF2T_A_GOUKI_PALETTES_P2COLOR) },
 };
 
-// THESE ARE IN sfxe.03c
+const sGame_PaletteDataset SSF2T_A_08_BONUS_NODE[] =
+{
+    { L"Intro Ryu Part 1", 0x6d0be, 0x6d1fe },
+    { L"Intro Ryu Part 2", 0x6d2be, 0x6d37e },
+    { L"Intro Ryu Part 3", 0x6d3be, 0x6d3de },
+    { L"Intro Ryu Part 4", 0x755de, 0x755fe },
 
-const sGame_PaletteDataset SSF2T_A_BONUS_NODE[] =
+    { L"Blue SUPER Text", 0x7561e, 0x7565e },
+    { L"Yellow Flash SUPER Text Part 1", 0x7555e, 0x755de },
+    { L"Yellow Flash SUPER Text Part 2", 0x7565e, 0x757fe },
+    { L"Intro Ryu Hadouken Blast", 0x6d27e, 0x6d29e },
+
+    { L"Character Select Background (1/2)", 0x743fe, 0x7441e, indexSF2Sprites_Bonus, 0x1c, &pairNext },
+    { L"Character Select Background (2/2)", 0x7443e, 0x7445e, indexSF2Sprites_Bonus, 0x1d },
+    { L"Vs Background", 0x74b1e, 0x74b3e, indexSF2Sprites_Bonus, 0x21 },
+};
+
+const sGame_PaletteDataset SSF2T_A_03_STAGES_CASINO_NODE[] =
+{
+    { L"Nin Nin Hall Sign", 0x58ed2, 0x58f32 },
+};
+
+// THESE ARE IN sfxe.04a
+
+const sGame_PaletteDataset SSF2T_A_04_BONUS_NODE[] =
 {
     { L"Akuma Intro", 0x05bf5a, 0x05bf7a, indexSF2Sprites_Bonus, 1 },
     { L"Chun-Li Intro", 0x05bf7a, 0x05c09a, indexSF2Sprites_Bonus, 2 },
     { L"Cammy Intro", 0x05be5a, 0x05bf5a, indexSF2Sprites_Bonus, 0 },
+
+    { L"Intro Ryu Part 5", 0x5917a, 0x5919a },
+
+    { L"Intro Ryu Charging Hadouken", 0x591da, 0x591fa },
+};
+
+const sGame_PaletteDataset SSF2T_A_04_BONUS_TITLESCREEN_NODE[] =
+{
+    { L"Title Screen \"X\"", 0x59098, 0x590b8, indexSF2Sprites_Bonus, 0x20, &pairFullyLinkedNode },
+    { L"Street Fighter II Text", 0x5921a, 0x5923a, indexSF2Sprites_Bonus, 0x1f },
+    { L"Grand Master Challenge Text", 0x5915a, 0x5917a, indexSF2Sprites_Bonus, 0x1e },
+    // this is now "charging hadouken" { L"Title Screen Lightning", 0x591da, 0x591fa },
+};
+
+const sGame_PaletteDataset SSF2T_A_04_STAGES_CASINO_NODE[] =
+{
+    { L"Girls & Nin Nin Hall Sign", 0x5697a, 0x56a5a, indexSF2Sprites_Stages, -1, &pairFullyLinkedNode },
+    { L"Casino Sign 1", 0x4a360, 0x4a380, indexSF2Sprites_Stages, -1 },
+    { L"Casino Sign 2", 0x4a384, 0x4a3a4, indexSF2Sprites_Stages, -1 },
+    { L"Casino Sign 3", 0x4a3a8, 0x4a3c8, indexSF2Sprites_Stages, -1 },
+    { L"Casino Sign 4", 0x4a3cc, 0x4a3ec, indexSF2Sprites_Stages, -1 },
+    { L"Casino Sign 5", 0x4a3f0, 0x4a410, indexSF2Sprites_Stages, -1 },
+    { L"Casino Sign 6", 0x4a33c, 0x4a35c, indexSF2Sprites_Stages, -1 },
 };
 
 const sGame_PaletteDataset SSF2T_A_RYU_STAGE_NODE_4[] =
 {
     { L"Background Castle", 0x541Da, 0x5423a, indexSF2Sprites_Stages, 0x0b },
+};
+
+const sGame_PaletteDataset SSF2T_A_04_STAGEHUD_NODE[] =
+{
+    { L"Ryu Stage HUD and Extras", 0x53f7c, 0x5403c, indexSF2Sprites_Bonus, 0x22 },
+    { L"E. Honda Stage HUD and Extras", 0x5437c, 0x5443c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Blanka Stage HUD and Extras", 0x5477c, 0x5483c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Guile Stage HUD and Extras", 0x54b7c, 0x54c3c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Ken Stage HUD and Extras", 0x54f7c, 0x5503c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Chun-Li Stage HUD and Extras", 0x5537c, 0x5543c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Zangief Stage HUD and Extras", 0x5577c, 0x5583c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Dhalsim Stage HUD and Extras", 0x55b7c, 0x55c3c, indexSF2Sprites_Bonus, 0x22 },
+    { L"M. Bison Stage HUD and Extras", 0x55f7c, 0x5603c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Sagat Stage HUD and Extras", 0x5637c, 0x5643c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Balrog Stage HUD and Extras", 0x5677c, 0x5683c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Vega Stage HUD and Extras", 0x56b7c, 0x56c3c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Cammy Stage HUD and Extras", 0x56f7c, 0x5703c, indexSF2Sprites_Bonus, 0x22 },
+    { L"T. Hawk Stage HUD and Extras", 0x5737c, 0x5743c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Fei-Long Stage HUD and Extras", 0x5777c, 0x5783c, indexSF2Sprites_Bonus, 0x22 },
+    { L"Dee Jay Stage HUD and Extras", 0x57b7c, 0x57c3c, indexSF2Sprites_Bonus, 0x22 },
 };
 
 const sGame_PaletteDataset SSF2T_A_RYU_STAGE_NODE[] =
@@ -2885,11 +2969,30 @@ const sDescTreeNode SSF2T_A_DEEJAY_PORTRAIT_COLLECTION[] =
     { L"Old 2P",    DESC_NODETYPE_TREE, (void*)SSF2T_A_DEEJAY_PORTRAITS_OLD2P,      ARRAYSIZE(SSF2T_A_DEEJAY_PORTRAITS_OLD2P) },
 };
 
-const sDescTreeNode SSF2T_A_BONUS_COLLECTION[] =
+const sDescTreeNode SSF2T_A_03_STAGES_COLLECTION[] =
 {
-    { L"Palettes",                  DESC_NODETYPE_TREE, (void*)SSF2T_A_BONUS_NODE,          ARRAYSIZE(SSF2T_A_BONUS_NODE) },
+    { L"Balrog's Casino Stage (03 parts)",  DESC_NODETYPE_TREE, (void*)SSF2T_A_03_STAGES_CASINO_NODE,   ARRAYSIZE(SSF2T_A_03_STAGES_CASINO_NODE) },
+};
+
+const sDescTreeNode SSF2T_A_4A_STAGES_COLLECTION[] =
+{
+    { L"Stage HUDs and Extras",     DESC_NODETYPE_TREE, (void*)SSF2T_A_04_STAGEHUD_NODE, ARRAYSIZE(SSF2T_A_04_STAGEHUD_NODE) },
+
+    { L"Balrog's Casino Stage (04 parts)",  DESC_NODETYPE_TREE, (void*)SSF2T_A_04_STAGES_CASINO_NODE, ARRAYSIZE(SSF2T_A_04_STAGES_CASINO_NODE) },
+
     { L"Cammy Stage (04 parts)",    DESC_NODETYPE_TREE, (void*)SSF2T_A_CAMMY_STAGE_NODE_4,  ARRAYSIZE(SSF2T_A_CAMMY_STAGE_NODE_4) },
     { L"Ryu Stage (04 parts)",      DESC_NODETYPE_TREE, (void*)SSF2T_A_RYU_STAGE_NODE_4,    ARRAYSIZE(SSF2T_A_RYU_STAGE_NODE_4) },
+};
+
+const sDescTreeNode SSF2T_A_04_BONUS_COLLECTION[] =
+{
+    { L"Intro Palettes",            DESC_NODETYPE_TREE, (void*)SSF2T_A_04_BONUS_NODE,          ARRAYSIZE(SSF2T_A_04_BONUS_NODE) },
+    { L"Title Screen",              DESC_NODETYPE_TREE, (void*)SSF2T_A_04_BONUS_TITLESCREEN_NODE, ARRAYSIZE(SSF2T_A_04_BONUS_TITLESCREEN_NODE) },
+};
+
+const sDescTreeNode SSF2T_A_08_BONUS_COLLECTION[] =
+{
+    { L"Palettes",                  DESC_NODETYPE_TREE, (void*)SSF2T_A_08_BONUS_NODE,   ARRAYSIZE(SSF2T_A_08_BONUS_NODE) },
 };
 
 const sDescTreeNode SSF2T_A_STAGES_COLLECTION[] =
@@ -2902,28 +3005,29 @@ const sDescTreeNode SSF2T_A_STAGES_COLLECTION[] =
 
 const sDescTreeNode SSF2T_A_UNITS_3C[] =
 {
-    { L"Balrog",      DESC_NODETYPE_TREE, (void*)SSF2T_A_BALROG_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_BALROG_PORTRAIT_COLLECTION) },
-    { L"Blanka",      DESC_NODETYPE_TREE, (void*)SSF2T_A_BLANKA_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_BLANKA_PORTRAIT_COLLECTION) },
-    { L"Cammy",       DESC_NODETYPE_TREE, (void*)SSF2T_A_CAMMY_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_CAMMY_PORTRAIT_COLLECTION) },
-    { L"Chun-Li",     DESC_NODETYPE_TREE, (void*)SSF2T_A_CHUNLI_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_CHUNLI_PORTRAIT_COLLECTION) },
-    { L"Dee Jay",     DESC_NODETYPE_TREE, (void*)SSF2T_A_DEEJAY_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_DEEJAY_PORTRAIT_COLLECTION) },
-    { L"Dhalsim",     DESC_NODETYPE_TREE, (void*)SSF2T_A_DHALSIM_PORTRAIT_COLLECTION,      ARRAYSIZE(SSF2T_A_DHALSIM_PORTRAIT_COLLECTION) },
-    { L"E. Honda",    DESC_NODETYPE_TREE, (void*)SSF2T_A_EHONDA_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_EHONDA_PORTRAIT_COLLECTION) },
-    { L"Fei Long",    DESC_NODETYPE_TREE, (void*)SSF2T_A_FEILONG_PORTRAIT_COLLECTION,      ARRAYSIZE(SSF2T_A_FEILONG_PORTRAIT_COLLECTION) },
-    { L"Guile",       DESC_NODETYPE_TREE, (void*)SSF2T_A_GUILE_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_GUILE_PORTRAIT_COLLECTION) },
-    { L"Ken",         DESC_NODETYPE_TREE, (void*)SSF2T_A_KEN_PORTRAIT_COLLECTION,          ARRAYSIZE(SSF2T_A_KEN_PORTRAIT_COLLECTION) },
-    { L"M. Bison",    DESC_NODETYPE_TREE, (void*)SSF2T_A_MBISON_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_MBISON_PORTRAIT_COLLECTION) },
-    { L"Ryu",         DESC_NODETYPE_TREE, (void*)SSF2T_A_RYU_PORTRAIT_COLLECTION,          ARRAYSIZE(SSF2T_A_RYU_PORTRAIT_COLLECTION) },
-    { L"Sagat",       DESC_NODETYPE_TREE, (void*)SSF2T_A_SAGAT_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_SAGAT_PORTRAIT_COLLECTION) },
-    { L"T-Hawk",      DESC_NODETYPE_TREE, (void*)SSF2T_A_THAWK_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_THAWK_PORTRAIT_COLLECTION) },
-    { L"Vega",        DESC_NODETYPE_TREE, (void*)SSF2T_A_VEGA_PORTRAIT_COLLECTION,         ARRAYSIZE(SSF2T_A_VEGA_PORTRAIT_COLLECTION) },
-    { L"Zangief",     DESC_NODETYPE_TREE, (void*)SSF2T_A_ZANGIEF_PORTRAIT_COLLECTION,      ARRAYSIZE(SSF2T_A_ZANGIEF_PORTRAIT_COLLECTION) },
+    { L"Balrog",      DESC_NODETYPE_TREE, (void*)SSF2T_A_BALROG_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_BALROG_PORTRAIT_COLLECTION) },
+    { L"Blanka",      DESC_NODETYPE_TREE, (void*)SSF2T_A_BLANKA_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_BLANKA_PORTRAIT_COLLECTION) },
+    { L"Cammy",       DESC_NODETYPE_TREE, (void*)SSF2T_A_CAMMY_PORTRAIT_COLLECTION,         ARRAYSIZE(SSF2T_A_CAMMY_PORTRAIT_COLLECTION) },
+    { L"Chun-Li",     DESC_NODETYPE_TREE, (void*)SSF2T_A_CHUNLI_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_CHUNLI_PORTRAIT_COLLECTION) },
+    { L"Dee Jay",     DESC_NODETYPE_TREE, (void*)SSF2T_A_DEEJAY_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_DEEJAY_PORTRAIT_COLLECTION) },
+    { L"Dhalsim",     DESC_NODETYPE_TREE, (void*)SSF2T_A_DHALSIM_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_DHALSIM_PORTRAIT_COLLECTION) },
+    { L"E. Honda",    DESC_NODETYPE_TREE, (void*)SSF2T_A_EHONDA_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_EHONDA_PORTRAIT_COLLECTION) },
+    { L"Fei Long",    DESC_NODETYPE_TREE, (void*)SSF2T_A_FEILONG_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_FEILONG_PORTRAIT_COLLECTION) },
+    { L"Guile",       DESC_NODETYPE_TREE, (void*)SSF2T_A_GUILE_PORTRAIT_COLLECTION,         ARRAYSIZE(SSF2T_A_GUILE_PORTRAIT_COLLECTION) },
+    { L"Ken",         DESC_NODETYPE_TREE, (void*)SSF2T_A_KEN_PORTRAIT_COLLECTION,           ARRAYSIZE(SSF2T_A_KEN_PORTRAIT_COLLECTION) },
+    { L"M. Bison",    DESC_NODETYPE_TREE, (void*)SSF2T_A_MBISON_PORTRAIT_COLLECTION,        ARRAYSIZE(SSF2T_A_MBISON_PORTRAIT_COLLECTION) },
+    { L"Ryu",         DESC_NODETYPE_TREE, (void*)SSF2T_A_RYU_PORTRAIT_COLLECTION,           ARRAYSIZE(SSF2T_A_RYU_PORTRAIT_COLLECTION) },
+    { L"Sagat",       DESC_NODETYPE_TREE, (void*)SSF2T_A_SAGAT_PORTRAIT_COLLECTION,         ARRAYSIZE(SSF2T_A_SAGAT_PORTRAIT_COLLECTION) },
+    { L"T-Hawk",      DESC_NODETYPE_TREE, (void*)SSF2T_A_THAWK_PORTRAIT_COLLECTION,         ARRAYSIZE(SSF2T_A_THAWK_PORTRAIT_COLLECTION) },
+    { L"Vega",        DESC_NODETYPE_TREE, (void*)SSF2T_A_VEGA_PORTRAIT_COLLECTION,          ARRAYSIZE(SSF2T_A_VEGA_PORTRAIT_COLLECTION) },
+    { L"Zangief",     DESC_NODETYPE_TREE, (void*)SSF2T_A_ZANGIEF_PORTRAIT_COLLECTION,       ARRAYSIZE(SSF2T_A_ZANGIEF_PORTRAIT_COLLECTION) },
+    { L"Stages",      DESC_NODETYPE_TREE, (void*)SSF2T_A_03_STAGES_COLLECTION,              ARRAYSIZE(SSF2T_A_03_STAGES_COLLECTION) },
 };
 
 constexpr auto SSF2T_A_NUM_IND_3C = ARRAYSIZE(SSF2T_A_UNITS_3C);
 #define SSF2T_A_EXTRALOC_3C SSF2T_A_NUM_IND_3C
 
-#define k_stNameKey_Bonus L"Bonus"
+#define k_stNameKey_Bonus L"Bonus Palettes"
 
 const sDescTreeNode SSF2T_A_UNITS_4A[SSF2T_A_NUM_IND_4A] =
 {
@@ -2944,14 +3048,20 @@ const sDescTreeNode SSF2T_A_UNITS_4A[SSF2T_A_NUM_IND_4A] =
     { L"T-Hawk",      DESC_NODETYPE_TREE, (void*)SSF2T_A_THAWK_COLLECTION,      ARRAYSIZE(SSF2T_A_THAWK_COLLECTION) },
     { L"Vega",        DESC_NODETYPE_TREE, (void*)SSF2T_A_VEGA_COLLECTION,       ARRAYSIZE(SSF2T_A_VEGA_COLLECTION) },
     { L"Zangief",     DESC_NODETYPE_TREE, (void*)SSF2T_A_ZANGIEF_COLLECTION,    ARRAYSIZE(SSF2T_A_ZANGIEF_COLLECTION) },
+    { L"Stages",      DESC_NODETYPE_TREE, (void*)SSF2T_A_4A_STAGES_COLLECTION,    ARRAYSIZE(SSF2T_A_4A_STAGES_COLLECTION) },
     // We special-case handling this, so use a namekey
-    { k_stNameKey_Bonus,       DESC_NODETYPE_TREE, (void*)SSF2T_A_BONUS_COLLECTION,      ARRAYSIZE(SSF2T_A_BONUS_COLLECTION) },
+    { k_stNameKey_Bonus,    DESC_NODETYPE_TREE, (void*)SSF2T_A_04_BONUS_COLLECTION,      ARRAYSIZE(SSF2T_A_04_BONUS_COLLECTION) },
 };
 
 const sDescTreeNode SSF2T_A_UNITS_8[] =
 {
-    { L"Stages",  DESC_NODETYPE_TREE, (void*)SSF2T_A_STAGES_COLLECTION, ARRAYSIZE(SSF2T_A_STAGES_COLLECTION) },
+    { L"Stages",            DESC_NODETYPE_TREE, (void*)SSF2T_A_STAGES_COLLECTION, ARRAYSIZE(SSF2T_A_STAGES_COLLECTION) },
+    // We special-case handling this, so use a namekey
+    { k_stNameKey_Bonus,    DESC_NODETYPE_TREE, (void*)SSF2T_A_08_BONUS_COLLECTION,      ARRAYSIZE(SSF2T_A_08_BONUS_COLLECTION) },
 };
+
+constexpr auto SSF2T_A_NUM_IND_8 = ARRAYSIZE(SSF2T_A_UNITS_8);
+#define SSF2T_A_EXTRALOC_8 SSF2T_A_NUM_IND_8
 
 // We extend this array with data groveled from the SSF2T-3Ce.txt or SSF2T-4Ae.txt extensible extras filc, if any.
 const stExtraDef SSF2T_A_EXTRA[] =

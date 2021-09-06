@@ -5,7 +5,9 @@
 #include "Game_AOF1_A.h"
 #include "Game_AOF3_A.h"
 #include "Game_Bleach_DS.h"
+#include "Game_BMKNS_SNES.h"
 #include "Game_Breakers_A.h"
+#include "Game_BSSMSJR_SNES.h"
 #include "Game_CFTE_SNES.h"
 #include "Game_COTA_A.h"
 #include "Game_CVS2_A.h"
@@ -18,18 +20,21 @@
 #include "Game_FatalFuryS_SNES.h"
 #include "Game_Garou_A.h"
 #include "Game_Garou_S.h"
+#include "Game_Gowcaizer_A.h"
 #include "Game_GGXXACR_S.h"
-#include "Game_GGXXACR_p.h"
+#include "Game_GGXXACR_P.h"
+#include "Game_GGXXR_S.h"
 #include "Game_GUNDAM_SNES.h"
 #include "Game_JOJOS_A.h"
 #include "Game_JOJOS_A_DIR.h"
-#include "Game_VENTURE_A.h"
+#include "Game_JOJOSRPG_SNES.h"
 #include "Game_KarnovsR_A.h"
 #include "Game_KI_SNES.h"
 #include "Game_Kizuna_A.h"
 #include "Game_KOF00N_A.h"
 #include "Game_KOF01_A.h"
 #include "Game_KOF02_A.h"
+#include "Game_KOF02PS2_A.h"
 #include "Game_KOF02UM_S.h"
 #include "Game_KOF03_A.h"
 #include "Game_KOF94_A.h"
@@ -43,7 +48,10 @@
 #include "Game_KOTM_A.h"
 #include "Game_LASTBLADE_A.h"
 #include "Game_LASTBLADE2_A.h"
+#include "Game_MAGICALDROPIII_A.h"
+#include "Game_MartialMasters_A.h"
 #include "Game_Matrimelee_A.h"
+#include "Game_MAAB_A.h"
 #include "Game_MBAACC_S.h"
 #include "Game_MMPR_SNES.h"
 #include "Game_MMX_SNES.h"
@@ -61,7 +69,9 @@
 #include "Game_NEOGEO_A.h"
 #include "Game_NGBC_A.h"
 #include "Game_NINJAMASTERS_A.h"
+#include "Game_P4AU_NESICA.h"
 #include "Game_GEMFIGHTER_A.h"
+#include "Game_RanmaCRH_SNES.h"
 #include "Game_RanmaHB_SNES.h"
 #include "Game_RBFF1_A.h"
 #include "Game_RBFF2_A.h"
@@ -94,6 +104,7 @@
 #include "Game_SPF2T_A.h"
 #include "Game_SSF2T_A.h"
 #include "Game_SSF2T_GBA.h"
+#include "Game_SVG_SNES.h"
 #include "Game_SVCPLUSA_A.h"
 #include "Game_TMNTTF_SNES.h"
 #include "Game_TopF2005_Sega.h"
@@ -105,12 +116,11 @@
 #include "Game_Windjammers_A.h"
 #include "Game_XMMA_SNES.h"
 #include "Game_XMVSF_A.h"
-#include "Game_ESCKIDS_A.h"
 
 #include "..\resource.h"
 #include "..\palmod.h"
 
-void StrRemoveNonASCII(WCHAR* pszOutput, size_t ccSize, LPCWSTR pszInput)
+void StrRemoveNonASCII(WCHAR* pszOutput, size_t ccSize, LPCWSTR pszInput, bool fForceUpperCase /* = false*/)
 {
     size_t iStrOutputIndex = 0;
 
@@ -128,11 +138,23 @@ void StrRemoveNonASCII(WCHAR* pszOutput, size_t ccSize, LPCWSTR pszInput)
         }
         else if ((pszInput[iStrIndex] >= 'a') && (pszInput[iStrIndex] <= 'z'))
         {
-            pszOutput[iStrOutputIndex++] = pszInput[iStrIndex] - 32;
+            if (fForceUpperCase)
+            {
+                pszOutput[iStrOutputIndex++] = pszInput[iStrIndex] - 32;
+            }
+            else
+            {
+                pszOutput[iStrOutputIndex++] = pszInput[iStrIndex];
+            }
         }
     }
 
     pszOutput[iStrOutputIndex] = 0;
+}
+
+void StruprRemoveNonASCII(WCHAR* pszOutput, size_t ccSize, LPCWSTR pszInput)
+{
+    StrRemoveNonASCII(pszOutput, ccSize, pszInput, true);
 }
 
 CGameLoad::CGameLoad(void)
@@ -165,9 +187,20 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         return TRUE;
     }
 
+    case BMKNS_SNES:
+    {
+        GetRule = &CGame_BMKNS_SNES::GetRule;
+        return TRUE;
+    }
+    
     case BREAKERS_A:
     {
         GetRule = &CGame_BREAKERS_A::GetRule;
+        return TRUE;
+    }
+    case BSSMSJR_SNES:
+    {
+        GetRule = &CGame_BSSMSJR_SNES::GetRule;
         return TRUE;
     }
     case CFTE_SNES:
@@ -248,6 +281,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_GEMFIGHTER_A::GetRule;
         return TRUE;
     }
+    case Gowcaizer_A:
+    {
+        GetRule = &CGame_Gowcaizer_A::GetRule;
+        return TRUE;
+    }
     case GGXXACR_S:
     {
         GetRuleCtr = &CGame_GGXXACR_S::GetRuleCtr;
@@ -263,6 +301,15 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         ResetRuleCtr = &CGame_GGXXACR_P::ResetRuleCtr;
         GetRule = &CGame_GGXXACR_P::GetRule;
         GetNextRule = &CGame_GGXXACR_P::GetNextRule;
+
+        return TRUE;
+    }
+    case GGXXR_S:
+    {
+        GetRuleCtr = &CGame_GGXXR_S::GetRuleCtr;
+        ResetRuleCtr = &CGame_GGXXR_S::ResetRuleCtr;
+        GetRule = &CGame_GGXXR_S::GetRule;
+        GetNextRule = &CGame_GGXXR_S::GetNextRule;
 
         return TRUE;
     }
@@ -286,9 +333,9 @@ BOOL CGameLoad::SetGame(int nGameFlag)
 
         return TRUE;
     }
-	case VENTURE_A:
+    case JOJOSRPG_SNES:
     {
-        GetRule = &CGame_VENTURE_A::GetRule;
+        GetRule = &CGame_JOJOSRPG_SNES::GetRule;
         return TRUE;
     }
     case KarnovsR_A:
@@ -356,6 +403,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_KOF02_A::GetRule;
         return TRUE;
     }
+    case KOF02PS2_A:
+    {
+        GetRule = &CGame_KOF02PS2_A::GetRule;
+        return TRUE;
+    }
     case KOF02UM_S:
     {
         GetRule = &CGame_KOF02UM_S::GetRule;
@@ -386,9 +438,28 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_LASTBLADE2_A::GetRule;
         return TRUE;
     }
+    case MAGICALDROPIII_A:
+    {
+        GetRule = &CGame_MAGICALDROPIII_A::GetRule;
+        return TRUE;
+    }
+    case MartialMasters_A:
+    {
+        GetRule = &CGame_MartialMasters_A::GetRule;
+        return TRUE;
+    }
     case MATRIMELEE_A:
     {
         GetRule = &CGame_Matrimelee_A::GetRule;
+        return TRUE;
+    }
+    case MAAB_A:
+    {
+        GetRuleCtr = &CGame_MAAB_A::GetRuleCtr;
+        ResetRuleCtr = &CGame_MAAB_A::ResetRuleCtr;
+        GetRule = &CGame_MAAB_A::GetRule;
+        GetNextRule = &CGame_MAAB_A::GetNextRule;
+
         return TRUE;
     }
     case MBAACC_S:
@@ -491,6 +562,20 @@ BOOL CGameLoad::SetGame(int nGameFlag)
     {
         GetRule = &CGame_NINJAMASTERS_A::GetRule;
         return TRUE;
+    }   
+    case P4AU_NESICA:
+    {
+        GetRuleCtr = &CGame_P4AU_NESICA::GetRuleCtr;
+        ResetRuleCtr = &CGame_P4AU_NESICA::ResetRuleCtr;
+        GetRule = &CGame_P4AU_NESICA::GetRule;
+        GetNextRule = &CGame_P4AU_NESICA::GetNextRule;
+
+        return TRUE;
+    }
+    case RANMACRH_SNES:
+    {
+        GetRule = &CGame_RANMACRH_SNES::GetRule;
+        return TRUE;
     }
     case RANMAHB_SNES:
     {
@@ -532,6 +617,15 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         ResetRuleCtr = &CGame_RedEarth_A_DIR::ResetRuleCtr;
         GetRule = &CGame_RedEarth_A_DIR::GetRule_31;
         GetNextRule = &CGame_RedEarth_A_DIR::GetNextRule_31;
+
+        return TRUE;
+    }
+    case REDEARTH_A_DIR_50:
+    {
+        GetRuleCtr = &CGame_RedEarth_A_DIR::GetRuleCtr;
+        ResetRuleCtr = &CGame_RedEarth_A_DIR::ResetRuleCtr;
+        GetRule = &CGame_RedEarth_A_DIR::GetRule_50;
+        GetNextRule = &CGame_RedEarth_A_DIR::GetNextRule_50;
 
         return TRUE;
     }
@@ -717,6 +811,11 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_SSF2T_GBA::GetRule;
         return TRUE;
     }
+    case SVG_SNES:
+    {
+        GetRule = &CGame_SVG_SNES::GetRule;
+        return TRUE;
+    }
     case SVCPLUSA_A:
     {
         GetRule = &CGame_SVCPLUSA_A::GetRule;
@@ -776,11 +875,6 @@ BOOL CGameLoad::SetGame(int nGameFlag)
         GetRule = &CGame_XMVSF_A::GetRule;
         return TRUE;
     }
-	case ESCKIDS_A:
-    {
-        GetRule = &CGame_ESCKIDS_A::GetRule;
-        return TRUE;
-    }
 
     default:
         OutputDebugString(L"CGameLoad::SetGame:: BUGBUG: New game has not been properly added yet\n");
@@ -809,10 +903,17 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_BLEACH_DS(nConfirmedROMSize);
     }
-
+    case BMKNS_SNES:
+    {
+        return new CGame_BMKNS_SNES(nConfirmedROMSize);
+    }
     case BREAKERS_A:
     {
         return new CGame_BREAKERS_A(nConfirmedROMSize);
+    }
+    case BSSMSJR_SNES:
+    {
+        return new CGame_BSSMSJR_SNES(nConfirmedROMSize);
     }
     case CFTE_SNES:
     {
@@ -870,6 +971,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_GEMFIGHTER_A(nConfirmedROMSize);
     }
+    case Gowcaizer_A:
+    {
+        return new CGame_Gowcaizer_A(nConfirmedROMSize);
+    }    
     case GGXXACR_S:
     {
         return new CGame_GGXXACR_S(nConfirmedROMSize);
@@ -877,6 +982,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case GGXXACR_P:
     {
         return new CGame_GGXXACR_P(nConfirmedROMSize);
+    }
+    case GGXXR_S:
+    {
+        return new CGame_GGXXR_S(nConfirmedROMSize);
     }
     case GUNDAM_SNES:
     {
@@ -886,10 +995,6 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_JOJOS_A(nConfirmedROMSize, nExtraGameData);
     }
-	case VENTURE_A:
-    {
-        return new CGame_VENTURE_A(nConfirmedROMSize);
-    }
     case JOJOS_A_DIR_50:
     {
         return new CGame_JOJOS_A_DIR(-1, 50);
@@ -897,6 +1002,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case JOJOS_A_DIR_51:
     {
         return new CGame_JOJOS_A_DIR(-1, 51);
+    }
+    case JOJOSRPG_SNES:
+    {
+        return new CGame_JOJOSRPG_SNES(nConfirmedROMSize);
     }
     case KarnovsR_A:
     {
@@ -930,7 +1039,6 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_KOF98_A(nConfirmedROMSize);
     }
-
     case KOF98AE2016_A:
     {
         return new CGame_KOF98AE2016_A(nConfirmedROMSize);
@@ -951,6 +1059,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_KOF02_A(nConfirmedROMSize);
     }
+    case KOF02PS2_A:
+    {
+        return new CGame_KOF02PS2_A(nConfirmedROMSize);
+    }    
     case KOF02UM_S:
     {
         return new CGame_KOF02UM_S(nConfirmedROMSize, nExtraGameData);
@@ -974,6 +1086,18 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case LASTBLADE2_A:
     {
         return new CGame_LASTBLADE2_A(nConfirmedROMSize);
+    }
+    case MAAB_A:
+    {
+        return new CGame_MAAB_A(nConfirmedROMSize);
+    }
+    case MAGICALDROPIII_A:
+    {
+        return new CGame_MAGICALDROPIII_A(nConfirmedROMSize);
+    }
+    case MartialMasters_A:
+    {
+        return new CGame_MartialMasters_A(nConfirmedROMSize);
     }
     case MATRIMELEE_A:
     {
@@ -1047,6 +1171,14 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_NINJAMASTERS_A(nConfirmedROMSize);
     }
+    case P4AU_NESICA:
+    {
+        return new CGame_P4AU_NESICA(nConfirmedROMSize);
+    }
+    case RANMACRH_SNES:
+    {
+        return new CGame_RANMACRH_SNES(nConfirmedROMSize);
+    }
     case RANMAHB_SNES:
     {
         return new CGame_RANMAHB_SNES(nConfirmedROMSize);
@@ -1074,6 +1206,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     case REDEARTH_A_DIR_31:
     {
         return new CGame_RedEarth_A_DIR(-1, 31);
+    }
+    case REDEARTH_A_DIR_50:
+    {
+        return new CGame_RedEarth_A_DIR(-1, 50);
     }
     case RODSM2_A:
     {
@@ -1195,6 +1331,10 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_SSF2T_GBA(nConfirmedROMSize);
     }
+    case SVG_SNES:
+    {
+        return new CGame_SVG_SNES(nConfirmedROMSize);
+    }
     case SVCPLUSA_A:
     {
         return new CGame_SVCPLUSA_A(nConfirmedROMSize);
@@ -1239,10 +1379,6 @@ CGameClass* CGameLoad::CreateGame(int nGameFlag, UINT32 nConfirmedROMSize, int n
     {
         return new CGame_XMVSF_A(nConfirmedROMSize);
     }
-	case ESCKIDS_A:
-    {
-        return new CGame_ESCKIDS_A(nConfirmedROMSize);
-    }
 
     default:
         OutputDebugString(L"CGameLoad::CreateGame:: BUGBUG: New game has not been properly added yet.\n");
@@ -1270,70 +1406,99 @@ CGameClass* CGameLoad::LoadFile(int nGameFlag, WCHAR* pszLoadFile)
     int nGameRule = 0;
 
     // Handle games that support multiple ROMs here
-    WCHAR* pszFileName = wcsrchr(pszLoadFile, L'\\');
+    WCHAR* pszFileNameLowercase = wcsrchr(pszLoadFile, L'\\');
 
-    if (pszFileName)
+    if (pszFileNameLowercase)
     {
         // Step forward to the filename
-        pszFileName++;
-        _wcslwr(pszFileName);
+        pszFileNameLowercase++;
+        _wcslwr(pszFileNameLowercase);
 
         switch (nGameFlag)
         {
         case AOF3_A:
-            nGameRule = ((wcsstr(pszFileName, L"p1") != nullptr) ? 1 : 2);
+            nGameRule = ((wcsstr(pszFileNameLowercase, L"p1") != nullptr) ? 1 : 2);
             break;
         case JOJOS_A:
-            nGameRule = ((wcscmp(pszFileName, L"50") == 0) ? 50 : 51);
+            nGameRule = ((wcscmp(pszFileNameLowercase, L"50") == 0) ? 50 : 51);
             break;
         case KOF99AE_A:
-            nGameRule = ((wcsstr(pszFileName, L"p2") != nullptr) ? 2 : 3);
+            nGameRule = ((wcsstr(pszFileNameLowercase, L"p2") != nullptr) ? 2 : 3);
             break;
         case KOF02UM_S:
-            if (wcscmp(pszFileName, L"bar.bin") == 0)
+            if (wcscmp(pszFileNameLowercase, L"bar.bin") == 0)
             {
-                nGameRule = 1;
+                nGameRule = (int)KOF02UMS_ROMOptions::Bar;
             }
-            else if (wcscmp(pszFileName, L"max2bg.bin") == 0)
+            else if (wcscmp(pszFileNameLowercase, L"max2bg.bin") == 0)
             {
-                nGameRule = 2;
+                nGameRule = (int)KOF02UMS_ROMOptions::Max2BG;
+            }
+            else if (wcscmp(pszFileNameLowercase, L"clear.bin") == 0)
+            {
+                nGameRule = (int)KOF02UMS_ROMOptions::Clear;
+            }
+            else if (wcscmp(pszFileNameLowercase, L"psel.bin-n") == 0)
+            {
+                nGameRule = (int)KOF02UMS_ROMOptions::PSel;
+            }
+            else if (wcscmp(pszFileNameLowercase, L"rank.bin") == 0)
+            {
+                nGameRule = (int)KOF02UMS_ROMOptions::Rank;
+            }
+            else if (wcscmp(pszFileNameLowercase, L"conte.bin") == 0)
+            {
+                nGameRule = (int)KOF02UMS_ROMOptions::Conte;
             }
             else
             {
-                nGameRule = 0;
+                nGameRule = (int)KOF02UMS_ROMOptions::Main;
             }
             break;
         case MSHVSF_A:
         {
-            nGameRule = ((wcsstr(pszFileName, L".06a") != nullptr) ? 6 : 7);
+            nGameRule = ((wcsstr(pszFileNameLowercase, L".06a") != nullptr) ? 6 : 7);
             break;
         }
         case MSH_A:
         {
-            nGameRule = ((wcsstr(pszFileName, L".05") != nullptr) ? 5 : 6);
+            nGameRule = ((wcsstr(pszFileNameLowercase, L".05") != nullptr) ? 5 : 6);
             break;
         }
         case REDEARTH_A:
-            nGameRule = ((wcscmp(pszFileName, L"30") == 0) ? 30 : 31);
+        {
+            if (wcscmp(pszFileNameLowercase, L"30") == 0)
+            {
+                nGameRule = 30;
+            }
+            else if (wcscmp(pszFileNameLowercase, L"50") == 0)
+            {
+                nGameRule = 50;
+            }
+            else
+            {
+                nGameRule = 31;
+            }
             break;
+        }
         case SFA2_A:
         {
-            nGameRule = ((wcsstr(pszFileName, L".08") != nullptr) ? 8 : 7);
+            nGameRule = ((wcsstr(pszFileNameLowercase, L".08") != nullptr) ? 8 : 7);
             break;
         }
         case SFIII3_A:
         {
-            nGameRule = ((wcsstr(pszFileName, L"10") != nullptr) ? 10 : 51);
+            nGameRule = ((wcsstr(pszFileNameLowercase, L"10") != nullptr) ? 10 : 51);
             break;
         }
-        case SF2CE_A: // these two share logic until we care about 23
         case SF2HF_A:
+        case SF2CE_A: // these two share the same general logic
         {
-            if (wcsstr(pszFileName, L"21") != nullptr)
+            if (wcsstr(pszFileNameLowercase, L"21") != nullptr)
             {
                 nGameRule = 21;
             }
-            else if (wcsstr(pszFileName, L"23") != nullptr)
+            else if (wcsstr(pszFileNameLowercase, L"23") != nullptr)
             {
                 nGameRule = 23;
             }
@@ -1345,11 +1510,11 @@ CGameClass* CGameLoad::LoadFile(int nGameFlag, WCHAR* pszLoadFile)
         }
         case SSF2T_A:
         {
-            if (wcsstr(pszFileName, L".03") != nullptr)
+            if (wcsstr(pszFileNameLowercase, L".03") != nullptr)
             {
                 nGameRule = 3;
             }
-            else if (wcsstr(pszFileName, L".08") != nullptr)
+            else if (wcsstr(pszFileNameLowercase, L".08") != nullptr)
             {
                 nGameRule = 8;
             }
@@ -1464,10 +1629,10 @@ CGameClass* CGameLoad::LoadFile(int nGameFlag, WCHAR* pszLoadFile)
     }
     else
     {
-        if (pszFileName)
+        if (pszFileNameLowercase)
         {
             CString strError;
-            strError.Format(L"The file \"%s\" can not be opened.  Another application is probably using it.", pszFileName);
+            strError.Format(L"The file \"%s\" can not be opened.  Another application is probably using it.", pszFileNameLowercase);
             MessageBox(g_appHWnd, strError, GetHost()->GetAppName(), MB_ICONSTOP);
         }
     }
@@ -1547,6 +1712,8 @@ CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* pszLoadDir)
                 CString strError;
                 strError.Format(L"The file \"%s\" was found but is not the expected size.  We expect the file to be %u bytes, but this file is %u bytes.\n\nAre you sure you wish to load this file?", strCurrFile.GetString(), CurrRule.uVerifyVar, (int)CurrFile.GetLength());
                 fActualFileSizeIsSafe = (MessageBox(g_appHWnd, strError, GetHost()->GetAppName(), MB_YESNO | MB_ICONERROR) == IDYES);
+                strError.Format(L"WARNING: The file \"%s\" was found but is not the expected size.  We expect the file to be %u bytes, but this file is %u bytes.\n", strCurrFile.GetString(), CurrRule.uVerifyVar, (int)CurrFile.GetLength());
+                OutputDebugString(strError);
             }
 
             if (fActualFileSizeIsSafe)
@@ -1608,6 +1775,8 @@ CGameClass* CGameLoad::LoadDir(int nGameFlag, WCHAR* pszLoadDir)
                     fShownFileError = true;
                     CString strError;
                     strError.Format(L"Could not find file \"%s\" needed for this game.", strCurrFile.GetString());
+                    OutputDebugString(strError);
+                    OutputDebugString(L"\n");
                     MessageBox(g_appHWnd, strError, GetHost()->GetAppName(), MB_ICONERROR);
                 }
 

@@ -162,9 +162,13 @@
 #define ID_ZOOM_3X                      32781
 #define ID_ZOOM_4X                      32782
 #define ID_SHOW32BITRGB                 32783
+#define ID_ZOOM_5X                      32784
 #define ID_AUTO                         32785
 #define ID_FILE_CROSSPATCH              32786
 #define ID_FILE_PATCH                   32787
+#define ID_ZOOM_6X                      32788
+#define ID_ZOOM_7X                      32789
+#define ID_ZOOM_8X                      32790
 #define ID_EDIT_SELECTALL               32793
 #define ID_EDIT_SELECTNONE              32794
 #define ID_ABOUT_ABOUTPALMOD            32795
@@ -218,13 +222,13 @@
 #define ID_IMGOUT_CLOSE                 32850
 #define ID_FILE_LOADSPRITE              32851
 #define ID_SETTINGS_COLORFORMAT         32852
-#define ID_COLORFORMAT_RGB444           32853
-#define ID_COLORFORMAT_RGB555           32854
+#define ID_COLORFORMAT_RGB444_BE        32853
+#define ID_COLORFORMAT_RGB555_LE        32854
 #define ID_COLORFORMAT_RGB556           32855
 #define ID_COLORFORMAT_RGB666           32856
 #define ID_COLORFORMAT_RGB557           32857
-#define ID_COLORFORMAT_RGB555_GBA       32858
-#define ID_COLORFORMAT_RGB555_ALT       32859
+#define ID_COLORFORMAT_BGR555_LE        32858
+#define ID_COLORFORMAT_RGB555_BE        32859
 #define ID_LD_SFIII3ARCADE10            32860
 #define ID_ACC_SNIFFCOLOR               32861
 #define ID_ACC_SNIFFPASTE               32862
@@ -236,7 +240,7 @@
 #define ID_ALPHASETTING_CHAOTIC         32869
 #define ID_SETTINGS_EXTCOPYDATA         32870
 #define ID_FILE_OPEN_BY_GAME            32871
-#define ID_COLORFORMAT_RGB333           32872
+#define ID_COLORFORMAT_RGB333_BE        32872
 #define ID_LD_SFIII3ARCADEEX            32873
 #define ID_COLORFORMAT_ARGB7888         32874
 #define ID_TOOLS_REVERSE                32875
@@ -263,13 +267,21 @@
 #define ID_FILE_LOADSPRITEFLIPPED       32896
 #define ID_LD_GGXXACR_P                 32897
 #define ID_LD_MBAACC_S                  32898
+#define ID_COLORFORMAT_GRB555_LE        32899
+#define ID_LOADDIRECTORY_REDEARTH_50    32900
+#define ID_COLORFORMAT_ABGR8888         32901
+#define ID_LD_MAAB                      32902
+#define ID_COLORFORMAT_BGR555_BE        32903
+#define ID_LD_GGXXR_S                   32904
+#define ID_LD_P4AU_NESICA               32905
+
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        138
-#define _APS_NEXT_COMMAND_VALUE         32899
+#define _APS_NEXT_COMMAND_VALUE         32906
 #define _APS_NEXT_CONTROL_VALUE         1040
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
