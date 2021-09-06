@@ -1,14 +1,11 @@
-# PalMod-Extra
-# This repository is deprecated. Go see the new and improved palmod fork repository here:(link not ready)
--
-PalMod-Extra is a fork of [PalMod](https://github.com/Preppy/PalMod) which aims to implement game support and features that are better off in a hacky fork than cluttering up the original.
-
-The games I've added support for are...
--
-- Jojo's Venture _(CPS-III, jojo.zip & clones)_ (Very limited support)
-- Escape Kids _(Konami Arcade, esckids.zip & clones)_
-
-The games i'm planning to support are...
--
-- Nothing new yet.
+## PalMod-Forks
+# PalMod-Lite
+PalMod-Lite is a build of PalMod based on [PalMod-Extended](https://github.com/turtlethug/PalMod-Forks) that debloats PalMod to its core. Games, previews, and features will be tweaked/removed for the lightest experience possible.
+#
+#### Added/Tweaked features from base build:
+`- None currently`
+#
+#### Removed features from base build:
+`- None currently`
+#
 
