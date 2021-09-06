@@ -22,15 +22,20 @@ void CPalModDlg::OnLoadGameByDirectory(SupportedGamesList nGameFlag)
             pszExtraInfo = L"For DBFCI, please select the 'games' directory.";
             break;
         case GGXXACR_S:
-            pszExtraInfo = L"For Guilty Gear (Steam), please select the \"obj\" folder under \"Resource\\pr\\ver_100\".\n\"Resource\\obj\" will not work.";
+            pszExtraInfo = L"Guilty Gear (Steam): select the \"obj\" folder under \"Resource\\pr\\ver_100\" after decrypting your files.\n\"Resource\\obj\" will not work.";
             break;
         case GGXXACR_P:
+            break; 
+        case GGXXR_S:
             break;
         case JOJOS_A_DIR_50:
             pszExtraInfo = L"We need the jojoba-simm5.x files from jojoba.zip.";
             break;
         case JOJOS_A_DIR_51:
             pszExtraInfo = L"We need the jojoba-simm5.x files from jojoba.zip.";
+            break;
+        case MAAB_A:
+            pszExtraInfo = L"For MAAB, please select the \"flashrom\" folder.\nThe folder is normally located in steamapps\\common\\Million Arthur Arcana Blood.";
             break;
         case MBAACC_S:
             pszExtraInfo = L"For MBAACC, please select the \"data\" folder.\nIf this is your first time loading MBAACC refer to the Read Me for more details.";
@@ -43,6 +48,9 @@ void CPalModDlg::OnLoadGameByDirectory(SupportedGamesList nGameFlag)
             break;
         case MVC2_P:
             pszExtraInfo = L"We need the PLxxPAK.bin files from the root of the game image.\nFor the PS3 version, select the folder \"gdrom\" under \"NPUB30068\\USRDIR\".";
+            break;
+        case P4AU_NESICA:
+            pszExtraInfo = L"Select the \"Char\" folder, under \"data\"";
             break;
         case REDEARTH_A_DIR_30:
             pszExtraInfo = L"We need the redearth-simm3.x files from redearth.zip.";
@@ -60,7 +68,7 @@ void CPalModDlg::OnLoadGameByDirectory(SupportedGamesList nGameFlag)
             pszExtraInfo = L"We need the sfiii2-simm5.x files from sfiii2.zip (US) or sfiii2n.zip (JPN).";
             break;
         case SFIII3_A_DIR_10:
-            pszExtraInfo = L"For the US version we need the sfiii3-simm1.x files from sfiii3nr1.zip.\nFor the JPN version we need the sfiii3n-simm1.x files from sfiii3n.zip.\nIf you don't have sfiii3nr1.zip, the files will be in sfiii3.zip.";
+            pszExtraInfo = L"The US version uses the sfiii3-simm1.x files from sfiii3nr1.zip.\nThe JPN version uses the sfiii3n-simm1.x files from sfiii3n.zip.\nIf you don't have sfiii3nr1.zip, the files will be in sfiii3.zip.";
             break;
         case SFIII3_A_DIR_51:
             pszExtraInfo = L"For the US version we need the sfiii3-simm5.x files from sfiii3.zip.\nFor the JPN version we need the sfiii3n-simm5.x files from sfiii3n.zip.";
@@ -75,6 +83,7 @@ void CPalModDlg::OnLoadGameByDirectory(SupportedGamesList nGameFlag)
             pszExtraInfo = L"We need the sfiii3ex-simm7.x files from sfiii3ex.zip.";
             break;
         case UNICLR_A:
+            pszExtraInfo = L"For UNICLR, please select the \"UNDER NIGHT In-Birth Exe Late[st]\" folder.\nThe folder is normally located in steamapps\\common.";
             break;
         }
 
@@ -98,7 +107,7 @@ void CPalModDlg::OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOOL bSysMenu)
     if (pPopupMenu == m_SubFileMenu)
     {
         pPopupMenu->EnableMenuItem(ID_FILE_PATCH, !fFileChanged);
-        pPopupMenu->EnableMenuItem(ID_FILE_OPENEXTRAS, (GetHost()->GetCurrGame() == nullptr));
+        pPopupMenu->EnableMenuItem(ID_FILE_OPENEXTRAS, (GetHost()->GetCurrGame() == nullptr) || !GetHost()->GetCurrGame()->GameAllowsExtraFile());
         pPopupMenu->EnableMenuItem(ID_FILE_CLOSEFILEDIR, (GetHost()->GetCurrGame() == nullptr));
         pPopupMenu->EnableMenuItem(ID_FILE_LOADLASTUSEDDIR, !GetLastUsedPath(NULL, 0, NULL, TRUE));
 
@@ -261,6 +270,9 @@ void CPalModDlg::OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOOL bSysMenu)
                 break;
             case GamePlatform::Nintendo:
                 pszPlatformName = L"Nintendo";
+                break;
+            case GamePlatform::PGM:
+                pszPlatformName = L"PolyGame Master";
                 break;
             case GamePlatform::Steam:
                 pszPlatformName = L"Steam";

@@ -4,4 +4,3 @@ PalMod-Extra is a build of PalMod based on [PalMod-Extended](https://github.com/
 #
 #### Added/Tweaked features from base build:
 `- None currently`
-

@@ -30,25 +30,25 @@ const WCHAR JOJOS_A_UNITDESC_50[][32] =
 const WCHAR JOJOS_A_UNITDESC_51[][32] =
 {
     L"Jotaro", // JOJOS_A_CHARACTER_COLLECTION_JOTARO
-    L"Kakyoin & Hierophant", // JOJOS_A_CHARACTER_COLLECTION_HIEROPHANT
+    L"Kakyoin", // JOJOS_A_CHARACTER_COLLECTION_HIEROPHANT
     L"Avdol", // JOJOS_A_CHARACTER_COLLECTION_AVDOL
     L"Polnareff", // JOJOS_A_CHARACTER_COLLECTION_POL
     L"Joseph", // JOJOS_A_CHARACTER_COLLECTION_JOSEPH
     L"Iggy", // JOJOS_A_CHARACTER_COLLECTION_IGGY
     L"Alessi", // JOJOS_A_CHARACTER_COLLECTION_ALESSI
     L"Chaka", // JOJOS_A_CHARACTER_COLLECTION_CHAKA
-    L"Devo and Ebony", // JOJOS_A_CHARACTER_COLLECTION_DEVOEBONY
+    L"Devo", // JOJOS_A_CHARACTER_COLLECTION_DEVOEBONY
     L"Midler", // JOJOS_A_CHARACTER_COLLECTION_MIDLER
-    L"Dio", // JOJOS_A_CHARACTER_COLLECTION_DIO
+    L"DIO", // JOJOS_A_CHARACTER_COLLECTION_DIO
     L"Shadow Dio", // JOJOS_A_CHARACTER_COLLECTION_SDIO
     L"Young Joseph", // JOJOS_A_CHARACTER_COLLECTION_YJOSEPH
-    L"Hol", // JOJOS_A_CHARACTER_COLLECTION_HOL
+    L"Hol Horse", // JOJOS_A_CHARACTER_COLLECTION_HOL
     L"Vanilla Ice", // JOJOS_A_CHARACTER_COLLECTION_VICE
-    L"New Kakyoin & Hierophant", // JOJOS_A_CHARACTER_COLLECTION_HIERO
+    L"New Kakyoin", // JOJOS_A_CHARACTER_COLLECTION_HIERO
     L"Anubis Polnareff", // JOJOS_A_CHARACTER_COLLECTION_BPOL
     L"Petshop", // JOJOS_A_CHARACTER_COLLECTION_SHOP
     L"Mariah", // JOJOS_A_CHARACTER_COLLECTION_MARIAH
-    L"Hol and Boingo", // JOJOS_A_CHARACTER_COLLECTION_HOLBOINGO
+    L"Hol Horse & Boingo", // JOJOS_A_CHARACTER_COLLECTION_HOLBOINGO
     L"Rubber Soul", // JOJOS_A_CHARACTER_COLLECTION_RSOUL
     L"Khan", // JOJOS_A_CHARACTER_COLLECTION_KHAN
     L"N'Doul and Geb", // JOJOS_A_CHARACTER_COLLECTION_NDOUL
@@ -56,7 +56,7 @@ const WCHAR JOJOS_A_UNITDESC_51[][32] =
     L"Death 13", // JOJOS_A_CHARACTER_COLLECTION_DEATH13
     L"Unimplemented: Gray Fly", // JOJOS_A_CHARACTER_COLLECTION_GRAYFLY
     L"Timestop", // JOJOS_TIMESTOP_COLLECTION
-    L"Bonus", // JOJOS_A_BONUS_COLLECTION
+    L"Bonus Palettes", // JOJOS_A_BONUS_COLLECTION
 };
 
 constexpr auto JOJOS_A_NUMUNIT_50 = ARRAYSIZE(JOJOS_A_UNITDESC_50);
@@ -64,6 +64,41 @@ constexpr auto JOJOS_A_NUMUNIT_51 = ARRAYSIZE(JOJOS_A_UNITDESC_51);
 
 #define JOJOS_A_EXTRALOC_50 JOJOS_A_NUMUNIT_50
 #define JOJOS_A_EXTRALOC_51 JOJOS_A_NUMUNIT_51
+
+const UINT16 JOJOS_A_IMGIDS_USED[] =
+{
+    indexJojos51Jotaro,
+    indexJojos51Kakyo,
+    indexJojos51Avdol,
+    indexJojos51Pol,
+    indexJojos51Joseph,
+    indexJojos51Iggy,
+    indexJojos51Alessi,
+    indexJojos51Chaka,
+    indexJojos51Devo,
+    indexJojos51Midler,
+    indexJojos51Dio,    // 0x0a
+    indexJojos51SDio,
+    indexJojos51YSeph,
+    indexJojos51Hol,
+    indexJojos51VIce,
+    indexJojos51NewKakyo,
+    indexJojos51Anubis, // 0x10
+    indexJojos51Petshop,
+    indexJojos51Mariah,
+    indexJojos51HolBoingo,
+    indexJojos51RSoul,
+    indexJojos51Khan,
+    indexJojos51NDoul,
+    indexJojos51BIce,
+    indexJojos51Death13, // 0x18
+    indexJojos51Timestop,
+    indexJojos51Bonus,
+    indexJojos50Stages,
+    indexJojos50HUDPortraits,
+    indexJojos51GrayFly,
+    indexJojos51TarotCards,
+};
 
 // hud, portraits, stages: 50
 // characters, timestop, bonus: 51
@@ -96,11 +131,11 @@ const sGame_PaletteDataset JOJOS_A_HUD_PORTRAIT_KAKYOIN_PALETTES[] =
 
 const sGame_PaletteDataset JOJOS_A_HUD_PORTRAIT_DIO_PALETTES[] =
 {
-    { L"Dio A Life Bar Portrait", 0x07C0480, 0x07C04A0, indexJojos50HUDPortraits, indexJojos51Dio },
-    { L"Dio B Life Bar Portrait", 0x07C04A0, 0x07C04C0, indexJojos50HUDPortraits, indexJojos51Dio },
-    { L"Dio C Life Bar Portrait", 0x07C14C0, 0x07C14E0, indexJojos50HUDPortraits, indexJojos51Dio },
-    { L"Dio S Life Bar Portrait", 0x07C14E0, 0x07C1500, indexJojos50HUDPortraits, indexJojos51Dio },
-    { L"Dio Start Life Bar Portrait", 0x07C1500, 0x07C1520, indexJojos50HUDPortraits, indexJojos51Dio },
+    { L"DIO A Life Bar Portrait", 0x07C0480, 0x07C04A0, indexJojos50HUDPortraits, indexJojos51Dio },
+    { L"DIO B Life Bar Portrait", 0x07C04A0, 0x07C04C0, indexJojos50HUDPortraits, indexJojos51Dio },
+    { L"DIO C Life Bar Portrait", 0x07C14C0, 0x07C14E0, indexJojos50HUDPortraits, indexJojos51Dio },
+    { L"DIO S Life Bar Portrait", 0x07C14E0, 0x07C1500, indexJojos50HUDPortraits, indexJojos51Dio },
+    { L"DIO Start Life Bar Portrait", 0x07C1500, 0x07C1520, indexJojos50HUDPortraits, indexJojos51Dio },
 };
 
 const sGame_PaletteDataset JOJOS_A_HUD_PORTRAIT_CHAKA_PALETTES[] =
@@ -247,11 +282,11 @@ const sGame_PaletteDataset JOJOS_A_HUD_PORTRAIT_APOL_PALETTES[] =
 
 const sGame_PaletteDataset JOJOS_A_HUD_PORTRAIT_HOLB_PALETTES[] =
 {
-    { L"Hol & Boingo A Life Bar Portrait", 0x07C18C0, 0x07C18E0, indexJojos50HUDPortraits, indexJojos51HolBoingo },
-    { L"Hol & Boingo B Life Bar Portrait", 0x07C18E0, 0x07C1900, indexJojos50HUDPortraits, indexJojos51HolBoingo },
-    { L"Hol & Boingo C Life Bar Portrait", 0x07C1900, 0x07C1920, indexJojos50HUDPortraits, indexJojos51HolBoingo },
-    { L"Hol & Boingo S Life Bar Portrait", 0x07C1920, 0x07C1940, indexJojos50HUDPortraits, indexJojos51HolBoingo },
-    { L"Hol & Boingo Start Life Bar Portrait", 0x07C1940, 0x07C1960, indexJojos50HUDPortraits, indexJojos51HolBoingo },
+    { L"Hol Horse & Boingo A Life Bar Portrait", 0x07C18C0, 0x07C18E0, indexJojos50HUDPortraits, indexJojos51HolBoingo },
+    { L"Hol Horse & Boingo B Life Bar Portrait", 0x07C18E0, 0x07C1900, indexJojos50HUDPortraits, indexJojos51HolBoingo },
+    { L"Hol Horse & Boingo C Life Bar Portrait", 0x07C1900, 0x07C1920, indexJojos50HUDPortraits, indexJojos51HolBoingo },
+    { L"Hol Horse & Boingo S Life Bar Portrait", 0x07C1920, 0x07C1940, indexJojos50HUDPortraits, indexJojos51HolBoingo },
+    { L"Hol Horse & Boingo Start Life Bar Portrait", 0x07C1940, 0x07C1960, indexJojos50HUDPortraits, indexJojos51HolBoingo },
 };
 
 const sGame_PaletteDataset JOJOS_A_HUD_PORTRAIT_RSOUL_PALETTES[] =
@@ -288,28 +323,28 @@ const sDescTreeNode JOJOS_A_50_HUD_PORTRAIT_COLLECTION[]
 {
     { L"Jotaro", DESC_NODETYPE_TREE, (void *)JOJOS_A_HUD_PORTRAIT_JOTARO_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_JOTARO_PALETTES) },
     { L"Kakyoin", DESC_NODETYPE_TREE,(void*)JOJOS_A_HUD_PORTRAIT_KAKYOIN_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_KAKYOIN_PALETTES) },
-    { L"Dio", DESC_NODETYPE_TREE,    (void*)JOJOS_A_HUD_PORTRAIT_DIO_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_DIO_PALETTES) },
-    { L"Chaka", DESC_NODETYPE_TREE,  (void*)JOJOS_A_HUD_PORTRAIT_CHAKA_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_CHAKA_PALETTES) },
-    { L"Iggy", DESC_NODETYPE_TREE,   (void*)JOJOS_A_HUD_PORTRAIT_IGGY_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_IGGY_PALETTES) },
-    { L"Petshop", DESC_NODETYPE_TREE,(void*)JOJOS_A_HUD_PORTRAIT_PETSHOP_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_PETSHOP_PALETTES) },
+    { L"Avdol", DESC_NODETYPE_TREE,  (void*)JOJOS_A_HUD_PORTRAIT_ABDUL_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_ABDUL_PALETTES) },
     { L"Polnareff", DESC_NODETYPE_TREE,(void*)JOJOS_A_HUD_PORTRAIT_POLNAREFF_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_POLNAREFF_PALETTES) },
     { L"Joseph", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_JOSEPH_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_JOSEPH_PALETTES) },
-    { L"Avdol", DESC_NODETYPE_TREE,  (void*)JOJOS_A_HUD_PORTRAIT_ABDUL_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_ABDUL_PALETTES) },
+    { L"Iggy", DESC_NODETYPE_TREE,   (void*)JOJOS_A_HUD_PORTRAIT_IGGY_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_IGGY_PALETTES) },
     { L"Alessi", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_ALESSI_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_ALESSI_PALETTES) },
+    { L"Chaka", DESC_NODETYPE_TREE,  (void*)JOJOS_A_HUD_PORTRAIT_CHAKA_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_CHAKA_PALETTES) },
     { L"Devo", DESC_NODETYPE_TREE,   (void*)JOJOS_A_HUD_PORTRAIT_DEVO_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_DEVO_PALETTES) },
-    { L"Vanilla Ice", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_VANILLA_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_VANILLA_PALETTES) },
-    { L"Hol Horse", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_HOL_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_HOL_PALETTES) },
     { L"Midler", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_MIDLER_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_MIDLER_PALETTES) },
-    { L"Mariah", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_MARIAH_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_MARIAH_PALETTES) },
-    { L"Young Joseph", DESC_NODETYPE_TREE,(void*)JOJOS_A_HUD_PORTRAIT_YJOSEPH_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_YJOSEPH_PALETTES) },
+    { L"DIO", DESC_NODETYPE_TREE,    (void*)JOJOS_A_HUD_PORTRAIT_DIO_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_DIO_PALETTES) },
     { L"Shadow Dio", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_SDIO_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_SDIO_PALETTES) },
+    { L"Young Joseph", DESC_NODETYPE_TREE,(void*)JOJOS_A_HUD_PORTRAIT_YJOSEPH_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_YJOSEPH_PALETTES) },
+    { L"Hol Horse", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_HOL_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_HOL_PALETTES) },
+    { L"Vanilla Ice", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_VANILLA_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_VANILLA_PALETTES) },
     { L"New Kakyoin", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_NKAKYOIN_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_NKAKYOIN_PALETTES) },
     { L"Anubis Polnareff", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_APOL_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_APOL_PALETTES) },
-    { L"Hol & Boingo", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_HOLB_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_HOLB_PALETTES) },
+    { L"Petshop", DESC_NODETYPE_TREE,(void*)JOJOS_A_HUD_PORTRAIT_PETSHOP_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_PETSHOP_PALETTES) },
+    { L"Mariah", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_MARIAH_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_MARIAH_PALETTES) },
+    { L"Hol Horse & Boingo", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_HOLB_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_HOLB_PALETTES) },
     { L"Rubber Soul", DESC_NODETYPE_TREE, (void*)JOJOS_A_HUD_PORTRAIT_RSOUL_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_RSOUL_PALETTES) },
     { L"Khan", DESC_NODETYPE_TREE,       (void*)JOJOS_A_HUD_PORTRAIT_KHAN_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_KHAN_PALETTES) },
-    { L"Death 13", DESC_NODETYPE_TREE,   (void*)JOJOS_A_HUD_PORTRAIT_DEATH_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_DEATH_PALETTES) },
     { L"N'Doul",  DESC_NODETYPE_TREE,    (void*)JOJOS_A_HUD_PORTRAIT_NDOUL_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_NDOUL_PALETTES) },
+    { L"Death 13", DESC_NODETYPE_TREE,   (void*)JOJOS_A_HUD_PORTRAIT_DEATH_PALETTES, ARRAYSIZE(JOJOS_A_HUD_PORTRAIT_DEATH_PALETTES) },
 };
 
 #pragma endregion HUD Portraits
@@ -354,12 +389,12 @@ const sGame_PaletteDataset JOJOS_A_STAGE_NODE_ALOCKUP[] =
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_AHEALTHROOM[] =
 {
-    { L"A Health Room (1/6)", 0x07c3e00, 0x07c4000 },
-    { L"A Health Room (2/6)", 0x07c4000, 0x07c4200 },
-    { L"A Health Room (3/6)", 0x07c4200, 0x07c4400 },
-    { L"A Health Room (4/6)", 0x07c4400, 0x07c4600 },
-    { L"A Health Room (5/6)", 0x07c4600, 0x07c4800 },
-    { L"A Health Room (6/6)", 0x07c4800, 0x07c4900 },
+    { L"A Health Room (1/6)", 0x07c3e00, 0x07c4000, indexJojos50Stages, 0x2e, &pairFullyLinkedNode },
+    { L"A Health Room (2/6)", 0x07c4000, 0x07c4200, indexJojos50Stages, 0x2f },
+    { L"A Health Room (3/6)", 0x07c4200, 0x07c4400, indexJojos50Stages, 0x30 },
+    { L"A Health Room (4/6)", 0x07c4400, 0x07c4600, indexJojos50Stages, 0x31 },
+    { L"A Health Room (5/6)", 0x07c4600, 0x07c4800, indexJojos50Stages, 0x32 },
+    { L"A Health Room (6/6)", 0x07c4800, 0x07c4900, indexJojos50Stages, 0x33 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_AIRPLANE[] =
@@ -385,28 +420,28 @@ const sGame_PaletteDataset JOJOS_A_STAGE_NODE_AIRPLANE[] =
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_TGARDEN[] =
 {
-    { L"Tigerbaum Garden (1/11)", 0x07c6c00, 0x07c6e00, indexJojos51Stages, 0x1e, &pairFullyLinkedNode },
-    { L"Tigerbaum Garden (2/11)", 0x07c6e00, 0x07c7000, indexJojos51Stages, 0x1f },
-    { L"Tigerbaum Garden (3/11)", 0x07c7000, 0x07c7200, indexJojos51Stages, 0x20 },
-    { L"Tigerbaum Garden (4/11)", 0x07c7200, 0x07c7400, indexJojos51Stages, 0x21 },
-    { L"Tigerbaum Garden (5/11)", 0x07c7400, 0x07c7600, indexJojos51Stages, 0x22 },
-    { L"Tigerbaum Garden (6/11)", 0x07c7600, 0x07c7800, indexJojos51Stages, 0x23 },
-    { L"Tigerbaum Garden (7/11)", 0x07c7800, 0x07c7a00, indexJojos51Stages, 0x24 },
-    { L"Tigerbaum Garden (8/11)", 0x07c7a00, 0x07c7c00, indexJojos51Stages, 0x25 },
-    { L"Tigerbaum Garden (9/11)", 0x07c7c00, 0x07c7e00, indexJojos51Stages, 0x26 },
-    { L"Tigerbaum Garden (10/11)", 0x07c7e00, 0x07c8000, indexJojos51Stages, 0x27 },
-    { L"Tigerbaum Garden (11/11)", 0x07c8000, 0x07c8200, indexJojos51Stages, 0x28 },
+    { L"Tigerbaum Garden (1/11)", 0x07c6c00, 0x07c6e00, indexJojos50Stages, 0x1e, &pairFullyLinkedNode },
+    { L"Tigerbaum Garden (2/11)", 0x07c6e00, 0x07c7000, indexJojos50Stages, 0x1f },
+    { L"Tigerbaum Garden (3/11)", 0x07c7000, 0x07c7200, indexJojos50Stages, 0x20 },
+    { L"Tigerbaum Garden (4/11)", 0x07c7200, 0x07c7400, indexJojos50Stages, 0x21 },
+    { L"Tigerbaum Garden (5/11)", 0x07c7400, 0x07c7600, indexJojos50Stages, 0x22 },
+    { L"Tigerbaum Garden (6/11)", 0x07c7600, 0x07c7800, indexJojos50Stages, 0x23 },
+    { L"Tigerbaum Garden (7/11)", 0x07c7800, 0x07c7a00, indexJojos50Stages, 0x24 },
+    { L"Tigerbaum Garden (8/11)", 0x07c7a00, 0x07c7c00, indexJojos50Stages, 0x25 },
+    { L"Tigerbaum Garden (9/11)", 0x07c7c00, 0x07c7e00, indexJojos50Stages, 0x26 },
+    { L"Tigerbaum Garden (10/11)", 0x07c7e00, 0x07c8000, indexJojos50Stages, 0x27 },
+    { L"Tigerbaum Garden (11/11)", 0x07c8000, 0x07c8200, indexJojos50Stages, 0x28 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_HOTELD[] =
 {
-    { L"Hotel (Devil) (1/7)", 0x07c8300, 0x07c8500, indexJojos51Stages, 0x11, &pairFullyLinkedNode },
-    { L"Hotel (Devil) (2/7)", 0x07c8500, 0x07c8700, indexJojos51Stages, 0x12 },
-    { L"Hotel (Devil) (3/7)", 0x07c8700, 0x07c8900, indexJojos51Stages, 0x13 },
-    { L"Hotel (Devil) (4/7)", 0x07c8900, 0x07c8b00, indexJojos51Stages, 0x14 },
-    { L"Hotel (Devil) (5/7)", 0x07c8b00, 0x07c8d00, indexJojos51Stages, 0x15 },
-    { L"Hotel (Devil) (6/7)", 0x07c8d00, 0x07c8f00, indexJojos51Stages, 0x16 },
-    { L"Hotel (Devil) (7/7)", 0x07c8f00, 0x07c9080, indexJojos51Stages, 0x17 },
+    { L"Hotel (Devil) (1/7)", 0x07c8300, 0x07c8500, indexJojos50Stages, 0x11, &pairFullyLinkedNode },
+    { L"Hotel (Devil) (2/7)", 0x07c8500, 0x07c8700, indexJojos50Stages, 0x12 },
+    { L"Hotel (Devil) (3/7)", 0x07c8700, 0x07c8900, indexJojos50Stages, 0x13 },
+    { L"Hotel (Devil) (4/7)", 0x07c8900, 0x07c8b00, indexJojos50Stages, 0x14 },
+    { L"Hotel (Devil) (5/7)", 0x07c8b00, 0x07c8d00, indexJojos50Stages, 0x15 },
+    { L"Hotel (Devil) (6/7)", 0x07c8d00, 0x07c8f00, indexJojos50Stages, 0x16 },
+    { L"Hotel (Devil) (7/7)", 0x07c8f00, 0x07c9080, indexJojos50Stages, 0x17 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_REMAINS[] =
@@ -467,32 +502,32 @@ const sGame_PaletteDataset JOJOS_A_STAGE_NODE_AMPARK[] =
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_SISLAND[] =
 {
-    { L"Small Island (1/6)", 0x07d0a00, 0x07d0c00, indexJojos51Stages, 0x18 },
-    { L"Small Island (2/6)", 0x07d0c00, 0x07d0e00, indexJojos51Stages, 0x19 },
-    { L"Small Island (3/6)", 0x07d0e00, 0x07d1000, indexJojos51Stages, 0x1A },
-    { L"Small Island (4/6)", 0x07d1000, 0x07d1200, indexJojos51Stages, 0x1B },
-    { L"Small Island (5/6)", 0x07d1200, 0x07d1400, indexJojos51Stages, 0x1C },
-    { L"Small Island (6/6)", 0x07d1400, 0x07d1600, indexJojos51Stages, 0x1D },
+    { L"Small Island (1/6)", 0x07d0a00, 0x07d0c00, indexJojos50Stages, 0x18 },
+    { L"Small Island (2/6)", 0x07d0c00, 0x07d0e00, indexJojos50Stages, 0x19 },
+    { L"Small Island (3/6)", 0x07d0e00, 0x07d1000, indexJojos50Stages, 0x1A },
+    { L"Small Island (4/6)", 0x07d1000, 0x07d1200, indexJojos50Stages, 0x1B },
+    { L"Small Island (5/6)", 0x07d1200, 0x07d1400, indexJojos50Stages, 0x1C },
+    { L"Small Island (6/6)", 0x07d1400, 0x07d1600, indexJojos50Stages, 0x1D },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_DNOON[] =
 {
-    { L"Desert Noon (1/7)", 0x07d3100, 0x07d3300, indexJojos51Stages, 0x0b },
+    { L"Desert Noon (1/7)", 0x07d3100, 0x07d3300, indexJojos50Stages, 0x0b },
     { L"Desert Noon (2/7)", 0x07d3300, 0x07d3500 },
-    { L"Desert Noon (3/7)", 0x07d3500, 0x07d3700, indexJojos51Stages, 0x0c },
+    { L"Desert Noon (3/7)", 0x07d3500, 0x07d3700, indexJojos50Stages, 0x0c },
     { L"Desert Noon (4/7)", 0x07d3700, 0x07d3900 },
-    { L"Desert Noon (5/7)", 0x07d3900, 0x07d3b00, indexJojos51Stages, 0x0d },
-    { L"Desert Noon (6/7)", 0x07d3b00, 0x07d3d00, indexJojos51Stages, 0x0e },
-    { L"Desert Noon (7/7)", 0x07d3d00, 0x07d3f00, indexJojos51Stages, 0x0f },
+    { L"Desert Noon (5/7)", 0x07d3900, 0x07d3b00, indexJojos50Stages, 0x0d },
+    { L"Desert Noon (6/7)", 0x07d3b00, 0x07d3d00, indexJojos50Stages, 0x0e },
+    { L"Desert Noon (7/7)", 0x07d3d00, 0x07d3f00, indexJojos50Stages, 0x0f },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_RUIN[] =
 {
-    { L"Ruins (1/5)", 0x07d6d00, 0x07d6f00, indexJojos51Stages, 0x29, &pairFullyLinkedNode },
-    { L"Ruins (2/5)", 0x07d6f00, 0x07d7100, indexJojos51Stages, 0x2a },
-    { L"Ruins (3/5)", 0x07d7100, 0x07d7300, indexJojos51Stages, 0x2b },
-    { L"Ruins (4/5)", 0x07d7300, 0x07d7500, indexJojos51Stages, 0x2c },
-    { L"Ruins (5/5)", 0x07d7500, 0x07d7700, indexJojos51Stages, 0x2d },
+    { L"Ruins (1/5)", 0x07d6d00, 0x07d6f00, indexJojos50Stages, 0x29, &pairFullyLinkedNode },
+    { L"Ruins (2/5)", 0x07d6f00, 0x07d7100, indexJojos50Stages, 0x2a },
+    { L"Ruins (3/5)", 0x07d7100, 0x07d7300, indexJojos50Stages, 0x2b },
+    { L"Ruins (4/5)", 0x07d7300, 0x07d7500, indexJojos50Stages, 0x2c },
+    { L"Ruins (5/5)", 0x07d7500, 0x07d7700, indexJojos50Stages, 0x2d },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_CTNOON[] =
@@ -546,19 +581,19 @@ const sGame_PaletteDataset JOJOS_A_STAGE_NODE_INHOUSE[] =
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_CROOM[] =
 {
-    { L"Coffin Room (1/6)", 0x07e4300, 0x07e4500, indexJojos51Stages, 0x5, &pairCoffinRoom },
-    { L"Coffin Room (2/6)", 0x07e4500, 0x07e4700, indexJojos51Stages, 0x6 },
-    { L"Coffin Room (3/6)", 0x07e4700, 0x07e4900, indexJojos51Stages, 0x7 },
-    { L"Coffin Room (4/6)", 0x07e4900, 0x07e4b00, indexJojos51Stages, 0x8 },
-    { L"Coffin Room (5/6)", 0x07e4b00, 0x07e4d00, indexJojos51Stages, 0x9 }, // This and the next are weird characters
-    { L"Coffin Room (6/6)", 0x07e4d00, 0x07e4e00, indexJojos51Stages, 0xa },
+    { L"Coffin Room (1/6)", 0x07e4300, 0x07e4500, indexJojos50Stages, 0x5, &pairCoffinRoom },
+    { L"Coffin Room (2/6)", 0x07e4500, 0x07e4700, indexJojos50Stages, 0x6 },
+    { L"Coffin Room (3/6)", 0x07e4700, 0x07e4900, indexJojos50Stages, 0x7 },
+    { L"Coffin Room (4/6)", 0x07e4900, 0x07e4b00, indexJojos50Stages, 0x8 },
+    { L"Coffin Room (5/6)", 0x07e4b00, 0x07e4d00, indexJojos50Stages, 0x9 }, // This and the next are weird characters
+    { L"Coffin Room (6/6)", 0x07e4d00, 0x07e4e00, indexJojos50Stages, 0xa },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_CLOCK[] =
 {
-    { L"Clock Tower (1/3)", 0x07e5b00, 0x07e5d00, indexJojos51Stages, 0, &pairFullyLinkedNode },
-    { L"Clock Tower (2/3)", 0x07e5d00, 0x07e5f00, indexJojos51Stages, 0x1 },
-    { L"Clock Tower (3/3)", 0x07e5f00, 0x07e6100, indexJojos51Stages, 0x2 },
+    { L"Clock Tower (1/3)", 0x07e5b00, 0x07e5d00, indexJojos50Stages, 0, &pairFullyLinkedNode },
+    { L"Clock Tower (2/3)", 0x07e5d00, 0x07e5f00, indexJojos50Stages, 0x1 },
+    { L"Clock Tower (3/3)", 0x07e5f00, 0x07e6100, indexJojos50Stages, 0x2 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_SUBURB[] =
@@ -589,8 +624,8 @@ const sGame_PaletteDataset JOJOS_A_STAGE_NODE_SUBURB[] =
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_OTBRIDGE[] =
 {
-    { L"On The Bridge (1/2)", 0x07eed00, 0x07eef00, indexJojos51Stages, 0x3, &pairFullyLinkedNode },
-    { L"On The Bridge (2/2)", 0x07eef00, 0x07ef100, indexJojos51Stages, 0x4 },
+    { L"On The Bridge (1/2)", 0x07eed00, 0x07eef00, indexJojos50Stages, 0x3, &pairFullyLinkedNode },
+    { L"On The Bridge (2/2)", 0x07eef00, 0x07ef100, indexJojos50Stages, 0x4 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_CTTWILIGHT[] =
@@ -620,48 +655,48 @@ const sGame_PaletteDataset JOJOS_A_STAGE_NODE_CTTWILIGHT[] =
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_DMORNING[] =
 {
-    { L"Desert Morning (1/8)", 0x07d4000, 0x07d4200, indexJojos51Stages, 0x0b },
+    { L"Desert Morning (1/8)", 0x07d4000, 0x07d4200, indexJojos50Stages, 0x0b },
     { L"Desert Morning (2/8)", 0x07d4200, 0x07d4400 },
-    { L"Desert Morning (3/8)", 0x07d4400, 0x07d4600, indexJojos51Stages, 0x0c },
+    { L"Desert Morning (3/8)", 0x07d4400, 0x07d4600, indexJojos50Stages, 0x0c },
     { L"Desert Morning (4/8)", 0x07d4600, 0x07d4800 },
-    { L"Desert Morning (5/8)", 0x07d4800, 0x07d4a00, indexJojos51Stages, 0x0d },
-    { L"Desert Morning (6/8)", 0x07d4a00, 0x07d4c00, indexJojos51Stages, 0x0e },
-    { L"Desert Morning (7/8)", 0x07d4c00, 0x07d4e00, indexJojos51Stages, 0x0f },
+    { L"Desert Morning (5/8)", 0x07d4800, 0x07d4a00, indexJojos50Stages, 0x0d },
+    { L"Desert Morning (6/8)", 0x07d4a00, 0x07d4c00, indexJojos50Stages, 0x0e },
+    { L"Desert Morning (7/8)", 0x07d4c00, 0x07d4e00, indexJojos50Stages, 0x0f },
     { L"Desert Morning (8/8)", 0x07d4e00, 0x07d4e80 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_DTWILIGHT[] =
 {
-    { L"Desert Twilight (1/8)", 0x07d5e00, 0x07d6000, indexJojos51Stages, 0x0b },
+    { L"Desert Twilight (1/8)", 0x07d5e00, 0x07d6000, indexJojos50Stages, 0x0b },
     { L"Desert Twilight (2/8)", 0x07d6000, 0x07d6200 },
-    { L"Desert Twilight (3/8)", 0x07d6200, 0x07d6400, indexJojos51Stages, 0x0c },
+    { L"Desert Twilight (3/8)", 0x07d6200, 0x07d6400, indexJojos50Stages, 0x0c },
     { L"Desert Twilight (4/8)", 0x07d6400, 0x07d6600 },
-    { L"Desert Twilight (5/8)", 0x07d6600, 0x07d6800, indexJojos51Stages, 0x0d },
-    { L"Desert Twilight (6/8)", 0x07d6800, 0x07d6a00, indexJojos51Stages, 0x0e },
-    { L"Desert Twilight (7/8)", 0x07d6a00, 0x07d6c00, indexJojos51Stages, 0x0f },
+    { L"Desert Twilight (5/8)", 0x07d6600, 0x07d6800, indexJojos50Stages, 0x0d },
+    { L"Desert Twilight (6/8)", 0x07d6800, 0x07d6a00, indexJojos50Stages, 0x0e },
+    { L"Desert Twilight (7/8)", 0x07d6a00, 0x07d6c00, indexJojos50Stages, 0x0f },
     { L"Desert Twilight (8/8)", 0x07d6c00, 0x07d6c80},
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_DNIGHT[] =
 {
-    { L"Desert Night (1/8)", 0x07d4f00, 0x07d5100, indexJojos51Stages, 0xb },
+    { L"Desert Night (1/8)", 0x07d4f00, 0x07d5100, indexJojos50Stages, 0xb },
     { L"Desert Night (2/8)", 0x07d5100, 0x07d5300 },
-    { L"Desert Night (3/8)", 0x07d5300, 0x07d5500, indexJojos51Stages, 0xc },
+    { L"Desert Night (3/8)", 0x07d5300, 0x07d5500, indexJojos50Stages, 0xc },
     { L"Desert Night (4/8)", 0x07d5500, 0x07d5700 },
-    { L"Desert Night (5/8)", 0x07d5700, 0x07d5900, indexJojos51Stages, 0xd },
-    { L"Desert Night (6/8)", 0x07d5900, 0x07d5b00, indexJojos51Stages, 0xe },
-    { L"Desert Night (7/8)", 0x07d5b00, 0x07d5d00, indexJojos51Stages, 0xf },
-    { L"Desert Night (8/8)", 0x07d5d00, 0x07d5d80, indexJojos51Stages, 0x10 },
+    { L"Desert Night (5/8)", 0x07d5700, 0x07d5900, indexJojos50Stages, 0xd },
+    { L"Desert Night (6/8)", 0x07d5900, 0x07d5b00, indexJojos50Stages, 0xe },
+    { L"Desert Night (7/8)", 0x07d5b00, 0x07d5d00, indexJojos50Stages, 0xf },
+    { L"Desert Night (8/8)", 0x07d5d00, 0x07d5d80, indexJojos50Stages, 0x10 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_SISLANDJ[] =
 {
-    { L"Small Island (Joseph) (1/6)", 0x07d1700, 0x07d1900, indexJojos51Stages, 0x18 },
-    { L"Small Island (Joseph) (2/6)", 0x07d1900, 0x07d1b00, indexJojos51Stages, 0x19 },
-    { L"Small Island (Joseph) (3/6)", 0x07d1b00, 0x07d1d00, indexJojos51Stages, 0x1a },
-    { L"Small Island (Joseph) (4/6)", 0x07d1d00, 0x07d1f00, indexJojos51Stages, 0x1b },
-    { L"Small Island (Joseph) (5/6)", 0x07d1f00, 0x07d2100, indexJojos51Stages, 0x1c },
-    { L"Small Island (Joseph) (6/6)", 0x07d2100, 0x07d2300, indexJojos51Stages, 0x1d },
+    { L"Small Island (Joseph) (1/6)", 0x07d1700, 0x07d1900, indexJojos50Stages, 0x18 },
+    { L"Small Island (Joseph) (2/6)", 0x07d1900, 0x07d1b00, indexJojos50Stages, 0x19 },
+    { L"Small Island (Joseph) (3/6)", 0x07d1b00, 0x07d1d00, indexJojos50Stages, 0x1a },
+    { L"Small Island (Joseph) (4/6)", 0x07d1d00, 0x07d1f00, indexJojos50Stages, 0x1b },
+    { L"Small Island (Joseph) (5/6)", 0x07d1f00, 0x07d2100, indexJojos50Stages, 0x1c },
+    { L"Small Island (Joseph) (6/6)", 0x07d2100, 0x07d2300, indexJojos50Stages, 0x1d },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_CTNIGHT[] =
@@ -757,32 +792,32 @@ const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW1[] = // aka Remains
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW2[] = // aka Hotel (Devil)
 {
-    { L"New 2 (1/7)", 0x07c9100, 0x07c9300, indexJojos51Stages, 0x11, &pairFullyLinkedNode },
-    { L"New 2 (2/7)", 0x07c9300, 0x07c9500, indexJojos51Stages, 0x12 },
-    { L"New 2 (3/7)", 0x07c9500, 0x07c9700, indexJojos51Stages, 0x13 },
-    { L"New 2 (4/7)", 0x07c9700, 0x07c9900, indexJojos51Stages, 0x14 },
-    { L"New 2 (5/7)", 0x07c9900, 0x07c9b00, indexJojos51Stages, 0x15 },
-    { L"New 2 (6/7)", 0x07c9b00, 0x07c9d00, indexJojos51Stages, 0x16 },
-    { L"New 2 (7/7)", 0x07c9d00, 0x07c9e80, indexJojos51Stages, 0x17 },
+    { L"New 2 (1/7)", 0x07c9100, 0x07c9300, indexJojos50Stages, 0x11, &pairFullyLinkedNode },
+    { L"New 2 (2/7)", 0x07c9300, 0x07c9500, indexJojos50Stages, 0x12 },
+    { L"New 2 (3/7)", 0x07c9500, 0x07c9700, indexJojos50Stages, 0x13 },
+    { L"New 2 (4/7)", 0x07c9700, 0x07c9900, indexJojos50Stages, 0x14 },
+    { L"New 2 (5/7)", 0x07c9900, 0x07c9b00, indexJojos50Stages, 0x15 },
+    { L"New 2 (6/7)", 0x07c9b00, 0x07c9d00, indexJojos50Stages, 0x16 },
+    { L"New 2 (7/7)", 0x07c9d00, 0x07c9e80, indexJojos50Stages, 0x17 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW3[] = // aka Small Island
 {
-    { L"New 3 (1/6)", 0x07d2400, 0x07d2600, indexJojos51Stages, 0x18 },
-    { L"New 3 (2/6)", 0x07d2600, 0x07d2800, indexJojos51Stages, 0x19 },
-    { L"New 3 (3/6)", 0x07d2800, 0x07d2a00, indexJojos51Stages, 0x1a },
-    { L"New 3 (4/6)", 0x07d2a00, 0x07d2c00, indexJojos51Stages, 0x1b },
-    { L"New 3 (5/6)", 0x07d2c00, 0x07d2e00, indexJojos51Stages, 0x1c },
-    { L"New 3 (6/6)", 0x07d2e00, 0x07d3000, indexJojos51Stages, 0x1d },
+    { L"New 3 (1/6)", 0x07d2400, 0x07d2600, indexJojos50Stages, 0x18 },
+    { L"New 3 (2/6)", 0x07d2600, 0x07d2800, indexJojos50Stages, 0x19 },
+    { L"New 3 (3/6)", 0x07d2800, 0x07d2a00, indexJojos50Stages, 0x1a },
+    { L"New 3 (4/6)", 0x07d2a00, 0x07d2c00, indexJojos50Stages, 0x1b },
+    { L"New 3 (5/6)", 0x07d2c00, 0x07d2e00, indexJojos50Stages, 0x1c },
+    { L"New 3 (6/6)", 0x07d2e00, 0x07d3000, indexJojos50Stages, 0x1d },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW4[] = // aka Ruins
 {
-    { L"New 4 (1/5)", 0x07d7800, 0x07d7a00, indexJojos51Stages, 0x29, &pairFullyLinkedNode },
-    { L"New 4 (2/5)", 0x07d7a00, 0x07d7c00, indexJojos51Stages, 0x2a },
-    { L"New 4 (3/5)", 0x07d7c00, 0x07d7e00, indexJojos51Stages, 0x2b },
-    { L"New 4 (4/5)", 0x07d7e00, 0x07d8000, indexJojos51Stages, 0x2c },
-    { L"New 4 (5/5)", 0x07d8000, 0x07d8200, indexJojos51Stages, 0x2d },
+    { L"New 4 (1/5)", 0x07d7800, 0x07d7a00, indexJojos50Stages, 0x29, &pairFullyLinkedNode },
+    { L"New 4 (2/5)", 0x07d7a00, 0x07d7c00, indexJojos50Stages, 0x2a },
+    { L"New 4 (3/5)", 0x07d7c00, 0x07d7e00, indexJojos50Stages, 0x2b },
+    { L"New 4 (4/5)", 0x07d7e00, 0x07d8000, indexJojos50Stages, 0x2c },
+    { L"New 4 (5/5)", 0x07d8000, 0x07d8200, indexJojos50Stages, 0x2d },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW5[] = // aka Underground Water
@@ -811,25 +846,25 @@ const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW6[] = // aka Inside House
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW7[] = // aka Coffin Room
 {
-    { L"New 7 (1/6)", 0x07e4f00, 0x07e5100, indexJojos51Stages, 0x5, &pairCoffinRoom },
-    { L"New 7 (2/6)", 0x07e5100, 0x07e5300, indexJojos51Stages, 0x6 },
-    { L"New 7 (3/6)", 0x07e5300, 0x07e5500, indexJojos51Stages, 0x7 },
-    { L"New 7 (4/6)", 0x07e5500, 0x07e5700, indexJojos51Stages, 0x8 },
-    { L"New 7 (5/6)", 0x07e5700, 0x07e5900, indexJojos51Stages, 0x9 },
-    { L"New 7 (6/6)", 0x07e5900, 0x07e5a00, indexJojos51Stages, 0xa },
+    { L"New 7 (1/6)", 0x07e4f00, 0x07e5100, indexJojos50Stages, 0x5, &pairCoffinRoom },
+    { L"New 7 (2/6)", 0x07e5100, 0x07e5300, indexJojos50Stages, 0x6 },
+    { L"New 7 (3/6)", 0x07e5300, 0x07e5500, indexJojos50Stages, 0x7 },
+    { L"New 7 (4/6)", 0x07e5500, 0x07e5700, indexJojos50Stages, 0x8 },
+    { L"New 7 (5/6)", 0x07e5700, 0x07e5900, indexJojos50Stages, 0x9 },
+    { L"New 7 (6/6)", 0x07e5900, 0x07e5a00, indexJojos50Stages, 0xa },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW8[] = // aka Clock Tower
 {
-    { L"New 8 (1/3)", 0x07e6200, 0x07e6400, indexJojos51Stages, 0, &pairFullyLinkedNode },
-    { L"New 8 (2/3)", 0x07e6400, 0x07e6600, indexJojos51Stages, 1 },
-    { L"New 8 (3/3)", 0x07e6600, 0x07e6800, indexJojos51Stages, 2 },
+    { L"New 8 (1/3)", 0x07e6200, 0x07e6400, indexJojos50Stages, 0, &pairFullyLinkedNode },
+    { L"New 8 (2/3)", 0x07e6400, 0x07e6600, indexJojos50Stages, 1 },
+    { L"New 8 (3/3)", 0x07e6600, 0x07e6800, indexJojos50Stages, 2 },
 };
 
 const sGame_PaletteDataset JOJOS_A_STAGE_NODE_NEW9[] = // aka On The Bridge
 {
-    { L"New 9 (1/2)", 0x07ef200, 0x07ef400, indexJojos51Stages, 0x3, &pairFullyLinkedNode },
-    { L"New 9 (2/2)", 0x07ef400, 0x07ef600, indexJojos51Stages, 0x4 },
+    { L"New 9 (1/2)", 0x07ef200, 0x07ef400, indexJojos50Stages, 0x3, &pairFullyLinkedNode },
+    { L"New 9 (2/2)", 0x07ef400, 0x07ef600, indexJojos50Stages, 0x4 },
 };
 
 const sDescTreeNode JOJOS_A_50_STAGE_COLLECTION[] =
@@ -2053,7 +2088,7 @@ const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOL_A[] =
     { L"Hol Horse Super Bullets A", 0x0343540, 0x0343560 },
     { L"Hol Horse 421 Super 1 A", 0x03435C0, 0x03435E0 },
     { L"Hol Horse 421 Super 2 A", 0x0343640, 0x0343660 },
-    { L"Hol's Intro/Winpose Stuff+Boingo A", 0x0343480, 0x0343500, indexJojos51Hol, 0x03 },
+    { L"Hol's Intro/Winpose Stuff & Boingo A", 0x0343480, 0x0343500, indexJojos51Hol, 0x03 },
     { L"Hol Horse Vs / Super A", 0x0413000, 0x0413080, indexJojos51Hol, 0x04 },
     { L"Hol Horse Challenger A", 0x0413080, 0x0413100, indexJojos51Hol, 0x05 },
     { L"Hol Horse Select / Winning A", 0x0413100, 0x0413180, indexJojos51Hol, 0x06 },
@@ -2069,7 +2104,7 @@ const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOL_B[] =
     { L"Hol Horse Super Bullets B", 0x0357A40, 0x0357A60 },
     { L"Hol Horse 421 Super 1 B", 0x0357AC0, 0x0357AE0 },
     { L"Hol Horse 421 Super 2 B", 0x0357B40, 0x0357B60 },
-    { L"Hol's Intro/Winpose Stuff+Boingo B", 0x0357980, 0x0357a00, indexJojos51Hol, 0x03 },
+    { L"Hol's Intro/Winpose Stuff & Boingo B", 0x0357980, 0x0357a00, indexJojos51Hol, 0x03 },
     { L"Hol Horse Vs / Super B", 0x0417e00, 0x0417e80, indexJojos51Hol, 0x04 },
     { L"Hol Horse Challenger B", 0x0417e80, 0x0417f00, indexJojos51Hol, 0x05 },
     { L"Hol Horse Select / Winning B", 0x0417f00, 0x0417f80, indexJojos51Hol, 0x06 },
@@ -2085,7 +2120,7 @@ const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOL_C[] =
     { L"Hol Horse Super Bullets C", 0x036BF40, 0x036BF60 },
     { L"Hol Horse 421 Super 1 C", 0x036BFC0, 0x036BFE0 },
     { L"Hol Horse 421 Super 2 C", 0x036C040, 0x036C060 },
-    { L"Hol's Intro/Winpose Stuff+Boingo C", 0x036be80, 0x036bf00, indexJojos51Hol, 0x03 },
+    { L"Hol's Intro/Winpose Stuff & Boingo C", 0x036be80, 0x036bf00, indexJojos51Hol, 0x03 },
     { L"Hol Horse Vs / Super C", 0x041cc00, 0x041cc80, indexJojos51Hol, 0x04 },
     { L"Hol Horse Challenger C", 0x041cc80, 0x041cd00, indexJojos51Hol, 0x05 },
     { L"Hol Horse Select / Winning C", 0x041cd00, 0x041cd80, indexJojos51Hol, 0x06 },
@@ -2101,7 +2136,7 @@ const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOL_S[] =
     { L"Hol Horse Super Bullets S", 0x0380440, 0x0380460 },
     { L"Hol Horse 421 Super 1 S", 0x03804C0, 0x03804E0 },
     { L"Hol Horse 421 Super 2 S", 0x0380540, 0x0380560 },
-    { L"Hol's Intro/Winpose Stuff+Boingo S", 0x0380380, 0x0380400, indexJojos51Hol, 0x03 },
+    { L"Hol's Intro/Winpose Stuff & Boingo S", 0x0380380, 0x0380400, indexJojos51Hol, 0x03 },
     { L"Hol Horse Vs / Super S", 0x0421a00, 0x0421a80, indexJojos51Hol, 0x04 },
     { L"Hol Horse Challenger S", 0x0421a80, 0x0421b00, indexJojos51Hol, 0x05 },
     { L"Hol Horse Select / Winning S", 0x0421b00, 0x0421b80, indexJojos51Hol, 0x06 },
@@ -2117,7 +2152,7 @@ const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOL_Start[] =
     { L"Hol Horse Super Bullets Start", 0x0394940, 0x0394960 },
     { L"Hol Horse 421 Super 1 Start", 0x03949C0, 0x03949E0 },
     { L"Hol Horse 421 Super 2 Start", 0x0394A40, 0x0394A60 },
-    { L"Hol's Intro/Winpose Stuff+Boingo Start", 0x0394880, 0x0394900, indexJojos51Hol, 0x03 },
+    { L"Hol's Intro/Winpose Stuff & Boingo Start", 0x0394880, 0x0394900, indexJojos51Hol, 0x03 },
     { L"Hol Horse Vs / Super Start", 0x0426800, 0x0426880, indexJojos51Hol, 0x04 },
     { L"Hol Horse Challenger Start", 0x0426880, 0x0426900, indexJojos51Hol, 0x05 },
     { L"Hol Horse Select / Winning Screen Start", 0x0426900, 0x0426980, indexJojos51Hol, 0x06 },
@@ -2554,77 +2589,77 @@ const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_MARIAH_Start[] =
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOLBOINGO_A[] =
 {
-    { L"Hol & Boingo A", 0x0348380, 0x0348400, indexJojos51HolBoingo },
-    { L"Child Hol & Boingo A", 0x0348c00, 0x0348c80, indexJojos51HolBoingo, 1 },
-    { L"Hol & Boingo Super Bullets A", 0x0348CC0, 0x0348CE0 },
-    { L"Hol & Boingo Vs / Super A", 0x0414500, 0x0414580, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
-    { L"Hol & Boingo Challenger A", 0x0414580, 0x0414600, indexJojos51HolBoingo, indexJojos51Character_Challenger },
-    { L"Hol & Boingo Select / Winning A (1/2)", 0x0414600, 0x0414680, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
-    { L"Hol & Boingo Select / Winning A (2/2)", 0x0414680, 0x0414700, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
-    { L"Hol & Boingo Burning A (1/2)", 0x0348400, 0x0348480, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Burning A (2/2)", 0x0348480, 0x0348500, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap A (1/2)", 0x0348700, 0x0348780, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap A (2/2)", 0x0348780, 0x0348800, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo A", 0x0348380, 0x0348400, indexJojos51HolBoingo },
+    { L"Child Hol Horse & Boingo A", 0x0348c00, 0x0348c80, indexJojos51HolBoingo, 1 },
+    { L"Hol Horse & Boingo Super Bullets A", 0x0348CC0, 0x0348CE0 },
+    { L"Hol Horse & Boingo Vs / Super A", 0x0414500, 0x0414580, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
+    { L"Hol Horse & Boingo Challenger A", 0x0414580, 0x0414600, indexJojos51HolBoingo, indexJojos51Character_Challenger },
+    { L"Hol Horse & Boingo Select / Winning A (1/2)", 0x0414600, 0x0414680, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
+    { L"Hol Horse & Boingo Select / Winning A (2/2)", 0x0414680, 0x0414700, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
+    { L"Hol Horse & Boingo Burning A (1/2)", 0x0348400, 0x0348480, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Burning A (2/2)", 0x0348480, 0x0348500, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap A (1/2)", 0x0348700, 0x0348780, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap A (2/2)", 0x0348780, 0x0348800, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOLBOINGO_B[] =
 {
-    { L"Hol & Boingo B", 0x035c880, 0x035c900, indexJojos51HolBoingo },
-    { L"Child Hol & Boingo B", 0x035d100, 0x035d180, indexJojos51HolBoingo, 1 },
-    { L"Hol & Boingo Super Bullets B", 0x035D1C0, 0x035D1E0 },
-    { L"Hol & Boingo Vs / Super B", 0x0419300, 0x0419380, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
-    { L"Hol & Boingo Challenger B", 0x0419380, 0x0419400, indexJojos51HolBoingo, indexJojos51Character_Challenger },
-    { L"Hol & Boingo Select / Winning B (1/2)", 0x0419400, 0x0419480, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
-    { L"Hol & Boingo Select / Winning B (2/2)", 0x0419480, 0x0419500, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
-    { L"Hol & Boingo Burning B (1/2)", 0x035c900, 0x035c980, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Burning B (2/2)", 0x035c980, 0x035ca00, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap B (1/2)", 0x035cc00, 0x035cc80, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap B (2/2)", 0x035cc80, 0x035cd00, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo B", 0x035c880, 0x035c900, indexJojos51HolBoingo },
+    { L"Child Hol Horse & Boingo B", 0x035d100, 0x035d180, indexJojos51HolBoingo, 1 },
+    { L"Hol Horse & Boingo Super Bullets B", 0x035D1C0, 0x035D1E0 },
+    { L"Hol Horse & Boingo Vs / Super B", 0x0419300, 0x0419380, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
+    { L"Hol Horse & Boingo Challenger B", 0x0419380, 0x0419400, indexJojos51HolBoingo, indexJojos51Character_Challenger },
+    { L"Hol Horse & Boingo Select / Winning B (1/2)", 0x0419400, 0x0419480, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
+    { L"Hol Horse & Boingo Select / Winning B (2/2)", 0x0419480, 0x0419500, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
+    { L"Hol Horse & Boingo Burning B (1/2)", 0x035c900, 0x035c980, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Burning B (2/2)", 0x035c980, 0x035ca00, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap B (1/2)", 0x035cc00, 0x035cc80, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap B (2/2)", 0x035cc80, 0x035cd00, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOLBOINGO_C[] =
 {
-    { L"Hol & Boingo C", 0x0370d80, 0x0370e00, indexJojos51HolBoingo },
-    { L"Child Hol & Boingo C", 0x0371600, 0x0371680, indexJojos51HolBoingo, 1 },
-    { L"Hol & Boingo Super Bullets C", 0x03716C0, 0x03716E0 },
-    { L"Hol & Boingo Vs / Super C", 0x041e100, 0x041e180, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
-    { L"Hol & Boingo Challenger C", 0x041e180, 0x041e200, indexJojos51HolBoingo, indexJojos51Character_Challenger },
-    { L"Hol & Boingo Select / Winning C (1/2)", 0x041e200, 0x041e280, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
-    { L"Hol & Boingo Select / Winning C (2/2)", 0x041e280, 0x041e300, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
-    { L"Hol & Boingo Burning C (1/2)", 0x0370e00, 0x0370e80, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Burning C (2/2)", 0x0370e80, 0x0370f00, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap C (1/2)", 0x0371100, 0x0371180, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap C (2/2)", 0x0371180, 0x0371200, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo C", 0x0370d80, 0x0370e00, indexJojos51HolBoingo },
+    { L"Child Hol Horse & Boingo C", 0x0371600, 0x0371680, indexJojos51HolBoingo, 1 },
+    { L"Hol Horse & Boingo Super Bullets C", 0x03716C0, 0x03716E0 },
+    { L"Hol Horse & Boingo Vs / Super C", 0x041e100, 0x041e180, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
+    { L"Hol Horse & Boingo Challenger C", 0x041e180, 0x041e200, indexJojos51HolBoingo, indexJojos51Character_Challenger },
+    { L"Hol Horse & Boingo Select / Winning C (1/2)", 0x041e200, 0x041e280, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
+    { L"Hol Horse & Boingo Select / Winning C (2/2)", 0x041e280, 0x041e300, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
+    { L"Hol Horse & Boingo Burning C (1/2)", 0x0370e00, 0x0370e80, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Burning C (2/2)", 0x0370e80, 0x0370f00, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap C (1/2)", 0x0371100, 0x0371180, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap C (2/2)", 0x0371180, 0x0371200, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOLBOINGO_S[] =
 {
-    { L"Hol & Boingo S", 0x0385280, 0x0385300, indexJojos51HolBoingo },
-    { L"Child Hol & Boingo S", 0x0385b00, 0x0385b80, indexJojos51HolBoingo, 1 },
-    { L"Hol & Boingo Super Bullets S", 0x0385BC0, 0x0385BE0 },
-    { L"Hol & Boingo Vs / Super S", 0x0422f00, 0x0422f80, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
-    { L"Hol & Boingo Challenger S", 0x0422f80, 0x0423000, indexJojos51HolBoingo, indexJojos51Character_Challenger },
-    { L"Hol & Boingo Select / Winning S (1/2)", 0x0423000, 0x0423080, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
-    { L"Hol & Boingo Select / Winning S (2/2)", 0x0423080, 0x0423100, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
-    { L"Hol & Boingo Burning S (1/2)", 0x0385300, 0x0385380, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Burning S (2/2)", 0x0385380, 0x0385400, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap S (1/2)", 0x0385600, 0x0385680, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap S (2/2)", 0x0385680, 0x0385700, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo S", 0x0385280, 0x0385300, indexJojos51HolBoingo },
+    { L"Child Hol Horse & Boingo S", 0x0385b00, 0x0385b80, indexJojos51HolBoingo, 1 },
+    { L"Hol Horse & Boingo Super Bullets S", 0x0385BC0, 0x0385BE0 },
+    { L"Hol Horse & Boingo Vs / Super S", 0x0422f00, 0x0422f80, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
+    { L"Hol Horse & Boingo Challenger S", 0x0422f80, 0x0423000, indexJojos51HolBoingo, indexJojos51Character_Challenger },
+    { L"Hol Horse & Boingo Select / Winning S (1/2)", 0x0423000, 0x0423080, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
+    { L"Hol Horse & Boingo Select / Winning S (2/2)", 0x0423080, 0x0423100, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
+    { L"Hol Horse & Boingo Burning S (1/2)", 0x0385300, 0x0385380, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Burning S (2/2)", 0x0385380, 0x0385400, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap S (1/2)", 0x0385600, 0x0385680, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap S (2/2)", 0x0385680, 0x0385700, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_HOLBOINGO_Start[] =
 {
-    { L"Hol & Boingo Start", 0x0399780, 0x0399800, indexJojos51HolBoingo },
-    { L"Child Hol & Boingo Start", 0x039a000, 0x039a080, indexJojos51HolBoingo, 1 },
-    { L"Hol & Boingo Super Bullets Start", 0x039A0C0, 0x039A0E0 },
-    { L"Hol & Boingo Vs / Super Start", 0x0427d00, 0x0427d80, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
-    { L"Hol & Boingo Challenger Start", 0x0427d80, 0x0427e00, indexJojos51HolBoingo, indexJojos51Character_Challenger },
-    { L"Hol & Boingo Select / Winning Start (1/2)", 0x0427e00, 0x0427e80, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
-    { L"Hol & Boingo Select / Winning Start (2/2)", 0x0427e80, 0x0427f00, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
-    { L"Hol & Boingo Burning Start (1/2)", 0x0399800, 0x0399880, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Burning Start (2/2)", 0x0399880, 0x0399900, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap Start (1/2)", 0x0399b00, 0x0399b80, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
-    { L"Hol & Boingo Tech/Zap Start (2/2)", 0x0399b80, 0x0399c00, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Start", 0x0399780, 0x0399800, indexJojos51HolBoingo },
+    { L"Child Hol Horse & Boingo Start", 0x039a000, 0x039a080, indexJojos51HolBoingo, 1 },
+    { L"Hol Horse & Boingo Super Bullets Start", 0x039A0C0, 0x039A0E0 },
+    { L"Hol Horse & Boingo Vs / Super Start", 0x0427d00, 0x0427d80, indexJojos51HolBoingo, indexJojos51Character_VsSuper },
+    { L"Hol Horse & Boingo Challenger Start", 0x0427d80, 0x0427e00, indexJojos51HolBoingo, indexJojos51Character_Challenger },
+    { L"Hol Horse & Boingo Select / Winning Start (1/2)", 0x0427e00, 0x0427e80, indexJojos51HolBoingo, indexJojos51Character_SelectWin1, &pairHandledInCode },
+    { L"Hol Horse & Boingo Select / Winning Start (2/2)", 0x0427e80, 0x0427f00, indexJojos51HolBoingo, indexJojos51Character_SelectWin2, &pairHandledInCode },
+    { L"Hol Horse & Boingo Burning Start (1/2)", 0x0399800, 0x0399880, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Burning Start (2/2)", 0x0399880, 0x0399900, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap Start (1/2)", 0x0399b00, 0x0399b80, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
+    { L"Hol Horse & Boingo Tech/Zap Start (2/2)", 0x0399b80, 0x0399c00, indexJojos51HolBoingo, indexJojos51Character_BurnZap },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_RSOUL_A[] =
@@ -2770,84 +2805,193 @@ const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_KHAN_Start[] =
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_NDOUL_A[] =
 {
     { L"N'Doul & Geb A", 0x033d480, 0x033d500, indexJojos51NDoul },
+
+    { L"N'Doul A Burning 1/2", 0x33d500, 0x33d580, indexJojos51NDoul },
+    { L"N'Doul A Burning 2/2", 0x33d580, 0x33d600, indexJojos51NDoul },
+    { L"N'Doul A Tech/Zap 1/2", 0x33d800, 0x33d880, indexJojos51NDoul },
+    { L"N'Doul A Tech/Zap 2/2", 0x33d880, 0x33d900, indexJojos51NDoul },
+
+    { L"N'Doul Super/VS A", 0x411b00, 0x411b80, indexJojos51NDoul, 0x03 },
+    { L"N'Doul Challenger A", 0x411b80, 0x411c00, indexJojos51NDoul, 0x04 },
+    { L"N'Doul Select/Winning A 1/2", 0x411c00, 0x411c80, indexJojos51NDoul, 0x05, &pairNext },
+    { L"Geb Select/Winning A 2/2", 0x411c80, 0x411d00, indexJojos51NDoul, 0x06, &pairPrevious },
 }; 
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_NDOUL_B[] =
 {
     { L"N'Doul & Geb B", 0x0351980, 0x0351a00, indexJojos51NDoul },
-}; 
+
+    // The hex at these locations is not palettes: skip these
+    // { L"N'Doul B Burning 1/2", 0x33d500 + 0x14500, 0x33d580 + 0x14500 },
+    // { L"N'Doul B Burning 2/2", 0x33d580 + 0x14500, 0x33d600 + 0x14500 },
+    // { L"N'Doul B Tech/Zap 1/2", 0x33d800 + 0x14500, 0x33d880 + 0x14500 },
+    // { L"N'Doul B Tech/Zap 2/2", 0x33d880 + 0x14500, 0x33d900 + 0x14500 },
+
+    // { L"N'Doul Super/VS B", 0x411b00 + 0x4e00, 0x411b80 + 0x4e00, indexJojos51NDoul, 0x03 },
+    // { L"N'Doul Challenger B", 0x411b80 + 0x4e00, 0x411c00 + 0x4e00, indexJojos51NDoul, 0x04 },
+    // { L"N'Doul Select/Winning B 1/2", 0x411c00 + 0x4e00, 0x411c80 + 0x4e00, indexJojos51NDoul, 0x05, &pairNext },
+    // { L"Geb Select/Winning B 2/2", 0x411c80 + 0x4e00, 0x411d00 + 0x4e00, indexJojos51NDoul, 0x06, &pairPrevious },
+};
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_NDOUL_C[] =
 {
     { L"N'Doul & Geb C", 0x0365e80, 0x0365f00, indexJojos51NDoul },
-}; 
+
+    { L"N'Doul C Burning 1/2", 0x365f00, 0x365f80, indexJojos51NDoul },
+    { L"N'Doul C Burning 2/2", 0x365f80, 0x366000, indexJojos51NDoul },
+    { L"N'Doul C Tech/Zap 1/2", 0x366200, 0x366280, indexJojos51NDoul },
+    { L"N'Doul C Tech/Zap 2/2", 0x366280, 0x366300, indexJojos51NDoul },
+
+    { L"N'Doul Super/VS C", 0x41b700, 0x41b780, indexJojos51NDoul, 0x03 },
+    { L"N'Doul Challenger C", 0x41b780, 0x41b800, indexJojos51NDoul, 0x04 },
+    { L"N'Doul Select/Winning C 1/2", 0x41b800, 0x41b880, indexJojos51NDoul, 0x05, &pairNext },
+    { L"Geb Select/Winning C 2/2", 0x41b880, 0x41b900, indexJojos51NDoul, 0x06, &pairPrevious },
+};
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_NDOUL_S[] =
 {
     { L"N'Doul & Geb S", 0x037a380, 0x037a400, indexJojos51NDoul },
-}; 
+
+    { L"N'Doul S Burning 1/2", 0x37a400, 0x37a480, indexJojos51NDoul },
+    { L"N'Doul S Burning 2/2", 0x37a480, 0x37a500, indexJojos51NDoul },
+    { L"N'Doul S Tech/Zap 1/2", 0x37a700, 0x37a780, indexJojos51NDoul },
+    { L"N'Doul S Tech/Zap 2/2", 0x37a780, 0x37a800, indexJojos51NDoul },
+
+    { L"N'Doul Super/VS S", 0x420500, 0x420580, indexJojos51NDoul, 0x03 },
+    { L"N'Doul Challenger S", 0x420580, 0x420600, indexJojos51NDoul, 0x04 },
+    { L"N'Doul Select/Winning S 1/2", 0x420600, 0x420680, indexJojos51NDoul, 0x05, &pairNext },
+    { L"Geb Select/Winning S 2/2", 0x420680, 0x420700, indexJojos51NDoul, 0x06, &pairPrevious },
+};
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_NDOUL_Start[] =
 {
     { L"N'Doul & Geb Start", 0x038e880, 0x038e900, indexJojos51NDoul },
-};
 
-const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_NDOUL_Portraits[] =
-{
-    { L"N'doul VS/Super A",     0x411b00, 0x411b80, indexJojos51NDoul, 0x03 },
-    { L"N'doul Challenger A",   0x411b80, 0x411c00, indexJojos51NDoul, 0x04 },
-    { L"N'doul Select A",       0x411C00, 0x411C80, indexJojos51NDoul, 0x05, &pairNext },
-    { L"Geb Select A",          0x411c80, 0x411d00, indexJojos51NDoul, 0x06, &pairPrevious },
+    { L"N'Doul Start Burning 1/2", 0x38e900, 0x38e980, indexJojos51NDoul },
+    { L"N'Doul Start Burning 2/2", 0x38e980, 0x38ea00, indexJojos51NDoul },
+    { L"N'Doul Start Tech/Zap 1/2", 0x38ec00, 0x38ec80, indexJojos51NDoul },
+    { L"N'Doul Start Tech/Zap 2/2", 0x38ec80, 0x38ed00, indexJojos51NDoul },
+
+    { L"N'Doul Super/VS Start", 0x425300, 0x425380, indexJojos51NDoul, 0x03 },
+    { L"N'Doul Challenger Start", 0x425380, 0x425400, indexJojos51NDoul, 0x04 },
+    { L"N'Doul Select/Winning Start 1/2", 0x425400, 0x425480, indexJojos51NDoul, 0x05, &pairNext },
+    { L"Geb Select/Winning Start 2/2", 0x425480, 0x425500, indexJojos51NDoul, 0x06, &pairPrevious },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_BICE_A[] =
 {
     { L"Boss Ice A", 0x033fa00, 0x033fa80, indexJojos51BIce },
+
+    { L"Boss Ice A Burning 1/2", 0x33fa80, 0x33fb00, indexJojos51BIce },
+    { L"Boss Ice A Burning 2/2", 0x33fb00, 0x33fb80, indexJojos51BIce },
+    { L"Boss Ice A Tech/Zap 1/2", 0x33fd80, 0x33fe00, indexJojos51BIce },
+    { L"Boss Ice A Tech/Zap 2/2", 0x33fe00, 0x33fe80, indexJojos51BIce },
+
+    { L"Boss Ice Select VS/Super A", 0x412400, 0x412480 },
+    { L"Boss Ice Challenger A", 0x412480, 0x412500 },
+    { L"Boss Ice Select/Winning A 1/2", 0x412500, 0x412580 },
+    { L"Boss Ice Select/Winning A 2/2", 0x412580, 0x412600 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_BICE_B[] =
 {
     { L"Boss Ice B", 0x0353f00, 0x0353f80, indexJojos51BIce },
+    { L"Boss Ice B Burning 1/2", 0x353f80, 0x354000, indexJojos51BIce },
+    { L"Boss Ice B Burning 2/2", 0x354000, 0x354080, indexJojos51BIce },
+    { L"Boss Ice B Tech/Zap 1/2", 0x354280, 0x354300, indexJojos51BIce },
+    { L"Boss Ice B Tech/Zap 2/2", 0x354300, 0x354380, indexJojos51BIce },
+
+    { L"Boss Ice Super/VS B", 0x417200, 0x417280 },
+    { L"Boss Ice Challenger B", 0x417280, 0x417300 },
+    { L"Boss Ice Select/Winning B 1/2", 0x417300, 0x417380 },
+    { L"Boss Ice Select/Winning B 2/2", 0x417380, 0x417400 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_BICE_C[] =
 {
     { L"Boss Ice C", 0x0368400, 0x0368480, indexJojos51BIce },
+    { L"Boss Ice C Tech/Zap 1/2", 0x368780, 0x368800, indexJojos51BIce },
+    { L"Boss Ice C Tech/Zap 2/2", 0x368800, 0x368880, indexJojos51BIce },
+    { L"Boss Ice C Burning 1/2", 0x368480, 0x368500, indexJojos51BIce },
+    { L"Boss Ice C Burning 2/2", 0x368500, 0x368580, indexJojos51BIce },
+
+    { L"Boss Ice Super/VS C", 0x41c000, 0x41c080 },
+    { L"Boss Ice Challenger C", 0x41c080, 0x41c100 },
+    { L"Boss Ice Select/Winning C 1/2", 0x41c100, 0x41c180 },
+    { L"Boss Ice Select/Winning C 2/2", 0x41c180, 0x41c200 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_BICE_S[] =
 {
     { L"Boss Ice S", 0x037c900, 0x037c980, indexJojos51BIce },
+    { L"Boss Ice S Tech/Zap 1/2", 0x37cc80, 0x37cd00, indexJojos51BIce },
+    { L"Boss Ice S Tech/Zap 2/2", 0x37cd00, 0x37cd80, indexJojos51BIce },
+    { L"Boss Ice S Burning 1/2", 0x37c980, 0x37ca00, indexJojos51BIce },
+    { L"Boss Ice S Burning 2/2", 0x37ca00, 0x37ca80, indexJojos51BIce },
+
+    { L"Boss Ice Super/VS S", 0x420e00, 0x420e80 },
+    { L"Boss Ice Challenger S", 0x420e80, 0x420f00 },
+    { L"Boss Ice Select/Winning S 1/2", 0x420f00, 0x420f80 },
+    { L"Boss Ice Select/Winning S 2/2", 0x420f80, 0x421000 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_BICE_Start[] =
 {
     { L"Boss Ice Start", 0x0390e00, 0x0390e80, indexJojos51BIce },
+    { L"Boss Ice Start Tech/Zap 1/2", 0x391180, 0x391200, indexJojos51BIce },
+    { L"Boss Ice Start Tech/Zap 2/2", 0x391200, 0x391280, indexJojos51BIce },
+    { L"Boss Ice Start Burning 1/2", 0x390e80, 0x390f00, indexJojos51BIce },
+    { L"Boss Ice Start Burning 2/2", 0x390f00, 0x390f80, indexJojos51BIce },
+
+    { L"Boss Ice Super/VS Start", 0x425c00, 0x425c80 },
+    { L"Boss Ice Challenger Start", 0x425c80, 0x425d00 },
+    { L"Boss Ice Select/Winning Start 1/2", 0x425d00, 0x425d80 },
+    { L"Boss Ice Select/Winning Start 2/2", 0x425d80, 0x425e00 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_DEATH13_A[] =
 {
     { L"Death 13 A", 0x0340680, 0x0340700, indexJojos51Death13 },
+    { L"Death 13 A Burning 1/2", 0x340700, 0x340780, indexJojos51Death13 },
+    { L"Death 13 A Burning 2/2", 0x340780, 0x340800, indexJojos51Death13 },
+    { L"Death 13 A Tech/Zap 1/2", 0x340a00, 0x340a80, indexJojos51Death13 },
+    { L"Death 13 A Tech/Zap 2/2", 0x340a80, 0x340b00, indexJojos51Death13 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_DEATH13_B[] =
 {
     { L"Death 13 B", 0x0354b80, 0x0354c00, indexJojos51Death13 },
+    { L"Death 13 B Burning 1/2", 0x354c00, 0x354c80, indexJojos51Death13 },
+    { L"Death 13 B Burning 2/2", 0x354c80, 0x354d00, indexJojos51Death13 },
+    { L"Death 13 B Tech/Zap 1/2", 0x354f00, 0x354f80, indexJojos51Death13 },
+    { L"Death 13 B Tech/Zap 2/2", 0x354f80, 0x355000, indexJojos51Death13 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_DEATH13_C[] =
 {
-    { L"Death 13 C", 0x0369080, 0x0369100, indexJojos51Death13 },
+    { L"Death 13 C", 0x369080, 0x369100, indexJojos51Death13 },
+    { L"Death 13 C Burning 1/2", 0x369100, 0x369180, indexJojos51Death13 },
+    { L"Death 13 C Burning 2/2", 0x369180, 0x369200, indexJojos51Death13 },
+    { L"Death 13 C Tech/Zap 1/2", 0x369400, 0x369480, indexJojos51Death13 },
+    { L"Death 13 C Tech/Zap 2/2", 0x369480, 0x369500, indexJojos51Death13 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_DEATH13_S[] =
 {
     { L"Death 13 S", 0x037d580, 0x037d600, indexJojos51Death13 },
+    { L"Death 13 S Burning 1/2", 0x37d600, 0x37d680, indexJojos51Death13 },
+    { L"Death 13 S Burning 2/2", 0x37d680, 0x37d700, indexJojos51Death13 },
+    { L"Death 13 S Tech/Zap 1/2", 0x37d900, 0x37d980, indexJojos51Death13 },
+    { L"Death 13 S Tech/Zap 2/2", 0x37d980, 0x37da00, indexJojos51Death13 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_DEATH13_Start[] =
 {
     { L"Death 13 Start", 0x0391a80, 0x0391b00, indexJojos51Death13 },
+    { L"Death 13 Start Burning 1/2", 0x391b00, 0x391b80, indexJojos51Death13 },
+    { L"Death 13 Start Burning 2/2", 0x391b80, 0x391c00, indexJojos51Death13 },
+    { L"Death 13 Start Tech/Zap 1/2", 0x391e00, 0x391e80, indexJojos51Death13 },
+    { L"Death 13 Start Tech/Zap 2/2", 0x391e80, 0x391f00, indexJojos51Death13 },
 };
 
 const sGame_PaletteDataset JOJOS_A_CHARACTER_NODE_GRAYFLY[] =
@@ -3071,7 +3215,6 @@ const sDescTreeNode JOJOS_A_CHARACTER_COLLECTION_NDOUL[] =
     { L"C", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_NODE_NDOUL_C, ARRAYSIZE(JOJOS_A_CHARACTER_NODE_NDOUL_C) },
     { L"S", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_NODE_NDOUL_S, ARRAYSIZE(JOJOS_A_CHARACTER_NODE_NDOUL_S) },
     { L"Start", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_NODE_NDOUL_Start, ARRAYSIZE(JOJOS_A_CHARACTER_NODE_NDOUL_Start) },
-    { L"Portraits", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_NODE_NDOUL_Portraits, ARRAYSIZE(JOJOS_A_CHARACTER_NODE_NDOUL_Portraits) },
 };
 
 const sDescTreeNode JOJOS_A_CHARACTER_COLLECTION_BICE[] =
@@ -3127,29 +3270,17 @@ const sGame_PaletteDataset JOJOS_BONUS_INTRO_PALETTES[] =
     { L"Hol Horse intro Body",   0x030c600, 0x030c680, indexJojos51Bonus, 0x3C },
     { L"Hol Horse intro Hand",   0x030c580, 0x030c600, indexJojos51Bonus, 0x3D },
     { L"Hol Horse shoot scene",  0x030C400, 0x030C480, indexJojos51Bonus, 0x3E },
-#ifdef USE_LARGE_PALETTES
-    { L"Hol Horse intro background", 0x030bb00, 0x030be00 },
-#else
     { L"Hol Horse intro background (1/2)", 0x030bb00, 0x030bd00 },
     { L"Hol Horse intro background (2/2)", 0x030bd00, 0x030be00 },
-#endif
-#ifdef USE_LARGE_PALETTES
-    { L"Hol Horse intro ender background", 0x030be00, 0x030c300 },
-#else
     { L"Hol Horse intro ender background (1/3)", 0x030be00, 0x030c000 },
     { L"Hol Horse intro ender background (2/3)", 0x030c000, 0x030c200 },
     { L"Hol Horse intro ender background (3/3)", 0x030c200,  0x030c300 },
-#endif
     { L"Vanilla Ice intro",      0x030ba00, 0x030ba80, indexJojos51Bonus, 0x0E },
     { L"Cream intro",            0x030ba80, 0x030bb00, indexJojos51Bonus, 0x3B },
-#ifdef USE_LARGE_PALETTES
-    { L"Vice intro background", 0x030b100, 0x030b780 },
-#else
     { L"Vice intro background (1/4)", 0x030b100, 0x030b300 },
     { L"Vice intro background (2/4)", 0x030b300, 0x030b500 },
     { L"Vice intro background (3/4)", 0x030b500, 0x030b700 },
     { L"Vice intro background (4/4)", 0x030b700, 0x030b780 },
-#endif
     { L"Vice Intro Ender",       0x030c380, 0x030c400, indexJojos51Bonus, 0x0F },
     { L"Intro Manga Panels (1/5)", 0x030b780, 0x030b800, indexJojos51Bonus, 0x09 },
     { L"Intro Manga Panels (2/5)", 0x030b800, 0x030b880, indexJojos51Bonus, 0x0A },
@@ -3171,6 +3302,8 @@ const sGame_PaletteDataset JOJOS_BONUS_INTRO_PALETTES[] =
     { L"English Title", 0x030CB80, 0x030CC00, indexJojos51Bonus, 0x34 },
     { L"Title Screen Background", 0x030b0a0, 0x030b0b0, indexJojos51Bonus, 0x31 },
     { L"World Map",              0x0313780, 0x0313800, indexJojos51Bonus, 0x38 },
+
+    { L"Ranking Mini Logo",      0x313f00, 0x313f80, indexJojos51Bonus, 0x4d },
 };
 
 const sGame_PaletteDataset JOJOS_BONUS_INGAME_PALETTES[] =
@@ -3222,7 +3355,6 @@ const sGame_PaletteDataset JOJOS_BONUS_INGAME_PALETTES[] =
 
 const sGame_PaletteDataset JOJOS_A_BONUS_NODE_SUPERBACKGROUND[] =
 {
-#ifndef USE_LARGE_PALETTES
     { L"Super Flash Background (Challenge Screen / Demo) (1/8)", 0x030d500, 0x030d580, indexJojos51Bonus, 0x11 },
     { L"Super Flash Background (Challenge Screen / Demo) (2/8)", 0x030d580, 0x030d600, indexJojos51Bonus, 0x12 },
     { L"Super Flash Background (Challenge Screen / Demo) (3/8)", 0x030d600, 0x030d680, indexJojos51Bonus, 0x13 },
@@ -3231,14 +3363,10 @@ const sGame_PaletteDataset JOJOS_A_BONUS_NODE_SUPERBACKGROUND[] =
     { L"Super Flash Background (Challenge Screen / Demo) (6/8)", 0x030d780, 0x030d800, indexJojos51Bonus, 0x16 },
     { L"Super Flash Background (Challenge Screen / Demo) (7/8)", 0x030d800, 0x030d880, indexJojos51Bonus, 0x17 },
     { L"Super Flash Background (Challenge Screen / Demo) (8/8)", 0x030d880, 0x030d900, indexJojos51Bonus, 0x18 },
-#else
-    { L"Super Flash Background (Challenge Screen / Demo)", 0x030d500, 0x030d900 },
-#endif
 };
 
 const sGame_PaletteDataset JOJOS_BONUS_NODE_FADEBACKGROUND[] =
 {
-#ifndef USE_LARGE_PALETTES
     { L"Fade Background (1/29)", 0x030f080, 0x030f100 },
     { L"Fade Background (2/29)", 0x030f100, 0x030f180 },
     { L"Fade Background (3/29)", 0x030f180, 0x030f200 },
@@ -3268,9 +3396,45 @@ const sGame_PaletteDataset JOJOS_BONUS_NODE_FADEBACKGROUND[] =
     { L"Fade Background (27/29)", 0x030fd80, 0x030fe00 },
     { L"Fade Background (28/29)", 0x030fe00, 0x030fe80 },
     { L"Fade Background (29/29)", 0x030fe80, 0x030ff00 },
-#else
-    { L"Fade Background", 0x030f080, 0x030ff00 },
-#endif
+};
+
+const sGame_PaletteDataset JOJOS_BONUS_STAGESHADOWS[] =
+{
+    { L"A Lockup", 0x334600, 0x334680 },
+    { L"A Health Room", 0x334680, 0x334700 },
+    { L"In A Airplane", 0x334700, 0x334780 },
+    { L"Tigerbaum Garden", 0x334780, 0x334800 },
+    { L"Hotel (Devil)", 0x334800, 0x334880 },
+    { L"Remains", 0x334880, 0x334900 },
+    { L"Hotel (Justice)", 0x334900, 0x334980 },
+    { L"Amusement Park", 0x334980, 0x334a00 },
+    { L"Small Island", 0x334a00, 0x334a80 },
+    { L"Desert Noon", 0x334b00, 0x334b80 },
+    { L"Ruins", 0x334d00, 0x334d80 },
+    { L"Country Town Noon", 0x334d80, 0x334e00 },
+    { L"Underground Water", 0x334f00, 0x334f80 },
+    { L"Inside House", 0x334f80, 0x335000 },
+    { L"Coffin Room", 0x335000, 0x335080 },
+    { L"Clock Tower", 0x335080, 0x335100 },
+    { L"Suburbs", 0x335100, 0x335180 },
+    { L"On The Bridge", 0x335280, 0x335300 },
+    { L"Country Town Twilight", 0x334e00, 0x334e80 },
+    { L"Desert Morning", 0x334b80, 0x334c00 },
+    { L"Desert Twilight", 0x334c00, 0x334c80 },
+    { L"Desert Night", 0x334c80, 0x334d00 },
+    { L"Small Island (Joseph)", 0x334a80, 0x334b00 },
+    { L"Country Town Night", 0x334e80, 0x334f00 },
+    { L"Suburbs 2", 0x335180, 0x335200 },
+    { L"Suburbs 3", 0x335200, 0x335280 },
+    { L"New 1 - Copy of Remains", 0x335380, 0x335400 },
+    { L"New 2 - Copy of Hotel (Devil)", 0x335300, 0x335380 },
+    { L"New 3 - Copy of Small Island", 0x335400, 0x335480 },
+    { L"New 4 - Copy of Ruins", 0x335480, 0x335500 },
+    { L"New 5 - Copy of Underground Water", 0x335500, 0x335580 },
+    { L"New 6 - Copy of Inside House", 0x335580, 0x335600 },
+    { L"New 7 - Copy of Coffin Room", 0x335600, 0x335680 },
+    { L"New 8 - Copy of Clock Tower", 0x335680, 0x335700 },
+    { L"New 9 - Copy of On The Bridge", 0x335700, 0x335780 },
 };
 
 const sGame_PaletteDataset JOJOS_BONUS_TAROT_CARDS[] =
@@ -3324,6 +3488,32 @@ const sGame_PaletteDataset JOJOS_BONUS_TAROT_CARDS[] =
     { L"The World Menu Card", 0x030EF00, 0x030EF80, indexJojos51TarotCards, 0x28 },
 };
 
+const sGame_PaletteDataset JOJOS_BONUS_PORTAITS_RANKING[] =
+{
+    { L"Jotaro Ranking Portrait", 0x313d00, 0x313d20,               indexJojos51Jotaro, 0x30 },
+    { L"Kakyoin Ranking Portrait", 0x313d20, 0x313d40,              indexJojos51Kakyo, 0x30 },
+    { L"Avdol Ranking Portrait", 0x313de0, 0x313e00,                indexJojos51Avdol, 0x30 },
+    { L"Polnareff Ranking Portrait", 0x313da0, 0x313dc0,            indexJojos51Pol, 0x30 },
+    { L"Joseph Ranking Portrait", 0x313dc0, 0x313de0,               indexJojos51Joseph, 0x30 },
+    { L"Iggy Ranking Portrait", 0x313d80, 0x313da0,                 indexJojos51Iggy, 0x30 },
+    { L"Alessi Ranking Portrait", 0x313e00, 0x313e20,               indexJojos51Alessi, 0x30 },
+    { L"Chaka Ranking Portrait", 0x313d60, 0x313d80,                indexJojos51Chaka, 0x30 },
+    { L"Devo Ranking Portrait", 0x313e20, 0x313e40,                 indexJojos51Devo, 0x30 },
+    { L"Midler Ranking Portrait", 0x313e40, 0x313e60,               indexJojos51Midler, 0x30 },
+    { L"DIO Ranking Portrait", 0x313d40, 0x313d60,                  indexJojos51Dio, 0x30 },
+    { L"Shadow DIO Ranking Portrait", 0x313e60, 0x313e80,           indexJojos51SDio, 0x30 },
+    { L"Young Joseph Ranking Portrait", 0x313e80, 0x313ea0,         indexJojos51YSeph, 0x30 },
+    { L"Hol Horse Ranking Portrait", 0x3141a0, 0x3141c0,            indexJojos51Hol, 0x30 },
+    { L"Vanilla Ice Ranking Portrait", 0x314180, 0x3141a0,          indexJojos51VIce, 0x30 },
+    { L"New Kak Ranking Portrait", 0x3141e0, 0x314200,              indexJojos51NewKakyo, 0x30 },
+    { L"Anubis Polnareff Ranking Portrait", 0x3141c0, 0x3141e0,     indexJojos51Anubis, 0x30 },
+    { L"Petshop Ranking Portrait", 0x314400, 0x314420,              indexJojos51Petshop, 0x30 },
+    { L"Mariah Ranking Portrait", 0x314420, 0x314440,               indexJojos51Mariah, 0x30 },
+    { L"Hol Horse & Boingo Ranking Portrait", 0x314440, 0x314460,   indexJojos51HolBoingo, 0x30 },
+    { L"Rubber Soul Ranking Portrait", 0x314460, 0x314480,          indexJojos51RSoul, 0x30 },
+    { L"Khan Ranking Portrait", 0x314480, 0x3144a0,                 indexJojos51Khan, 0x30 },
+};
+
 const sDescTreeNode JOJOS_A_BONUS_COLLECTION[]
 {
     { L"Intro", DESC_NODETYPE_TREE, (void*)JOJOS_BONUS_INTRO_PALETTES, ARRAYSIZE(JOJOS_BONUS_INTRO_PALETTES) },
@@ -3332,6 +3522,8 @@ const sDescTreeNode JOJOS_A_BONUS_COLLECTION[]
     { L"Fade Background (Challenge Screen / Demo)", DESC_NODETYPE_TREE, (void*)JOJOS_BONUS_NODE_FADEBACKGROUND, ARRAYSIZE(JOJOS_BONUS_NODE_FADEBACKGROUND) },
     { L"Super Screen Background", DESC_NODETYPE_TREE, (void*)JOJOS_A_BONUS_NODE_SUPERBACKGROUND, ARRAYSIZE(JOJOS_A_BONUS_NODE_SUPERBACKGROUND) },
     { L"Tarot Cards", DESC_NODETYPE_TREE, (void*)JOJOS_BONUS_TAROT_CARDS, ARRAYSIZE(JOJOS_BONUS_TAROT_CARDS) },
+    { L"Ranking Portraits", DESC_NODETYPE_TREE, (void*)JOJOS_BONUS_PORTAITS_RANKING, ARRAYSIZE(JOJOS_BONUS_PORTAITS_RANKING) },
+    { L"Stage Shadows", DESC_NODETYPE_TREE, (void*)JOJOS_BONUS_STAGESHADOWS, ARRAYSIZE(JOJOS_BONUS_STAGESHADOWS) },
 };
 
 #pragma endregion Bonus
@@ -3381,28 +3573,28 @@ const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_AIRPLANE[] =
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_TIGERBAUM[] =
 {
-    { L"Tigerbaum Garden TS (1/11)", 0x02d3c00, 0x02d3e00, indexJojos51Stages, 0x1e, &pairFullyLinkedNode },
-    { L"Tigerbaum Garden TS (2/11)", 0x02d3e00, 0x02d4000, indexJojos51Stages, 0x1f },
-    { L"Tigerbaum Garden TS (3/11)", 0x02d4000, 0x02d4200, indexJojos51Stages, 0x20 },
-    { L"Tigerbaum Garden TS (4/11)", 0x02d4200, 0x02d4400, indexJojos51Stages, 0x21 },
-    { L"Tigerbaum Garden TS (5/11)", 0x02d4400, 0x02d4600, indexJojos51Stages, 0x22 },
-    { L"Tigerbaum Garden TS (6/11)", 0x02d4600, 0x02d4800, indexJojos51Stages, 0x23 },
-    { L"Tigerbaum Garden TS (7/11)", 0x02d4800, 0x02d4a00, indexJojos51Stages, 0x24 },
-    { L"Tigerbaum Garden TS (8/11)", 0x02d4a00, 0x02d4c00, indexJojos51Stages, 0x25 },
-    { L"Tigerbaum Garden TS (9/11)", 0x02d4c00, 0x02d4e00, indexJojos51Stages, 0x26 },
-    { L"Tigerbaum Garden TS (10/11)", 0x02d4e00, 0x02d5000, indexJojos51Stages, 0x27 },
-    { L"Tigerbaum Garden TS (11/11)", 0x02d5000, 0x02d5200, indexJojos51Stages, 0x28 },
+    { L"Tigerbaum Garden TS (1/11)", 0x02d3c00, 0x02d3e00, indexJojos50Stages, 0x1e, &pairFullyLinkedNode },
+    { L"Tigerbaum Garden TS (2/11)", 0x02d3e00, 0x02d4000, indexJojos50Stages, 0x1f },
+    { L"Tigerbaum Garden TS (3/11)", 0x02d4000, 0x02d4200, indexJojos50Stages, 0x20 },
+    { L"Tigerbaum Garden TS (4/11)", 0x02d4200, 0x02d4400, indexJojos50Stages, 0x21 },
+    { L"Tigerbaum Garden TS (5/11)", 0x02d4400, 0x02d4600, indexJojos50Stages, 0x22 },
+    { L"Tigerbaum Garden TS (6/11)", 0x02d4600, 0x02d4800, indexJojos50Stages, 0x23 },
+    { L"Tigerbaum Garden TS (7/11)", 0x02d4800, 0x02d4a00, indexJojos50Stages, 0x24 },
+    { L"Tigerbaum Garden TS (8/11)", 0x02d4a00, 0x02d4c00, indexJojos50Stages, 0x25 },
+    { L"Tigerbaum Garden TS (9/11)", 0x02d4c00, 0x02d4e00, indexJojos50Stages, 0x26 },
+    { L"Tigerbaum Garden TS (10/11)", 0x02d4e00, 0x02d5000, indexJojos50Stages, 0x27 },
+    { L"Tigerbaum Garden TS (11/11)", 0x02d5000, 0x02d5200, indexJojos50Stages, 0x28 },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_HOTELD[] =
 {
-    { L"Hotel (Devil) / New 2 TS (1/7)", 0x02d5300, 0x02d5500, indexJojos51Stages, 0x11, &pairFullyLinkedNode },
-    { L"Hotel (Devil) / New 2 TS (2/7)", 0x02d5500, 0x02d5700, indexJojos51Stages, 0x12 },
-    { L"Hotel (Devil) / New 2 TS (3/7)", 0x02d5700, 0x02d5900, indexJojos51Stages, 0x13 },
-    { L"Hotel (Devil) / New 2 TS (4/7)", 0x02d5900, 0x02d5b00, indexJojos51Stages, 0x14 },
-    { L"Hotel (Devil) / New 2 TS (5/7)", 0x02d5b00, 0x02d5d00, indexJojos51Stages, 0x15 },
-    { L"Hotel (Devil) / New 2 TS (6/7)", 0x02d5d00, 0x02d5f00, indexJojos51Stages, 0x16 },
-    { L"Hotel (Devil) / New 2 TS (7/7)", 0x02d5f00, 0x02d6000, indexJojos51Stages, 0x17 },
+    { L"Hotel (Devil) / New 2 TS (1/7)", 0x02d5300, 0x02d5500, indexJojos50Stages, 0x11, &pairFullyLinkedNode },
+    { L"Hotel (Devil) / New 2 TS (2/7)", 0x02d5500, 0x02d5700, indexJojos50Stages, 0x12 },
+    { L"Hotel (Devil) / New 2 TS (3/7)", 0x02d5700, 0x02d5900, indexJojos50Stages, 0x13 },
+    { L"Hotel (Devil) / New 2 TS (4/7)", 0x02d5900, 0x02d5b00, indexJojos50Stages, 0x14 },
+    { L"Hotel (Devil) / New 2 TS (5/7)", 0x02d5b00, 0x02d5d00, indexJojos50Stages, 0x15 },
+    { L"Hotel (Devil) / New 2 TS (6/7)", 0x02d5d00, 0x02d5f00, indexJojos50Stages, 0x16 },
+    { L"Hotel (Devil) / New 2 TS (7/7)", 0x02d5f00, 0x02d6000, indexJojos50Stages, 0x17 },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_REMAINS[] =
@@ -3432,56 +3624,56 @@ const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_HOTELJ[] =
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_SISLAND[] =
 {
-    { L"Small Island / New 3 TS (1/6)", 0x02d8300, 0x02d8500, indexJojos51Stages, 0x18 },
-    { L"Small Island / New 3 TS (2/6)", 0x02d8500, 0x02d8700, indexJojos51Stages, 0x19 },
-    { L"Small Island / New 3 TS (3/6)", 0x02d8700, 0x02d8900, indexJojos51Stages, 0x1a },
-    { L"Small Island / New 3 TS (4/6)", 0x02d8900, 0x02d8b00, indexJojos51Stages, 0x1b },
-    { L"Small Island / New 3 TS (5/6)", 0x02d8b00, 0x02d8d00, indexJojos51Stages, 0x1c },
-    { L"Small Island / New 3 TS (6/6)", 0x02d8d00, 0x02d8f00, indexJojos51Stages, 0x1d },
+    { L"Small Island / New 3 TS (1/6)", 0x02d8300, 0x02d8500, indexJojos50Stages, 0x18 },
+    { L"Small Island / New 3 TS (2/6)", 0x02d8500, 0x02d8700, indexJojos50Stages, 0x19 },
+    { L"Small Island / New 3 TS (3/6)", 0x02d8700, 0x02d8900, indexJojos50Stages, 0x1a },
+    { L"Small Island / New 3 TS (4/6)", 0x02d8900, 0x02d8b00, indexJojos50Stages, 0x1b },
+    { L"Small Island / New 3 TS (5/6)", 0x02d8b00, 0x02d8d00, indexJojos50Stages, 0x1c },
+    { L"Small Island / New 3 TS (6/6)", 0x02d8d00, 0x02d8f00, indexJojos50Stages, 0x1d },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_DMORN[] =
 {
-    { L"Desert Morning / Twilight TS (1/8)", 0x02d9f00, 0x02da100, indexJojos51Stages, 0x0b },
+    { L"Desert Morning / Twilight TS (1/8)", 0x02d9f00, 0x02da100, indexJojos50Stages, 0x0b },
     { L"Desert Morning / Twilight TS (2/8)", 0x02da100, 0x02da300 },
-    { L"Desert Morning / Twilight TS (3/8)", 0x02da300, 0x02da500, indexJojos51Stages, 0x0c },
+    { L"Desert Morning / Twilight TS (3/8)", 0x02da300, 0x02da500, indexJojos50Stages, 0x0c },
     { L"Desert Morning / Twilight TS (4/8)", 0x02da500, 0x02da700 },
-    { L"Desert Morning / Twilight TS (5/8)", 0x02da700, 0x02da900, indexJojos51Stages, 0x0d },
-    { L"Desert Morning / Twilight TS (6/8)", 0x02da900, 0x02dab00, indexJojos51Stages, 0x0e },
-    { L"Desert Morning / Twilight TS (7/8)", 0x02dab00, 0x02dad00, indexJojos51Stages, 0x0f },
+    { L"Desert Morning / Twilight TS (5/8)", 0x02da700, 0x02da900, indexJojos50Stages, 0x0d },
+    { L"Desert Morning / Twilight TS (6/8)", 0x02da900, 0x02dab00, indexJojos50Stages, 0x0e },
+    { L"Desert Morning / Twilight TS (7/8)", 0x02dab00, 0x02dad00, indexJojos50Stages, 0x0f },
     { L"Desert Morning / Twilight TS (8/8)", 0x02dad00, 0x02dad80 },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_DNOON[] =
 {
-    { L"Desert Noon TS (1/7)", 0x02d9000, 0x02d9200, indexJojos51Stages, 0x0b },
+    { L"Desert Noon TS (1/7)", 0x02d9000, 0x02d9200, indexJojos50Stages, 0x0b },
     { L"Desert Noon TS (2/7)", 0x02d9200, 0x02d9400 },
-    { L"Desert Noon TS (3/7)", 0x02d9400, 0x02d9600, indexJojos51Stages, 0x0c },
+    { L"Desert Noon TS (3/7)", 0x02d9400, 0x02d9600, indexJojos50Stages, 0x0c },
     { L"Desert Noon TS (4/7)", 0x02d9600, 0x02d9800 },
-    { L"Desert Noon TS (5/7)", 0x02d9800, 0x02d9a00, indexJojos51Stages, 0x0d },
-    { L"Desert Noon TS (6/7)", 0x02d9a00, 0x02d9c00, indexJojos51Stages, 0x0e },
-    { L"Desert Noon TS (7/7)", 0x02d9c00, 0x02d9e00, indexJojos51Stages, 0x0f },
+    { L"Desert Noon TS (5/7)", 0x02d9800, 0x02d9a00, indexJojos50Stages, 0x0d },
+    { L"Desert Noon TS (6/7)", 0x02d9a00, 0x02d9c00, indexJojos50Stages, 0x0e },
+    { L"Desert Noon TS (7/7)", 0x02d9c00, 0x02d9e00, indexJojos50Stages, 0x0f },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_DNIGHT[] =
 {
-    { L"Desert Night TS (1/8)", 0x02dae00, 0x02db000, indexJojos51Stages, 0xb },
+    { L"Desert Night TS (1/8)", 0x02dae00, 0x02db000, indexJojos50Stages, 0xb },
     { L"Desert Night TS (2/8)", 0x02db000, 0x02db200 },
-    { L"Desert Night TS (3/8)", 0x02db200, 0x02db400, indexJojos51Stages, 0xc},
+    { L"Desert Night TS (3/8)", 0x02db200, 0x02db400, indexJojos50Stages, 0xc},
     { L"Desert Night TS (4/8)", 0x02db400, 0x02db600 },
-    { L"Desert Night TS (5/8)", 0x02db600, 0x02db800, indexJojos51Stages, 0xd },
-    { L"Desert Night TS (6/8)", 0x02db800, 0x02dba00, indexJojos51Stages, 0xe },
-    { L"Desert Night TS (7/8)", 0x02dba00, 0x02dbc00, indexJojos51Stages, 0xf },
-    { L"Desert Night TS (8/8)", 0x02dbc00, 0x02dbc80, indexJojos51Stages, 0x10 },
+    { L"Desert Night TS (5/8)", 0x02db600, 0x02db800, indexJojos50Stages, 0xd },
+    { L"Desert Night TS (6/8)", 0x02db800, 0x02dba00, indexJojos50Stages, 0xe },
+    { L"Desert Night TS (7/8)", 0x02dba00, 0x02dbc00, indexJojos50Stages, 0xf },
+    { L"Desert Night TS (8/8)", 0x02dbc00, 0x02dbc80, indexJojos50Stages, 0x10 },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_RUINS[] =
 {
-    { L"Ruins / New 4 TS (1/5)", 0x02dbd00, 0x02dbf00, indexJojos51Stages, 0x29, &pairFullyLinkedNode },
-    { L"Ruins / New 4 TS (2/5)", 0x02dbf00, 0x02dc100, indexJojos51Stages, 0x2a },
-    { L"Ruins / New 4 TS (3/5)", 0x02dc100, 0x02dc300, indexJojos51Stages, 0x2b },
-    { L"Ruins / New 4 TS (4/5)", 0x02dc300, 0x02dc500, indexJojos51Stages, 0x2c },
-    { L"Ruins / New 4 TS (5/5)", 0x02dc500, 0x02dc700, indexJojos51Stages, 0x2d },
+    { L"Ruins / New 4 TS (1/5)", 0x02dbd00, 0x02dbf00, indexJojos50Stages, 0x29, &pairFullyLinkedNode },
+    { L"Ruins / New 4 TS (2/5)", 0x02dbf00, 0x02dc100, indexJojos50Stages, 0x2a },
+    { L"Ruins / New 4 TS (3/5)", 0x02dc100, 0x02dc300, indexJojos50Stages, 0x2b },
+    { L"Ruins / New 4 TS (4/5)", 0x02dc300, 0x02dc500, indexJojos50Stages, 0x2c },
+    { L"Ruins / New 4 TS (5/5)", 0x02dc500, 0x02dc700, indexJojos50Stages, 0x2d },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_CTOWN[] =
@@ -3535,17 +3727,17 @@ const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_INHOUSE[] =
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_CROOM[] =
 {
-    { L"Coffin Room / New 7 TS (1/4)", 0x02e1300, 0x02e1500, indexJojos51Stages, 0x5 },
-    { L"Coffin Room / New 7 TS (2/4)", 0x02e1500, 0x02e1700, indexJojos51Stages, 0x6 },
-    { L"Coffin Room / New 7 TS (3/4)", 0x02e1700, 0x02e1900, indexJojos51Stages, 0x7 },
-    { L"Coffin Room / New 7 TS (4/4)", 0x02e1900, 0x02e1b00, indexJojos51Stages, 0x8 },
+    { L"Coffin Room / New 7 TS (1/4)", 0x02e1300, 0x02e1500, indexJojos50Stages, 0x5 },
+    { L"Coffin Room / New 7 TS (2/4)", 0x02e1500, 0x02e1700, indexJojos50Stages, 0x6 },
+    { L"Coffin Room / New 7 TS (3/4)", 0x02e1700, 0x02e1900, indexJojos50Stages, 0x7 },
+    { L"Coffin Room / New 7 TS (4/4)", 0x02e1900, 0x02e1b00, indexJojos50Stages, 0x8 },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_CTOWER[] =
 {
-    { L"Clock Tower / New 8 TS (1/3)", 0x02e1c00, 0x02e1e00, indexJojos51Stages, 0, &pairFullyLinkedNode },
-    { L"Clock Tower / New 8 TS (2/3)", 0x02e1e00, 0x02e2000, indexJojos51Stages, 1 },
-    { L"Clock Tower / New 8 TS (3/3)", 0x02e2000, 0x02e2200, indexJojos51Stages, 2 },
+    { L"Clock Tower / New 8 TS (1/3)", 0x02e1c00, 0x02e1e00, indexJojos50Stages, 0, &pairFullyLinkedNode },
+    { L"Clock Tower / New 8 TS (2/3)", 0x02e1e00, 0x02e2000, indexJojos50Stages, 1 },
+    { L"Clock Tower / New 8 TS (3/3)", 0x02e2000, 0x02e2200, indexJojos50Stages, 2 },
 };
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_SUBURB[] =
@@ -3576,8 +3768,8 @@ const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_SUBURB[] =
 
 const sGame_PaletteDataset JOJOS_A_TIMESTOP_NODE_OBRIDGE[] =
 {
-    { L"On the Bridge TS (1/2)", 0x02e4f00, 0x02e5100, indexJojos51Stages, 0x3, &pairFullyLinkedNode },
-    { L"On the Bridge TS (2/2)", 0x02e5100, 0x02e5300, indexJojos51Stages, 0x4 },
+    { L"On the Bridge TS (1/2)", 0x02e4f00, 0x02e5100, indexJojos50Stages, 0x3, &pairFullyLinkedNode },
+    { L"On the Bridge TS (2/2)", 0x02e5100, 0x02e5300, indexJojos50Stages, 0x4 },
 };
 
 const sDescTreeNode JOJOS_TIMESTOP_COLLECTION[] =
@@ -3614,34 +3806,34 @@ const sDescTreeNode JOJOS_UNITS_50[ARRAYSIZE(JOJOS_A_UNITDESC_50)] =
 
 const sDescTreeNode JOJOS_UNITS_51[ARRAYSIZE(JOJOS_A_UNITDESC_51)] =
 {
-    { L"Jotaro", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_JOTARO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_JOTARO) },
-    { L"Kakyoin & Hierophant", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_HIEROPHANT, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_HIEROPHANT) },
-    { L"Avdol", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_AVDOL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_AVDOL) },
-    { L"Polnareff", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_POL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_POL) },
-    { L"Joseph", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_JOSEPH, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_JOSEPH) },
-    { L"Iggy", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_IGGY, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_IGGY) },
-    { L"Alessi", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_ALESSI, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_ALESSI) },
-    { L"Chaka", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_CHAKA, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_CHAKA) },
-    { L"Devo and Ebony", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_DEVOEBONY, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_DEVOEBONY) },
-    { L"Midler", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_MIDLER, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_MIDLER) },
-    { L"Dio", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_DIO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_DIO) },
-    { L"Shadow Dio", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_SDIO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_SDIO) },
-    { L"Young Joseph", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_YJOSEPH, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_YJOSEPH) },
-    { L"Hol", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_HOL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_HOL) },
-    { L"Vanilla Ice", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_VICE, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_VICE) },
-    { L"New Kakyoin & Hierophant", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_HIERO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_HIERO) },
-    { L"Anubis Polnareff", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_BPOL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_BPOL) },
-    { L"Petshop", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_SHOP, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_SHOP) },
-    { L"Mariah", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_MARIAH, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_MARIAH) },
-    { L"Hol and Boingo", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_HOLBOINGO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_HOLBOINGO) },
-    { L"Rubber Soul", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_RSOUL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_RSOUL) },
-    { L"Khan", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_KHAN, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_KHAN) },
-    { L"N'Doul and Geb", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_NDOUL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_NDOUL) },
-    { L"Boss Ice", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_BICE, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_BICE) },
-    { L"Death 13", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_DEATH13, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_DEATH13) },
-    { L"Unimplemented: Gray Fly", DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_GRAYFLY, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_GRAYFLY) },
-    { L"Timestop", DESC_NODETYPE_TREE, (void*)JOJOS_TIMESTOP_COLLECTION, ARRAYSIZE(JOJOS_TIMESTOP_COLLECTION) },
-    { L"Bonus", DESC_NODETYPE_TREE,    (void*)JOJOS_A_BONUS_COLLECTION, ARRAYSIZE(JOJOS_A_BONUS_COLLECTION) },
+    { L"Jotaro", 			        DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_JOTARO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_JOTARO) },
+    { L"Kakyoin", 		            DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_HIEROPHANT, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_HIEROPHANT) },
+    { L"Avdol", 			        DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_AVDOL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_AVDOL) },
+    { L"Polnareff", 		        DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_POL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_POL) },
+    { L"Joseph", 			        DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_JOSEPH, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_JOSEPH) },
+    { L"Iggy", 					    DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_IGGY, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_IGGY) },
+    { L"Alessi", 					DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_ALESSI, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_ALESSI) },
+    { L"Chaka",					    DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_CHAKA, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_CHAKA) },
+    { L"Devo", 				        DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_DEVOEBONY, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_DEVOEBONY) },
+    { L"Midler",			        DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_MIDLER, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_MIDLER) },
+    { L"DIO",					    DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_DIO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_DIO) },
+    { L"Shadow Dio",			    DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_SDIO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_SDIO) },
+    { L"Young Joseph", 				DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_YJOSEPH, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_YJOSEPH) },
+    { L"Hol Horse",			        DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_HOL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_HOL) },
+    { L"Vanilla Ice", 				DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_VICE, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_VICE) },
+    { L"New Kakyoin", 	            DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_HIERO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_HIERO) },
+    { L"Anubis Polnareff",			DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_BPOL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_BPOL) },
+    { L"Petshop",					DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_SHOP, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_SHOP) },
+    { L"Mariah", 					DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_MARIAH, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_MARIAH) },
+    { L"Hol Horse & Boingo", 		DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_HOLBOINGO, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_HOLBOINGO) },
+    { L"Rubber Soul", 	            DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_RSOUL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_RSOUL) },
+    { L"Khan", 					    DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_KHAN, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_KHAN) },
+    { L"N'Doul", 					DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_NDOUL, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_NDOUL) },
+    { L"Boss Ice", 					DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_BICE, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_BICE) },
+    { L"Death 13", 					DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_DEATH13, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_DEATH13) },
+    { L"Unimplemented: Gray Fly", 	DESC_NODETYPE_TREE, (void*)JOJOS_A_CHARACTER_COLLECTION_GRAYFLY, ARRAYSIZE(JOJOS_A_CHARACTER_COLLECTION_GRAYFLY) },
+    { L"Timestop", 					DESC_NODETYPE_TREE, (void*)JOJOS_TIMESTOP_COLLECTION, ARRAYSIZE(JOJOS_TIMESTOP_COLLECTION) },
+    { L"Bonus Palettes", 			DESC_NODETYPE_TREE, (void*)JOJOS_A_BONUS_COLLECTION, ARRAYSIZE(JOJOS_A_BONUS_COLLECTION) },
 };
 
 // Unused natively, but used for Extra extension files people plug in.  May need to fork into 50/51 versions.

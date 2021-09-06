@@ -449,8 +449,7 @@ void CRegProc::LoadReg(int src)
             if (RegQueryValueEx(hKey, c_previewWndPos, 0, &RegType, (BYTE*)conv_str.GetBufferSetLength(RECT_STRSZ), &GetSz) == ERROR_SUCCESS)
             {
                 prev_szpos = StrToRect(conv_str);
-                // This good faith check doesn't seem to do anything meaningful. 
-                // Maybe I'm overthinking issues with multiple monitors and such.
+                // This is a good faith check to make sure we didn't get positioned off-screen
                 if ((MonitorFromRect(&prev_szpos, MONITOR_DEFAULTTONULL) == nullptr) ||
                     ((prev_szpos.bottom - prev_szpos.top) < 60)) // make sure we actually have a window to work with
                 {
@@ -605,4 +604,38 @@ RECT StrToRect(CString in_str)
     out_rect.bottom = wcstol(rect_val, NULL, 10);
 
     return out_rect;
+}
+
+const std::array<double, 6> CPalModZoom::m_nZoomSizes{ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
+
+void CPalModZoom::IncrementZoom(double* fpPreviousZoom)
+{
+    size_t nCurrentPosition = 0;
+
+    for (; nCurrentPosition < m_nZoomSizes.size(); nCurrentPosition++)
+    {
+        if (m_nZoomSizes[nCurrentPosition] == *fpPreviousZoom)
+        {
+            break;
+        }
+    }
+
+    nCurrentPosition = min(nCurrentPosition + 1, m_nZoomSizes.size() - 1);
+    *fpPreviousZoom = m_nZoomSizes[nCurrentPosition];
+}
+
+void CPalModZoom::DecrementZoom(double *fpPreviousZoom)
+{
+    int nCurrentPosition = m_nZoomSizes.size() - 1;
+
+    for (; nCurrentPosition > 0; nCurrentPosition--)
+    {
+        if (m_nZoomSizes[nCurrentPosition] == *fpPreviousZoom)
+        {
+            break;
+        }
+    }
+
+    nCurrentPosition = max(nCurrentPosition - 1, 0);
+    *fpPreviousZoom = m_nZoomSizes[nCurrentPosition];
 }

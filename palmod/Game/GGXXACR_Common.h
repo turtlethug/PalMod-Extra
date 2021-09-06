@@ -1,5 +1,5 @@
 
-const UINT16 GGXX_ACR_IMG_UNITS[] =
+const UINT16 GGXX_ACR_IMGIDS_USED[] =
 {
 	indexGGXXSprites_ACR_ABA,   // 0x00
 	indexGGXXSprites_ACR_Anji,  // 0x01
@@ -59,6 +59,39 @@ const LPCWSTR GGXXACRPaletteNamesNormal[] =
 	L"Vs Reload Dust",
 };
 
+// For the smaller Export listbox
+const LPCWSTR GGXXACRPaletteNamesShort[] =
+{
+	L"Punch",
+	L"Kick",
+	L"Slash",
+	L"Heavy",
+	L"Dust",
+
+	L"E. Punch",
+	L"E. Kick",
+	L"E. Slash",
+	L"E. Heavy",
+	L"E. Dust",
+
+	L"S. Punch",
+	L"S. Kick",
+	L"S. Slash",
+	L"S. Heavy",
+	L"Gold",
+
+	L"R. Punch",
+	L"R. Kick",
+	L"R. Slash",
+	L"R. Heavy",
+	L"Shadow",
+
+	L"VsS. Dust",
+	L"VsR. Dust",
+};
+
+static_assert(ARRAYSIZE(GGXXACRPaletteNamesNormal) == ARRAYSIZE(GGXXACRPaletteNamesShort), "The normal and short display name arrays need to be the same length.");
+
 const LPCWSTR GGXXACRPaletteNamesEx[] =
 {
 	L"Punch",
@@ -84,6 +117,23 @@ const LPCWSTR GGXXACRPaletteNamesEx[] =
 	L"Reload Slash",
 	L"Reload Heavy Slash",
 	L"Shadow",
+};
+
+const LPCWSTR GGXXRPaletteNamesNormal[] =
+{
+	L"Punch",
+	L"Kick",
+	L"Slash",
+	L"Heavy Slash",
+	L"Start",
+	L"Dust",
+
+	L"SP Punch",
+	L"SP Kick",
+	L"SP Slash",
+	L"SP Heavy Slash",
+	L"SP Start",
+	L"SP Dust",
 };
 
 struct GGXXACRFileData
