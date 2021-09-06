@@ -68,12 +68,13 @@ BOOL CImgOutDlg::OnInitDialog()
     tmp_str.Format(L"CImgOutDlg::OnInitDialog: preparing to show up to %u sprites\n", nPalAmt);
     OutputDebugString(tmp_str);
 
-    //Fix later... as we add more games
+    // Update here as needed to add new division options
     switch (nPalAmt)
     {
     default:
         OutputDebugString(L"WARNING BUGBUG: This palette count is not supported in CImgOutDlg::OnInitDialog yet!\n");
         OutputDebugString(L"WARNING BUGBUG: You may want to update CImgDumpBmp::GetMaxImagesPerLine as well!\n");
+        __fallthrough;
     case 1:
         // By default, we export out only the one sprite
         m_CB_Amt.EnableWindow(FALSE);
@@ -143,10 +144,10 @@ BOOL CImgOutDlg::OnInitDialog()
 
     //Cannot get accurate remainder amount
 
-    //Populate Zoom combo box: 1-4x
-    for (int i = 1; i < 5; i++)
+    //Populate Zoom combo box: 1-8x
+    for (size_t i = 0; i < CPalModZoom::GetZoomListSize(); i++)
     {
-        tmp_str.Format(L"%ux", i);
+        tmp_str.Format(L"%.0fx", CPalModZoom::GetValueAt(i));
         m_CB_Zoom.AddString(tmp_str);
     }
 
@@ -174,12 +175,27 @@ BOOL CImgOutDlg::OnInitDialog()
     return TRUE;
 }
 
+BOOL CImgOutDlg::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
+{
+    if (zDelta > 0)
+    {
+        AddZoom();
+    }
+    else
+    {
+        SubZoom();
+    }
+
+    return TRUE;
+}
+
+
 void CImgOutDlg::AddZoom()
 {
-    int nCurrZoom = m_CB_Zoom.GetCurSel() + 1;
-    if (nCurrZoom <= m_nZoomSelOptionsMax)
+    int nCurrZoomIndex = m_CB_Zoom.GetCurSel() + 1;
+    if (nCurrZoomIndex < (int)CPalModZoom::GetZoomListSize())
     {
-        m_CB_Zoom.SetCurSel(nCurrZoom);
+        m_CB_Zoom.SetCurSel(nCurrZoomIndex);
     }
 
     UpdateImg();
@@ -187,10 +203,11 @@ void CImgOutDlg::AddZoom()
 
 void CImgOutDlg::SubZoom()
 {
-    int nCurrZoom = m_CB_Zoom.GetCurSel() - 1;
-    if (nCurrZoom >= m_nZoomSelOptionsMin)
+    int nCurrZoomIndex = m_CB_Zoom.GetCurSel() - 1;
+
+    if (nCurrZoomIndex >= m_nZoomSelOptionsMin)
     {
-        m_CB_Zoom.SetCurSel(nCurrZoom);
+        m_CB_Zoom.SetCurSel(nCurrZoomIndex);
     }
 
     UpdateImg();
@@ -212,6 +229,8 @@ BEGIN_MESSAGE_MAP(CImgOutDlg, CDialog)
     ON_WM_CLOSE()
 
     ON_BN_CLICKED(IDC_UPDATE, UpdateImg)
+
+    ON_WM_MOUSEWHEEL()
 
     ON_CBN_SELCHANGE(IDC_AMT, OnCbnSelchangeAmt)
     ON_CBN_SELCHANGE(IDC_PAL, UpdateImg)
@@ -254,14 +273,8 @@ void CImgOutDlg::UpdImgVar(BOOL bResize)
     m_DumpBmp.m_nTotalImagesToDisplay = img_amt;
     m_DumpBmp.nPalIndex = m_pal;
 
-    if (m_zoomSelIndex >= m_nZoomSelOptionsMax)
-    {
-        m_zoomSelIndex = m_nZoomSelOptionsMax;
-    }
-    else if (m_zoomSelIndex < m_nZoomSelOptionsMin)
-    {
-        m_zoomSelIndex = m_nZoomSelOptionsMin;
-    }
+    m_zoomSelIndex = min(m_zoomSelIndex, (int)CPalModZoom::GetZoomListSize());
+    m_zoomSelIndex = max(m_zoomSelIndex, m_nZoomSelOptionsMin);
 
     m_DumpBmp.zoom = (float)(1 + m_zoomSelIndex);
     m_DumpBmp.outline_sz = 0;
@@ -472,6 +485,13 @@ void CImgOutDlg::ExportToIndexedPNG(CString save_str, CString output_str, CStrin
 
     if (fShouldExportAsIndexed)
     {
+        UINT16 nTransparencyPosition = GetHost()->GetCurrGame()->GetTransparencyColorPosition();
+#ifdef ALLOW_MULTIPLE_TRANSPARENCY_COLORS
+        // It's technically correct for our purposes to allow for this, but also problematic since Photoshop
+        // only wants one transparency per indexed image.  So let's just turn this off for now.
+        UINT16 nMaxWritePerTransparency = GetHost()->GetCurrGame()->GetMaximumWritePerEachTransparency();
+#endif
+
         // Indexed PNG: use the lodePNG encoder
         for (int nNodeIndex = 0; nNodeIndex < m_DumpBmp.m_nTotalImagesToDisplay; nNodeIndex++)
         {
@@ -530,7 +550,11 @@ void CImgOutDlg::ExportToIndexedPNG(CString save_str, CString output_str, CStrin
                 // the PNG PLTE section goes up to 256 colors, so use that as our initial cap
                 for (size_t iCurrentColor = 0; iCurrentColor < 256; iCurrentColor++)
                 {
-                    if (iCurrentColor == 0) // transparency color
+#ifdef ALLOW_MULTIPLE_TRANSPARENCY_COLORS
+                    if ((iCurrentColor % nMaxWritePerTransparency) == nTransparencyPosition)
+#else
+                    if (iCurrentColor == nTransparencyPosition) // transparency color
+#endif
                     {
                         if (bTransPNG)
                         {

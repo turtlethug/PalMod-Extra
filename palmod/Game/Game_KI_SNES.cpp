@@ -27,7 +27,7 @@ CGame_KI_SNES::CGame_KI_SNES(UINT32 nConfirmedROMSize)
     m_nTotalInternalUnits = KI_SNES_NUMUNIT;
     m_nExtraUnit = KI_SNES_EXTRALOC;
 
-    m_nSafeCountForThisRom = GetExtraCt(m_nExtraUnit) + 80;
+    m_nSafeCountForThisRom = GetExtraCt(m_nExtraUnit) + 82;
     m_pszExtraFilename = EXTRA_FILENAME_KI_SNES;
     m_nTotalPaletteCount = m_nTotalPaletteCountForKI;
 
@@ -40,15 +40,15 @@ CGame_KI_SNES::CGame_KI_SNES(UINT32 nConfirmedROMSize)
     nGameFlag = KI_SNES;
 
     nImgGameFlag = IMGDAT_SECTION_SNES;
-    m_prgGameImageSet = nullptr;  // KI_SNES_IMG_UNITS
-    nImgUnitAmt = 0; // ARRAYSIZE(KI_SNES_IMG_UNITS);
+    m_prgGameImageSet = KI_SNES_IMGIDS_USED;
+    nImgUnitAmt = ARRAYSIZE(KI_SNES_IMGIDS_USED);
 
     nFileAmt = 1;
 
     //Set the image out display type
     DisplayType = eImageOutputSpriteDisplay::DISPLAY_SPRITES_LEFTTORIGHT;
     // Button labels are used for the Export Image dialog
-    pButtonLabelSet = DEF_NOBUTTONS; // Check out the available options in gamedef.h
+    pButtonLabelSet = DEF_NOBUTTONS; // Check out the available options in buttondef.h
     m_nNumberOfColorOptions = ARRAYSIZE(DEF_NOBUTTONS);
 
     //Create the redirect buffer
@@ -88,6 +88,31 @@ CGame_KI_SNES::~CGame_KI_SNES(void)
     ClearDataBuffer();
     //Get rid of the file changed flag
     FlushChangeTrackingArray();
+}
+
+UINT32 CGame_KI_SNES::GetKnownCRC32DatasetsForGame(const sCRC32ValueSet** ppKnownROMSet, bool* pfNeedToValidateCRCs)
+{
+    static sCRC32ValueSet knownROMs[] =
+    {
+        { L"Killer Instinct (SNES Rev 1)", L"Killer Instinct (USA) (Rev 1).sfc", 0x09e9a04e, 0 },
+        { L"Killer Instinct (SNES Rev 2)", L"Killer Instinct (USA).sfc", 0x252c1da7, 0x8 },
+        { L"Killer Instinct (SNES Rev 2)", L"sns-akle-0.u1", 0x252c1da7, 0x8 },
+        { L"Killer Instinct (SNES Rev 1)", L"Killer Instinct (USA) (Rev 1).smc", 0x09e9a04e, 0 },
+        { L"Killer Instinct (SNES Rev 2)", L"Killer Instinct (USA).smc", 0x252c1da7, 0x8 },
+    };
+
+    if (ppKnownROMSet != nullptr)
+    {
+        *ppKnownROMSet = knownROMs;
+    }
+
+    if (pfNeedToValidateCRCs)
+    {
+        // Each filename is associated with a single CRC
+        *pfNeedToValidateCRCs = false;
+    }
+
+    return ARRAYSIZE(knownROMs);
 }
 
 CDescTree* CGame_KI_SNES::GetMainTree()
@@ -195,6 +220,12 @@ void CGame_KI_SNES::LoadSpecificPaletteData(UINT16 nUnitId, UINT16 nPalId)
             m_nCurrentPaletteROMLocation = paletteData->nPaletteOffset;
             m_nCurrentPaletteSizeInColors = cbPaletteSizeOnDisc / m_nSizeOfColorsInBytes;
             m_pszCurrentPaletteName = paletteData->szPaletteName;
+
+            if (m_pCRC32SpecificData)
+            {
+                // adjust for ROM, but bound it by 0
+                m_nCurrentPaletteROMLocation = max(0, m_nCurrentPaletteROMLocation + m_pCRC32SpecificData->nROMSpecificOffset);
+            }
         }
         else
         {
